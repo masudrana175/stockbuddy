@@ -1,0 +1,1006 @@
+/* ============================================================
+   StockBuddy – Custom Stylesheet
+   Designed for 1920 px canvas · Barlow typeface
+   Stack : Bootstrap 5.3.2 + Bootstrap Icons 1.11.3
+   ============================================================ */
+
+/* ── Google Font: Barlow ── */
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&display=swap');
+
+/* ============================================================
+   CSS CUSTOM PROPERTIES
+   ============================================================ */
+:root {
+  /* Brand colours */
+  --sb-pink        : #d14894;
+  --sb-pink-light  : rgba(212, 56, 122, 0.08);
+  --sb-pink-hover  : #b52d66;
+  --sb-blue        : #1d3a8e;
+  --sb-green       : #22C55E;
+  --sb-green-dark  : #22b36d;
+  --sb-red         : #EF4444;
+
+  /* Surface / background */
+  --sb-card-bg     : #ffffff;
+  --sb-border      : #eef0f4;
+  --sb-sidebar-sep : #d3d3d3;
+  --sb-divider     : #d8d8d8;
+
+  /* Text hierarchy */
+  --sb-text-h      : #333333;   /* headings / strong labels          */
+  --sb-text        : #2d2f3e;   /* default body copy                 */
+  --sb-text-soft   : #4b5563;   /* secondary body                    */
+  --sb-text-muted  : #999999;   /* captions, meta, placeholders      */
+
+  /* Layout */
+  --sb-sidebar-w   : 300px;
+  --sb-sidebar-col : 72px;      /* collapsed icon-rail width         */
+
+  /* Shape */
+  --sb-radius      : 16px;      /* card outer corners                */
+  --sb-radius-md   : 10px;      /* inner components                  */
+  --sb-radius-sm   : 8px;       /* badges, chips                     */
+
+  /* Shadow – very light to match PSD */
+  --sb-shadow      : 0 2px 8px rgba(0, 0, 0, 0.055),
+                     0 0 0 1px rgba(0, 0, 0, 0.028);
+
+  /* Transition */
+  --sb-ease        : all 0.2s ease;
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { min-height: 100%; }
+
+body {
+  /* Page gradient: white at top → very soft pink at bottom */
+  background           : linear-gradient(to top, #f9f6f9, #ffffff);
+  background-attachment: fixed;
+  min-height           : 100vh;
+
+  /* Typography */
+  font-family : 'Barlow', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 1rem;           /* 1rem = 15 px throughout          */
+  font-weight : 400;
+  line-height : 1.6;
+  color       : var(--sb-text);
+  margin      : 0;
+  overflow-x  : hidden;
+
+  /* Crisp sub-pixel rendering */
+  -webkit-font-smoothing : antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   SIDEBAR
+   ============================================================ */
+.sb-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--sb-sidebar-w);
+    background: transparent;
+    border-right: 0px solid var(--sb-sidebar-sep);
+    display: flex;
+    flex-direction: column;
+    z-index: 1050;
+    overflow: hidden;
+    transition: width 0.25s ease;
+    padding-top: 2.1rem;
+    padding-bottom: 2.1rem;
+}
+.sb-sidebar-inner {
+    border-right: 1px solid #d3d3d3;
+    height: 100%;
+}
+/* ── Logo row ── */
+.sb-logo {
+  display        : flex;
+  align-items    : center;
+  gap            : 12px;
+  padding        : 0rem 1.6rem 1.6rem;
+  text-decoration: none;
+  white-space    : nowrap;
+}
+
+.sb-logo-icon {
+  position       : relative;
+}
+.sb-logo-icon span {
+  color      : #fff;
+  font-size  : 1.1rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.sb-logo-text {
+  font-size  : 1.067rem;   /* ≈ 16 px */
+  font-weight: 700;
+  color      : var(--sb-text-h);
+  letter-spacing: -0.01em;
+  transition : opacity 0.2s;
+}
+
+/* ── Navigation ── */
+.sb-nav { flex: 1; padding: 0.25rem 0.85rem; }
+
+.sb-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 0.68rem 1.1rem;
+    margin-bottom: 15px;
+    border-radius: var(--sb-radius-md);
+    color: #333;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 400;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+    transition: var(--sb-ease);
+}
+.sb-nav-link>span:first-child {
+    display: inline-block;
+    min-width: 29px;
+    text-align: center;
+    margin-right: 4px;
+}
+.oracall-image>div:not(.oracle-pill) {
+    padding-left: 20px;
+}
+.sb-nav-link>span img {
+    filter: brightness(.2);
+}
+.sb-nav-link.active img,.sb-nav-link:hover img {
+    filter: brightness(1);
+}
+.sb-nav-link i {
+  font-size  : 1.2rem;
+  flex-shrink: 0;
+  opacity    : 0.85;
+}
+
+.sb-nav-link span { transition: opacity 0.2s; }
+
+.sb-nav-link:hover {
+  color     : var(--sb-pink);
+}
+
+.sb-nav-link:hover i { opacity: 1; }
+
+.sb-nav-link.active,.sb-nav-link:hover {
+  color      : var(--sb-pink);
+  font-weight: 700;
+}
+
+.sb-nav-link.active i { opacity: 1; }
+
+/* ── Mobile overlay / open state ── */
+.sb-overlay {
+  display   : none;
+  position  : fixed;
+  inset     : 0;
+  background: rgba(0, 0, 0, 0.32);
+  z-index   : 1049;
+}
+.sb-overlay.show { display: block; }
+
+.sb-sidebar.mobile-open {
+  display   : flex !important;
+  width     : 300px !important;   /* hardcoded – var(--sb-sidebar-w) is
+                                     already overridden to 72px at this
+                                     breakpoint, so we can't use it here */
+  background: #fff !important;    /* sidebar is transparent by default;
+                                     drawer must have a solid surface     */
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12) !important;
+  animation : sidebarSlideIn 0.25s ease;
+}
+
+@keyframes sidebarSlideIn {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+/* Restore text labels when drawer is open */
+.sb-sidebar.mobile-open .sb-logo-text,
+.sb-sidebar.mobile-open .sb-nav-link span {
+  opacity       : 1 !important;
+  width         : auto !important;
+  overflow      : visible !important;
+  pointer-events: auto !important;
+}
+
+/* Restore nav link layout to row (not icon-centred) */
+.sb-sidebar.mobile-open .sb-nav-link {
+  justify-content: flex-start !important;
+  padding        : 0.68rem 1.1rem !important;
+}
+
+.sb-sidebar.mobile-open .sb-logo {
+  justify-content: flex-start !important;
+  padding        : 1.4rem 1.6rem 1.6rem !important;
+}
+
+/* ============================================================
+   MAIN CONTENT AREA
+   ============================================================ */
+.sb-main {
+  margin-left: var(--sb-sidebar-w);
+  padding    : 2.1rem 2.1rem 2.1rem;
+  min-height : 100vh;
+  transition : margin-left 0.25s ease;
+}
+
+/* ── Topbar ── */
+.sb-topbar {
+  display        : flex;
+  align-items    : center;
+  justify-content: space-between;
+  margin-bottom  : 1.75rem;
+}
+
+.sb-topbar h1 {
+  font-size     : 1.9rem;        /* ≈ 30 px – matches PSD heading scale  */
+  font-weight   : 700;
+  color         : var(--sb-blue);
+  margin        : 0;
+  line-height   : 1.15;
+  letter-spacing: -0.02em;
+}
+
+.sb-topbar-right {
+  display    : flex;
+  align-items: center;
+  gap        : 9px;
+}
+
+/* Notification button */
+.sb-notif {
+  background     : transparent;
+  border         : none;
+  color          : #fff;
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+  cursor         : pointer;
+  position       : relative;
+  font-size      : 0.95rem;
+  transition     : background 0.15s;
+}
+.sb-notif:hover {
+    background: transparent;
+}
+.sb-notif .nb {
+    position: absolute;
+    top: -3px;
+    right: auto;
+    min-width: 20px;
+    height: 20px;
+    background: var(--sb-pink);
+    border: 0px solid var(--sb-pink);
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3px;
+    left: -3px;
+}
+
+/* Avatar */
+.sb-avatar {
+  width        : 42px;
+  height       : 42px;
+  border-radius: 50%;
+  overflow     : hidden;
+  cursor       : pointer;
+  flex-shrink  : 0;
+}
+.sb-avatar img {
+    object-fit: cover;
+    display: block;
+}
+img{
+    max-width: 100%;	
+}
+/* Hamburger */
+.sb-hamburger {
+  display     : none;
+  background  : none;
+  border      : none;
+  font-size   : 1.4rem;
+  color       : #6b7280;
+  cursor      : pointer;
+  margin-right: 10px;
+  padding     : 0;
+  line-height : 1;
+}
+
+/* ============================================================
+   CARD BASE
+   ============================================================ */
+.sb-card {
+  background   : var(--sb-card-bg);
+  border-radius: var(--sb-radius);
+  padding      : 1.5rem;          /* 24 px – matches PSD card inset */
+  box-shadow   : var(--sb-shadow);
+  height       : 100%;
+}
+.sb-card .mkt-row {
+    border: none;
+}
+/* Card header icon + title row */
+.card-head {
+  display      : flex;
+  align-items  : center;
+  gap          : 10px;
+  margin-bottom: 1rem;
+}
+
+.card-icon {
+  width          : 36px;
+  border-radius  : var(--sb-radius-sm);
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+  flex-shrink    : 0;
+}
+
+.card-title {
+  font-size  : 1.2rem;   /* ≈ 14 px */
+  font-weight: 700;
+  color      : var(--sb-text-h);
+  margin     : 0;
+  line-height: 1.3;
+}
+
+.card-sub {
+  font-size  : 1.1rem;   /* ≈ 11 px */
+  font-weight: 400;
+  color      : #333333;
+  line-height: 1.4;
+  margin-top : 0px;
+}
+
+/* ── Sparklines (StockBuddy Depot / Mein Depot) ── */
+.sparkwrap {
+  flex-shrink: 0;
+  overflow   : hidden;
+}
+.sparkwrap canvas {
+  display: block;
+  width  : 100% !important;
+}
+.row-top .card-head {
+    margin-bottom: 0;
+}
+/* ── Trend percentage ("+18,75%") ── */
+.trend-val {
+  font-size    : 2.1rem;       /* ≈ 30 px – dominant number in PSD  */
+  font-weight  : 500;
+  line-height  : 1.1;
+}
+
+.trend-sub {
+  font-size  : 1.15rem;   /* ≈ 11 px */
+  font-weight: 400;
+  color      : var(--sb-text-h);
+  margin-top : 0px;
+}
+
+.trend-pos { color: var(--sb-green-dark); }
+.trend-neg { color: var(--sb-red); }
+
+/* ── Wertentwicklung separator row ── */
+.wert-row {
+  display        : flex;
+  align-items    : center;
+  justify-content: space-between;
+  border-top     : 1px solid var(--sb-divider);
+  margin-top     : 1rem;
+  padding-top    : 0.75rem;
+}
+
+.wert-label {
+  font-size  : 1.15rem;     /* ≈ 12 px */
+  font-weight: 400;
+  color      : var(--sb-text-h);
+  display    : flex;
+  align-items: center;
+  gap        : 4px;
+}
+
+.wert-val {
+  font-size    : 1.4rem;  /* ≈ 16 px – prominent amount */
+  font-weight  : 700;
+  color        : var(--sb-text-h);
+  letter-spacing: -0.01em;
+}
+
+/* ============================================================
+   ANALYSEPROFIL CARD
+   ============================================================ */
+.profile-desc {
+  font-size    : 0.8rem;    /* ≈ 12 px */
+  font-weight  : 400;
+  color        : var(--sb-text-soft);
+  line-height  : 1.55;
+  margin-bottom: 1rem;
+}
+
+/* Bordered pill tags */
+.sb-tag {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1;
+    padding: 10px 12px;
+    border-radius: 9px;
+    border: 1.5px solid;
+    letter-spacing: 0.01em;
+}
+.tag-pink  { color: var(--sb-pink);       border-color: var(--sb-pink); }
+.tag-blue  { color: #1d3a8e; background:#d8d9f0; border-color: #1d3a8e; }
+.tag-green {background:#bfeed7; color: var(--sb-green-dark); border-color: var(--sb-green-dark); }
+.tag-amber { color: #c2a34e; background:#eee8d7; border-color: #c2a34e; }
+
+/* ============================================================
+   AKTIE DES TAGES CARD
+   ============================================================ */
+.today-badge {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--sb-text-h);
+    background: #eeebf3;
+    padding: 5px 16px;
+    border-radius: 35px;
+    letter-spacing: 0.02em;
+}
+
+/* Oracle logo pill */
+.oracle-pill {
+
+}
+
+.oracle-oval {
+  width        : 22px;
+  height       : 22px;
+  border       : 2px solid #C74634;
+  border-radius: 50%;
+  background   : transparent;
+  flex-shrink  : 0;
+}
+
+/* Score badge ("87/100 Sehr attraktiv ★★★★★") */
+.score-box {
+  background   : #bfeed7;
+  border-radius: var(--sb-radius-md);
+  padding      : 0.65rem 1.1rem;
+  text-align   : center;
+  min-width    : 95px;
+}
+
+.score-num {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #22b36d;
+    line-height: 1;
+    letter-spacing: 1px;
+}
+
+.score-tot {
+    font-size: 1.4rem;
+    color: var(--sb-text-h);
+    font-weight: 500;
+    margin-left: 6px;
+}
+
+.score-lbl {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #059669;
+    margin-top: 0px;
+    line-height: 1;
+}
+.score-stars i {
+    font-size: 15px;
+    color: #2fad6c;
+}
+.card-aktie .d-flex .metric-row {
+    padding: 2px 0;
+}
+.card-letzte .analysis-item {
+    margin-bottom: 22px;
+}
+.score-stars {
+  color         : #059669;
+  font-size     : 0.8rem;
+  letter-spacing: 1px;
+  margin-top    : 7px;
+}
+
+/* Metric progress bars */
+.metric-row {
+  display    : flex;
+  align-items: center;
+  gap        : 10px;
+}
+
+.metric-lbl {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--sb-text-h);
+    min-width: 90px;
+    line-height: 1;
+}
+
+.metric-pct {
+  font-size  : 1rem;
+  font-weight: 700;
+  color      : var(--sb-text-h);
+  min-width  : 36px;
+  text-align : right;
+}
+
+.sb-progress {
+  flex         : 1;
+  height       : 7px;
+  background   : #e5e7eb;
+  border-radius: 4px;
+  overflow     : hidden;
+}
+
+.sb-progress-bar {
+  height       : 100%;
+  background   : #22c55e;
+  border-radius: 4px;
+  transition   : width 0.7s ease;
+}
+
+/* ============================================================
+   MARKTÜBERBLICK CARD
+   ============================================================ */
+.mkt-row {
+  display      : flex;
+  align-items  : center;
+  padding      : 0.48rem 0;
+  border-bottom: 1px solid var(--sb-divider);
+  gap          : 8px;
+}
+.mkt-row:last-child { border-bottom: none; }
+
+.mkt-flag {
+  font-size  : 1.05rem;
+  line-height: 1;
+  flex-shrink: 0;
+  width      : 24px;
+}
+
+.mkt-name {
+  font-size  : 1rem;  /* ≈ 12.5 px */
+  font-weight: 700;
+  color      : var(--sb-text-h);
+  flex       : 1;
+}
+
+.mkt-price {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--sb-text-h);
+    min-width: 76px;
+    text-align: right;
+}
+
+.mkt-chg {
+  font-size  : 1rem;
+  font-weight: 700;
+  min-width  : 62px;
+  text-align : right;
+}
+
+/* ============================================================
+   LETZTE ANALYSEN CARD
+   ============================================================ */
+.analysis-item {
+  display      : flex;
+  align-items  : center;
+  gap          : 12px;
+  padding      : 0.6rem 0;
+  border-bottom: 0px solid var(--sb-divider);
+}
+.analysis-item:last-child { border-bottom: none; }
+
+.analysis-logo {
+  width          : 42px;
+  height         : 42px;
+  border-radius  : var(--sb-radius-sm);
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+  font-size      : 0.6rem;
+  font-weight    : 800;
+  color          : #fff;
+  flex-shrink    : 0;
+  letter-spacing : -0.5px;
+}
+
+.analysis-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--sb-text-h);
+    line-height: 1.0;
+}
+
+.analysis-date {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--sb-text-h);
+    margin-top: 2px;
+}
+
+.analysis-score {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #22b36d;
+    white-space: nowrap;
+    margin-left: auto;
+}
+.analysis-score span{
+	font-weight:400;
+}
+/* ============================================================
+   SHARED LINK ARROW ("Zur Analyse →" etc.)
+   ============================================================ */
+.sb-link {
+  color          : var(--sb-blue);
+  text-decoration: none;
+  font-size      : 0.867rem;  /* ≈ 13 px */
+  font-weight    : 600;
+  transition     : color 0.15s;
+  letter-spacing : 0.01em;
+}
+.wert-row.arrow-link a.sb-link {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+.wert-row.arrow-link a.sb-link img {
+    margin-left: 6px;
+}
+.sb-link:hover { color: var(--sb-pink-hover); }
+
+/* ============================================================
+   PERFORMANCE CHART CARD (bottom)
+   ============================================================ */
+.chart-card {
+  background   : var(--sb-card-bg);
+  border-radius: var(--sb-radius);
+  padding      : 1.5rem 1.75rem 1.25rem;
+  box-shadow   : var(--sb-shadow);
+}
+
+.chart-card-head {
+  display        : flex;
+  align-items    : center;
+  justify-content: space-between;
+  flex-wrap      : wrap;
+  gap            : 0.75rem;
+  margin-bottom  : 1rem;
+}
+
+.chart-title {
+  font-size  : 1rem;       /* ≈ 15 px */
+  font-weight: 600;
+  color      : var(--sb-text-h);
+  letter-spacing: -0.01em;
+}
+
+/* Time selector buttons */
+.time-btns {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    border: 1px solid var(--sb-border);
+    padding: 6px 15px;
+    border-radius: 27px;
+}
+
+.time-btn {
+    padding: 2px 12px;
+    /* font-size: 0.767rem; */
+    font-weight: 400;
+    font-family: inherit;
+    border: 0px solid #e2e5ea;
+    border-radius: 26px;
+    background: #fff;
+    color: var(--sb-text-h);
+    cursor: pointer;
+    transition: var(--sb-ease);
+    line-height: 1.55;
+}
+.time-btn.active {
+  background  : var(--sb-border);
+  color       : var(--sb-blue);
+  border-color: var(--sb-border);
+  font-weight : 400;
+}
+.time-btn:hover:not(.active) {
+  background  : #f5f5f7;
+  color       : var(--sb-text-soft);
+  border-color: #d8dbe0;
+}
+
+/* Legend */
+.chart-legend {
+  display      : flex;
+  align-items  : center;
+  gap          : 1.25rem;
+  margin-bottom: 0.75rem;
+  flex-wrap    : wrap;
+}
+
+.legend-item {
+  display    : flex;
+  align-items: center;
+  gap        : 7px;
+}
+
+.legend-line {
+  height       : 2.5px;
+  width        : 22px;
+  border-radius: 2px;
+  flex-shrink  : 0;
+}
+
+.legend-label {
+  font-size  : 1rem;
+  font-weight: 700;
+  color      : var(--sb-text-h);
+}
+
+.legend-pct {
+  font-weight: 700;
+}
+
+.chart-disclaimer {
+    font-size: 1rem;
+    color: var(--sb-pink);
+    margin-top: 0.6rem;
+    font-style: normal;
+}
+
+/* ============================================================
+   NOTIFICATION DROPDOWN
+   ============================================================ */
+.notif-wrapper { position: relative; }
+
+.notif-panel {
+  position     : absolute;
+  top          : calc(100% + 12px);
+  right        : 0;
+  width        : 370px;
+  background   : #fff;
+  border-radius: 18px;
+  border       : 1px solid #e5e7eb;
+  box-shadow   : 0 12px 40px rgba(0, 0, 0, 0.12),
+                 0 2px 8px rgba(0, 0, 0, 0.06);
+  z-index      : 2000;
+  overflow     : hidden;
+  animation    : notifSlideIn 0.18s ease;
+}
+
+/* Arrow caret */
+.notif-panel::before {
+  content        : '';
+  position       : absolute;
+  top            : -7px;
+  right          : 15px;
+  width          : 13px;
+  height         : 13px;
+  background     : #fff;
+  border-left    : 1px solid #e5e7eb;
+  border-top     : 1px solid #e5e7eb;
+  transform      : rotate(45deg);
+  border-radius  : 2px 0 0 0;
+}
+
+@keyframes notifSlideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.notif-header {
+  display        : flex;
+  align-items    : center;
+  justify-content: space-between;
+  padding        : 1.1rem 1.25rem 0.8rem;
+  border-bottom  : 1px solid var(--sb-divider);
+}
+
+.notif-title {
+  font-size  : 0.933rem;
+  font-weight: 700;
+  color      : var(--sb-text-h);
+}
+
+.notif-close {
+  background  : none;
+  border      : none;
+  color       : var(--sb-text-muted);
+  cursor      : pointer;
+  padding     : 3px 5px;
+  border-radius: 6px;
+  font-size   : 0.8rem;
+  line-height : 1;
+  transition  : var(--sb-ease);
+}
+.notif-close:hover {
+  background: #f3f4f6;
+  color     : var(--sb-text-h);
+}
+
+.notif-item {
+  display      : flex;
+  align-items  : flex-start;
+  gap          : 11px;
+  padding      : 0.9rem 1.25rem;
+  border-bottom: 1px solid #fafafa;
+  position     : relative;
+  transition   : background 0.15s;
+  cursor       : pointer;
+}
+.notif-item:last-of-type { border-bottom: none; }
+.notif-item:hover { background: #fafafa; }
+.notif-item.unread { background: #fdf4f8; }
+.notif-item.unread:hover { background: #fbeaf2; }
+
+.notif-icon-wrap {
+  flex-shrink    : 0;
+  width          : 38px;
+  height         : 38px;
+  border-radius  : var(--sb-radius-sm);
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+  font-size      : 1rem;
+}
+
+.notif-body { flex: 1; min-width: 0; }
+
+.notif-item-title {
+  font-size    : 0.833rem;
+  font-weight  : 700;
+  color        : var(--sb-text-h);
+  margin-bottom: 2px;
+  line-height  : 1.3;
+}
+
+.notif-item-desc {
+  font-size    : 0.767rem;
+  color        : var(--sb-text-soft);
+  line-height  : 1.45;
+  margin-bottom: 5px;
+}
+
+.notif-item-time {
+  font-size: 0.7rem;
+  color    : var(--sb-text-muted);
+}
+.notif-item-time i { font-size: 0.65rem; }
+
+.notif-dot {
+  flex-shrink  : 0;
+  width        : 8px;
+  height       : 8px;
+  border-radius: 50%;
+  background   : var(--sb-pink);
+  margin-top   : 4px;
+}
+
+.notif-footer {
+  padding   : 0.8rem 1.25rem;
+  border-top: 1px solid var(--sb-divider);
+  text-align: center;
+}
+
+@media (max-width: 479.98px) {
+  .notif-panel { width: calc(100vw - 2rem); right: -4rem; }
+}
+
+/* ============================================================
+   INFO ICON TOOLTIP
+   ============================================================ */
+.sb-info-icon {
+  font-size     : 1.1rem;
+  color         : var(--sb-text-muted);
+  cursor        : help;
+  vertical-align: middle;
+  transition    : color 0.15s;
+  margin-left: 5px;
+}
+.sb-info-icon:hover,
+.sb-info-icon:focus { color: var(--sb-pink); outline: none; }
+
+/* ============================================================
+   MOBILE BOTTOM NAV
+   ============================================================ */
+.sb-mobile-nav {
+  display   : none;
+  position  : fixed;
+  bottom    : 0;
+  left      : 0;
+  right     : 0;
+  background: #fff;
+  border-top: 1px solid var(--sb-border);
+  z-index   : 1060;
+  padding   : 0.45rem 0 0.65rem;
+}
+
+.mobile-nav-inner {
+  display        : flex;
+  justify-content: space-around;
+  align-items    : center;
+}
+
+.mobile-nav-link {
+  display        : flex;
+  flex-direction : column;
+  align-items    : center;
+  text-decoration: none;
+  gap            : 2px;
+}
+.mobile-nav-link i    { font-size: 1.35rem; }
+.mobile-nav-link span { font-size: 0.633rem; font-weight: 500; }
+.mobile-nav-link.active        { color: var(--sb-pink); }
+.mobile-nav-link:not(.active)  { color: var(--sb-text-muted); }
+
+/* ============================================================
+   RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* Tablet — icon rail only */
+@media (max-width: 1279.98px) {
+  :root { --sb-sidebar-w: var(--sb-sidebar-col); }
+
+  .sb-logo-text,
+  .sb-nav-link span {
+    opacity       : 0;
+    pointer-events: none;
+    width         : 0;
+    overflow      : hidden;
+  }
+
+  .sb-logo {
+    justify-content: center;
+    padding        : 1.3rem 0.5rem 1.6rem;
+  }
+
+  .sb-nav { padding: 0 0.4rem; }
+  .sb-nav-link { justify-content: center; padding: 0.75rem; }
+  .sb-hamburger { display: inline-flex; }
+}
+
+/* Mobile — hide sidebar, show bottom nav */
+@media (max-width: 767.98px) {
+  .sb-sidebar    { display: none; }
+  .sb-main       { margin-left: 0; padding: 1.25rem 1rem 5rem; }
+  .sb-mobile-nav { display: block; }
+  .sb-hamburger  { display: inline-flex; }
+}
+
+/* Small mobile */
+@media (max-width: 575.98px) {
+  .sb-topbar h1  { font-size: 1.4rem; }
+  .chart-card    { padding: 1.1rem; }
+  .time-btns     { gap: 2px; }
+  .time-btn      { padding: 3px 8px; font-size: 0.7rem; }
+  .sb-card       { padding: 1.1rem; }
+}
