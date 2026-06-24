@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockBuddy – Buddy Analyse-Assistent</title>
+
+  <!-- Google Font: Barlow -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Bootstrap CSS (local) -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* ── Buddy page layout ── */
+    .buddy-layout {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+
+    /* Chat column */
+    .buddy-chat-col {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Right panel */
+    .buddy-right-col {
+      width: 320px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* ── Chat window ── */
+    .chat-window {
+      background: #fff;
+      border-radius: var(--sb-radius);
+      box-shadow: var(--sb-shadow);
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100vh - 200px);
+      overflow: hidden;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 1.75rem 1.75rem 1rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* User bubble */
+    .chat-bubble-user {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      gap: 10px;
+    }
+
+    .chat-bubble-user .bubble-content {
+      background: #e8e9f5;
+      border-radius: 18px 18px 4px 18px;
+      padding: 0.75rem 1.1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--sb-text-h);
+      max-width: 60%;
+    }
+
+    .chat-bubble-user .bubble-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .chat-bubble-user .bubble-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .chat-timestamp {
+      font-size: 0.78rem;
+      color: var(--sb-text-muted);
+      text-align: right;
+      margin-top: 4px;
+      padding-right: 46px;
+    }
+    .chat-timestamp.left {
+      text-align: left;
+      padding-right: 0;
+      padding-left: 0;
+    }
+
+    /* Assistant response card */
+    .chat-response {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .chat-response-inner {
+      background: #f8f9fc;
+      border-radius: var(--sb-radius);
+      padding: 1.5rem;
+      border: 1px solid var(--sb-border);
+    }
+
+    /* Intro text in response */
+    .chat-intro-text {
+      font-size: 1rem;
+      color: var(--sb-text-h);
+      margin-bottom: 1.25rem;
+      line-height: 1.55;
+    }
+    .chat-intro-text strong { font-weight: 700; }
+
+    /* Analysis card inside chat */
+    .buddy-analysis-card {
+      background: #fff;
+      border-radius: var(--sb-radius);
+      box-shadow: var(--sb-shadow);
+      padding: 1.25rem;
+    }
+
+    .buddy-analysis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Score section */
+    .buddy-score-section {
+      background: #f8f9fc;
+      border-radius: var(--sb-radius-md);
+      padding: 1.1rem;
+    }
+
+    .buddy-score-section .section-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--sb-text-h);
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .buddy-score-section .section-title img {
+      width: 16px;
+    }
+
+    /* Circular score */
+    .score-circle-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .score-circle {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      flex-shrink: 0;
+    }
+    .score-circle svg {
+      width: 80px;
+      height: 80px;
+      transform: rotate(-90deg);
+    }
+    .score-circle .bg-ring {
+      fill: none;
+      stroke: #e5e7eb;
+      stroke-width: 7;
+    }
+    .score-circle .value-ring {
+      fill: none;
+      stroke: var(--sb-pink);
+      stroke-width: 7;
+      stroke-linecap: round;
+      stroke-dasharray: 220;
+      stroke-dashoffset: 28; /* 87/100 * 220 ≈ 191.4 → offset = 220-191 = 29 */
+      transition: stroke-dashoffset 1s ease;
+    }
+    .score-circle-num {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--sb-text-h);
+      line-height: 1;
+    }
+    .score-circle-num span {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--sb-text-muted);
+    }
+
+    .score-label-green {
+      font-size: 1.55rem;
+      font-weight: 700;
+      color: var(--sb-green-dark);
+      line-height: 1.1;
+    }
+    .score-desc {
+      font-size: 0.83rem;
+      color: var(--sb-text-soft);
+      line-height: 1.45;
+      margin-top: 0.35rem;
+    }
+
+    .score-profile-tag {
+      display: inline-block;
+      background: #f0f0f9;
+      color: var(--sb-blue);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-top: 0.6rem;
+    }
+
+    /* Score breakdown bars */
+    .breakdown-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 0.55rem;
+    }
+    .breakdown-row:last-child { margin-bottom: 0; }
+    .breakdown-icon {
+      width: 20px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .breakdown-icon img { width: 16px; }
+    .breakdown-lbl {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--sb-text-h);
+      min-width: 70px;
+    }
+    .breakdown-bar-wrap {
+      flex: 1;
+      height: 7px;
+      background: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .breakdown-bar {
+      height: 100%;
+      border-radius: 4px;
+    }
+    .bar-green  { background: #22c55e; }
+    .bar-amber  { background: #f59e0b; }
+    .breakdown-pct {
+      font-size: 0.9rem;
+      font-weight: 700;
+      min-width: 36px;
+      text-align: right;
+    }
+    .pct-green { color: #22b36d; }
+    .pct-amber { color: #d97706; }
+
+    /* Analyse-Erklärung */
+    .erklaerung-item {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 0.8rem;
+      align-items: flex-start;
+    }
+    .erklaerung-item:last-child { margin-bottom: 0; }
+    .erklaerung-icon {
+      width: 26px;
+      height: 26px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .erklaerung-icon img { width: 22px; }
+    .erklaerung-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--sb-text-h);
+      line-height: 1.2;
+    }
+    .erklaerung-text {
+      font-size: 0.82rem;
+      color: var(--sb-text-soft);
+      line-height: 1.45;
+      margin-top: 2px;
+    }
+
+    /* Score-Entwicklung chart area */
+    .score-entwicklung-section {
+      background: #f8f9fc;
+      border-radius: var(--sb-radius-md);
+      padding: 1.1rem;
+    }
+
+    /* Analyse action buttons */
+    .buddy-action-btns {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .btn-compare {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #fff;
+      border: 2px solid var(--sb-blue);
+      color: var(--sb-blue);
+      border-radius: 30px;
+      padding: 0.55rem 1.25rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--sb-ease);
+    }
+    .btn-compare:hover {
+      background: var(--sb-blue);
+      color: #fff;
+    }
+    .btn-compare img { width: 18px; }
+
+    .btn-deep {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--sb-pink);
+      border: 2px solid var(--sb-pink);
+      color: #fff;
+      border-radius: 30px;
+      padding: 0.55rem 1.4rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--sb-ease);
+    }
+    .btn-deep:hover { background: var(--sb-pink-hover); border-color: var(--sb-pink-hover); color: #fff; }
+
+    /* ── Chat input bar ── */
+    .chat-input-bar {
+      padding: 1rem 1.75rem 1.25rem;
+      border-top: 1px solid var(--sb-border);
+      background: #fff;
+    }
+
+    .chat-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f8f9fc;
+      border: 1.5px solid var(--sb-border);
+      border-radius: 30px;
+      padding: 0.6rem 0.75rem 0.6rem 1rem;
+    }
+
+    .chat-attach-btn {
+      background: none;
+      border: none;
+      color: var(--sb-text-muted);
+      cursor: pointer;
+      padding: 4px;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      transition: color 0.15s;
+      flex-shrink: 0;
+    }
+    .chat-attach-btn:hover { color: var(--sb-pink); }
+
+    .chat-input-field {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--sb-text-h);
+      outline: none;
+      min-width: 0;
+    }
+    .chat-input-field::placeholder { color: var(--sb-text-muted); }
+
+    .chat-mic-btn {
+      background: none;
+      border: none;
+      color: var(--sb-text-muted);
+      cursor: pointer;
+      padding: 4px;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      transition: color 0.15s;
+      flex-shrink: 0;
+    }
+    .chat-mic-btn:hover { color: var(--sb-pink); }
+
+    .chat-disclaimer-bar {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--sb-text-muted);
+      margin-top: 0.5rem;
+    }
+
+    /* ── Right panel cards ── */
+    .rp-stock-card {
+      background: #fff;
+      border-radius: var(--sb-radius);
+      box-shadow: var(--sb-shadow);
+      padding: 1.25rem;
+    }
+
+    .rp-stock-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.1rem;
+    }
+    .rp-stock-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--sb-radius-sm);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .rp-stock-logo img { width: 100%; height: 100%; object-fit: contain; }
+    .rp-stock-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--sb-text-h);
+      line-height: 1.2;
+    }
+    .rp-stock-ticker {
+      font-size: 0.83rem;
+      color: var(--sb-text-muted);
+      margin-top: 2px;
+    }
+
+    .rp-score-label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--sb-text-h);
+      margin-bottom: 0.5rem;
+    }
+
+    .rp-score-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 0.25rem;
+    }
+    .rp-score-num {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--sb-text-h);
+      line-height: 1;
+    }
+    .rp-score-num span {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--sb-text-muted);
+    }
+    .rp-score-badge {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--sb-green-dark);
+    }
+
+    .rp-stars {
+      color: #f59e0b;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.35rem;
+    }
+
+    .rp-updated {
+      font-size: 0.8rem;
+      color: var(--sb-text-muted);
+      margin-top: 0.35rem;
+    }
+
+    /* Letzte Analysen right panel */
+    .rp-analyses-card {
+      background: #fff;
+      border-radius: var(--sb-radius);
+      box-shadow: var(--sb-shadow);
+      padding: 1.25rem;
+    }
+    .rp-analyses-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--sb-text-h);
+      margin-bottom: 1rem;
+    }
+    .rp-analyses-title img { width: 28px; }
+
+    /* Disclaimer card */
+    .rp-disclaimer-card {
+      background: #fdf4f8;
+      border-radius: var(--sb-radius);
+      padding: 1.1rem 1.25rem;
+      border: 1px solid #f5d6e8;
+    }
+    .rp-disclaimer-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--sb-text-h);
+      margin-bottom: 0.6rem;
+    }
+    .rp-disclaimer-head img { width: 20px; }
+    .rp-disclaimer-text {
+      font-size: 0.82rem;
+      color: var(--sb-text-soft);
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Topbar subtitle */
+    .page-subtitle {
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--sb-text-soft);
+      margin-top: 2px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 1279.98px) {
+      .buddy-right-col { width: 280px; }
+    }
+    @media (max-width: 1024px) {
+      .buddy-layout { flex-direction: column; }
+      .buddy-right-col { width: 100%; }
+    }
+    @media (max-width: 767.98px) {
+      .buddy-analysis-grid { grid-template-columns: 1fr; }
+      .chat-messages { padding: 1.1rem; }
+      .chat-input-bar { padding: 0.75rem 1rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       SIDEBAR
+       ══════════════════════════════════════════════ -->
+  <aside class="sb-sidebar" id="sidebar">
+    <div class="sb-sidebar-inner">
+      <a class="sb-logo" href="index.html">
+        <div class="sb-logo-icon">
+          <img src="img/logo.png" alt=""/>
+        </div>
+      </a>
+
+      <nav class="sb-nav">
+        <a class="sb-nav-link" href="index.html">
+          <span><img src="img/navi_home_active.svg" alt="" style="width:22px"/></span>
+          <span>Übersicht</span>
+        </a>
+        <a class="sb-nav-link active" href="#">
+          <span><img src="img/bildmarke_stockbuddy.svg" alt="" style="width:28px"/></span>
+          <span>Buddy</span>
+        </a>
+        <a class="sb-nav-link" href="#">
+          <span><img src="img/navi_depot_active.svg" alt="" style="width:26px"/></span>
+          <span>Depot</span>
+        </a>
+        <a class="sb-nav-link" href="#">
+          <span><img src="img/navi_musterdepot_active.svg" alt="" style="width:29px"/></span>
+          <span>Musterdepot</span>
+        </a>
+        <a class="sb-nav-link" href="#">
+          <span><img src="img/navi_analyse_active.svg" alt="" style="width:22px"/></span>
+          <span>Analyse</span>
+        </a>
+        <a class="sb-nav-link" href="#">
+          <span><img src="img/navi_profil_active.svg" alt="" style="width:22px"/></span>
+          <span>Profil</span>
+        </a>
+      </nav>
+    </div>
+  </aside>
+
+  <!-- Mobile overlay -->
+  <div class="sb-overlay" id="overlay" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════════
+       MAIN CONTENT
+       ══════════════════════════════════════════════ -->
+  <main class="sb-main">
+
+    <!-- ── Topbar ── -->
+    <div class="sb-topbar top-bar-main">
+      <div class="d-flex align-items-center">
+        <button class="sb-hamburger" id="hamburger" aria-label="Navigation öffnen">
+          <i class="bi bi-list" aria-hidden="true"></i>
+        </button>
+        <div class="d-block d-lg-none">
+          <img src="img/logo.png" alt=""/>
+        </div>
+        <div class="d-none d-lg-block">
+          <h1 style="margin-bottom:0;">Buddy Analyse – Assistent</h1>
+          <div class="page-subtitle">Dein KI-gestützter Analyse-assistent – für fundierte Einblicke, keine Anlageberatung</div>
+        </div>
+      </div>
+      <div class="sb-topbar-right">
+        <!-- Notification trigger + dropdown -->
+        <div class="notif-wrapper" id="notifWrapper">
+          <button class="sb-notif" id="notifBtn" aria-label="Benachrichtigungen" aria-expanded="false" aria-controls="notifPanel">
+            <img src="img/benachrichtigungen.svg" alt="" style="width:24px;"/>
+            <span class="nb" id="notifCount" aria-label="2 neue Benachrichtigungen">2</span>
+          </button>
+
+          <div class="notif-panel" id="notifPanel" role="dialog" aria-label="Benachrichtigungen" hidden>
+            <div class="notif-header">
+              <span class="notif-title">Benachrichtigungen</span>
+              <button class="notif-close" id="notifClose" aria-label="Schließen">
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+              </button>
+            </div>
+
+            <div class="notif-item unread">
+              <div class="notif-icon-wrap" style="background:#fce8f1;">
+                <i class="bi bi-graph-up-arrow" style="color:var(--sb-pink);" aria-hidden="true"></i>
+              </div>
+              <div class="notif-body">
+                <div class="notif-item-title">Neue Analyse verfügbar</div>
+                <div class="notif-item-desc">Oracle Corp. wurde heute analysiert und erhält 87/100 Punkte.</div>
+                <div class="notif-item-time"><i class="bi bi-clock" aria-hidden="true"></i> Vor 2 Stunden</div>
+              </div>
+              <span class="notif-dot" aria-label="Ungelesen"></span>
+            </div>
+
+            <div class="notif-item unread">
+              <div class="notif-icon-wrap" style="background:#eef2ff;">
+                <i class="bi bi-lightning-charge-fill" style="color:var(--sb-blue);" aria-hidden="true"></i>
+              </div>
+              <div class="notif-body">
+                <div class="notif-item-title">Kursalarm ausgelöst</div>
+                <div class="notif-item-desc">NVIDIA ist seit gestern um +5,2 % gestiegen.</div>
+                <div class="notif-item-time"><i class="bi bi-clock" aria-hidden="true"></i> Vor 5 Stunden</div>
+              </div>
+              <span class="notif-dot" aria-label="Ungelesen"></span>
+            </div>
+
+            <div class="notif-item">
+              <div class="notif-icon-wrap" style="background:#f0fdf4;">
+                <i class="bi bi-check-circle-fill" style="color:#16a34a;" aria-hidden="true"></i>
+              </div>
+              <div class="notif-body">
+                <div class="notif-item-title">Depot aktualisiert</div>
+                <div class="notif-item-desc">Deine Wertentwicklung wurde erfolgreich synchronisiert.</div>
+                <div class="notif-item-time"><i class="bi bi-clock" aria-hidden="true"></i> Gestern, 18:42</div>
+              </div>
+            </div>
+
+            <div class="notif-footer">
+              <a href="#" class="sb-link">Alle Benachrichtigungen →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="sb-avatar" role="img" aria-label="Benutzerprofil">
+          <img src="img/profile-top.png" alt="Profilbild">
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile page title -->
+    <div class="sb-topbar d-block d-lg-none">
+      <div>
+        <h1 style="margin-bottom:2px;">Buddy Analyse – Assistent</h1>
+        <div class="page-subtitle">Dein KI-gestützter Analyse-assistent</div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         BUDDY LAYOUT
+         ══════════════════════════════════════════ -->
+    <div class="buddy-layout">
+
+      <!-- ── Chat column ── -->
+      <div class="buddy-chat-col">
+        <div class="chat-window">
+
+          <!-- Messages -->
+          <div class="chat-messages" id="chatMessages">
+
+            <!-- User message -->
+            <div>
+              <div class="chat-bubble-user">
+                <div class="bubble-content">
+                  Analysiere Oracle anhand meines analyseprofils.
+                </div>
+                <div class="bubble-avatar">
+                  <img src="img/profile-top.png" alt="Profilbild">
+                </div>
+              </div>
+              <div class="chat-timestamp">09:42 <i class="bi bi-check2-all" style="color:var(--sb-blue);"></i></div>
+            </div>
+
+            <!-- Assistant response -->
+            <div class="chat-response">
+              <div class="chat-response-inner">
+
+                <p class="chat-intro-text">
+                  Gerne analysiere ich Oracle (ORCL) anhand deines hinterlegten Analyseprofils.<br>
+                  <strong>Dein Profil:</strong> Ausgewogen (wachstum, Dividende, Risiko, Bewertung gleichgewicht)<br>
+                  Hier die Analyse:
+                </p>
+
+                <!-- Analysis card -->
+                <div class="buddy-analysis-card">
+                  <div class="buddy-analysis-grid">
+
+                    <!-- StockBuddy Score -->
+                    <div class="buddy-score-section">
+                      <div class="section-title">
+                        <img src="img/score.svg" alt=""/>
+                        StockBuddy Score
+                        <img src="img/info.svg" alt="" style="width:15px; margin-left:2px;" title="Erklärung zum Score"/>
+                      </div>
+
+                      <div class="score-circle-wrap">
+                        <div class="score-circle" aria-label="Score: 87 von 100">
+                          <svg viewBox="0 0 80 80">
+                            <circle class="bg-ring" cx="40" cy="40" r="33"/>
+                            <circle class="value-ring" cx="40" cy="40" r="33"/>
+                          </svg>
+                          <div class="score-circle-num">87<span>/100</span></div>
+                        </div>
+                        <div>
+                          <div class="score-label-green">Sehr gut</div>
+                          <div class="score-desc">Oracle überzeugt mit starkem Wachstum und soliden Fundamentaldaten. Die Bewertung ist leicht erhöht, das Risiko moderat.</div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <span class="score-profile-tag">Analyse basiert auf dein Profil: ausgewogen</span>
+                      </div>
+                    </div>
+
+                    <!-- Score Breakdown -->
+                    <div class="buddy-score-section">
+                      <div class="section-title">
+                        Score-Breakdown
+                        <img src="img/info.svg" alt="" style="width:15px; margin-left:2px;" title="Erklärung zum Score-Breakdown"/>
+                      </div>
+
+                      <div class="breakdown-row">
+                        <div class="breakdown-icon"><img src="img/wachstum_green.svg" alt=""/></div>
+                        <span class="breakdown-lbl">Wachstum</span>
+                        <div class="breakdown-bar-wrap">
+                          <div class="breakdown-bar bar-green" style="width:90%"></div>
+                        </div>
+                        <span class="breakdown-pct pct-green">90%</span>
+                      </div>
+                      <div class="breakdown-row">
+                        <div class="breakdown-icon"><img src="img/dividende_yellow.svg" alt=""/></div>
+                        <span class="breakdown-lbl">Dividende</span>
+                        <div class="breakdown-bar-wrap">
+                          <div class="breakdown-bar bar-amber" style="width:60%"></div>
+                        </div>
+                        <span class="breakdown-pct pct-amber">60%</span>
+                      </div>
+                      <div class="breakdown-row">
+                        <div class="breakdown-icon"><img src="img/risiko_green.svg" alt=""/></div>
+                        <span class="breakdown-lbl">Risiko</span>
+                        <div class="breakdown-bar-wrap">
+                          <div class="breakdown-bar bar-green" style="width:80%"></div>
+                        </div>
+                        <span class="breakdown-pct pct-green">80%</span>
+                      </div>
+                      <div class="breakdown-row">
+                        <div class="breakdown-icon"><img src="img/bewertung_lightblue.svg" alt=""/></div>
+                        <span class="breakdown-lbl">Bewertung</span>
+                        <div class="breakdown-bar-wrap">
+                          <div class="breakdown-bar bar-green" style="width:70%"></div>
+                        </div>
+                        <span class="breakdown-pct pct-green">70%</span>
+                      </div>
+                    </div>
+
+                  </div><!-- /grid -->
+
+                  <!-- Bottom grid: Erklärung + Entwicklung -->
+                  <div class="buddy-analysis-grid">
+
+                    <!-- Analyse-Erklärung -->
+                    <div class="buddy-score-section">
+                      <div class="section-title">
+                        Analyse-Erklärung
+                        <img src="img/info.svg" alt="" style="width:15px; margin-left:2px;" title="Erklärung"/>
+                      </div>
+
+                      <div class="erklaerung-item">
+                        <div class="erklaerung-icon"><img src="img/wachstum_green.svg" alt=""/></div>
+                        <div>
+                          <div class="erklaerung-title">Wachstum: Sehr stark</div>
+                          <div class="erklaerung-text">Oracle profitiert von der hohen Nachfrage nach Cloud-Infrastruktur und KI-Lösungen. Umsatz- und Gewinnwachstum über dem Branchendurchschnitt.</div>
+                        </div>
+                      </div>
+                      <div class="erklaerung-item">
+                        <div class="erklaerung-icon"><img src="img/dividende_yellow.svg" alt=""/></div>
+                        <div>
+                          <div class="erklaerung-title">Dividende: Gut</div>
+                          <div class="erklaerung-text">Solide Dividendenhistorie mit regelmäßigen Erhöhungen. Die ausschüttungsquote ist auf einem gesunden Niveau.</div>
+                        </div>
+                      </div>
+                      <div class="erklaerung-item">
+                        <div class="erklaerung-icon"><img src="img/risiko_green.svg" alt=""/></div>
+                        <div>
+                          <div class="erklaerung-title">Risiko: Moderat</div>
+                          <div class="erklaerung-text">Abhängigkeit von Großkunden und intensiver Wettbewerbim Cloud-Markt. Solide Bilanz mindert das Risiko.</div>
+                        </div>
+                      </div>
+                      <div class="erklaerung-item">
+                        <div class="erklaerung-icon"><img src="img/bewertung_lightblue.svg" alt=""/></div>
+                        <div>
+                          <div class="erklaerung-title">Bewertung: Leicht erhöht</div>
+                          <div class="erklaerung-text">KGV und KUV liegen leicht über dem historischen Durchschnitt, aber im Rahmen des erwarteten Wachstums.</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Score-Entwicklung -->
+                    <div class="score-entwicklung-section">
+                      <div class="section-title" style="font-size:.95rem;font-weight:700;color:var(--sb-text-h);margin-bottom:.85rem;display:flex;align-items:center;gap:6px;">
+                        Score-Entwicklung
+                        <img src="img/info.svg" alt="" style="width:15px; margin-left:2px;" title="Entwicklung des Scores"/>
+                      </div>
+                      <div style="position:relative;height:170px;">
+                        <canvas id="scoreChart" aria-label="Score-Entwicklung Oracle"></canvas>
+                      </div>
+                    </div>
+
+                  </div><!-- /bottom grid -->
+
+                  <!-- Action buttons -->
+                  <div class="buddy-action-btns">
+                    <a href="#" class="btn-compare">
+                      <i class="bi bi-arrow-left-right"></i>
+                      Mit Microsoft vergleichen
+                    </a>
+                    <a href="#" class="btn-deep">
+                      Analyse vertiefen
+                      <i class="bi bi-arrow-right"></i>
+                    </a>
+                  </div>
+
+                </div><!-- /analysis card -->
+              </div><!-- /response inner -->
+
+              <div class="chat-timestamp left">09:41</div>
+            </div>
+
+          </div><!-- /chat-messages -->
+
+          <!-- Input bar -->
+          <div class="chat-input-bar">
+            <div class="chat-input-wrap">
+              <button class="chat-attach-btn" aria-label="Anhang hinzufügen">
+                <i class="bi bi-paperclip"></i>
+              </button>
+              <input
+                type="text"
+                class="chat-input-field"
+                placeholder="Stelle eine Frage zu Aktien, Märkten oder Analysen ..."
+                aria-label="Nachricht eingeben"
+              />
+              <button class="chat-mic-btn" aria-label="Spracheingabe">
+                <i class="bi bi-mic-fill"></i>
+              </button>
+            </div>
+            <div class="chat-disclaimer-bar">
+              Buddy kann Fehler machen. Antworten bitte immer selbst prüfen.
+            </div>
+          </div>
+
+        </div><!-- /chat-window -->
+      </div><!-- /chat-col -->
+
+      <!-- ── Right panel ── -->
+      <div class="buddy-right-col">
+
+        <!-- Stock info card -->
+        <div class="rp-stock-card">
+          <div class="rp-stock-head">
+            <div class="rp-stock-logo">
+              <img src="img/oracal.png" alt="Oracle Logo"/>
+            </div>
+            <div>
+              <div class="rp-stock-name">Oracle Corp.</div>
+              <div class="rp-stock-ticker">ORCL &bull; US68389X1084</div>
+            </div>
+          </div>
+
+          <div class="rp-score-label">StockBuddy Score</div>
+          <div class="rp-score-row">
+            <div>
+              <div class="rp-score-num">87<span>/100</span></div>
+              <div style="font-size:0.82rem;color:var(--sb-green-dark);font-weight:600;margin-top:2px;">Sehr attraktiv</div>
+            </div>
+            <div class="rp-score-badge">Sehr gut</div>
+          </div>
+          <div class="rp-stars" aria-label="5 Sterne">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="rp-updated">Zuletzt aktualisiert: heute, 10:24</div>
+        </div>
+
+        <!-- Letzte Analysen -->
+        <div class="rp-analyses-card">
+          <div class="rp-analyses-title">
+            <img src="img/letzte_analysen.svg" alt=""/>
+            Letzte Analysen
+          </div>
+
+          <div class="analysis-item">
+            <div class="analysis-logo">
+              <img src="img/nvidia.png" alt="NVIDIA"/>
+            </div>
+            <div class="flex-grow-1">
+              <div class="analysis-name">NCIDIA Corporation</div>
+              <div class="analysis-date">22.05.2024</div>
+            </div>
+            <div class="analysis-score">92/<span>100</span></div>
+          </div>
+
+          <div class="analysis-item">
+            <div class="analysis-logo">
+              <img src="img/microsoft.png" alt="Microsoft"/>
+            </div>
+            <div class="flex-grow-1">
+              <div class="analysis-name">Microsoft Corporation</div>
+              <div class="analysis-date">20.05.2024</div>
+            </div>
+            <div class="analysis-score">88/<span>100</span></div>
+          </div>
+
+          <div class="analysis-item">
+            <div class="analysis-logo">
+              <img src="img/asml.png" alt="ASML"/>
+            </div>
+            <div class="flex-grow-1">
+              <div class="analysis-name">ASML Holding N.V.</div>
+              <div class="analysis-date">19.05.2024</div>
+            </div>
+            <div class="analysis-score">85/<span>100</span></div>
+          </div>
+
+          <div class="analysis-item" style="margin-bottom:0;">
+            <div class="analysis-logo">
+              <img src="img/visa.png" alt="Visa"/>
+            </div>
+            <div class="flex-grow-1">
+              <div class="analysis-name">Visa Inc.</div>
+              <div class="analysis-date">14.05.2024</div>
+            </div>
+            <div class="analysis-score">80/<span>100</span></div>
+          </div>
+
+          <div class="wert-row arrow-link" style="margin-top:.75rem;padding-top:.6rem;">
+            <a href="#" class="sb-link">Alle Analysen anzeigen <img src="img/arrow_right_blue.svg" alt="" style="width:22px;"/></a>
+          </div>
+        </div>
+
+        <!-- Disclaimer card -->
+        <div class="rp-disclaimer-card">
+          <div class="rp-disclaimer-head">
+            <img src="img/hinweis.svg" alt=""/>
+            Keine Anlageberatung – nur Analyse
+          </div>
+          <div class="rp-disclaimer-text">
+            Die Informationen von StockBuddy dienen ausschließlich zu Analysezwecken und stellen keine Anlageberatung oder Kaufempfehlung dar. Investitionen in Aktien und Wertpapiere sind mit Risiken verbunden.
+          </div>
+          <a href="#" class="sb-link">Mehr erfahren <img src="img/arrow_right_blue.svg" alt="" style="width:20px; vertical-align:middle;"/></a>
+        </div>
+
+      </div><!-- /right col -->
+    </div><!-- /buddy-layout -->
+
+  </main>
+
+  <!-- ══════════════════════════════════════════
+       SCRIPTS
+       ══════════════════════════════════════════ -->
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/chart.umd.min.js"></script>
+  <script src="js/main.js"></script>
+
+  <script>
+    /* Score-Entwicklung Chart */
+    (function () {
+      const ctx = document.getElementById('scoreChart');
+      if (!ctx) return;
+
+      const labels = ['Dez 24','Jan 25','Feb 25','Mär 25','Apr 25','Mai 25'];
+      const data   = [52, 58, 62, 68, 74, 87];
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{
+            data,
+            borderColor    : '#d14894',
+            backgroundColor: 'rgba(209,72,148,0.10)',
+            borderWidth    : 2,
+            fill           : true,
+            tension        : 0.45,
+            pointRadius    : 0,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: '#d14894',
+          }]
+        },
+        options: {
+          responsive   : true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              mode       : 'index',
+              intersect  : false,
+              callbacks  : {
+                label: ctx => ' Score: ' + ctx.parsed.y
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid : { display: false },
+              ticks: { font: { size: 10, family: 'Barlow' }, color: '#999' }
+            },
+            y: {
+              min : 0,
+              max : 100,
+              grid: { color: '#f0f0f0' },
+              ticks: {
+                stepSize: 25,
+                font: { size: 10, family: 'Barlow' },
+                color: '#999'
+              }
+            }
+          }
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
