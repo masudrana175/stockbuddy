@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Ebene_1" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 21.835 27.626">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Neues_Verlaufsfeld_6);
+      }
+    </style>
+    <linearGradient id="Neues_Verlaufsfeld_6" data-name="Neues Verlaufsfeld 6" x1=".9412" y1="9.848" x2="21.6275" y2="27.2058" gradientUnits="userSpaceOnUse">
+      <stop offset=".1053" stop-color="#d04994"/>
+      <stop offset="1" stop-color="#323e8c"/>
+    </linearGradient>
+  </defs>
+  <path class="cls-1" d="M10.6655,0L0,10.9697v15.6064c0,.5801.4697,1.0498,1.0498,1.0498s1.0498-.4697,1.0498-1.0498v-14.7539L10.7007,2.9766l9.0347,8.8604v14.7393c0,.5801.4697,1.0498,1.0498,1.0498s1.0498-.4697,1.0498-1.0498v-15.6211L10.6655,0ZM5.604,26.5601c0,.5801.4697,1.0498,1.0498,1.0498s1.0498-.4697,1.0498-1.0498v-7.7554h6.4277v7.7554c0,.5801.4697,1.0498,1.0498,1.0498s1.0498-.4697,1.0498-1.0498v-9.855H5.604v9.855Z"/>
+</svg>
