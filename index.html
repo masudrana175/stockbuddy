@@ -71,12 +71,15 @@
   <main class="sb-main">
 
     <!-- ── Topbar ── -->
-    <div class="sb-topbar">
+    <div class="sb-topbar top-bar-main">
       <div class="d-flex align-items-center">
-        <button class="sb-hamburger" id="hamburger" aria-label="Navigation öffnen">
+		<button class="sb-hamburger" id="hamburger" aria-label="Navigation öffnen">
           <i class="bi bi-list" aria-hidden="true"></i>
         </button>
-        <h1>Übersicht</h1>
+		<div class="d-block d-lg-none">
+			<img src="img/logo.png" alt=""/>
+		</div>
+        <h1 class="d-none d-lg-block">Übersicht</h1>
       </div>
       <div class="sb-topbar-right">
 
@@ -151,7 +154,7 @@
         </div>
       </div>
     </div>
-
+	<div class="sb-topbar d-block d-lg-none"><h1>Übersicht</h1></div>
     <!-- ══════════════════════════════════════════
          ROW 1 – Performance Cards
          ══════════════════════════════════════════ -->
@@ -532,34 +535,7 @@
     </div><!-- /chart card -->
 
   </main>
-
-  <!-- ══════════════════════════════════════════
-       MOBILE BOTTOM NAV
-       ══════════════════════════════════════════ -->
-  <nav class="sb-mobile-nav" aria-label="Mobile Navigation">
-    <div class="mobile-nav-inner">
-      <a href="#" class="mobile-nav-link active">
-        <i class="bi bi-house-door" aria-hidden="true"></i>
-        <span>Übersicht</span>
-      </a>
-      <a href="#" class="mobile-nav-link">
-        <i class="bi bi-chat-square-dots" aria-hidden="true"></i>
-        <span>Buddy</span>
-      </a>
-      <a href="#" class="mobile-nav-link">
-        <i class="bi bi-briefcase" aria-hidden="true"></i>
-        <span>Depot</span>
-      </a>
-      <a href="#" class="mobile-nav-link">
-        <i class="bi bi-bar-chart-line" aria-hidden="true"></i>
-        <span>Analyse</span>
-      </a>
-      <a href="#" class="mobile-nav-link">
-        <i class="bi bi-person" aria-hidden="true"></i>
-        <span>Profil</span>
-      </a>
-    </div>
-  </nav>
+ 
 
   <!-- ══════════════════════════════════════════
        SCRIPTS

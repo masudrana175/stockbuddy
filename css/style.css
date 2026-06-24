@@ -989,6 +989,43 @@ img{
 }
 
 /* Mobile — hide sidebar, show bottom nav */
+@media (max-width: 1024px) {
+	.top-bar-main {
+		margin-left: -1rem;
+		margin-right: -1rem;
+		margin-top: -1.25rem;
+		background: #fff;
+		box-shadow: 0 0 19px 0 #33333347;
+		padding-right: 15px;
+	}
+	button#hamburger {
+		background: #D24B96;
+		background: linear-gradient(121deg,rgba(210, 75, 150, 1) 0%, rgba(52, 62, 140, 1) 100%);
+		color: #fff;
+		width: 63px;
+		height: 69px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 40px;
+	}
+	.sb-sidebar {
+		display: none;
+	}
+	.sb-main {
+		margin-left: 0;
+		padding: 1.25rem 1rem 5rem;
+	}
+	.top-bar-main .d-block.d-lg-none {
+		display: block!important;
+	}
+	.top-bar-main h1.d-none.d-lg-block {
+		display: none!important;
+	}
+	.sb-topbar.d-block.d-lg-none {
+		display: block!important;
+	}
+}
 @media (max-width: 767.98px) {
   .sb-sidebar    { display: none; }
   .sb-main       { margin-left: 0; padding: 1.25rem 1rem 5rem; }
@@ -1003,4 +1040,30 @@ img{
   .time-btns     { gap: 2px; }
   .time-btn      { padding: 3px 8px; font-size: 0.7rem; }
   .sb-card       { padding: 1.1rem; }
+	.sb-tag {
+		font-size: 14px;
+		padding: 7px 8px;
+	}
+	.oracall-image>div:not(.oracle-pill) {
+		padding-left: 5px;
+	}
+	.oracle-pill {
+		max-width: 55px;
+	}
+	.score-num {
+		font-size: 1.8rem;
+	}
+	.score-tot {
+		font-size: 1.2rem;
+	}
+	.score-lbl {
+		font-size: 13px;
+	}
+	.score-stars i {
+		font-size: 14px;
+	}
+	.score-box {
+		padding: 0.5rem .5rem;
+		min-width: 95px;
+	}
 }
