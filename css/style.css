@@ -1086,6 +1086,11 @@ img{
 .buddy-col-header {
   padding-bottom: 1rem;
 }
+.buddy-rp-topbar {
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 1rem;
+}
 .buddy-right-col {
   width: 500px;
   flex-shrink: 0;

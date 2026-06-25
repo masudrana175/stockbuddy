@@ -79,63 +79,13 @@
         </div>
         <div class="d-none d-lg-block"></div>
       </div>
-      <div class="sb-topbar-right">
-        <!-- Notification trigger + dropdown -->
-        <div class="notif-wrapper" id="notifWrapper">
-          <button class="sb-notif" id="notifBtn" aria-label="Benachrichtigungen" aria-expanded="false" aria-controls="notifPanel">
+      <div class="sb-topbar-right d-flex d-lg-none">
+        <div class="notif-wrapper">
+          <button class="sb-notif" aria-label="Benachrichtigungen">
             <img src="img/benachrichtigungen.svg" alt="" style="width:24px;"/>
-            <span class="nb" id="notifCount" aria-label="2 neue Benachrichtigungen">2</span>
+            <span class="nb">2</span>
           </button>
-
-          <div class="notif-panel" id="notifPanel" role="dialog" aria-label="Benachrichtigungen" hidden>
-            <div class="notif-header">
-              <span class="notif-title">Benachrichtigungen</span>
-              <button class="notif-close" id="notifClose" aria-label="Schließen">
-                <i class="bi bi-x-lg" aria-hidden="true"></i>
-              </button>
-            </div>
-
-            <div class="notif-item unread">
-              <div class="notif-icon-wrap" style="background:#fce8f1;">
-                <i class="bi bi-graph-up-arrow" style="color:var(--sb-pink);" aria-hidden="true"></i>
-              </div>
-              <div class="notif-body">
-                <div class="notif-item-title">Neue Analyse verfügbar</div>
-                <div class="notif-item-desc">Oracle Corp. wurde heute analysiert und erhält 87/100 Punkte.</div>
-                <div class="notif-item-time"><i class="bi bi-clock" aria-hidden="true"></i> Vor 2 Stunden</div>
-              </div>
-              <span class="notif-dot" aria-label="Ungelesen"></span>
-            </div>
-
-            <div class="notif-item unread">
-              <div class="notif-icon-wrap" style="background:#eef2ff;">
-                <i class="bi bi-lightning-charge-fill" style="color:var(--sb-blue);" aria-hidden="true"></i>
-              </div>
-              <div class="notif-body">
-                <div class="notif-item-title">Kursalarm ausgelöst</div>
-                <div class="notif-item-desc">NVIDIA ist seit gestern um +5,2 % gestiegen.</div>
-                <div class="notif-item-time"><i class="bi bi-clock" aria-hidden="true"></i> Vor 5 Stunden</div>
-              </div>
-              <span class="notif-dot" aria-label="Ungelesen"></span>
-            </div>
-
-            <div class="notif-item">
-              <div class="notif-icon-wrap" style="background:#f0fdf4;">
-                <i class="bi bi-check-circle-fill" style="color:#16a34a;" aria-hidden="true"></i>
-              </div>
-              <div class="notif-body">
-                <div class="notif-item-title">Depot aktualisiert</div>
-                <div class="notif-item-desc">Deine Wertentwicklung wurde erfolgreich synchronisiert.</div>
-                <div class="notif-item-time"><i class="bi bi-clock" aria-hidden="true"></i> Gestern, 18:42</div>
-              </div>
-            </div>
-
-            <div class="notif-footer">
-              <a href="#" class="sb-link">Alle Benachrichtigungen →</a>
-            </div>
-          </div>
         </div>
-
         <div class="sb-avatar" role="img" aria-label="Benutzerprofil">
           <img src="img/profile-top.png" alt="Profilbild">
         </div>
@@ -362,6 +312,68 @@
 
       <!-- ── Right panel ── -->
       <div class="buddy-right-col">
+
+        <!-- Topbar right (notif + avatar) -->
+        <div class="sb-topbar-right buddy-rp-topbar d-none d-lg-flex">
+          <div class="notif-wrapper" id="notifWrapper">
+            <button class="sb-notif" id="notifBtn" aria-label="Benachrichtigungen" aria-expanded="false" aria-controls="notifPanel">
+              <img src="img/benachrichtigungen.svg" alt="" style="width:24px;"/>
+              <span class="nb" id="notifCount" aria-label="2 neue Benachrichtigungen">2</span>
+            </button>
+
+            <div class="notif-panel" id="notifPanel" role="dialog" aria-label="Benachrichtigungen" hidden>
+              <div class="notif-header">
+                <span class="notif-title">Benachrichtigungen</span>
+                <button class="notif-close" id="notifClose" aria-label="Schließen">
+                  <i class="bi bi-x-lg" aria-hidden="true"></i>
+                </button>
+              </div>
+
+              <div class="notif-item unread">
+                <div class="notif-icon-wrap" style="background:#fce8f1;">
+                  <i class="bi bi-graph-up-arrow" style="color:var(--sb-pink);" aria-hidden="true"></i>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-item-title">Neue Analyse verfügbar</div>
+                  <div class="notif-item-desc">Oracle Corp. wurde heute analysiert und erhält 87/100 Punkte.</div>
+                  <div class="notif-item-time"><i class="bi bi-clock" aria-hidden="true"></i> Vor 2 Stunden</div>
+                </div>
+                <span class="notif-dot" aria-label="Ungelesen"></span>
+              </div>
+
+              <div class="notif-item unread">
+                <div class="notif-icon-wrap" style="background:#eef2ff;">
+                  <i class="bi bi-lightning-charge-fill" style="color:var(--sb-blue);" aria-hidden="true"></i>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-item-title">Kursalarm ausgelöst</div>
+                  <div class="notif-item-desc">NVIDIA ist seit gestern um +5,2 % gestiegen.</div>
+                  <div class="notif-item-time"><i class="bi bi-clock" aria-hidden="true"></i> Vor 5 Stunden</div>
+                </div>
+                <span class="notif-dot" aria-label="Ungelesen"></span>
+              </div>
+
+              <div class="notif-item">
+                <div class="notif-icon-wrap" style="background:#f0fdf4;">
+                  <i class="bi bi-check-circle-fill" style="color:#16a34a;" aria-hidden="true"></i>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-item-title">Depot aktualisiert</div>
+                  <div class="notif-item-desc">Deine Wertentwicklung wurde erfolgreich synchronisiert.</div>
+                  <div class="notif-item-time"><i class="bi bi-clock" aria-hidden="true"></i> Gestern, 18:42</div>
+                </div>
+              </div>
+
+              <div class="notif-footer">
+                <a href="#" class="sb-link">Alle Benachrichtigungen →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="sb-avatar" role="img" aria-label="Benutzerprofil">
+            <img src="img/profile-top.png" alt="Profilbild">
+          </div>
+        </div>
 
         <!-- Stock info card -->
         <div class="rp-stock-card">
