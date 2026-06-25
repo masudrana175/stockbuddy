@@ -1083,6 +1083,9 @@ img{
   flex-direction: column;
   padding-right: 1.5rem;
 }
+.buddy-col-header {
+  padding-bottom: 1rem;
+}
 .buddy-right-col {
   width: 500px;
   flex-shrink: 0;
