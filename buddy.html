@@ -66,7 +66,7 @@
   <!-- ══════════════════════════════════════════════
        MAIN CONTENT
        ══════════════════════════════════════════════ -->
-  <main class="sb-main">
+  <main class="sb-main buddy-page">
 
     <!-- ── Topbar ── -->
     <div class="sb-topbar top-bar-main">
@@ -107,7 +107,7 @@
 
       <!-- ── Chat column ── -->
       <div class="buddy-chat-col">
-        <div class="buddy-col-header d-none d-lg-block">
+        <div class="buddy-col-header d-none d-lg-block sb-topbar ">
           <h1 style="margin-bottom:2px;">Buddy Analyse – Assistent</h1>
           <div class="page-subtitle">Dein KI-gestützter Analyse-assistent – für fundierte Einblicke, keine Anlageberatung</div>
         </div>
@@ -145,10 +145,9 @@
 
                     <!-- StockBuddy Score -->
                     <div class="buddy-score-section">
-                      <div class="section-title">
-                        <img src="img/score.svg" alt=""/>
+                      <div class="card-title mb-3">
                         StockBuddy Score
-                        <img src="img/info.svg" alt="" style="width:15px; margin-left:2px;" title="Erklärung zum Score"/>
+                        <img src="img/info.svg" alt="" style="width:18px; margin-left:2px;" title="Erklärung zum Score"/>
                       </div>
 
                       <div class="score-circle-wrap">
@@ -166,17 +165,16 @@
                       </div>
 
                       <div>
-                        <span class="score-profile-tag">Analyse basiert auf dein Profil: ausgewogen</span>
+                        <span class="sb-tag tag-blue mt-2">Analyse basiert auf dein Profil: ausgewogen</span>
                       </div>
                     </div>
 
                     <!-- Score Breakdown -->
                     <div class="buddy-score-section">
-                      <div class="section-title">
+						<div class="card-title mb-3">
                         Score-Breakdown
-                        <img src="img/info.svg" alt="" style="width:15px; margin-left:2px;" title="Erklärung zum Score-Breakdown"/>
+                        <img src="img/info.svg" alt="" style="width:18px; margin-left:2px;" title="Erklärung zum Score"/>
                       </div>
-
                       <div class="breakdown-row">
                         <div class="breakdown-icon"><img src="img/wachstum_green.svg" alt=""/></div>
                         <span class="breakdown-lbl">Wachstum</span>
@@ -218,11 +216,10 @@
 
                     <!-- Analyse-Erklärung -->
                     <div class="buddy-score-section">
-                      <div class="section-title">
+						<div class="card-title mb-3">
                         Analyse-Erklärung
-                        <img src="img/info.svg" alt="" style="width:15px; margin-left:2px;" title="Erklärung"/>
+                        <img src="img/info.svg" alt="" style="width:18px; margin-left:2px;" title="Erklärung zum Score"/>
                       </div>
-
                       <div class="erklaerung-item">
                         <div class="erklaerung-icon"><img src="img/wachstum_green.svg" alt=""/></div>
                         <div>
@@ -254,29 +251,28 @@
                     </div>
 
                     <!-- Score-Entwicklung -->
-                    <div class="score-entwicklung-section">
-                      <div class="section-title" style="font-size:.95rem;font-weight:700;color:var(--sb-text-h);margin-bottom:.85rem;display:flex;align-items:center;gap:6px;">
+                    <div class="score-entwicklung-section">                      
+					  <div class="card-title mb-3">
                         Score-Entwicklung
-                        <img src="img/info.svg" alt="" style="width:15px; margin-left:2px;" title="Entwicklung des Scores"/>
+                        <img src="img/info.svg" alt="" style="width:18px; margin-left:2px;" title="Erklärung zum Score"/>
                       </div>
                       <div style="position:relative;height:170px;">
                         <canvas id="scoreChart" aria-label="Score-Entwicklung Oracle"></canvas>
                       </div>
+					  <!-- Action buttons -->
+					  <div class="buddy-action-btns">
+						<a href="#" class="btn-compare">
+						  <i class="bi bi-arrow-left-right"></i>
+						  Mit Microsoft vergleichen
+						</a>
+						<a href="#" class="btn-deep">
+						  Analyse vertiefen
+						  <i class="bi bi-arrow-right"></i>
+						</a>
+					  </div>
                     </div>
 
-                  </div><!-- /bottom grid -->
-
-                  <!-- Action buttons -->
-                  <div class="buddy-action-btns">
-                    <a href="#" class="btn-compare">
-                      <i class="bi bi-arrow-left-right"></i>
-                      Mit Microsoft vergleichen
-                    </a>
-                    <a href="#" class="btn-deep">
-                      Analyse vertiefen
-                      <i class="bi bi-arrow-right"></i>
-                    </a>
-                  </div>
+                  </div><!-- /bottom grid -->                
 
                 </div><!-- /analysis card -->
               </div><!-- /response inner -->
@@ -301,11 +297,11 @@
               <button class="chat-mic-btn" aria-label="Spracheingabe">
                 <i class="bi bi-mic-fill"></i>
               </button>
-            </div>
-            <div class="chat-disclaimer-bar">
+            </div>            
+          </div>
+		  <div class="chat-disclaimer-bar">
               Buddy kann Fehler machen. Antworten bitte immer selbst prüfen.
             </div>
-          </div>
 
         </div><!-- /chat-window -->
       </div><!-- /chat-col -->
@@ -407,7 +403,7 @@
 
         <!-- Letzte Analysen -->
         <div class="rp-analyses-card">
-          <div class="rp-analyses-title">
+          <div class="rp-analyses-title card-title">
             <img src="img/letzte_analysen.svg" alt=""/>
             Letzte Analysen
           </div>
