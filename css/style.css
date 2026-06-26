@@ -1100,6 +1100,11 @@ img{
   align-items: center;
   padding-bottom: 1rem;
 }
+.buddy-rp-topbar {
+  justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 1rem;
+}
 .buddy-right-col {
   width: 500px;
   flex-shrink: 0;
@@ -1941,7 +1946,10 @@ img{
    ============================================================ */
 .md-layout { display: flex; gap: 1.5rem; align-items: flex-start; }
 .md-main   { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1.25rem; }
-.md-side   { width: 300px; flex-shrink: 0; display: flex; flex-direction: column; gap: 1.25rem; }
+.md-side   { width: 320px; flex-shrink: 0; display: flex; flex-direction: column; gap: 1.25rem; }
+.md-side-desc { font-size: .9rem; color: var(--sb-text-soft); line-height: 1.6; margin: 0; }
+.risikoklasse-badge { background: #f0f2fb; border: 1.5px solid var(--sb-blue); border-radius: 8px; padding: 6px 14px; font-size: 1rem; font-weight: 700; color: var(--sb-blue); }
+.risikoklasse-label { font-size: .95rem; font-weight: 600; color: var(--sb-text-h); }
 
 .perf-card {
   background: #fff;
@@ -1956,7 +1964,7 @@ img{
 .perf-left { flex: 1; min-width: 200px; }
 .perf-since { font-size: .85rem; color: var(--sb-text-muted); margin-bottom: .4rem; display: flex; align-items: center; gap: 5px; }
 .perf-since img { width: 16px; }
-.perf-pct   { font-size: 3rem; font-weight: 700; color: var(--sb-green-dark); line-height: 1; letter-spacing: -1px; }
+.perf-pct   { font-size: 3rem; font-weight: 800; color: var(--sb-pink); line-height: 1; letter-spacing: -1px; }
 .perf-sub   { font-size: .9rem; color: var(--sb-text-soft); margin-top: .3rem; }
 .perf-vs    { font-size: .9rem; font-weight: 700; color: var(--sb-green-dark); margin-top: .25rem; }
 .perf-chart-wrap { flex: 1; min-width: 260px; }
@@ -2017,17 +2025,6 @@ img{
   flex-shrink: 0;
 }
 .pos-score-label { font-size: .72rem; font-weight: 600; color: var(--sb-text-soft); margin-top: 2px; }
-
-.side-section-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--sb-text-h);
-  margin-bottom: .75rem;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
-.side-section-title img { width: 20px; }
 
 .branche-row { display: flex; align-items: center; gap: 8px; margin-bottom: .6rem; }
 .branche-row:last-child { margin-bottom: 0; }
