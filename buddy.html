@@ -117,20 +117,20 @@
           <div class="chat-messages" id="chatMessages">
 
             <!-- User message -->
-            <div>
+            <div class="d-flex align-items-start justify-content-end">
               <div class="chat-bubble-user">
                 <div class="bubble-content">
                   Analysiere Oracle anhand meines analyseprofils.
                 </div>
-                <div class="bubble-avatar">
+				<div class="chat-timestamp">09:42 <i class="bi bi-check2-all" style="color:var(--sb-blue);"></i></div>                
+              </div> 
+				<div class="bubble-avatar">
                   <img src="img/profile-top.png" alt="Profilbild">
-                </div>
-              </div>
-              <div class="chat-timestamp">09:42 <i class="bi bi-check2-all" style="color:var(--sb-blue);"></i></div>
+                </div>			  
             </div>
 
             <!-- Assistant response -->
-            <div class="chat-response">
+            <div class="chat-response mt-3">
               <div class="chat-response-inner">
 
                 <p class="chat-intro-text">
@@ -262,12 +262,12 @@
 					  <!-- Action buttons -->
 					  <div class="buddy-action-btns">
 						<a href="#" class="btn-compare">
-						  <i class="bi bi-arrow-left-right"></i>
+						  <img src="img/mit.png" alt=""/>
 						  Mit Microsoft vergleichen
 						</a>
 						<a href="#" class="btn-deep">
 						  Analyse vertiefen
-						  <i class="bi bi-arrow-right"></i>
+						  <img src="img/arrow_right_white.svg" alt="" style="width:25px;"/>
 						</a>
 					  </div>
                     </div>
@@ -277,7 +277,7 @@
                 </div><!-- /analysis card -->
               </div><!-- /response inner -->
 
-              <div class="chat-timestamp left">09:41</div>
+              <div class="chat-timestamp right">09:41</div>
             </div>
 
           </div><!-- /chat-messages -->
@@ -383,11 +383,11 @@
             </div>
           </div>
 
-          <div class="rp-score-label">StockBuddy Score</div>
+          <div class="rp-score-label card-title">StockBuddy Score</div>
           <div class="rp-score-row">
             <div>
               <div class="rp-score-num">87<span>/100</span></div>
-              <div style="font-size:0.82rem;color:var(--sb-green-dark);font-weight:600;margin-top:2px;">Sehr attraktiv</div>
+              <div style="color: var(--sb-green-dark);font-weight: 500;">Sehr attraktiv</div>
             </div>
             <div class="rp-score-badge">Sehr gut</div>
           </div>
@@ -459,14 +459,14 @@
 
         <!-- Disclaimer card -->
         <div class="rp-disclaimer-card">
-          <div class="rp-disclaimer-head">
+          <div class="rp-disclaimer-head card-title mb-3">
             <img src="img/hinweis.svg" alt=""/>
             Keine Anlageberatung – nur Analyse
           </div>
           <div class="rp-disclaimer-text">
             Die Informationen von StockBuddy dienen ausschließlich zu Analysezwecken und stellen keine Anlageberatung oder Kaufempfehlung dar. Investitionen in Aktien und Wertpapiere sind mit Risiken verbunden.
           </div>
-          <a href="#" class="sb-link">Mehr erfahren <img src="img/arrow_right_blue.svg" alt="" style="width:20px; vertical-align:middle;"/></a>
+          <a href="#" class="sb-link">Mehr erfahren <img src="img/arrow_right_blue.svg" alt="" style="width:22px;"/></a>
         </div>
 
       </div><!-- /right col -->
