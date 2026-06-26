@@ -1,562 +1,515 @@
 <!DOCTYPE html>
 <html lang="de">
-
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StockBuddy – Übersicht</title>
-
     <!-- Google Font: Barlow -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Bootstrap CSS (local) -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
-
     <!-- Bootstrap Icons (CDN – requires font files; swap to local if needed) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
     <!-- Custom Styles -->
     <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-
+  </head>
+  <body>
     <!-- ══════════════════════════════════════════════
        SIDEBAR
        ══════════════════════════════════════════════ -->
     <aside class="sb-sidebar" id="sidebar">
-        <div class="sb-sidebar-inner">
-            <a class="sb-logo" href="#">
-                <div class="sb-logo-icon">
-                    <img src="img/logo.png" alt="" />
-                </div>
-            </a>
-
-            <nav class="sb-nav">
-                <a class="sb-nav-link active" href="index.html">
-                    <span><img src="img/navi_home_active.svg" alt="" style="width:22px"/></span>
-                    <span>Übersicht</span>
-                </a>
-                <a class="sb-nav-link" href="buddy.html">
-                    <span><img src="img/bildmarke_stockbuddy.svg" alt=""  style="width:28px"/></span>
-                    <span>Buddy</span>
-                </a>
-                <a class="sb-nav-link" href="depot.html">
-                    <span><img src="img/navi_depot_active.svg" alt=""  style="width:26px"/></span>
-                    <span>Depot</span>
-                </a>
-                <a class="sb-nav-link" href="musterdepot.html">
-                    <span><img src="img/navi_musterdepot_active.svg" alt="" style="width:29px"/></span>
-                    <span>Musterdepot</span>
-                </a>
-                <a class="sb-nav-link" href="analyse.html">
-                    <span><img src="img/navi_analyse_active.svg" alt="" style="width:22px"/></span>
-                    <span>Analyse</span>
-                </a>
-                <a class="sb-nav-link" href="profil.html">
-                    <span><img src="img/navi_profil_active.svg" alt="" style="width:22px"/></span>
-                    <span>Profil</span>
-                </a>
-            </nav>
-        </div>
+      <div class="sb-sidebar-inner">
+        <a class="sb-logo" href="#">
+          <div class="sb-logo-icon">
+            <img src="img/logo.png" alt="" />
+          </div>
+        </a>
+        <nav class="sb-nav">
+          <a class="sb-nav-link active" href="index.html">
+            <span>
+              <img src="img/navi_home_active.svg" alt="" style="width:22px" />
+            </span>
+            <span>Übersicht</span>
+          </a>
+          <a class="sb-nav-link" href="buddy.html">
+            <span>
+              <img src="img/bildmarke_stockbuddy.svg" alt="" style="width:28px" />
+            </span>
+            <span>Buddy</span>
+          </a>
+          <a class="sb-nav-link" href="depot.html">
+            <span>
+              <img src="img/navi_depot_active.svg" alt="" style="width:26px" />
+            </span>
+            <span>Depot</span>
+          </a>
+          <a class="sb-nav-link" href="musterdepot.html">
+            <span>
+              <img src="img/navi_musterdepot_active.svg" alt="" style="width:29px" />
+            </span>
+            <span>Musterdepot</span>
+          </a>
+          <a class="sb-nav-link" href="analyse.html">
+            <span>
+              <img src="img/navi_analyse_active.svg" alt="" style="width:22px" />
+            </span>
+            <span>Analyse</span>
+          </a>
+          <a class="sb-nav-link" href="profil.html">
+            <span>
+              <img src="img/navi_profil_active.svg" alt="" style="width:22px" />
+            </span>
+            <span>Profil</span>
+          </a>
+        </nav>
+      </div>
     </aside>
-
     <!-- Mobile overlay (closes sidebar on outside click) -->
     <div class="sb-overlay" id="overlay" aria-hidden="true"></div>
-
     <!-- ══════════════════════════════════════════════
        MAIN CONTENT
        ══════════════════════════════════════════════ -->
     <main class="sb-main">
-
-        <!-- ── Topbar ── -->
-        <div class="sb-topbar top-bar-main">
-            <div class="d-flex align-items-center">
-                <button class="sb-hamburger" id="hamburger" aria-label="Navigation öffnen">
-                    <i class="bi bi-list" aria-hidden="true"></i>
-                </button>
-                <div class="d-block d-lg-none">
-                    <img src="img/logo.png" alt="" />
-                </div>
-                <h1 class="d-none d-lg-block">Übersicht</h1>
-            </div>
-            <div class="sb-topbar-right">
-
-                <!-- Notification trigger + dropdown -->
-                <div class="notif-wrapper" id="notifWrapper">
-                    <button class="sb-notif" id="notifBtn" aria-label="Benachrichtigungen" aria-expanded="false" aria-controls="notifPanel">
-                        <img src="img/benachrichtigungen.svg" alt="" style="width:24px;" />
-                        <span class="nb" id="notifCount" aria-label="2 neue Benachrichtigungen">2</span>
-                    </button>
-
-                    <!-- Dropdown panel -->
-                    <div class="notif-panel" id="notifPanel" role="dialog" aria-label="Benachrichtigungen" hidden>
-                        <div class="notif-header">
-                            <span class="notif-title">Benachrichtigungen</span>
-                            <button class="notif-close" id="notifClose" aria-label="Schließen">
-                                <i class="bi bi-x-lg" aria-hidden="true"></i>
-                            </button>
-                        </div>
-
-                        <!-- Item 1 -->
-                        <div class="notif-item unread">
-                            <div class="notif-icon-wrap" style="background:#fce8f1;">
-                                <i class="bi bi-graph-up-arrow" style="color:var(--sb-pink);" aria-hidden="true"></i>
-                            </div>
-                            <div class="notif-body">
-                                <div class="notif-item-title">Neue Analyse verfügbar</div>
-                                <div class="notif-item-desc">Oracle Corp. wurde heute analysiert und erhält 87/100 Punkte.</div>
-                                <div class="notif-item-time">
-                                    <i class="bi bi-clock" aria-hidden="true"></i> Vor 2 Stunden
-                                </div>
-                            </div>
-                            <span class="notif-dot" aria-label="Ungelesen"></span>
-                        </div>
-
-                        <!-- Item 2 -->
-                        <div class="notif-item unread">
-                            <div class="notif-icon-wrap" style="background:#eef2ff;">
-                                <i class="bi bi-lightning-charge-fill" style="color:var(--sb-blue);" aria-hidden="true"></i>
-                            </div>
-                            <div class="notif-body">
-                                <div class="notif-item-title">Kursalarm ausgelöst</div>
-                                <div class="notif-item-desc">NVIDIA ist seit gestern um +5,2 % gestiegen.</div>
-                                <div class="notif-item-time">
-                                    <i class="bi bi-clock" aria-hidden="true"></i> Vor 5 Stunden
-                                </div>
-                            </div>
-                            <span class="notif-dot" aria-label="Ungelesen"></span>
-                        </div>
-
-                        <!-- Item 3 (read) -->
-                        <div class="notif-item">
-                            <div class="notif-icon-wrap" style="background:#f0fdf4;">
-                                <i class="bi bi-check-circle-fill" style="color:#16a34a;" aria-hidden="true"></i>
-                            </div>
-                            <div class="notif-body">
-                                <div class="notif-item-title">Depot aktualisiert</div>
-                                <div class="notif-item-desc">Deine Wertentwicklung wurde erfolgreich synchronisiert.</div>
-                                <div class="notif-item-time">
-                                    <i class="bi bi-clock" aria-hidden="true"></i> Gestern, 18:42
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="notif-footer">
-                            <a href="#" class="sb-link">Alle Benachrichtigungen →</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- /notif-wrapper -->
-
-                <div class="sb-avatar" role="img" aria-label="Benutzerprofil">
-                    <img src="img/profile-top.png" alt="Profilbild">
-                </div>
-            </div>
+      <!-- ── Topbar ── -->
+      <div class="sb-topbar top-bar-main">
+        <div class="d-flex align-items-center">
+          <button class="sb-hamburger" id="hamburger" aria-label="Navigation öffnen">
+            <i class="bi bi-list" aria-hidden="true"></i>
+          </button>
+          <div class="d-block d-lg-none">
+            <img src="img/logo.png" alt="" />
+          </div>
+          <h1 class="d-none d-lg-block">Übersicht</h1>
         </div>
-        <div class="sb-topbar d-block d-lg-none">
-            <h1>Übersicht</h1></div>
-        <!-- ══════════════════════════════════════════
+        <div class="sb-topbar-right">
+          <!-- Notification trigger + dropdown -->
+          <div class="notif-wrapper" id="notifWrapper">
+            <button class="sb-notif" id="notifBtn" aria-label="Benachrichtigungen" aria-expanded="false" aria-controls="notifPanel">
+              <img src="img/benachrichtigungen.svg" alt="" style="width:24px;" />
+              <span class="nb" id="notifCount" aria-label="2 neue Benachrichtigungen">2</span>
+            </button>
+            <!-- Dropdown panel -->
+            <div class="notif-panel" id="notifPanel" role="dialog" aria-label="Benachrichtigungen" hidden>
+              <div class="notif-header">
+                <span class="notif-title">Benachrichtigungen</span>
+                <button class="notif-close" id="notifClose" aria-label="Schließen">
+                  <i class="bi bi-x-lg" aria-hidden="true"></i>
+                </button>
+              </div>
+              <!-- Item 1 -->
+              <div class="notif-item unread">
+                <div class="notif-icon-wrap" style="background:#fce8f1;">
+                  <i class="bi bi-graph-up-arrow" style="color:var(--sb-pink);" aria-hidden="true"></i>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-item-title">Neue Analyse verfügbar</div>
+                  <div class="notif-item-desc">Oracle Corp. wurde heute analysiert und erhält 87/100 Punkte.</div>
+                  <div class="notif-item-time">
+                    <i class="bi bi-clock" aria-hidden="true"></i> Vor 2 Stunden
+                  </div>
+                </div>
+                <span class="notif-dot" aria-label="Ungelesen"></span>
+              </div>
+              <!-- Item 2 -->
+              <div class="notif-item unread">
+                <div class="notif-icon-wrap" style="background:#eef2ff;">
+                  <i class="bi bi-lightning-charge-fill" style="color:var(--sb-blue);" aria-hidden="true"></i>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-item-title">Kursalarm ausgelöst</div>
+                  <div class="notif-item-desc">NVIDIA ist seit gestern um +5,2 % gestiegen.</div>
+                  <div class="notif-item-time">
+                    <i class="bi bi-clock" aria-hidden="true"></i> Vor 5 Stunden
+                  </div>
+                </div>
+                <span class="notif-dot" aria-label="Ungelesen"></span>
+              </div>
+              <!-- Item 3 (read) -->
+              <div class="notif-item">
+                <div class="notif-icon-wrap" style="background:#f0fdf4;">
+                  <i class="bi bi-check-circle-fill" style="color:#16a34a;" aria-hidden="true"></i>
+                </div>
+                <div class="notif-body">
+                  <div class="notif-item-title">Depot aktualisiert</div>
+                  <div class="notif-item-desc">Deine Wertentwicklung wurde erfolgreich synchronisiert.</div>
+                  <div class="notif-item-time">
+                    <i class="bi bi-clock" aria-hidden="true"></i> Gestern, 18:42
+                  </div>
+                </div>
+              </div>
+              <div class="notif-footer">
+                <a href="#" class="sb-link">Alle Benachrichtigungen →</a>
+              </div>
+            </div>
+          </div>
+          <!-- /notif-wrapper -->
+          <div class="sb-avatar" role="img" aria-label="Benutzerprofil">
+            <img src="img/profile-top.png" alt="Profilbild">
+          </div>
+        </div>
+      </div>
+      <div class="sb-topbar d-block d-lg-none">
+        <h1>Übersicht</h1>
+      </div>
+      <!-- ══════════════════════════════════════════
          ROW 1 – Performance Cards
          ══════════════════════════════════════════ -->
-        <div class="row g-4 mb-4 row-top">
-
-            <!-- StockBuddy Depot -->
-            <div class="col-xxl-4 col-lg-6">
-                <div class="sb-card">
-                    <div class="card-head">
-                        <div class="card-icon">
-                            <img src="img/bildmarke_stockbuddy.svg" alt="" style="width:36px;" />
-                        </div>
-                        <div>
-                            <div class="card-title">StockBuddy Depot</div>
-                            <div class="card-sub">Seit 01.01.2024</div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-end">
-                        <div>
-                            <div class="trend-val trend-pos">+18,75%</div>
-                            <div class="trend-sub">Gesamtrendite</div>
-                        </div>
-                        <div class="sparkwrap" style="width:50%;" aria-hidden="true">
-                            <canvas id="spark1"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="wert-row">
-                        <span class="wert-label">
-              Wertentwicklung
-				<img src="img/info.svg" alt="" style="width:19px" data-bs-toggle="tooltip"
-                 data-bs-placement="top"
-                 title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren."
-                 tabindex="0"
-                 aria-label="Info zur Wertentwicklung"/>
-            </span>
-                        <span class="wert-val">23.320,25 €</span>
-                    </div>
-                </div>
+      <div class="row g-4 mb-4 row-top">
+        <!-- StockBuddy Depot -->
+        <div class="col-xxl-4 col-lg-6">
+          <div class="sb-card">
+            <div class="card-head">
+              <div class="card-icon">
+                <img src="img/bildmarke_stockbuddy.svg" alt="" style="width:36px;" />
+              </div>
+              <div>
+                <div class="card-title">StockBuddy Depot</div>
+                <div class="card-sub">Seit 01.01.2024</div>
+              </div>
             </div>
-
-            <!-- Mein Depot -->
-            <div class="col-xxl-4 col-lg-6">
-                <div class="sb-card">
-                    <div class="card-head">
-                        <div class="sb-avatar">
-                            <img src="img/profile-head.png" alt="" />
-                        </div>
-                        <div>
-                            <div class="card-title">Mein Depot</div>
-                            <div class="card-sub">Seit 01.01.2024</div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-end">
-                        <div>
-                            <div class="trend-val trend-pos">+6,40%</div>
-                            <div class="trend-sub">Gesamtrendite</div>
-                        </div>
-                        <div class="sparkwrap" style="width:50%;" aria-hidden="true">
-                            <canvas id="spark2"></canvas>
-                        </div>
-                    </div>
-
-                    <div class="wert-row">
-                        <span class="wert-label">
-              Wertentwicklung
-				<img src="img/info.svg" alt="" style="width:19px" data-bs-toggle="tooltip"
-                 data-bs-placement="top"
-                 title="Gesamte Wertentwicklung deines persönlichen Depots seit dem Startdatum 01.01.2024."
-                 tabindex="0"
-                 aria-label="Info zur Wertentwicklung"/>
-            </span>
-                        <span class="wert-val">32.458,21 €</span>
-                    </div>
-                </div>
+            <div class="d-flex justify-content-between align-items-end">
+              <div>
+                <div class="trend-val trend-pos">+18,75%</div>
+                <div class="trend-sub">Gesamtrendite</div>
+              </div>
+              <div class="sparkwrap" style="width:50%;" aria-hidden="true">
+                <canvas id="spark1"></canvas>
+              </div>
             </div>
-
-            <!-- Analyseprofil -->
-            <div class="col-xxl-4 col-lg-12">
-                <div class="sb-card">
-                    <div class="card-head">
-                        <div class="card-icon">
-                            <img src="img/navi_analyse.svg" alt="" style="width:22px" />
-                        </div>
-                        <div>
-                            <div class="card-title">Analyseprofil</div>
-                            <div class="card-sub">Dein persönliches Analyseprofil definiert deine Auswertungen.</div>
-                        </div>
-                    </div>
-                    <div class="d-flex flex-wrap gap-2 mb-4 mt-4">
-                        <span class="sb-tag tag-blue">Wachstum</span>
-                        <span class="sb-tag tag-green">Dividende</span>
-                        <span class="sb-tag tag-amber">Mittleres Risiko</span>
-                    </div>
-                    <div class="wert-row arrow-link">
-                        <a href="profil.html" class="sb-link">Profil bearbeiten <img src="img/arrow_right_blue.svg" alt="" style="width:25px;"/></a>
-                    </div>
-                </div>
+            <div class="wert-row">
+              <span class="wert-label"> Wertentwicklung <img src="img/info.svg" alt="" style="width:19px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" />
+              </span>
+              <span class="wert-val">23.320,25 €</span>
             </div>
-
+          </div>
         </div>
-        <!-- /row 1 -->
-
-        <!-- ══════════════════════════════════════════
+        <!-- Mein Depot -->
+        <div class="col-xxl-4 col-lg-6">
+          <div class="sb-card">
+            <div class="card-head">
+              <div class="sb-avatar">
+                <img src="img/profile-head.png" alt="" />
+              </div>
+              <div>
+                <div class="card-title">Mein Depot</div>
+                <div class="card-sub">Seit 01.01.2024</div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-end">
+              <div>
+                <div class="trend-val trend-pos">+6,40%</div>
+                <div class="trend-sub">Gesamtrendite</div>
+              </div>
+              <div class="sparkwrap" style="width:50%;" aria-hidden="true">
+                <canvas id="spark2"></canvas>
+              </div>
+            </div>
+            <div class="wert-row">
+              <span class="wert-label"> Wertentwicklung <img src="img/info.svg" alt="" style="width:19px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung deines persönlichen Depots seit dem Startdatum 01.01.2024." tabindex="0" aria-label="Info zur Wertentwicklung" />
+              </span>
+              <span class="wert-val">32.458,21 €</span>
+            </div>
+          </div>
+        </div>
+        <!-- Analyseprofil -->
+        <div class="col-xxl-4 col-lg-12">
+          <div class="sb-card">
+            <div class="card-head">
+              <div class="card-icon">
+                <img src="img/navi_analyse.svg" alt="" style="width:22px" />
+              </div>
+              <div>
+                <div class="card-title">Analyseprofil</div>
+                <div class="card-sub">Dein persönliches Analyseprofil definiert deine Auswertungen.</div>
+              </div>
+            </div>
+            <div class="d-flex flex-wrap gap-2 mb-4 mt-4">
+              <span class="sb-tag tag-blue">Wachstum</span>
+              <span class="sb-tag tag-green">Dividende</span>
+              <span class="sb-tag tag-amber">Mittleres Risiko</span>
+            </div>
+            <div class="wert-row arrow-link">
+              <a href="profil.html" class="sb-link">Profil bearbeiten <img src="img/arrow_right_blue.svg" alt="" style="width:25px;" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /row 1 -->
+      <!-- ══════════════════════════════════════════
          ROW 2 – Stock / Market / Analyses
          ══════════════════════════════════════════ -->
-        <div class="row g-4 mb-4">
-
-            <!-- Aktie des Tages -->
-            <div class="col-xxl-4 col-lg-6">
-                <div class="sb-card card-aktie">
-
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <div class="d-flex align-items-center gap-2">
-                            <img src="img/aktie.svg" alt="" style="width:38px;" />
-                            <span class="card-title">Aktie des Tages</span>
-                        </div>
-                        <span class="today-badge">Heute</span>
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-start mb-5 mt-3">
-                        <div class="d-flex oracall-image align-items-center">
-                            <div class="oracle-pill">
-                                <img src="img/oracal.png" alt="" />
-                            </div>
-                            <div>
-                                <strong class="card-title">Oracle Corp.</strong>
-                                <div>ORCL &bull; US68389X1084</div>
-                            </div>
-                        </div>
-                        <div class="score-box" aria-label="Bewertung: 87 von 100, Sehr attraktiv">
-                            <div class="score-num">87<span class="score-tot">/100</span></div>
-                            <div class="score-lbl">Sehr attraktiv</div>
-                            <div class="score-stars d-flex justify-content-between " aria-hidden="true">
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                                <i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Metric bars -->
-                    <div class="d-flex flex-column gap-2 mb-3">
-                        <div class="metric-row">
-                            <span class="metric-lbl">Wachstum</span>
-                            <div class="sb-progress" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
-                                <div class="sb-progress-bar" style="width:88%;"></div>
-                            </div>
-                            <span class="metric-pct">88%</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-lbl">Rentabilität</span>
-                            <div class="sb-progress" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
-                                <div class="sb-progress-bar" style="width:85%;"></div>
-                            </div>
-                            <span class="metric-pct">85%</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-lbl">Finanzstärke</span>
-                            <div class="sb-progress" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100">
-                                <div class="sb-progress-bar" style="width:83%;"></div>
-                            </div>
-                            <span class="metric-pct">83%</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-lbl">Bewertung</span>
-                            <div class="sb-progress" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100">
-                                <div class="sb-progress-bar" style="width:82%;"></div>
-                            </div>
-                            <span class="metric-pct">82%</span>
-                        </div>
-                        <div class="metric-row">
-                            <span class="metric-lbl">Momentum</span>
-                            <div class="sb-progress" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100">
-                                <div class="sb-progress-bar" style="width:87%;"></div>
-                            </div>
-                            <span class="metric-pct">87%</span>
-                        </div>
-                    </div>
-                    <div class="wert-row arrow-link">
-                        <a href="#" class="sb-link">Zur Analysen <img src="img/arrow_right_blue.svg" alt="" style="width:25px;"></a>
-                    </div>
-                </div>
+      <div class="row g-4 mb-4">
+        <!-- Aktie des Tages -->
+        <div class="col-xxl-4 col-lg-6">
+          <div class="sb-card card-aktie">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <div class="d-flex align-items-center gap-2">
+                <img src="img/aktie.svg" alt="" style="width:38px;" />
+                <span class="card-title">Aktie des Tages</span>
+              </div>
+              <span class="today-badge">Heute</span>
             </div>
-
-            <!-- Marktüberblick -->
-            <div class="col-xxl-4 col-lg-6">
-                <div class="sb-card  card-markt">
-                    <div class="card-head mb-4 d-flex align-items-center gap-2">
-                        <img src="img/marktuebersicht.svg" alt="" style="width:21px;" />
-                        <span class="card-title">Marktüberblick</span>
-                    </div>
-
-                    <div class="mkt-row">
-                        <span class="mkt-flag" aria-label="Deutschland">
-				<img src="img/ger-flg.png" alt=""/>
-			</span>
-                        <span class="mkt-name">DAX</span>
-                        <span class="mkt-price">18.693,22</span>
-                        <span class="mkt-chg trend-pos">+0,78 %</span>
-                    </div>
-                    <div class="mkt-row">
-                        <span class="mkt-flag" aria-label="Deutschland">
-				<img src="img/ger-flg.png" alt=""/>
-			</span>
-                        <span class="mkt-name">MDAS</span>
-                        <span class="mkt-price">24.984,65</span>
-                        <span class="mkt-chg trend-pos">+0,61 %</span>
-                    </div>
-                    <div class="mkt-row">
-                        <span class="mkt-flag" aria-label="USA">
-				<img src="img/usa-flg.png" alt=""/>
-			</span>
-                        <span class="mkt-name">S&amp;P 500</span>
-                        <span class="mkt-price">5.321,56</span>
-                        <span class="mkt-chg trend-pos">+0,65 %</span>
-                    </div>
-                    <div class="mkt-row">
-                        <span class="mkt-flag" aria-label="USA">
-				<img src="img/usa-flg.png" alt=""/>
-			</span>
-                        <span class="mkt-name">Nasdaq 100</span>
-                        <span class="mkt-price">18.404,76</span>
-                        <span class="mkt-chg trend-pos">+0,89 %</span>
-                    </div>
-                    <div class="mkt-row">
-                        <span class="mkt-flag" aria-label="Europa">
-				<img src="img/eu-flg.png" alt=""/>
-			</span>
-                        <span class="mkt-name">Euro Stoxx 50</span>
-                        <span class="mkt-price">5.102,35</span>
-                        <span class="mkt-chg trend-pos">+0,42 %</span>
-                    </div>
-                    <div class="mkt-row">
-                        <span class="mkt-flag" aria-label="USA">
-				<img src="img/usa-flg.png" alt=""/>
-			</span>
-                        <span class="mkt-name">VIX</span>
-                        <span class="mkt-price">12,45</span>
-                        <span class="mkt-chg trend-neg">-1,35 %</span>
-                    </div>
-                    <div class="mkt-row">
-                        <span class="mkt-flag" aria-label="Gold">
-				<img src="img/gold-flg.png" alt=""/>
-			</span>
-                        <span class="mkt-name">Gold (USD)</span>
-                        <span class="mkt-price">2.341,96</span>
-                        <span class="mkt-chg trend-pos">+0,27 %</span>
-                    </div>
-                    <div class="mkt-row">
-                        <span class="mkt-flag" aria-label="Öl">
-				<img src="img/usa-flg.png" alt=""/>
-			</span>
-                        <span class="mkt-name">Öl (Brent)</span>
-                        <span class="mkt-price">81,92</span>
-                        <span class="mkt-chg trend-neg">-0,41 %</span>
-                    </div>
-                    <div class="wert-row arrow-link">
-                        <a href="#" class="sb-link">Zum Marktüberblick <img src="img/arrow_right_blue.svg" alt="" style="width:25px;"></a>
-                    </div>
+            <div class="d-flex justify-content-between align-items-start mb-5 mt-3">
+              <div class="d-flex oracall-image align-items-center">
+                <div class="oracle-pill">
+                  <img src="img/oracal.png" alt="" />
                 </div>
-            </div>
-
-            <!-- Letzte Analysen -->
-            <div class="col-xxl-4 col-lg-12">
-                <div class="sb-card  card-letzte">
-                    <div class="card-head mb-4 d-flex align-items-center gap-2">
-                        <img src="img/letzte_analysen.svg" alt="" style="width:34px;">
-                        <span class="card-title">Letzte Analysen</span>
-                    </div>
-
-                    <!-- NVIDIA -->
-                    <div class="analysis-item">
-                        <div class="analysis-logo">
-                            <img src="img/nvidia.png" alt="" />
-                        </div>
-                        <div class="flex-grow-1">
-                            <div class="analysis-name">NVIDIA Corporation</div>
-                            <div class="analysis-date">22.05.2024</div>
-                        </div>
-                        <div class="analysis-score">92/<span>100</span></div>
-                    </div>
-
-                    <!-- Microsoft -->
-                    <div class="analysis-item">
-                        <div class="analysis-logo">
-                            <img src="img/microsoft.png" alt="" />
-
-                        </div>
-                        <div class="flex-grow-1">
-                            <div class="analysis-name">Microsoft Corporation</div>
-                            <div class="analysis-date">20.05.2024</div>
-                        </div>
-                        <div class="analysis-score">88/<span>100</span></div>
-                    </div>
-
-                    <!-- ASML -->
-                    <div class="analysis-item">
-                        <div class="analysis-logo">
-                            <img src="img/asml.png" alt="" />
-                        </div>
-                        <div class="flex-grow-1">
-                            <div class="analysis-name">ASML Holding N.V.</div>
-                            <div class="analysis-date">19.05.2024</div>
-                        </div>
-                        <div class="analysis-score">85/<span>100</span></div>
-                    </div>
-
-                    <!-- Visa -->
-                    <div class="analysis-item">
-                        <div class="analysis-logo">
-                            <img src="img/visa.png" alt="" />
-                        </div>
-                        <div class="flex-grow-1">
-                            <div class="analysis-name">Visa Inc.</div>
-                            <div class="analysis-date">14.05.2024</div>
-                        </div>
-                        <div class="analysis-score">80/<span>100</span></div>
-                    </div>
-
-                    <div class="wert-row arrow-link">
-                        <a href="#" class="sb-link">Alle Analysen anzeigen <img src="img/arrow_right_blue.svg" alt="" style="width:25px;"></a>
-                    </div>
+                <div>
+                  <strong class="card-title">Oracle Corp.</strong>
+                  <div>ORCL &bull; US68389X1084</div>
                 </div>
+              </div>
+              <div class="score-box" aria-label="Bewertung: 87 von 100, Sehr attraktiv">
+                <div class="score-num">87 <span class="score-tot">/100</span>
+                </div>
+                <div class="score-lbl">Sehr attraktiv</div>
+                <div class="score-stars d-flex justify-content-between " aria-hidden="true">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+              </div>
             </div>
-
+            <!-- Metric bars -->
+            <div class="d-flex flex-column gap-2 mb-3">
+              <div class="metric-row">
+                <span class="metric-lbl">Wachstum</span>
+                <div class="sb-progress" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+                  <div class="sb-progress-bar" style="width:88%;"></div>
+                </div>
+                <span class="metric-pct">88%</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-lbl">Rentabilität</span>
+                <div class="sb-progress" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
+                  <div class="sb-progress-bar" style="width:85%;"></div>
+                </div>
+                <span class="metric-pct">85%</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-lbl">Finanzstärke</span>
+                <div class="sb-progress" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100">
+                  <div class="sb-progress-bar" style="width:83%;"></div>
+                </div>
+                <span class="metric-pct">83%</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-lbl">Bewertung</span>
+                <div class="sb-progress" role="progressbar" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100">
+                  <div class="sb-progress-bar" style="width:82%;"></div>
+                </div>
+                <span class="metric-pct">82%</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-lbl">Momentum</span>
+                <div class="sb-progress" role="progressbar" aria-valuenow="87" aria-valuemin="0" aria-valuemax="100">
+                  <div class="sb-progress-bar" style="width:87%;"></div>
+                </div>
+                <span class="metric-pct">87%</span>
+              </div>
+            </div>
+            <div class="wert-row arrow-link">
+              <a href="#" class="sb-link">Zur Analysen <img src="img/arrow_right_blue.svg" alt="" style="width:25px;">
+              </a>
+            </div>
+          </div>
         </div>
-        <!-- /row 2 -->
-
-        <!-- ══════════════════════════════════════════
+        <!-- Marktüberblick -->
+        <div class="col-xxl-4 col-lg-6">
+          <div class="sb-card  card-markt">
+            <div class="card-head mb-4 d-flex align-items-center gap-2">
+              <img src="img/marktuebersicht.svg" alt="" style="width:21px;" />
+              <span class="card-title">Marktüberblick</span>
+            </div>
+            <div class="mkt-row">
+              <span class="mkt-flag" aria-label="Deutschland">
+                <img src="img/ger-flg.png" alt="" />
+              </span>
+              <span class="mkt-name">DAX</span>
+              <span class="mkt-price">18.693,22</span>
+              <span class="mkt-chg trend-pos">+0,78 %</span>
+            </div>
+            <div class="mkt-row">
+              <span class="mkt-flag" aria-label="Deutschland">
+                <img src="img/ger-flg.png" alt="" />
+              </span>
+              <span class="mkt-name">MDAS</span>
+              <span class="mkt-price">24.984,65</span>
+              <span class="mkt-chg trend-pos">+0,61 %</span>
+            </div>
+            <div class="mkt-row">
+              <span class="mkt-flag" aria-label="USA">
+                <img src="img/usa-flg.png" alt="" />
+              </span>
+              <span class="mkt-name">S&amp;P 500</span>
+              <span class="mkt-price">5.321,56</span>
+              <span class="mkt-chg trend-pos">+0,65 %</span>
+            </div>
+            <div class="mkt-row">
+              <span class="mkt-flag" aria-label="USA">
+                <img src="img/usa-flg.png" alt="" />
+              </span>
+              <span class="mkt-name">Nasdaq 100</span>
+              <span class="mkt-price">18.404,76</span>
+              <span class="mkt-chg trend-pos">+0,89 %</span>
+            </div>
+            <div class="mkt-row">
+              <span class="mkt-flag" aria-label="Europa">
+                <img src="img/eu-flg.png" alt="" />
+              </span>
+              <span class="mkt-name">Euro Stoxx 50</span>
+              <span class="mkt-price">5.102,35</span>
+              <span class="mkt-chg trend-pos">+0,42 %</span>
+            </div>
+            <div class="mkt-row">
+              <span class="mkt-flag" aria-label="USA">
+                <img src="img/usa-flg.png" alt="" />
+              </span>
+              <span class="mkt-name">VIX</span>
+              <span class="mkt-price">12,45</span>
+              <span class="mkt-chg trend-neg">-1,35 %</span>
+            </div>
+            <div class="mkt-row">
+              <span class="mkt-flag" aria-label="Gold">
+                <img src="img/gold-flg.png" alt="" />
+              </span>
+              <span class="mkt-name">Gold (USD)</span>
+              <span class="mkt-price">2.341,96</span>
+              <span class="mkt-chg trend-pos">+0,27 %</span>
+            </div>
+            <div class="mkt-row">
+              <span class="mkt-flag" aria-label="Öl">
+                <img src="img/usa-flg.png" alt="" />
+              </span>
+              <span class="mkt-name">Öl (Brent)</span>
+              <span class="mkt-price">81,92</span>
+              <span class="mkt-chg trend-neg">-0,41 %</span>
+            </div>
+            <div class="wert-row arrow-link">
+              <a href="#" class="sb-link">Zum Marktüberblick <img src="img/arrow_right_blue.svg" alt="" style="width:25px;">
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- Letzte Analysen -->
+        <div class="col-xxl-4 col-lg-12">
+          <div class="sb-card  card-letzte">
+            <div class="card-head mb-4 d-flex align-items-center gap-2">
+              <img src="img/letzte_analysen.svg" alt="" style="width:34px;">
+              <span class="card-title">Letzte Analysen</span>
+            </div>
+            <!-- NVIDIA -->
+            <div class="analysis-item">
+              <div class="analysis-logo">
+                <img src="img/nvidia.png" alt="" />
+              </div>
+              <div class="flex-grow-1">
+                <div class="analysis-name">NVIDIA Corporation</div>
+                <div class="analysis-date">22.05.2024</div>
+              </div>
+              <div class="analysis-score">92/ <span>100</span>
+              </div>
+            </div>
+            <!-- Microsoft -->
+            <div class="analysis-item">
+              <div class="analysis-logo">
+                <img src="img/microsoft.png" alt="" />
+              </div>
+              <div class="flex-grow-1">
+                <div class="analysis-name">Microsoft Corporation</div>
+                <div class="analysis-date">20.05.2024</div>
+              </div>
+              <div class="analysis-score">88/ <span>100</span>
+              </div>
+            </div>
+            <!-- ASML -->
+            <div class="analysis-item">
+              <div class="analysis-logo">
+                <img src="img/asml.png" alt="" />
+              </div>
+              <div class="flex-grow-1">
+                <div class="analysis-name">ASML Holding N.V.</div>
+                <div class="analysis-date">19.05.2024</div>
+              </div>
+              <div class="analysis-score">85/ <span>100</span>
+              </div>
+            </div>
+            <!-- Visa -->
+            <div class="analysis-item">
+              <div class="analysis-logo">
+                <img src="img/visa.png" alt="" />
+              </div>
+              <div class="flex-grow-1">
+                <div class="analysis-name">Visa Inc.</div>
+                <div class="analysis-date">14.05.2024</div>
+              </div>
+              <div class="analysis-score">80/ <span>100</span>
+              </div>
+            </div>
+            <div class="wert-row arrow-link">
+              <a href="#" class="sb-link">Alle Analysen anzeigen <img src="img/arrow_right_blue.svg" alt="" style="width:25px;">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /row 2 -->
+      <!-- ══════════════════════════════════════════
          ROW 3 – Performance Chart
          ══════════════════════════════════════════ -->
-        <div class="chart-card">
-
-            <div class="chart-card-head">
-                <div class="card-head mb-2 d-flex align-items-center gap-2">
-                    <img src="img/aktie.svg" alt="" style="width:38px;" />
-                    <span class="card-title">Performance im Vergleich</</span>
-                </div>
-                <div class="time-btns" role="group" aria-label="Zeitraum wählen">
-                    <button class="time-btn" type="button">1M</button>
-                    <button class="time-btn" type="button">2M</button>
-                    <button class="time-btn" type="button">6M</button>
-                    <button class="time-btn active" type="button">YTD</button>
-                    <button class="time-btn" type="button">1J</button>
-                    <button class="time-btn" type="button">3J</button>
-                    <button class="time-btn" type="button">5J</button>
-                    <button class="time-btn" type="button">Max</button>
-                    <button class="time-btn" type="button" title="Datum wählen">
-                        <i class="bi bi-calendar3" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </div>
-
-            <div class="chart-legend">
-                <div class="legend-item">
-                    <div class="legend-line" style="background:var(--sb-pink);" aria-hidden="true"></div>
-                    <span class="legend-label">StockBuddy Musterdepot</span>
-                    <span class="legend-pct" style="color:var(--sb-green-dark);">+18,75 %</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-line" style="background:var(--sb-blue);" aria-hidden="true"></div>
-                    <span class="legend-label">Mein Depot</span>
-                    <span class="legend-pct" style="color:var(--sb-green-dark);">+8,40 %</span>
-                </div>
-            </div>
-
-            <div style="position:relative;height:220px;">
-                <canvas id="perfChart" aria-label="Performance-Vergleichsdiagramm"></canvas>
-            </div>
-
-            <p class="chart-disclaimer mb-0">
-                Hinweis: Vergangene Wertentwicklungen sind keine Garantie für zukünftige Ergebnisse
-            </p>
-
+      <div class="chart-card">
+        <div class="chart-card-head">
+          <div class="card-head mb-2 d-flex align-items-center gap-2">
+            <img src="img/aktie.svg" alt="" style="width:38px;" />
+            <span class="card-title">Performance im Vergleich </ </span>
+          </div>
+          <div class="time-btns" role="group" aria-label="Zeitraum wählen">
+            <button class="time-btn" type="button">1M</button>
+            <button class="time-btn" type="button">2M</button>
+            <button class="time-btn" type="button">6M</button>
+            <button class="time-btn active" type="button">YTD</button>
+            <button class="time-btn" type="button">1J</button>
+            <button class="time-btn" type="button">3J</button>
+            <button class="time-btn" type="button">5J</button>
+            <button class="time-btn" type="button">Max</button>
+            <button class="time-btn" type="button" title="Datum wählen">
+              <i class="bi bi-calendar3" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
-        <!-- /chart card -->
-
+        <div class="chart-legend">
+          <div class="legend-item">
+            <div class="legend-line" style="background:var(--sb-pink);" aria-hidden="true"></div>
+            <span class="legend-label">StockBuddy Musterdepot</span>
+            <span class="legend-pct" style="color:var(--sb-green-dark);">+18,75 %</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-line" style="background:var(--sb-blue);" aria-hidden="true"></div>
+            <span class="legend-label">Mein Depot</span>
+            <span class="legend-pct" style="color:var(--sb-green-dark);">+8,40 %</span>
+          </div>
+        </div>
+        <div style="position:relative;height:220px;">
+          <canvas id="perfChart" aria-label="Performance-Vergleichsdiagramm"></canvas>
+        </div>
+        <p class="chart-disclaimer mb-0"> Hinweis: Vergangene Wertentwicklungen sind keine Garantie für zukünftige Ergebnisse </p>
+      </div>
+      <!-- /chart card -->
     </main>
-
-
     <!-- ══════════════════════════════════════════
        SCRIPTS
        ══════════════════════════════════════════ -->
-
     <!-- Bootstrap JS (local) -->
     <script src="js/bootstrap.bundle.min.js"></script>
-
     <!-- Chart.js (local) -->
     <script src="js/chart.umd.min.js"></script>
-
     <!-- Custom JS -->
     <script src="js/main.js"></script>
-
-</body>
-
+  </body>
 </html>

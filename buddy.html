@@ -151,7 +151,7 @@
                                         <div class="buddy-score-section">
                                             <div class="card-title mb-3">
                                                 StockBuddy Score
-                                                <img src="img/info.svg" alt="" style="width:18px; margin-left:2px;" title="Erklärung zum Score" />
+                                                <img src="img/info.svg" alt="" style="width:18px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" />
                                             </div>
 
                                             <div class="score-circle-wrap">
@@ -177,7 +177,7 @@
                                         <div class="buddy-score-section">
                                             <div class="card-title mb-3">
                                                 Score-Breakdown
-                                                <img src="img/info.svg" alt="" style="width:18px; margin-left:2px;" title="Erklärung zum Score" />
+                                                <img src="img/info.svg" alt="" style="width:18px;margin-left:2px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" />
                                             </div>
                                             <div class="breakdown-row">
                                                 <div class="breakdown-icon"><img src="img/wachstum_green.svg" alt="" /></div>
@@ -223,7 +223,7 @@
                                         <div class="buddy-score-section">
                                             <div class="card-title mb-3">
                                                 Analyse-Erklärung
-                                                <img src="img/info.svg" alt="" style="width:18px; margin-left:2px;" title="Erklärung zum Score" />
+                                                <img src="img/info.svg" alt="" style="width:18px;margin-left:2px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" />
                                             </div>
                                             <div class="erklaerung-item">
                                                 <div class="erklaerung-icon"><img src="img/wachstum_green.svg" alt="" /></div>
@@ -259,7 +259,7 @@
                                         <div class="score-entwicklung-section">
                                             <div class="card-title mb-3">
                                                 Score-Entwicklung
-                                                <img src="img/info.svg" alt="" style="width:18px; margin-left:2px;" title="Erklärung zum Score" />
+                                                <img src="img/info.svg" alt="" style="width:18px;margin-left:2px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" />
                                             </div>
                                             <div style="position:relative;height:170px;">
                                                 <canvas id="scoreChart" aria-label="Score-Entwicklung Oracle"></canvas>
@@ -291,19 +291,21 @@
                     <!-- /chat-messages -->
 
                     <!-- Input bar -->
-                    <div class="chat-input-bar">
-                        <div class="chat-input-wrap">
-                            <button class="chat-attach-btn" aria-label="Anhang hinzufügen">
-                                <i class="bi bi-paperclip"></i>
-                            </button>
-                            <input type="text" class="chat-input-field" placeholder="Stelle eine Frage zu Aktien, Märkten oder Analysen ..." aria-label="Nachricht eingeben" />
-                            <button class="chat-mic-btn" aria-label="Spracheingabe">
-                                <i class="bi bi-mic-fill"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="chat-disclaimer-bar">
-                        Buddy kann Fehler machen. Antworten bitte immer selbst prüfen.
+					<div class="chat-input-bar-wraper">
+						<div class="chat-input-bar">
+							<div class="chat-input-wrap">
+								<button class="chat-attach-btn" aria-label="Anhang hinzufügen">
+									<i class="bi bi-paperclip"></i>
+								</button>
+								<input type="text" class="chat-input-field" placeholder="Stelle eine Frage zu Aktien, Märkten oder Analysen ..." aria-label="Nachricht eingeben" />
+								<button class="chat-mic-btn" aria-label="Spracheingabe">
+									<i class="bi bi-mic-fill"></i>
+								</button>
+							</div>
+						</div>
+						<div class="chat-disclaimer-bar">
+							Buddy kann Fehler machen. Antworten bitte immer selbst prüfen.
+						</div>
                     </div>
 
                 </div>
@@ -392,7 +394,7 @@
                     <div class="rp-score-row">
                         <div>
                             <div class="rp-score-num">87<span>/100</span></div>
-                            <div style="color: var(--sb-green-dark);font-weight: 500;">Sehr attraktiv</div>
+                            <div style="color: var(--sb-green-dark);">Sehr attraktiv</div>
                         </div>
                         <div class="rp-score-badge">Sehr gut</div>
                     </div>

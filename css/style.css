@@ -1191,10 +1191,10 @@ img {
   box-shadow: var(--sb-shadow);
 }
 .chat-intro-text {
-  font-size: 1rem;
-  color: var(--sb-text-h);
-  margin-bottom: 1.25rem;
-  line-height: 1.55;
+	font-size: 1.1rem;
+    color: var(--sb-text-h);
+    margin-bottom: 1.25rem;
+    line-height: 1.4;
 }
 .chat-intro-text strong {
   font-weight: 700;
@@ -1546,7 +1546,7 @@ img {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 1.1rem;
+  margin-bottom: 1.4rem;
 }
 .rp-stock-logo {
   width: 69px;
@@ -1573,10 +1573,8 @@ img {
   margin-top: 2px;
 }
 .rp-score-label {
-  font-size: 0.9rem;
   font-weight: 700;
   color: var(--sb-text-h);
-  margin-bottom: 0.5rem;
 }
 .rp-score-row {
   display: flex;
@@ -1655,9 +1653,11 @@ img {
 .page-subtitle {
   font-size: 1.2rem;
   font-weight: 400;
-  margin-top: 2px;
 }
-
+.rp-score-num+div {
+    line-height: 1.1rem;
+    margin-bottom: 3px;
+}
 @media (max-width: 1279.98px) {
   .buddy-right-col {
     width: 360px;
