@@ -1968,8 +1968,8 @@ img{
 .pos-price-main { font-size: .95rem; font-weight: 700; color: var(--sb-text-h); }
 .pos-price-chg  { font-size: .78rem; color: var(--sb-green-dark); font-weight: 600; }
 .pos-score-badge {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1977,8 +1977,10 @@ img{
   font-size: .85rem;
   font-weight: 700;
   flex-shrink: 0;
+  background: transparent;
+  border: 2.5px solid currentColor;
 }
-.pos-score-label { font-size: .72rem; font-weight: 600; color: var(--sb-text-soft); margin-top: 2px; }
+.pos-score-label { font-size: .82rem; font-weight: 700; margin-top: 0; }
 
 .branche-row { display: flex; align-items: center; gap: 8px; margin-bottom: .6rem; }
 .branche-row:last-child { margin-bottom: 0; }
