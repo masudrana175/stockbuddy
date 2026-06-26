@@ -297,7 +297,7 @@
 								<button class="chat-attach-btn" aria-label="Anhang hinzufügen">
 									<i class="bi bi-paperclip"></i>
 								</button>
-								<input type="text" class="chat-input-field" placeholder="Stelle eine Frage zu Aktien, Märkten oder Analysen ..." aria-label="Nachricht eingeben" />
+								<textarea class="chat-input-field" placeholder="Stelle eine Frage zu Aktien, Märkten oder Analysen ..." aria-label="Nachricht eingeben" rows="1"></textarea>
 								<button class="chat-mic-btn" aria-label="Spracheingabe">
 									<i class="bi bi-mic-fill"></i>
 								</button>
@@ -546,6 +546,19 @@
           });
         })();
     </script>
+
+  <script>
+    /* Auto-expand textarea up to 5 lines */
+    (function () {
+      const ta = document.querySelector('.chat-input-field');
+      if (!ta) return;
+      const maxH = parseFloat(getComputedStyle(ta).maxHeight);
+      ta.addEventListener('input', function () {
+        this.style.height = 'auto';
+        this.style.height = Math.min(this.scrollHeight, maxH) + 'px';
+      });
+    })();
+  </script>
 
 </body>
 
