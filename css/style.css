@@ -2055,12 +2055,14 @@ img{
   font-size: .85rem;
   font-weight: 700;
   flex-shrink: 0;
+  background: transparent;
+  border: 2.5px solid currentColor;
 }
 .profil-layout-wrap.row .sb-card {
     height: auto;
 	margin-bottom: 2rem;
 }
-.pos-score-label { font-size: .72rem; font-weight: 600; color: var(--sb-text-soft); margin-top: 2px; }
+.pos-score-label { font-size: .82rem; font-weight: 700; margin-top: 0; }
 
 .branche-row { display: flex; align-items: center; gap: 8px; margin-bottom: 1rem; }
 .branche-row:last-child { margin-bottom: 0; }
