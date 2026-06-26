@@ -104,7 +104,7 @@
     <!-- Profile header -->
     <div class="profil-header">
       <div class="profil-avatar-lg">
-        <img src="img/profile-head.png" alt="Alexander Schampers"/>
+        <img src="img/circle-profile.png" alt="Alexander Schampers"/>
       </div>
       <div>
         <div class="profil-name">Alexander Schampers</div>
@@ -113,10 +113,10 @@
     </div>
 
     <!-- Layout -->
-    <div class="profil-layout">
+    <div class="profil-layout-wrap row">
 
       <!-- Left column -->
-      <div class="profil-left">
+      <div class="profil-leftd col-xxl-6 col-lg-6 ">
 
         <!-- Analyseprofil settings -->
         <div class="sb-card">
@@ -156,7 +156,7 @@
             <div class="setting-btns">
               <button class="toggle-pill">Kurzfristig</button>
               <button class="toggle-pill">Mittelfristig</button>
-              <button class="toggle-pill active-blue active">Langfristig</button>
+              <button class="toggle-pill active">Langfristig</button>
             </div>
           </div>
           <!-- Bevorzugte Märkte -->
@@ -206,18 +206,21 @@
       </div><!-- /profil-left -->
 
       <!-- Right column -->
-      <div class="profil-right">
+      <div class="profil-rights col-xxl-6 col-lg-6">
 
         <!-- Deine voreingestellten Ziele -->
-        <div class="ziele-card">
+        <div class="sb-card pink-bg"> 
           <div class="ziele-header">
-            <div class="ziele-title">Deine voreingestellten Ziele</div>
+            <div class="ziele-title">
+				<div class="card-title mb-3">Deine voreingestellten Ziele</div>
+				<div class="ziel-checkbox-row">
+				<input type="checkbox" id="zieleCheck"/>
+				<label for="zieleCheck">Meine voreingestellten Ziele immer in der Session berücksichtigen</label>
+			  </div>
+			</div>
             <button class="btn-ziele">Anlageziele von StockBuddy<br>ermitteln lassen</button>
           </div>
-          <div class="ziel-checkbox-row">
-            <input type="checkbox" id="zieleCheck"/>
-            <label for="zieleCheck">Meine voreingestellten Ziele immer in der Session berücksichtigen</label>
-          </div>
+          
 
           <!-- Sliders -->
           <div class="ziel-row">

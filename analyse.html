@@ -175,10 +175,10 @@
     </div>
 
     <!-- Analyse body -->
-    <div class="analyse-body">
+    <div class="analyse-bodys row g-4 mb-4">
 
       <!-- Main -->
-      <div class="analyse-main">
+      <div class="analyse-mains col-xxl-8 col-lg-6">
 
         <!-- Analyseergebnis -->
         <div class="sb-card">
@@ -237,7 +237,46 @@
           </div>
         </div>
 
-        <!-- Weitere Aktien im Vergleich -->
+       
+
+      </div><!-- /analyse-main -->
+
+      <!-- Side -->
+      <div class="analyse-sided col-xxl-4 col-lg-6">
+        <div class="sb-card">
+          <div class="se-header">
+            <div class="se-title">
+              <img src="img/aktie.svg" alt=""/>
+              Score Entwicklung
+            </div>
+            <button class="se-period-btn">Letzte 6 Monate <i class="bi bi-chevron-down"></i></button>
+          </div>
+
+          <div class="se-score-change">
+            <span>84</span>
+            <span class="se-arrow">→</span>
+            <span class="se-new">87</span>
+          </div>
+
+          <div style="position:relative;height:160px;">
+            <canvas id="scoreDevChart" aria-label="Score Entwicklung"></canvas>
+          </div>
+
+          <div class="se-note mt-3">
+            <div class="se-note-title">Analysten verbessert</div>
+            <div class="se-note-text">Die durchschnittlichen Analystenschätzungen wurden angehoben</div>
+          </div>
+          <div class="se-note mt-2">
+            <div class="se-note-title">Umsatzprognose erhöht</div>
+            <div class="se-note-text">Die erwartete Umsatzentwicklung für die nächsten 12 Monate wurde angehoben.</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /analyse-body -->
+	<div class="row">
+		<div class="col-sm-12">
+			 <!-- Weitere Aktien im Vergleich -->
         <div class="sb-card">
           <div class="vergleich-section-title">
             <img src="img/analyse_blue.svg" alt=""/>
@@ -310,43 +349,8 @@
             </table>
           </div>
         </div>
-
-      </div><!-- /analyse-main -->
-
-      <!-- Side -->
-      <div class="analyse-side">
-        <div class="sb-card">
-          <div class="se-header">
-            <div class="se-title">
-              <img src="img/aktie.svg" alt=""/>
-              Score Entwicklung
-            </div>
-            <button class="se-period-btn">Letzte 6 Monate <i class="bi bi-chevron-down"></i></button>
-          </div>
-
-          <div class="se-score-change">
-            <span>84</span>
-            <span class="se-arrow">→</span>
-            <span class="se-new">87</span>
-          </div>
-
-          <div style="position:relative;height:160px;">
-            <canvas id="scoreDevChart" aria-label="Score Entwicklung"></canvas>
-          </div>
-
-          <div class="se-note mt-3">
-            <div class="se-note-title">Analysten verbessert</div>
-            <div class="se-note-text">Die durchschnittlichen Analystenschätzungen wurden angehoben</div>
-          </div>
-          <div class="se-note mt-2">
-            <div class="se-note-title">Umsatzprognose erhöht</div>
-            <div class="se-note-text">Die erwartete Umsatzentwicklung für die nächsten 12 Monate wurde angehoben.</div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /analyse-body -->
-
+		</div>
+	</div>
   </main>
 
   <script src="js/bootstrap.bundle.min.js"></script>

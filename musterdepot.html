@@ -61,7 +61,7 @@
         <div class="d-block d-lg-none"><img src="img/logo.png" alt=""/></div>
         <div class="d-none d-lg-block">
           <h1 style="margin-bottom:2px;">Musterdepot StockBuddy</h1>
-          <div style="font-size:.95rem;color:var(--sb-text-soft);">Das KI-optimierte Musterdepot von StockBuddy</div>
+          <div class="page-subtitle">Das KI-optimierte Musterdepot von StockBuddy</div>
         </div>
       </div>
       <div class="sb-topbar-right">
@@ -106,11 +106,11 @@
         <!-- Performance header -->
         <div class="perf-card">
           <div class="perf-left">
-            <div class="perf-since">
-              <img src="img/info.svg" alt=""/>
-              Performance seit Start &nbsp; Seit 01.01.2024
+            <div class="card-title mb-1">              
+              Performance seit Start <img src="img/info.svg" alt="" style="width:18px;"/>
+			  <span>Seit 01.01.2024</span>
             </div>
-            <div class="perf-pct">+18,75 %</div>
+            <div class="perf-pct  mb-4">+18,75 %</div>
             <div class="perf-sub">Im Vergleich zum MSCI World</div>
             <div class="perf-vs">+7,32%</div>
           </div>
@@ -133,7 +133,7 @@
         <div class="row g-3">
           <div class="col-lg-3 col-6">
             <div class="stat-box">
-              <div class="stat-label"><img src="img/info.svg" alt=""/> Depotwert</div>
+              <div class="card-title mb-3">Depotwert <img src="img/info.svg" alt="" style="width:18px;"/></div>
               <div class="stat-val">128.450,75 €</div>
               <div class="stat-sub green">+20.320,75 € (18,75 %)</div>
               <div class="stat-sub">seit Start</div>
@@ -141,21 +141,21 @@
           </div>
           <div class="col-lg-3 col-6">
             <div class="stat-box">
-              <div class="stat-label"><img src="img/info.svg" alt=""/> Cash – Anteil</div>
+			  <div class="card-title mb-3">Cash – Anteil <img src="img/info.svg" alt="" style="width:18px;"/></div>
               <div class="stat-val">8,32 %</div>
               <div class="stat-sub">10.664,45 €</div>
             </div>
           </div>
           <div class="col-lg-3 col-6">
             <div class="stat-box">
-              <div class="stat-label"><img src="img/info.svg" alt=""/> Anzahl Positionen</div>
+			  <div class="card-title mb-3">Anzahl Positionen <img src="img/info.svg" alt="" style="width:18px;"/></div>
               <div class="stat-val">18</div>
               <div class="stat-sub">diversifiziert</div>
             </div>
           </div>
           <div class="col-lg-3 col-6">
-            <div class="stat-box">
-              <div class="stat-label"><img src="img/info.svg" alt=""/> Trefferquote</div>
+            <div class="stat-box trefferquote">
+			  <div class="card-title mb-3">Trefferquote <img src="img/info.svg" alt="" style="width:18px;"/></div>
               <div class="stat-val">72,2 %</div>
               <div class="stat-sub">letzte 12 Monate</div>
             </div>
@@ -165,9 +165,8 @@
         <!-- Top Positionen -->
         <div class="sb-card">
           <div class="d-flex align-items-center gap-2 mb-3">
-            <img src="img/analyse_blue.svg" alt="" style="width:26px;"/>
             <span class="card-title">Top – Positionen</span>
-            <img src="img/info.svg" alt="" style="width:16px; margin-left:2px;" title="Top Positionen nach Gewichtung"/>
+            <img src="img/info.svg" alt="" style="width:18px; margin-left:2px;" title="Top Positionen nach Gewichtung"/>
           </div>
           <div style="overflow-x:auto;">
             <table class="pos-table">
@@ -175,9 +174,9 @@
                 <tr>
                   <th>Unternehmen</th>
                   <th>Gewichtung</th>
-                  <th>Performance<br>seit Kauf</th>
+                  <th>Performance<small>seit Kauf</small></th>
                   <th>Aktueller Kurs</th>
-                  <th>StockBuddy Score<br>/100</th>
+                  <th>StockBuddy Score<small>/100</small></th>
                 </tr>
               </thead>
               <tbody>
@@ -188,7 +187,7 @@
                       <div class="pos-logo"><img src="img/nvidia.png" alt="NVIDIA"/></div>
                       <div>
                         <div class="pos-name">NCIDIA Corporation</div>
-                        <div class="pos-date">22.05.2024</div>
+                        <div>22.05.2024</div>
                       </div>
                     </div>
                   </td>
@@ -199,7 +198,7 @@
                     <div class="pos-price-chg">+1,12 %</div>
                   </td>
                   <td>
-                    <div class="d-flex align-items-center gap-2">
+                    <div class="d-flex align-items-center gap-2 justify-content-end">
                       <div class="pos-score-badge" style="background:#bfeed7; color:#22b36d;">89</div>
                       <div class="pos-score-label" style="color:var(--sb-green-dark);font-weight:700;">Sehr gut</div>
                     </div>
@@ -212,7 +211,7 @@
                       <div class="pos-logo"><img src="img/microsoft.png" alt="Microsoft"/></div>
                       <div>
                         <div class="pos-name">Microsoft Corporation</div>
-                        <div class="pos-date">20.05.2024</div>
+                        <div>20.05.2024</div>
                       </div>
                     </div>
                   </td>
@@ -223,7 +222,7 @@
                     <div class="pos-price-chg">+2,31 %</div>
                   </td>
                   <td>
-                    <div class="d-flex align-items-center gap-2">
+                    <div class="d-flex align-items-center gap-2 justify-content-end">
                       <div class="pos-score-badge" style="background:#bfeed7; color:#22b36d;">91</div>
                       <div class="pos-score-label" style="color:var(--sb-green-dark);font-weight:700;">Sehr gut</div>
                     </div>
@@ -236,7 +235,7 @@
                       <div class="pos-logo"><img src="img/asml.png" alt="ASML"/></div>
                       <div>
                         <div class="pos-name">ASML Holding N.V.</div>
-                        <div class="pos-date">19.05.2024</div>
+                        <div>19.05.2024</div>
                       </div>
                     </div>
                   </td>
@@ -247,7 +246,7 @@
                     <div class="pos-price-chg">+1,65 %</div>
                   </td>
                   <td>
-                    <div class="d-flex align-items-center gap-2">
+                    <div class="d-flex align-items-center gap-2 justify-content-end">
                       <div class="pos-score-badge" style="background:#bfeed7; color:#22b36d;">87</div>
                       <div class="pos-score-label" style="color:var(--sb-green-dark);font-weight:700;">Sehr gut</div>
                     </div>
@@ -260,7 +259,7 @@
                       <div class="pos-logo"><img src="img/visa.png" alt="Visa"/></div>
                       <div>
                         <div class="pos-name">Visa Inc.</div>
-                        <div class="pos-date">14.05.2024</div>
+                        <div>14.05.2024</div>
                       </div>
                     </div>
                   </td>
@@ -271,7 +270,7 @@
                     <div class="pos-price-chg">+0,38 %</div>
                   </td>
                   <td>
-                    <div class="d-flex align-items-center gap-2">
+                    <div class="d-flex align-items-center gap-2 justify-content-end">
                       <div class="pos-score-badge" style="background:#eee8d7; color:#c2a34e;">68</div>
                       <div class="pos-score-label" style="color:#c2a34e;font-weight:700;">Gut</div>
                     </div>
@@ -327,12 +326,11 @@
 
         <!-- Strategie -->
         <div class="sb-card">
-          <div class="d-flex align-items-center gap-2 mb-3">
-            <img src="img/analysefokus.svg" alt="" style="width:20px;"/>
+          <div class="align-items-center gap-2 mb-3">
             <span class="card-title mb-0">Strategie des Musterdepots</span>
-            <img src="img/info.svg" alt="" style="width:15px; margin-left:2px;"/>
+            <img src="img/info.svg" alt="" style="width:18px; margin-left:2px;"/>
           </div>
-          <p class="md-side-desc">
+          <p>
             Quantitativ, KI-gestützt, regelbasiert.<br>
             Fokus auf Qualität, Wachstum und Bewertung – für langfristige, überdurchschnittliche Renditen
           </p>
@@ -342,7 +340,7 @@
         <div class="sb-card">
           <div class="d-flex align-items-center gap-2 mb-3">
             <span class="card-title mb-0">Risikoklasse</span>
-            <img src="img/info.svg" alt="" style="width:15px;"/>
+            <img src="img/info.svg" alt="" style="width:18px;"/>
           </div>
           <div class="d-flex align-items-center gap-3">
             <div class="risikoklasse-badge">5 / 7</div>
@@ -354,7 +352,7 @@
         <div class="sb-card">
           <div class="d-flex align-items-center gap-2 mb-3">
             <span class="card-title mb-0">Branchenverteilung</span>
-            <img src="img/info.svg" alt="" style="width:15px;"/>
+            <img src="img/info.svg" alt="" style="width:18px;"/>
           </div>
           <div class="branche-row">
             <span class="branche-lbl">Technologie</span>
@@ -397,10 +395,10 @@
         </div>
 
         <!-- Letzte Umschichtung -->
-        <div class="sb-card">
-          <div class="d-flex align-items-center gap-2 mb-3">
+        <div class="sb-card letzte-box-right">
+          <div class="d-flex align-items-center gap-2 mb-0">
             <span class="card-title mb-0">Letzte Umschichtung</span>
-            <img src="img/info.svg" alt="" style="width:15px;"/>
+            <img src="img/info.svg" alt="" style="width:18px;"/>
           </div>
           <div class="umschicht-date">15. Mai 2025</div>
 
@@ -409,7 +407,7 @@
             hinzugefügt
           </div>
           <div class="umschicht-name">ASML Holding N.V.</div>
-          <div class="umschicht-sub" style="margin-bottom:.85rem;">Thermo Fisher Scientific</div>
+          <div class="umschicht-sub">Thermo Fisher Scientific</div>
 
           <div class="umschicht-tag tag-red-dot">
             <img src="img/reduziert.svg" alt="" style="width:16px;"/>
