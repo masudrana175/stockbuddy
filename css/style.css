@@ -1448,13 +1448,20 @@ img {
 
 /* Chat input bar — fixed to bottom of viewport */
 .chat-input-bar-wraper {
-  position: fixed;
-  bottom: 0;
-  left: var(--sb-sidebar-w);
-  right: 0;
-  z-index: 100;
-  padding: 8px 2.1rem 4px;
-  background: transparent;
+    position: fixed;
+    bottom: 0;
+    left: var(--sb-sidebar-w);
+    right: 0;
+    z-index: 100;
+    padding: 8px 2.1rem 4px;
+    background: #f9f7f9f0;
+    max-width: calc(100% - 834px);
+}
+.btn-compare:hover img,.btn-detail:hover img {
+    filter: brightness(0) invert(1);
+}
+.sb-link:hover img{
+	filter: brightness(0) saturate(100%) invert(20%) sepia(99%) saturate(2103%) hue-rotate(315deg) brightness(86%) contrast(82%);
 }
 .chat-input-bar {
   background: linear-gradient(121deg, rgba(29, 58, 142, 1) 0%, rgba(204, 51, 153, 1) 100%);
@@ -2742,14 +2749,7 @@ a.btn-vgl-detail i.bi.bi-arrow-right {
 .blue {
   color: var(--sb-blue);
 }
-@media (max-width: 1024px) {
-  .md-layout {
-    flex-direction: column;
-  }
-  .md-side {
-    width: 100%;
-  }
-}
+
 @media (max-width: 767.98px) {
   .perf-card {
     gap: 1rem;
@@ -2788,6 +2788,18 @@ a.btn-vgl-detail i.bi.bi-arrow-right {
     box-shadow: 0 0 19px 0 #33333347;
     padding-right: 15px;
   }
+    .md-layout {
+    flex-direction: column;
+  }
+  .md-side {
+    width: 100%;
+  }
+  .chat-messages {
+		padding-bottom: 75px;
+	}
+  .chat-input-bar-wraper {
+		max-width: calc(100% - 0px);
+	}
   .vgl-table thead th {
 		line-height: 1.2rem;
 		vertical-align: top;
