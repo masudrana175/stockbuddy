@@ -155,7 +155,7 @@
                                             </div>
 
                                             <div class="score-circle-wrap">
-                                                <div class="score-circle" aria-label="Score: 87 von 100">
+                                                <div class="score-circle" data-score="87" aria-label="Score: 87 von 100">
                                                     <svg viewBox="0 0 80 80">
                                                         <circle class="bg-ring" cx="40" cy="40" r="33" />
                                                         <circle class="value-ring" cx="40" cy="40" r="33" />
@@ -504,21 +504,25 @@
         yaxis: { range:[0,100], gridcolor:'#f0f0f0', tickfont: { family:'Barlow', size:10, color:'#999' }, dtick: 25 }
       }, noBar);
 
-      /* Dynamic score circles — r=33, circumference ≈ 207.35 */
+      /* Dynamic score circles — set data-score="0..100" on .score-circle.
+         The ring fills to that percentage: 87 → 87 % filled.
+         Color: green ≥ 75, orange 50–74, red < 50. */
       (function () {
-        var C = 2 * Math.PI * 33;
-        document.querySelectorAll('.score-circle').forEach(function (el) {
-          var numEl = el.querySelector('.score-circle-num');
-          if (!numEl) return;
-          var score = parseInt(numEl.textContent, 10);
-          if (isNaN(score)) return;
+        var C = 2 * Math.PI * 33; /* ring circumference, r = 33 */
+        document.querySelectorAll('.score-circle[data-score]').forEach(function (el) {
+          var score = Math.max(0, Math.min(100, parseInt(el.dataset.score, 10) || 0));
           var ring = el.querySelector('.value-ring');
           if (!ring) return;
           var color = score >= 75 ? '#22b36d' : score >= 50 ? '#f59e0b' : '#e53e3e';
           ring.style.strokeDasharray = C;
           ring.style.strokeDashoffset = C * (1 - score / 100);
           ring.style.stroke = color;
-          numEl.style.color = color;
+          var numEl = el.querySelector('.score-circle-num');
+          if (numEl) {
+            numEl.innerHTML = score + '<span>/100</span>';
+            numEl.style.color = color;
+          }
+          el.setAttribute('aria-label', 'Score: ' + score + ' von 100');
         });
       })();
     </script>
