@@ -2304,6 +2304,31 @@ img {
   color: #fff;
   text-align: left;
 }
+/* DataTables header: title text left, sort arrow pinned right
+   (also overrides DataTables' right-align on auto-detected numeric columns) */
+.vgl-table.dataTable thead th,
+.vgl-table.dataTable thead th.dt-type-numeric {
+  text-align: left;
+  position: relative;
+  padding-right: 28px;
+}
+.vgl-table.dataTable thead th span.dt-column-title {
+  float: none;
+  display: inline;
+}
+table.dataTable.vgl-table thead > tr > th span.dt-column-order {
+  position: absolute !important;
+  left: auto !important;
+  right: 10px !important;
+  top: 50% !important;
+  bottom: auto !important;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 20px;
+}
+table.dataTable.vgl-table thead > tr > th.dt-orderable-none span.dt-column-order {
+  display: none;
+}
 a.btn-vgl-detail i.bi.bi-arrow-right {
   font-size: 26px;
   line-height: 16px;
@@ -2412,6 +2437,13 @@ a.btn-vgl-detail i.bi.bi-arrow-right {
   .vgl-table thead th,
   .vgl-table tbody td {
     padding: 0.55rem 0.6rem;
+  }
+  .vgl-table.dataTable thead th {
+    padding-right: 24px;
+  }
+  /* keep the table readable on phones: scroll inside its wrapper instead of squashing */
+  .vgl-table {
+    min-width: 640px;
   }
 }
 @media (max-width: 575.98px) {
