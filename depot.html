@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockBuddy – Depot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <aside class="sb-sidebar" id="sidebar">
+        <div class="sb-sidebar-inner">
+            <a class="sb-logo" href="index.html">
+                <div class="sb-logo-icon"><img src="img/logo.png" alt="" /></div>
+            </a>
+            <nav class="sb-nav">
+                <a class="sb-nav-link" href="index.html">
+                    <span><img src="img/navi_home_active.svg" alt="" style="width:22px"/></span>
+                    <span>Übersicht</span>
+                </a>
+                <a class="sb-nav-link" href="buddy.html">
+                    <span><img src="img/bildmarke_stockbuddy.svg" alt="" style="width:28px"/></span>
+                    <span>Buddy</span>
+                </a>
+                <a class="sb-nav-link active" href="depot.html">
+                    <span><img src="img/navi_depot_active.svg" alt="" style="width:26px"/></span>
+                    <span>Depot</span>
+                </a>
+                <a class="sb-nav-link" href="musterdepot.html">
+                    <span><img src="img/navi_musterdepot_active.svg" alt="" style="width:29px"/></span>
+                    <span>Musterdepot</span>  
+                </a>
+                <a class="sb-nav-link" href="analyse.html">
+                    <span><img src="img/navi_analyse_active.svg" alt="" style="width:22px"/></span>
+                    <span>Analyse</span>
+                </a>
+                <a class="sb-nav-link" href="profil.html">
+                    <span><img src="img/navi_profil_active.svg" alt="" style="width:22px"/></span>
+                    <span>Profil</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+
+    <div class="sb-overlay" id="overlay" aria-hidden="true"></div>
+
+    <main class="sb-main">
+
+        <!-- Topbar -->
+        <div class="sb-topbar top-bar-main">
+            <div class="d-flex align-items-center">
+                <button class="sb-hamburger" id="hamburger" aria-label="Navigation öffnen">
+                    <i class="bi bi-list" aria-hidden="true"></i>
+                </button>
+                <div class="d-block d-lg-none"><img src="img/logo.png" alt="" /></div>
+                <div class="d-none d-lg-block">
+                    <h1 style="margin-bottom:2px;">Depot StockBuddy</h1>
+                    <div class="page-subtitle">Das KI-optimierte Depot von StockBuddy</div>
+                </div>
+            </div>
+            <div class="sb-topbar-right">
+                <div class="notif-wrapper" id="notifWrapper">
+                    <button class="sb-notif" id="notifBtn" aria-label="Benachrichtigungen" aria-expanded="false" aria-controls="notifPanel">
+                        <img src="img/benachrichtigungen.svg" alt="" style="width:24px;" />
+                        <span class="nb" id="notifCount">2</span>
+                    </button>
+                    <div class="notif-panel" id="notifPanel" role="dialog" aria-label="Benachrichtigungen" hidden>
+                        <div class="notif-header">
+                            <span class="notif-title">Benachrichtigungen</span>
+                            <button class="notif-close" id="notifClose" aria-label="Schließen"><i class="bi bi-x-lg"></i></button>
+                        </div>
+                        <div class="notif-item unread">
+                            <div class="notif-icon-wrap" style="background:#fce8f1;"><i class="bi bi-graph-up-arrow" style="color:var(--sb-pink);"></i></div>
+                            <div class="notif-body">
+                                <div class="notif-item-title">Neue Analyse verfügbar</div>
+                                <div class="notif-item-desc">Oracle Corp. wurde heute analysiert und erhält 87/100 Punkte.</div>
+                                <div class="notif-item-time"><i class="bi bi-clock"></i> Vor 2 Stunden</div>
+                            </div>
+                            <span class="notif-dot"></span>
+                        </div>
+                        <div class="notif-footer"><a href="#" class="sb-link">Alle Benachrichtigungen →</a></div>
+                    </div>
+                </div>
+                <div class="sb-avatar" role="img"><img src="img/profile-top.png" alt="Profilbild"></div>
+            </div>
+        </div>
+        <div class="sb-topbar d-block d-lg-none">
+            <div>
+                <h1 style="margin-bottom:2px;">Depot StockBuddy</h1>
+                <div style="font-size:.9rem;color:var(--sb-text-soft);">Das KI-optimierte Depot von StockBuddy</div>
+            </div>
+        </div>
+
+        <!-- Layout -->
+        <div class="md-layout">
+
+            <!-- Main -->
+            <div class="md-main">
+
+                <!-- Performance header -->
+                <div class="perf-card">
+                    <div class="perf-left">
+                        <div class="card-title mb-1">
+                            Performance seit Start <img src="img/info.svg" alt="" style="width:18px;margin-left:2px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" />
+                            <span>Seit 01.01.2024</span>
+                        </div>
+                        <div class="perf-pct  mb-4">+18,75 %</div>
+                        <div class="perf-sub">Im Vergleich zum MSCI World</div>
+                        <div class="perf-vs">+7,32%</div>
+                    </div>
+                    <div class="perf-chart-wrap">
+                        <div class="perf-time-btns">
+                            <button class="perf-time-btn">1M</button>
+                            <button class="perf-time-btn">3M</button>
+                            <button class="perf-time-btn">6M</button>
+                            <button class="perf-time-btn">YTD</button>
+                            <button class="perf-time-btn active">1J</button>
+                            <button class="perf-time-btn">Seit Start</button>
+                        </div>
+                        <div style="position:relative;height:130px;">
+                            <canvas id="perfHeaderChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stat boxes -->
+                <div class="row g-3">
+                    <div class="col-12 col-lg-3 col-6">
+                        <div class="stat-box">
+                            <div class="card-title mb-3">Depotwert <img src="img/info.svg" alt="" style="width:18px;margin-left:2px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" /></div>
+                            <div class="stat-val">128.450,75 €</div>
+                            <div class="stat-sub green">+20.320,75 € (18,75 %)</div>
+                            <div class="stat-sub">seit Start</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3 col-6">
+                        <div class="stat-box">
+                            <div class="card-title mb-3">Cash – Anteil <img src="img/info.svg" alt="" style="width:18px;margin-left:2px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" /></div>
+                            <div class="stat-val">8,32 %</div>
+                            <div class="stat-sub">10.664,45 €</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3 col-6">
+                        <div class="stat-box">
+                            <div class="card-title mb-3">Anzahl Positionen <img src="img/info.svg" alt="" style="width:18px;" /></div>
+                            <div class="stat-val">18</div>
+                            <div class="stat-sub">diversifiziert</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3 col-6">
+                        <div class="stat-box trefferquote">
+                            <div class="card-title mb-3">Trefferquote <img src="img/info.svg" alt="" style="width:18px;margin-left:2px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" /></div>
+                            <div class="stat-val">72,2 %</div>
+                            <div class="stat-sub">letzte 12 Monate</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Positionen -->
+                <div class="sb-card">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="card-title">Top – Positionen</span>
+                        <img src="img/info.svg" alt="" style="width:18px;margin-left:2px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" />
+                    </div>
+                    <div style="overflow-x:auto;">
+                        <table class="pos-table">
+                            <thead>
+                                <tr>
+                                    <th>Unternehmen</th>
+                                    <th>Gewichtung</th>
+                                    <th>Performance<small>seit Kauf</small></th>
+                                    <th>Aktueller Kurs</th>
+                                    <th>StockBuddy Score<small>/100</small></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- NVIDIA -->
+                                <tr>
+                                    <td>
+                                        <div class="pos-company-cell">
+                                            <div class="pos-logo"><img src="img/nvidia.png" alt="NVIDIA" /></div>
+                                            <div>
+                                                <div class="pos-name">NCIDIA Corporation</div>
+                                                <div>22.05.2024</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><strong class="blue">8,72 %</strong></td>
+                                    <td><span class="pos-pct-pos">+24,31 %</span></td>
+                                    <td>
+                                        <div class="pos-price-main">422,56 €</div>
+                                        <div class="pos-price-chg">+1,12 %</div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2 justify-content-end">
+                                            <div class="score-circle" aria-label="Score: 87 von 100">
+                                                <svg viewBox="0 0 80 80">
+                                                    <circle class="bg-ring" cx="40" cy="40" r="33"></circle>
+                                                    <circle class="value-ring" cx="40" cy="40" r="33"></circle>
+                                                </svg>
+                                                <div class="score-circle-num">89</div>
+                                            </div>
+                                            <div class="pos-score-label" style="color:var(--sb-green-dark);font-weight:700;">Sehr gut</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Microsoft -->
+                                <tr>
+                                    <td>
+                                        <div class="pos-company-cell">
+                                            <div class="pos-logo"><img src="img/microsoft.png" alt="Microsoft" /></div>
+                                            <div>
+                                                <div class="pos-name">Microsoft Corporation</div>
+                                                <div>20.05.2024</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><strong class="blue">8,15 %</strong></td>
+                                    <td><span class="pos-pct-pos">+36,47 %</span></td>
+                                    <td>
+                                        <div class="pos-price-main">112,18 €</div>
+                                        <div class="pos-price-chg">+2,31 %</div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2 justify-content-end">
+                                            <div class="score-circle" aria-label="Score: 87 von 100">
+                                                <svg viewBox="0 0 80 80">
+                                                    <circle class="bg-ring" cx="40" cy="40" r="33"></circle>
+                                                    <circle class="value-ring" cx="40" cy="40" r="33"></circle>
+                                                </svg>
+                                                <div class="score-circle-num">91</div>
+                                            </div>
+                                            <div class="pos-score-label" style="color:var(--sb-green-dark);font-weight:700;">Sehr gut</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- ASML -->
+                                <tr>
+                                    <td>
+                                        <div class="pos-company-cell">
+                                            <div class="pos-logo"><img src="img/asml.png" alt="ASML" /></div>
+                                            <div>
+                                                <div class="pos-name">ASML Holding N.V.</div>
+                                                <div>19.05.2024</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><strong class="blue">7,68 %</strong></td>
+                                    <td><span class="pos-pct-pos">+28,19 %</span></td>
+                                    <td>
+                                        <div class="pos-price-main">146,72 €</div>
+                                        <div class="pos-price-chg">+1,65 %</div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2 justify-content-end">
+                                            <div class="score-circle" aria-label="Score: 87 von 100">
+                                                <svg viewBox="0 0 80 80">
+                                                    <circle class="bg-ring" cx="40" cy="40" r="33"></circle>
+                                                    <circle class="value-ring" cx="40" cy="40" r="33"></circle>
+                                                </svg>
+                                                <div class="score-circle-num">87</div>
+                                            </div>
+                                            <div class="pos-score-label" style="color:var(--sb-green-dark);font-weight:700;">Sehr gut</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- Visa -->
+                                <tr>
+                                    <td>
+                                        <div class="pos-company-cell">
+                                            <div class="pos-logo"><img src="img/visa.png" alt="Visa" /></div>
+                                            <div>
+                                                <div class="pos-name">Visa Inc.</div>
+                                                <div>14.05.2024</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><strong class="blue">6,45 %</strong></td>
+                                    <td><span class="pos-pct-pos">+12,08 %</span></td>
+                                    <td>
+                                        <div class="pos-price-main">31,45 €</div>
+                                        <div class="pos-price-chg">+0,38 %</div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2 justify-content-end">
+                                            <div class="score-circle" aria-label="Score: 87 von 100">
+                                                <svg viewBox="0 0 80 80">
+                                                    <circle class="bg-ring" cx="40" cy="40" r="33"></circle>
+                                                    <circle class="value-ring" cx="40" cy="40" r="33"></circle>
+                                                </svg>
+                                                <div class="score-circle-num">88</div>
+                                            </div>
+                                            <div class="pos-score-label" style="color:#c2a34e;font-weight:700;">Gut</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="wert-row arrow-link" style="margin-top:.75rem;">
+                        <a href="#" class="sb-link">Alle Positionen anzeigen <img src="img/arrow_right_blue.svg" alt="" style="width:22px;"/></a>
+                    </div>
+                </div>
+
+                <!-- Performance im Vergleich -->
+                <div class="chart-card">
+                    <div class="chart-card-head">
+                        <div class="d-flex align-items-center gap-2">
+                            <img src="img/aktie.svg" alt="" style="width:38px;" />
+                            <span class="card-title">Performance im Vergleich</span>
+                            <img src="img/info.svg" alt="" style="width:18px;margin-left:2px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" />
+                        </div>
+                        <div class="time-btns" role="group">
+                            <button class="time-btn">1M</button>
+                            <button class="time-btn">3M</button>
+                            <button class="time-btn">6M</button>
+                            <button class="time-btn active">YTD</button>
+                            <button class="time-btn">1J</button>
+                            <button class="time-btn">Seit Start</button>
+                        </div>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <div class="legend-line" style="background:var(--sb-pink);" aria-hidden="true"></div>
+                            <span class="legend-label">StockBuddy Depot</span>
+                            <span class="legend-pct" style="color:var(--sb-green-dark);">+18,75 %</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-line" style="background:var(--sb-blue);" aria-hidden="true"></div>
+                            <span class="legend-label">MSCI World</span>
+                            <span class="legend-pct" style="color:var(--sb-green-dark);">+6,40 %</span>
+                        </div>
+                    </div>
+                    <div style="position:relative;height:220px;">
+                        <canvas id="perfVergleich" aria-label="Performance Vergleich"></canvas>
+                    </div>
+                    <p class="chart-disclaimer mb-0">Hinweis: Vergangene Wertentwicklungen sind keine Garantie für zukünftige Ergebnisse</p>
+                </div>
+
+            </div>
+            <!-- /md-main -->
+
+            <!-- Side -->
+            <div class="md-side">
+
+                <!-- Strategie -->
+                <div class="sb-card">
+                    <div class="align-items-center gap-2 mb-3">
+                        <span class="card-title mb-0">Strategie des Depots</span>
+                        <img src="img/info.svg" alt="" style="width:18px;margin-left:2px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" />
+                    </div>
+                    <p>
+                        Quantitativ, KI-gestützt, regelbasiert.
+                        <br> Fokus auf Qualität, Wachstum und Bewertung – für langfristige, überdurchschnittliche Renditen
+                    </p>
+                </div>
+
+                <!-- Risikoklasse -->
+                <div class="sb-card">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="card-title mb-0">Risikoklasse</span>
+                        <img src="img/info.svg" alt="" style="width:18px;margin-left:2px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" />
+                    </div>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="risikoklasse-badge">5 / 7</div>
+                        <span class="risikoklasse-label">Wachstumsorientiert</span>
+                    </div>
+                </div>
+
+                <!-- Branchenverteilung -->
+                <div class="sb-card">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <span class="card-title mb-0">Branchenverteilung</span>
+                        <img src="img/info.svg" alt="" style="width:18px;margin-left:2px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" />
+                    </div>
+                    <div class="branche-row">
+                        <span class="branche-lbl">Technologie</span>
+                        <div class="branche-bar-wrap">
+                            <div class="branche-bar" style="width:42.1%"></div>
+                        </div>
+                        <span class="branche-pct">42,1 %</span>
+                    </div>
+                    <div class="branche-row">
+                        <span class="branche-lbl">Industrie</span>
+                        <div class="branche-bar-wrap">
+                            <div class="branche-bar" style="width:18.3%"></div>
+                        </div>
+                        <span class="branche-pct">18,3 %</span>
+                    </div>
+                    <div class="branche-row">
+                        <span class="branche-lbl">Finanzen</span>
+                        <div class="branche-bar-wrap">
+                            <div class="branche-bar" style="width:14.7%"></div>
+                        </div>
+                        <span class="branche-pct">14,7 %</span>
+                    </div>
+                    <div class="branche-row">
+                        <span class="branche-lbl">Energie</span>
+                        <div class="branche-bar-wrap">
+                            <div class="branche-bar" style="width:9.8%"></div>
+                        </div>
+                        <span class="branche-pct">9,8 %</span>
+                    </div>
+                    <div class="branche-row">
+                        <span class="branche-lbl">Konsumgüter</span>
+                        <div class="branche-bar-wrap">
+                            <div class="branche-bar" style="width:7.6%"></div>
+                        </div>
+                        <span class="branche-pct">7,6 %</span>
+                    </div>
+                    <div class="branche-row">
+                        <span class="branche-lbl">Gesundheit</span>
+                        <div class="branche-bar-wrap">
+                            <div class="branche-bar" style="width:4.2%"></div>
+                        </div>
+                        <span class="branche-pct">4,2 %</span>
+                    </div>
+                    <div class="branche-row">
+                        <span class="branche-lbl">Sonstige</span>
+                        <div class="branche-bar-wrap">
+                            <div class="branche-bar" style="width:3.3%"></div>
+                        </div>
+                        <span class="branche-pct">3,3 %</span>
+                    </div>
+                    <div class="wert-row arrow-link" style="margin-top:.75rem;padding-top:.6rem;">
+                        <a href="#" class="sb-link">Alle anzeigen <img src="img/arrow_right_blue.svg" alt="" style="width:20px;"/></a>
+                    </div>
+                </div>
+
+                <!-- Letzte Umschichtung -->
+                <div class="sb-card letzte-box-right">
+                    <div class="d-flex align-items-center gap-2 mb-0">
+                        <span class="card-title mb-0">Letzte Umschichtung</span>
+                        <img src="img/info.svg" alt="" style="width:18px;margin-left:2px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" />
+                    </div>
+                    <div class="umschicht-date">15. Mai 2025</div>
+
+                    <div class="umschicht-tag tag-green-dot">
+                        <img src="img/hinzugefuegt.svg" alt="" style="width:16px;" /> hinzugefügt
+                    </div>
+                    <div class="umschicht-name">ASML Holding N.V.</div>
+                    <div class="umschicht-sub">Thermo Fisher Scientific</div>
+
+                    <div class="umschicht-tag tag-red-dot">
+                        <img src="img/reduziert.svg" alt="" style="width:16px;" /> reduziert
+                    </div>
+                    <div class="umschicht-name">LVMH Moet Hennessy</div>
+                    <div class="umschicht-sub" style="margin-bottom:.85rem;">Unilever PLC</div>
+
+                    <div class="wert-row arrow-link" style="margin-top:.5rem;padding-top:.5rem;">
+                        <a href="#" class="sb-link">Zur Historie <img src="img/arrow_right_blue.svg" alt="" style="width:20px;"/></a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /md-side -->
+        </div>
+        <!-- /md-layout -->
+
+    </main>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/chart.umd.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        /* Performance header sparkline */
+        (function(){
+          const ctx = document.getElementById('perfHeaderChart');
+          if (!ctx) return;
+          const labels = ['Jan 24','Mär 24','Mai 24','Jul 24','Sep 24','Nov 24','Jan 25'];
+          new Chart(ctx, {
+            type:'line',
+            data:{
+              labels,
+              datasets:[{
+                data:[-2,3,8,5,12,18,22],
+                borderColor:'#d14894', backgroundColor:'rgba(209,72,148,.1)',
+                borderWidth:2, fill:true, tension:.45, pointRadius:0
+              }]
+            },
+            options:{
+              responsive:true, maintainAspectRatio:false,
+              plugins:{legend:{display:false}},
+              scales:{
+                x:{ grid:{display:false}, ticks:{font:{size:10,family:'Barlow'},color:'#999'} },
+                y:{
+                  grid:{color:'#f0f0f0'},
+                  ticks:{
+                    callback: v => v+'%',
+                    font:{size:10,family:'Barlow'}, color:'#999'
+                  }
+                }
+              }
+            }
+          });
+        })();
+    
+        /* Performance im Vergleich */
+        (function(){
+          const ctx = document.getElementById('perfVergleich');
+          if (!ctx) return;
+          const labels=['Jan 24','Feb 24','Mär 24','Apr 24','Mai 24','Jun 24'];
+          new Chart(ctx, {
+            type:'line',
+            data:{
+              labels,
+              datasets:[
+                {
+                  label:'StockBuddy Depot',
+                  data:[0,3,7,5,14,19],
+                  borderColor:'#d14894', backgroundColor:'rgba(209,72,148,.08)',
+                  borderWidth:2, fill:true, tension:.45, pointRadius:0
+                },
+                {
+                  label:'MSCI World',
+                  data:[0,1,3,2,5,6],
+                  borderColor:'#1d3a8e', backgroundColor:'transparent',
+                  borderWidth:2, fill:false, tension:.45, pointRadius:0
+                }
+              ]
+            },
+            options:{
+              responsive:true, maintainAspectRatio:false,
+              plugins:{
+                legend:{display:false},
+                tooltip:{ mode:'index', intersect:false }
+              },
+              scales:{
+                x:{ grid:{display:false}, ticks:{font:{size:10,family:'Barlow'},color:'#999'} },
+                y:{
+                  grid:{color:'#f0f0f0'},
+                  ticks:{
+                    callback: v => v+'%',
+                    font:{size:10,family:'Barlow'}, color:'#999'
+                  }
+                }
+              }
+            }
+          });
+        })();
+    </script>
+</body>
+
+</html>
