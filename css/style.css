@@ -2781,6 +2781,12 @@ a.btn-vgl-detail i.bi.bi-arrow-right {
   color: var(--sb-blue);
 }
 
+/* Charts live inside a horizontal scroll container so they can
+   keep a readable width on small screens */
+.chart-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 @media (max-width: 767.98px) {
   .perf-card {
     gap: 1rem;
@@ -2790,6 +2796,13 @@ a.btn-vgl-detail i.bi.bi-arrow-right {
   }
   .perf-pct {
     font-size: 2.2rem;
+  }
+  /* charts + tables scroll inside their cards instead of stretching the page */
+  .chart-scroll > div {
+    min-width: 480px;
+  }
+  .pos-table {
+    min-width: 640px;
   }
 }
 @media (max-width: 575.98px) {
@@ -2821,6 +2834,11 @@ a.btn-vgl-detail i.bi.bi-arrow-right {
   }
     .md-layout {
     flex-direction: column;
+    align-items: stretch;
+  }
+  .md-main {
+    width: 100%;
+    max-width: 100%;
   }
   .md-side {
     width: 100%;
