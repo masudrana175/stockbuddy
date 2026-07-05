@@ -261,9 +261,7 @@
                                                 Score-Entwicklung
                                                 <img src="img/info.svg" alt="" style="width:18px;margin-left:2px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" />
                                             </div>
-                                            <div style="position:relative;height:170px;">
-                                                <canvas id="scoreChart" aria-label="Score-Entwicklung Oracle"></canvas>
-                                            </div>
+                                            <div id="scoreChart" style="width:100%;height:170px;"></div>
                                             <!-- Action buttons -->
                                             <div class="buddy-action-btns">
                                                 <a href="#" class="btn-compare">
@@ -485,66 +483,44 @@
        SCRIPTS
        ══════════════════════════════════════════ -->
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/chart.umd.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
     <script src="js/main.js"></script>
 
     <script>
-        /* Score-Entwicklung Chart */
-        (function () {
-          const ctx = document.getElementById('scoreChart');
-          if (!ctx) return;
-    
-          const labels = ['Dez 24','Jan 25','Feb 25','Mär 25','Apr 25','Mai 25'];
-          const data   = [52, 58, 62, 68, 74, 87];
-    
-          new Chart(ctx, {
-            type: 'line',
-            data: {
-              labels,
-              datasets: [{
-                data,
-                borderColor    : '#d14894',
-                backgroundColor: 'rgba(209,72,148,0.10)',
-                borderWidth    : 2,
-                fill           : true,
-                tension        : 0.45,
-                pointRadius    : 0,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: '#d14894',
-              }]
-            },
-            options: {
-              responsive   : true,
-              maintainAspectRatio: false,
-              plugins: {
-                legend: { display: false },
-                tooltip: {
-                  mode       : 'index',
-                  intersect  : false,
-                  callbacks  : {
-                    label: ctx => ' Score: ' + ctx.parsed.y
-                  }
-                }
-              },
-              scales: {
-                x: {
-                  grid : { display: false },
-                  ticks: { font: { size: 10, family: 'Barlow' }, color: '#999' }
-                },
-                y: {
-                  min : 0,
-                  max : 100,
-                  grid: { color: '#f0f0f0' },
-                  ticks: {
-                    stepSize: 25,
-                    font: { size: 10, family: 'Barlow' },
-                    color: '#999'
-                  }
-                }
-              }
-            }
-          });
-        })();
+      const PL = { font: { family: 'Barlow, sans-serif' }, paper_bgcolor: 'transparent', plot_bgcolor: 'transparent' };
+      const noBar = { displayModeBar: false, responsive: true };
+
+      /* Score-Entwicklung Chart */
+      Plotly.newPlot('scoreChart', [{
+        x: ['Dez 24','Jan 25','Feb 25','Mär 25','Apr 25','Mai 25'],
+        y: [52, 58, 62, 68, 74, 87],
+        type: 'scatter', mode: 'lines+markers',
+        line: { color: '#d14894', width: 2, shape: 'spline', smoothing: 1.2 },
+        marker: { color: '#d14894', size: 6, line: { color: '#fff', width: 2 } },
+        fill: 'tozeroy', fillcolor: 'rgba(209,72,148,0.1)'
+      }], {
+        ...PL, margin: { t:4, r:8, b:28, l:32 },
+        xaxis: { showgrid: false, tickfont: { family:'Barlow', size:10, color:'#999' } },
+        yaxis: { range:[0,100], gridcolor:'#f0f0f0', tickfont: { family:'Barlow', size:10, color:'#999' }, dtick: 25 }
+      }, noBar);
+
+      /* Dynamic score circles — r=33, circumference ≈ 207.35 */
+      (function () {
+        var C = 2 * Math.PI * 33;
+        document.querySelectorAll('.score-circle').forEach(function (el) {
+          var numEl = el.querySelector('.score-circle-num');
+          if (!numEl) return;
+          var score = parseInt(numEl.textContent, 10);
+          if (isNaN(score)) return;
+          var ring = el.querySelector('.value-ring');
+          if (!ring) return;
+          var color = score >= 75 ? '#22b36d' : score >= 50 ? '#f59e0b' : '#e53e3e';
+          ring.style.strokeDasharray = C;
+          ring.style.strokeDashoffset = C * (1 - score / 100);
+          ring.style.stroke = color;
+          numEl.style.color = color;
+        });
+      })();
     </script>
 
   <script>

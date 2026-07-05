@@ -1,6 +1,6 @@
 /* ============================================================
    StockBuddy – main.js
-   Dependencies : Chart.js (loaded before this file)
+   Dependencies : Plotly.js (loaded before this file)
    ============================================================ */
 
 'use strict';
@@ -40,166 +40,59 @@ function makeTrendData(points, start, end, seed) {
    SPARKLINE CHARTS (top performance cards)
    ============================================================ */
 
-/**
- * Draw a mini sparkline on a canvas element.
- * Uses fixed pixel dimensions (130 × 68) to avoid the offsetWidth=0
- * bug that occurs when the canvas is not yet laid out.
- *
- * @param {string}   canvasId  Element id
- * @param {string}   color     Hex / CSS color for line + gradient fill
- * @param {number[]} data      Values array
- */
-function drawSparkline(canvasId, color, data) {
-  var canvas = document.getElementById(canvasId);
-  if (!canvas) return;
-
-  /* Destroy any previous Chart instance on this canvas */
-  var existing = Chart.getChart(canvas);
-  if (existing) existing.destroy();
-
-  /* Hard-code canvas pixel size – never rely on offsetWidth during DOMContentLoaded */
-  var W = 170, H = 95;
-  canvas.width  = W;
-  canvas.height = H;
-
-  var ctx = canvas.getContext('2d');
-
-  /* Build gradient fill once the context exists */
-  var grad = ctx.createLinearGradient(0, 0, 0, H);
-  grad.addColorStop(0, color + '30');  /* ~19 % opacity at top */
-  grad.addColorStop(1, color + '00');  /* fully transparent at bottom */
-
-  new Chart(canvas, {
-    type: 'line',
-    data: {
-      labels  : data.map(function (_, i) { return i; }),
-      datasets: [{
-        data           : data,
-        borderColor    : color,
-        borderWidth    : 2.5,
-        pointRadius    : 0,
-        tension        : 0.42,
-        fill           : true,
-        backgroundColor: grad
-      }]
-    },
-    options: {
-      responsive    : false,
-      animation     : false,
-      layout        : { padding: { top: 4, bottom: 2 } },
-      plugins       : { legend: { display: false }, tooltip: { enabled: false } },
-      scales        : { x: { display: false }, y: { display: false } }
-    }
-  });
+function drawSparkline(divId, color, data) {
+  if (!document.getElementById(divId)) return;
+  Plotly.newPlot(divId, [{
+    y: data,
+    type: 'scatter', mode: 'lines',
+    line: { color: color, width: 2.5, shape: 'spline', smoothing: 1.2 },
+    fill: 'tozeroy', fillcolor: color + '18'
+  }], {
+    font: { family: 'Barlow, sans-serif' },
+    paper_bgcolor: 'transparent', plot_bgcolor: 'transparent',
+    margin: { t: 0, r: 0, b: 0, l: 0 },
+    xaxis: { visible: false }, yaxis: { visible: false }
+  }, { displayModeBar: false, responsive: true });
 }
 
 /* ============================================================
    PERFORMANCE COMPARISON CHART (bottom section)
    ============================================================ */
 
-/**
- * Build the x-axis label array (month label every 10 points, blank in between).
- * @param {string[]} monthNames
- * @param {number}   pointsPerMonth
- * @returns {string[]}
- */
-function buildLabels(monthNames, pointsPerMonth) {
-  const labels = [];
-  monthNames.forEach(function (m, idx) {
-    labels.push(m);
-    if (idx < monthNames.length - 1) {
-      for (let j = 1; j < pointsPerMonth; j++) {
-        labels.push('');
-      }
-    }
-  });
-  return labels;
-}
-
 function initPerfChart() {
-  const canvas = document.getElementById('perfChart');
-  if (!canvas) return;
+  if (!document.getElementById('perfChart')) return;
 
-  const monthNames     = ["Jan '24", "Feb '24", "Mär '24", "Apr '24", "Mai '24"];
-  const pointsPerMonth = 10;
-  const totalPoints    = (monthNames.length - 1) * pointsPerMonth + 1;
+  var months        = ["Jan '24", "Feb '24", "Mär '24", "Apr '24", "Mai '24"];
+  var ppm           = 10; // points per month
+  var total         = (months.length - 1) * ppm + 1; // 41
+  var pinkData      = makeTrendData(total, -3,    18.75, 7);
+  var blueData      = makeTrendData(total, -1,     6.40, 3);
+  var tickvals      = months.map(function (_, i) { return i * ppm; });
+  var x             = Array.from({ length: total }, function (_, i) { return i; });
 
-  const labels   = buildLabels(monthNames, pointsPerMonth);
-  const pinkData = makeTrendData(totalPoints, -3,    18.75, 7);
-  const blueData = makeTrendData(totalPoints, -1,     6.40, 3);
-
-  new Chart(canvas.getContext('2d'), {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [
-        {
-          label          : 'StockBuddy Musterdepot',
-          data           : pinkData,
-          borderColor    : '#D4387A',
-          borderWidth    : 2,
-          pointRadius    : 0,
-          pointHoverRadius: 4,
-          pointHoverBackgroundColor: '#D4387A',
-          tension        : 0.45,
-          fill           : false
-        },
-        {
-          label          : 'Mein Depot',
-          data           : blueData,
-          borderColor    : '#1B4FBF',
-          borderWidth    : 2,
-          pointRadius    : 0,
-          pointHoverRadius: 4,
-          pointHoverBackgroundColor: '#1B4FBF',
-          tension        : 0.45,
-          fill           : false
-        }
-      ]
+  Plotly.newPlot('perfChart', [
+    { x: x, y: pinkData, name: 'StockBuddy Musterdepot',
+      type: 'scatter', mode: 'lines',
+      line: { color: '#D4387A', width: 2, shape: 'spline', smoothing: 1.2 } },
+    { x: x, y: blueData, name: 'Mein Depot',
+      type: 'scatter', mode: 'lines',
+      line: { color: '#1B4FBF', width: 2, shape: 'spline', smoothing: 1.2 } }
+  ], {
+    font: { family: 'Barlow, sans-serif' },
+    paper_bgcolor: 'transparent', plot_bgcolor: 'transparent',
+    margin: { t: 4, r: 8, b: 28, l: 36 },
+    xaxis: {
+      showgrid: false,
+      tickvals: tickvals, ticktext: months,
+      tickfont: { family: 'Barlow', size: 11, color: '#9ba3af' }
     },
-    options: {
-      responsive           : true,
-      maintainAspectRatio  : false,
-      interaction          : { mode: 'index', intersect: false },
-      plugins: {
-        legend : { display: false },
-        tooltip: {
-          backgroundColor: '#fff',
-          titleColor     : '#1a1a2e',
-          bodyColor      : '#6b7280',
-          borderColor    : '#e5e7eb',
-          borderWidth    : 1,
-          padding        : 10,
-          callbacks: {
-            label: function (ctx) {
-              return ctx.dataset.label + ': ' + ctx.raw.toFixed(2) + ' %';
-            }
-          }
-        }
-      },
-      scales: {
-        x: {
-          grid  : { display: false },
-          border: { display: false },
-          ticks : {
-            color      : '#9ba3af',
-            font       : { size: 11 },
-            maxRotation: 0,
-            callback   : function (val, idx) { return labels[idx] || ''; }
-          }
-        },
-        y: {
-          grid  : { color: 'rgba(0,0,0,0.05)' },
-          border: { display: false, dash: [4, 4] },
-          ticks : {
-            color   : '#9ba3af',
-            font    : { size: 11 },
-            callback: function (v) { return v.toFixed(0) + ' %'; }
-          }
-        }
-      }
-    }
-  });
+    yaxis: {
+      gridcolor: 'rgba(0,0,0,0.05)',
+      tickfont: { family: 'Barlow', size: 11, color: '#9ba3af' },
+      ticksuffix: ' %'
+    },
+    hovermode: 'x unified', showlegend: false
+  }, { displayModeBar: false, responsive: true });
 }
 
 /* ============================================================
@@ -343,7 +236,7 @@ function initSidebarToggle() {
 }
 
 /* ============================================================
-   INIT – run after DOM + Chart.js are ready
+   INIT – run after DOM + Plotly are ready
    ============================================================ */
 document.addEventListener('DOMContentLoaded', function () {
   /* Sparklines */
