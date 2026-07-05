@@ -176,7 +176,7 @@
                 <div class="trend-sub">Gesamtrendite</div>
               </div>
               <div class="sparkwrap" style="width:50%;" aria-hidden="true">
-                <canvas id="spark1"></canvas>
+                <div id="spark1" style="width:100%;height:68px;"></div>
               </div>
             </div>
             <div class="wert-row">
@@ -204,7 +204,7 @@
                 <div class="trend-sub">Gesamtrendite</div>
               </div>
               <div class="sparkwrap" style="width:50%;" aria-hidden="true">
-                <canvas id="spark2"></canvas>
+                <div id="spark2" style="width:100%;height:68px;"></div>
               </div>
             </div>
             <div class="wert-row">
@@ -495,9 +495,7 @@
             <span class="legend-pct" style="color:var(--sb-green-dark);">+8,40 %</span>
           </div>
         </div>
-        <div style="position:relative;height:220px;">
-          <canvas id="perfChart" aria-label="Performance-Vergleichsdiagramm"></canvas>
-        </div>
+        <div id="perfChart" style="width:100%;height:220px;"></div>
         <p class="chart-disclaimer mb-0"> Hinweis: Vergangene Wertentwicklungen sind keine Garantie für zukünftige Ergebnisse </p>
       </div>
       <!-- /chart card -->
@@ -507,9 +505,7 @@
        ══════════════════════════════════════════ -->
     <!-- Bootstrap JS (local) -->
     <script src="js/bootstrap.bundle.min.js"></script>
-    <!-- Chart.js (local) -->
-    <script src="js/chart.umd.min.js"></script>
-    <!-- Custom JS -->
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
     <script src="js/main.js"></script>
   </body>
 </html>
