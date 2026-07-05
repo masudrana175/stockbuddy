@@ -99,11 +99,14 @@ function initPerfChart() {
    TIME-PERIOD SELECTOR BUTTONS
    ============================================================ */
 function initTimeButtons() {
-  var buttons = document.querySelectorAll('.time-btn');
-  buttons.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      buttons.forEach(function (b) { b.classList.remove('active'); });
-      this.classList.add('active');
+  /* Each button group toggles independently (.time-btns and .perf-time-btns) */
+  document.querySelectorAll('.time-btns, .perf-time-btns').forEach(function (group) {
+    var buttons = group.querySelectorAll('.time-btn, .perf-time-btn');
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        buttons.forEach(function (b) { b.classList.remove('active'); });
+        this.classList.add('active');
+      });
     });
   });
 }

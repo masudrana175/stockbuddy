@@ -471,18 +471,37 @@
       const PL = { font: { family: 'Barlow, sans-serif' }, paper_bgcolor: 'transparent', plot_bgcolor: 'transparent' };
       const noBar = { displayModeBar: false, responsive: true };
 
-      /* Performance header sparkline */
-      Plotly.newPlot('perfHeaderChart', [{
-        x: ['Jan 24','Mär 24','Mai 24','Jul 24','Sep 24','Nov 24','Jan 25'],
-        y: [-2,3,8,5,12,18,22],
-        type: 'scatter', mode: 'lines',
-        line: { color: '#d14894', width: 2, shape: 'spline', smoothing: 1.2 },
-        fill: 'tozeroy', fillcolor: 'rgba(209,72,148,0.1)'
-      }], {
-        ...PL, margin: { t:4, r:8, b:28, l:36 },
-        xaxis: { showgrid: false, tickfont: { family:'Barlow', size:10, color:'#999' } },
-        yaxis: { gridcolor: '#f0f0f0', tickfont: { family:'Barlow', size:10, color:'#999' }, ticksuffix: '%' }
-      }, noBar);
+      /* Performance header chart — data per time range */
+      const PERF_RANGES = {
+        '1M':         { x: ['W1','W2','W3','W4'],                                          y: [20.4, 21.1, 20.8, 22] },
+        '3M':         { x: ['Nov 24','Dez 24','Jan 25'],                                   y: [18, 19.5, 22] },
+        '6M':         { x: ['Aug 24','Sep 24','Okt 24','Nov 24','Dez 24','Jan 25'],        y: [10, 12, 15, 18, 19.5, 22] },
+        'YTD':        { x: ['01. Jan','08. Jan','15. Jan','22. Jan','29. Jan'],            y: [19.5, 20.2, 21, 20.6, 22] },
+        '1J':         { x: ['Jan 24','Mär 24','Mai 24','Jul 24','Sep 24','Nov 24','Jan 25'], y: [-2, 3, 8, 5, 12, 18, 22] },
+        'Seit Start': { x: ['Jan 24','Mär 24','Mai 24','Jul 24','Sep 24','Nov 24','Jan 25'], y: [-2, 3, 8, 5, 12, 18, 22] }
+      };
+
+      function drawPerfHeader(range) {
+        const d = PERF_RANGES[range] || PERF_RANGES['1J'];
+        Plotly.react('perfHeaderChart', [{
+          x: d.x, y: d.y,
+          type: 'scatter', mode: 'lines',
+          line: { color: '#d14894', width: 2, shape: 'spline', smoothing: 1.2 },
+          fill: 'tozeroy', fillcolor: 'rgba(209,72,148,0.1)'
+        }], {
+          ...PL, margin: { t:4, r:8, b:28, l:36 },
+          xaxis: { showgrid: false, tickfont: { family:'Barlow', size:10, color:'#999' } },
+          yaxis: { gridcolor: '#f0f0f0', tickfont: { family:'Barlow', size:10, color:'#999' }, ticksuffix: '%' }
+        }, noBar);
+      }
+      drawPerfHeader('1J');
+
+      /* Time-range buttons redraw the chart */
+      document.querySelectorAll('.perf-time-btns .perf-time-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          drawPerfHeader(this.textContent.trim());
+        });
+      });
 
       /* Performance im Vergleich */
       Plotly.newPlot('perfVergleich', [
