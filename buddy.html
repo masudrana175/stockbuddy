@@ -14,6 +14,8 @@
     />
     <!-- Bootstrap CSS (local) -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="css/dataTables.min.css">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Custom Styles -->
@@ -220,6 +222,115 @@
 
                                     </div>
                                     <!-- /grid -->
+
+                                    <!-- Detaillierte Score-Auswertung -->
+                                    <div class="score-auswertung-section">
+                                        <div class="auswertung-header">
+                                            <div class="card-title mb-0">Detaillierte Score-Auswertung</div>
+                                            <button class="btn-auswertung-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#detailAuswertung" aria-expanded="true" aria-controls="detailAuswertung">
+                                                <span class="toggle-close">Auswertung schließen <i class="bi bi-x-lg"></i></span>
+                                                <span class="toggle-open">Auswertung anzeigen <i class="bi bi-plus-lg"></i></span>
+                                            </button>
+                                        </div>
+
+                                        <div class="collapse show" id="detailAuswertung">
+
+                                            <!-- Anlageziele aus deinem Profil -->
+                                            <div class="auswertung-block">
+                                                <div class="auswertung-block-title">Anlageziele aus deinem Profil</div>
+                                                <div class="auswertung-block-sub">Die folgenden Anlageziele wurden in deinem Profil gefunden.</div>
+                                                <div class="table-scroll">
+                                                    <table class="sbs-table ziele-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>Geringstes Risiko</th>
+                                                                <th>Beste Dividende</th>
+                                                                <th>Beste Fundamentaldaten</th>
+                                                                <th>Beste Analystenbewertung</th>
+                                                                <th>Beste Nachrichten</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="sbs-row-label">Weight</td>
+                                                                <td>100%</td>
+                                                                <td>100%</td>
+                                                                <td>75%</td>
+                                                                <td>65%</td>
+                                                                <td>50%</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <!-- Scoring Tabelle -->
+                                            <div class="auswertung-block">
+                                                <div class="auswertung-block-title">Scoring Tabelle - SB Scores für jede Aktie im Fokus</div>
+                                                <div class="auswertung-block-sub">Stock Buddy Scores (SBS) bewerten die Kennzahlen einer Aktie für jede Anlageabsicht. Ist der SBS &gt; 0, sind die Kennzahlen einer Aktie besser als der Durchschnitt der Vergleichsaktien. 100 ist der beste und -100 der schlechteste SBS Wert.</div>
+                                                <div class="table-scroll">
+                                                    <table class="sbs-table" id="sbsTable">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Unternehmen/Aktie</th>
+                                                                <th>Kumulativ</th>
+                                                                <th>Geringstes Risiko</th>
+                                                                <th>Beste Dividende</th>
+                                                                <th>Beste Fundamentaldaten</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><div class="sbs-company">Advantest Corp.</div><div class="sbs-isin">(JP3122400009)</div></td>
+                                                                <td>46,73 SBS</td>
+                                                                <td class="sbs-hl">89 SBS</td>
+                                                                <td>-11 SBS</td>
+                                                                <td>77 SBS</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><div class="sbs-company">Applied Materials Inc</div><div class="sbs-isin">(US0382221051)</div></td>
+                                                                <td>37,81 SBS</td>
+                                                                <td>56 SBS</td>
+                                                                <td>0 SBS</td>
+                                                                <td class="sbs-hl">69 SBS</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><div class="sbs-company">Automatic Data Processing Inc</div><div class="sbs-isin">(US0530151036)</div></td>
+                                                                <td>43,40 SBS</td>
+                                                                <td>67 SBS</td>
+                                                                <td>22 SBS</td>
+                                                                <td>38 SBS</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><div class="sbs-company">BE Semiconductor Industries N.V.</div><div class="sbs-isin">(NL0012866412)</div></td>
+                                                                <td>38,45 SBS</td>
+                                                                <td>56 SBS</td>
+                                                                <td>-11 SBS</td>
+                                                                <td>85 SBS</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><div class="sbs-company">BHP Group Ltd.</div><div class="sbs-isin">(AU000000BHP4)</div></td>
+                                                                <td>37,02 SBS</td>
+                                                                <td>67 SBS</td>
+                                                                <td>11 SBS</td>
+                                                                <td>54 SBS</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <!-- Ranking Diagramm -->
+                                            <div class="auswertung-block">
+                                                <div class="auswertung-block-title">Ranking Diagramm</div>
+                                                <div class="chart-scroll"><div id="rankingChart" style="width:100%;height:360px;"></div></div>
+                                                <div class="auswertung-block-sub mt-2">StockBuddy ermittelt die besten 3 Aktien aus der Scoring Tabelle unter Berücksichtigung deiner Anlageziele. Die im Fokus stehenden Aktien sind in einigen Kategorien stark und in anderen schwach. Es kommt auf deine Anlageziele an, welche Aktie für dich am besten geeignet ist. StockBuddy gewichtet die Scores mit deinen Anlagezielen.</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- /Detaillierte Score-Auswertung -->
 
                                     <!-- Bottom grid: Erklärung + Entwicklung -->
                                     <div class="buddy-analysis-grid">
@@ -467,6 +578,27 @@
                     </div>
                 </div>
 
+                <!-- Stockbuddy Boost -->
+                <div class="sb-card rp-card">
+                    <div class="card-title mb-3">
+                        <img src="img/letzte_analysen.svg" alt="" style="width:24px;margin-right:6px;" /> Stockbuddy Boost
+                    </div>
+                    <div class="boost-headline green">Bestes Ranking diese Woche</div>
+                    <div class="boost-item"><i class="bi bi-check-lg boost-check"></i> Industria de Diseño Textil, S.A.</div>
+                    <div class="boost-item"><i class="bi bi-check-lg boost-check"></i> Sanofi S.A.</div>
+                    <div class="boost-item"><i class="bi bi-check-lg boost-check"></i> Medtronic PLC</div>
+                </div>
+
+                <!-- Stockbuddy Protect -->
+                <div class="sb-card rp-card">
+                    <div class="card-title mb-3">
+                        <img src="img/letzte_analysen.svg" alt="" style="width:24px;margin-right:6px;" /> Stockbuddy Protect
+                    </div>
+                    <div class="boost-headline red">Bad Performer im Portfolio</div>
+                    <div class="boost-item"><i class="bi bi-check-lg protect-check"></i> Bayerische Motoren Werke Aktiengesellschaft</div>
+                    <div class="boost-item"><i class="bi bi-check-lg protect-check"></i> Volkswagen AG Stammaktien</div>
+                </div>
+
                 <!-- Disclaimer card -->
                 <div class="rp-disclaimer-card">
                     <div class="rp-disclaimer-head card-title mb-3">
@@ -589,6 +721,8 @@
        ══════════════════════════════════════════ -->
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/plotly.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/dataTables.min.js"></script>
     <script src="js/main.js"></script>
 
     <script>
@@ -608,6 +742,56 @@
         xaxis: { showgrid: false, tickfont: { family:'Barlow', size:10, color:'#999' } },
         yaxis: { range:[0,100], gridcolor:'#f0f0f0', tickfont: { family:'Barlow', size:10, color:'#999' }, dtick: 25 }
       }, noBar);
+
+      /* Ranking Diagramm — grouped bars, SBS per category */
+      (function () {
+        const cats = ['Geringstes Risiko','Beste Dividende','Beste Fundamentaldaten','Beste Analystenbewertung','Beste Nachrichten','Höchstes Wachstum','Bester Trend','Bester Preis'];
+        const bar = (name, color, y) => ({
+          x: cats, y, name, type: 'bar',
+          marker: { color },
+          text: y.map(String), textposition: 'outside',
+          textfont: { family: 'Barlow', size: 10, color: '#666' }
+        });
+        Plotly.newPlot('rankingChart', [
+          bar('Medtronic PLC',      '#1d3a8e', [56, 33, 68, 48, 45, 67, 100, -100]),
+          bar('KSB SE & Co. KGaA',  '#f3cfe2', [56, 33, 54, 48, 45, 100, -71,  -71]),
+          bar('KSB SE & Co. KGaA',  '#d14894', [56, 33, 54, 48, 45, 100, -71,  -71])
+        ], {
+          ...PL, barmode: 'group',
+          margin: { t: 10, r: 8, b: 90, l: 40 },
+          xaxis: { tickangle: -45, tickfont: { family: 'Barlow', size: 10, color: '#666' } },
+          yaxis: { title: { text: 'SBS', font: { family: 'Barlow', size: 11, color: '#999' } }, range: [-115, 115], gridcolor: '#f0f0f0', zerolinecolor: '#ccc', tickfont: { family: 'Barlow', size: 10, color: '#999' } },
+          legend: { orientation: 'h', x: 1, xanchor: 'right', y: 1.12, font: { family: 'Barlow', size: 11 } },
+          showlegend: true
+        }, noBar);
+      })();
+
+      /* Scoring Tabelle — sortable via DataTables */
+      new DataTable('#sbsTable', {
+        paging: false,
+        info: false,
+        searching: false,
+        ordering: true,
+        order: [],
+        language: { zeroRecords: 'Keine Einträge gefunden' },
+        columnDefs: [
+          /* numeric sort on the SBS columns: strip markup + "SBS", parse the number */
+          { targets: [1, 2, 3, 4], render: function (data, type) {
+              return type === 'sort' || type === 'type'
+                ? (parseFloat(String(data).replace(/<[^>]*>/g, '').replace(',', '.')) || 0)
+                : data;
+            } }
+        ]
+      });
+
+      /* Detaillierte Auswertung toggle: swap button label with collapse state */
+      (function () {
+        const target = document.getElementById('detailAuswertung');
+        const btn = document.querySelector('.btn-auswertung-toggle');
+        if (!target || !btn) return;
+        target.addEventListener('show.bs.collapse', () => btn.classList.remove('collapsed-state'));
+        target.addEventListener('hide.bs.collapse', () => btn.classList.add('collapsed-state'));
+      })();
 
       /* Dynamic score circles — set data-score="0..100" on .score-circle.
          The ring fills to that percentage: 87 → 87 % filled.
