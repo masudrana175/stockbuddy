@@ -1218,8 +1218,8 @@ img {
   vertical-align: middle;
   white-space: nowrap;
 }
-.sbs-table .sbs-company { font-weight: 700; color: var(--sb-text-h); }
-.sbs-table .sbs-isin { font-size: 0.78rem; color: var(--sb-text-muted); }
+.sbs-table .sbs-company { font-weight: 700; color: var(--sb-text-h);    font-size: 1rem; }
+.sbs-table .sbs-isin { font-size: 0.88rem; color: var(--sb-text-h); }
 .sbs-table .sbs-row-label { font-weight: 700; color: var(--sb-text-h); }
 .sbs-table td.sbs-hl { background: #f8d7e8; }
 /* DataTables header on sbs-table: title left, sort arrow right */
@@ -1228,6 +1228,10 @@ table.dataTable.sbs-table thead th.dt-type-numeric {
   text-align: left;
   position: relative;
   padding-right: 26px;
+}
+table.sbs-table tbody {
+    font-size: 1rem;
+	color: var(--sb-text-h);
 }
 table.dataTable.sbs-table thead > tr > th span.dt-column-order {
   position: absolute !important;
@@ -1249,7 +1253,7 @@ table.dataTable.sbs-table thead > tr > th.dt-orderable-none span.dt-column-order
 }
 .boost-headline {
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 1rem;
   margin-bottom: 0.6rem;
   /* align with the card title text (icon 24px + 6px gap) */
   padding-left: 30px;
@@ -1257,13 +1261,19 @@ table.dataTable.sbs-table thead > tr > th.dt-orderable-none span.dt-column-order
 .boost-headline.green { color: var(--sb-green-dark); }
 .boost-headline.red { color: #e53e3e; }
 .boost-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-size: 0.9rem;
-  color: var(--sb-text-h);
-  margin-bottom: 0.45rem;
-  padding-left: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    color: var(--sb-text-h);
+    margin-bottom: 0rem;
+    padding-left: 34px;
+}
+.st-protect i {
+    color: red;
+}
+.st-boost i {
+	color: var(--sb-green-dark);
 }
 .boost-check { color: var(--sb-green-dark); font-size: 1rem; }
 .protect-check { color: #e53e3e; font-size: 1rem; }
