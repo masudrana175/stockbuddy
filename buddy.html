@@ -463,7 +463,7 @@
                     </div>
 
                     <div class="wert-row arrow-link" style="margin-top:.75rem;padding-top:.6rem;">
-                        <a href="#" class="sb-link">Alle Analysen anzeigen <img src="img/arrow_right_blue.svg" alt="" style="width:22px;"/></a>
+                        <a href="#" class="sb-link" data-bs-toggle="modal" data-bs-target="#analysenModal">Alle Analysen anzeigen <img src="img/arrow_right_blue.svg" alt="" style="width:22px;"/></a>
                     </div>
                 </div>
 
@@ -484,6 +484,93 @@
         <!-- /buddy-layout -->
 
     </main>
+
+    <!-- ══════════════════════════════════════════
+       MODAL – Alle bisherigen Analysen
+       ══════════════════════════════════════════ -->
+    <div class="modal fade" id="analysenModal" tabindex="-1" aria-labelledby="analysenModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content analysen-modal">
+                <div class="modal-header analysen-modal-header">
+                    <div class="analysen-modal-title" id="analysenModalTitle">
+                        <img src="img/letzte_analysen.svg" alt="" style="width:24px;" />
+                        Alle bisherigen Analysen
+                    </div>
+                    <button type="button" class="analysen-modal-close" data-bs-dismiss="modal" aria-label="Schließen">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+                <div class="modal-body analysen-modal-body">
+
+                    <div class="analysen-modal-item">
+                        <div class="analysis-logo"><img src="img/nvidia.png" alt="NVIDIA" /></div>
+                        <div class="flex-grow-1">
+                            <div class="analysis-name">NVIDIA Corporation</div>
+                            <div class="analysis-date">22.05.2024</div>
+                        </div>
+                        <button class="analysen-item-btn edit" aria-label="Analyse bearbeiten"><i class="bi bi-pencil-square"></i></button>
+                        <button class="analysen-item-btn delete" aria-label="Analyse löschen"><i class="bi bi-trash3"></i></button>
+                    </div>
+
+                    <div class="analysen-modal-item">
+                        <div class="analysis-logo"><img src="img/microsoft.png" alt="Microsoft" /></div>
+                        <div class="flex-grow-1">
+                            <div class="analysis-name">Microsoft Corporation</div>
+                            <div class="analysis-date">20.05.2024</div>
+                        </div>
+                        <button class="analysen-item-btn edit" aria-label="Analyse bearbeiten"><i class="bi bi-pencil-square"></i></button>
+                        <button class="analysen-item-btn delete" aria-label="Analyse löschen"><i class="bi bi-trash3"></i></button>
+                    </div>
+
+                    <div class="analysen-modal-item">
+                        <div class="analysis-logo"><img src="img/asml.png" alt="ASML" /></div>
+                        <div class="flex-grow-1">
+                            <div class="analysis-name">ASML Holding N.V.</div>
+                            <div class="analysis-date">19.05.2024</div>
+                        </div>
+                        <button class="analysen-item-btn edit" aria-label="Analyse bearbeiten"><i class="bi bi-pencil-square"></i></button>
+                        <button class="analysen-item-btn delete" aria-label="Analyse löschen"><i class="bi bi-trash3"></i></button>
+                    </div>
+
+                    <div class="analysen-modal-item">
+                        <div class="analysis-logo"><img src="img/visa.png" alt="Visa" /></div>
+                        <div class="flex-grow-1">
+                            <div class="analysis-name">Visa Inc.</div>
+                            <div class="analysis-date">14.05.2024</div>
+                        </div>
+                        <button class="analysen-item-btn edit" aria-label="Analyse bearbeiten"><i class="bi bi-pencil-square"></i></button>
+                        <button class="analysen-item-btn delete" aria-label="Analyse löschen"><i class="bi bi-trash3"></i></button>
+                    </div>
+
+                    <div class="analysen-modal-item">
+                        <div class="analysis-logo"><img src="img/asml.png" alt="ASML" /></div>
+                        <div class="flex-grow-1">
+                            <div class="analysis-name">ASML Holding N.V.</div>
+                            <div class="analysis-date">14.03.2024</div>
+                        </div>
+                        <button class="analysen-item-btn edit" aria-label="Analyse bearbeiten"><i class="bi bi-pencil-square"></i></button>
+                        <button class="analysen-item-btn delete" aria-label="Analyse löschen"><i class="bi bi-trash3"></i></button>
+                    </div>
+
+                    <div class="analysen-modal-item">
+                        <div class="analysis-logo"><img src="img/microsoft.png" alt="Microsoft" /></div>
+                        <div class="flex-grow-1">
+                            <div class="analysis-name">Microsoft Corporation</div>
+                            <div class="analysis-date">12.01.2024</div>
+                        </div>
+                        <button class="analysen-item-btn edit" aria-label="Analyse bearbeiten"><i class="bi bi-pencil-square"></i></button>
+                        <button class="analysen-item-btn delete" aria-label="Analyse löschen"><i class="bi bi-trash3"></i></button>
+                    </div>
+
+                </div>
+                <div class="modal-footer analysen-modal-footer">
+                    <button type="button" class="btn-alle-loeschen">
+                        <i class="bi bi-trash3"></i> Alle Analysen löschen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- ══════════════════════════════════════════
        SCRIPTS

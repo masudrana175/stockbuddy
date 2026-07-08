@@ -1109,6 +1109,87 @@ img {
   align-items: flex-start;
   gap: 1rem;
 }
+/* ── Modal: Alle bisherigen Analysen ── */
+.analysen-modal {
+  border: none;
+  border-radius: 18px;
+  padding: 0.75rem 1rem 1rem;
+}
+.analysen-modal-header {
+  border-bottom: none;
+  padding: 1rem 1rem 0.5rem;
+  align-items: center;
+}
+.analysen-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--sb-blue);
+}
+.analysen-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--sb-text-h);
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px;
+}
+.analysen-modal-body {
+  padding: 0.75rem 1rem;
+}
+.analysen-modal-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+}
+.analysen-modal-item:nth-child(even) {
+  background: #f7f7fb;
+}
+.analysen-item-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.15rem;
+  padding: 5px;
+  line-height: 1;
+  transition: var(--sb-ease);
+}
+.analysen-item-btn.edit {
+  color: var(--sb-blue);
+}
+.analysen-item-btn.delete {
+  color: var(--sb-pink);
+}
+.analysen-item-btn:hover {
+  opacity: 0.65;
+}
+.analysen-modal-footer {
+  border-top: none;
+  padding: 0.5rem 1rem 1rem;
+}
+.btn-alle-loeschen {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--sb-pink);
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.55rem 1.2rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--sb-ease);
+}
+.btn-alle-loeschen:hover {
+  background: var(--sb-pink-hover);
+}
 .btn-print-analyse {
     display: inline-flex;
     align-items: center;
