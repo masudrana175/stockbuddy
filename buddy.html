@@ -229,7 +229,7 @@
                                             <div class="card-title mb-0">Detaillierte Score-Auswertung</div>
                                             <button class="btn-auswertung-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#detailAuswertung" aria-expanded="true" aria-controls="detailAuswertung">
                                                 <span class="toggle-close">Auswertung schließen <i class="bi bi-x-lg"></i></span>
-                                                <span class="toggle-open">Auswertung anzeigen <i class="bi bi-plus-lg"></i></span>
+                                                <span class="toggle-open">Auswertung anzeigen <i class="bi bi-chevron-down"></i></span>
                                             </button>
                                         </div>
 
@@ -240,7 +240,7 @@
                                                 <div class="auswertung-block-title">Anlageziele aus deinem Profil</div>
                                                 <div class="auswertung-block-sub">Die folgenden Anlageziele wurden in deinem Profil gefunden.</div>
                                                 <div class="table-scroll">
-                                                    <table class="sbs-table ziele-table">
+                                                    <table class="sbs-table ziele-table" id="zieleTable">
                                                         <thead>
                                                             <tr>
                                                                 <th></th>
@@ -747,7 +747,7 @@
         const bar = (name, color, y) => ({
           x: cats, y, name, type: 'bar',
           marker: { color },
-          text: y.map(String), textposition: 'outside',
+          text: y.map(String), textposition: 'outside', textangle: -90,
           textfont: { family: 'Barlow', size: 10, color: '#666' }
         });
         Plotly.newPlot('rankingChart', [
@@ -763,6 +763,14 @@
           showlegend: true
         }, noBar);
       })();
+
+      /* Anlageziele table — DataTables (no sorting: single weight row) */
+      new DataTable('#zieleTable', {
+        paging: false,
+        info: false,
+        searching: false,
+        ordering: false
+      });
 
       /* Scoring Tabelle — sortable via DataTables */
       new DataTable('#sbsTable', {

@@ -54,6 +54,35 @@
   box-sizing: border-box;
 }
 
+/* ── Global scrollbars: pink thumb on pale-pink rail, no arrows ── */
+* {
+  scrollbar-color: #d34692 #f4d9e8; /* Firefox */
+  scrollbar-width: thin;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: #f4d9e8;
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #d34692;
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #b52d66;
+}
+*::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 html {
   min-height: 100%;
 }
@@ -1215,10 +1244,15 @@ table.dataTable.sbs-table thead > tr > th.dt-orderable-none span.dt-column-order
 }
 
 /* ── Right panel: Boost & Protect cards ── */
+.sb-card.rp-card {
+  height: auto;
+}
 .boost-headline {
   font-weight: 700;
   font-size: 0.95rem;
   margin-bottom: 0.6rem;
+  /* align with the card title text (icon 24px + 6px gap) */
+  padding-left: 30px;
 }
 .boost-headline.green { color: var(--sb-green-dark); }
 .boost-headline.red { color: #e53e3e; }
@@ -1229,6 +1263,7 @@ table.dataTable.sbs-table thead > tr > th.dt-orderable-none span.dt-column-order
   font-size: 0.9rem;
   color: var(--sb-text-h);
   margin-bottom: 0.45rem;
+  padding-left: 30px;
 }
 .boost-check { color: var(--sb-green-dark); font-size: 1rem; }
 .protect-check { color: #e53e3e; font-size: 1rem; }
