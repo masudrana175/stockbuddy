@@ -1110,21 +1110,21 @@ img {
   gap: 1rem;
 }
 .btn-print-analyse {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #fff;
-  border: 1.5px solid var(--sb-blue);
-  color: var(--sb-blue);
-  border-radius: 10px;
-  padding: 0.45rem 1.1rem;
-  font-size: 0.95rem;
-  font-weight: 700;
-  font-family: inherit;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: var(--sb-ease);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #faf7f9;
+    border: 1.5px solid var(--sb-blue);
+    color: var(--sb-blue);
+    border-radius: 10px;
+    padding:0.52rem 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: var(--sb-ease);
 }
 .btn-print-analyse i {
   font-size: 1.1rem;
@@ -1132,6 +1132,9 @@ img {
 .btn-print-analyse:hover {
   background: var(--sb-blue);
   color: #fff;
+}
+.btn-print-analyse:hover img{
+    filter: brightness(0) invert(1);
 }
 @media print {
   /* print only the analysis content: hide navigation and input chrome */
