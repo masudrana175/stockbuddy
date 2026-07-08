@@ -1105,6 +1105,48 @@ img {
 }
 .buddy-col-header {
   padding-bottom: 0;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.btn-print-analyse {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1.5px solid var(--sb-blue);
+  color: var(--sb-blue);
+  border-radius: 10px;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: var(--sb-ease);
+}
+.btn-print-analyse i {
+  font-size: 1.1rem;
+}
+.btn-print-analyse:hover {
+  background: var(--sb-blue);
+  color: #fff;
+}
+@media print {
+  /* print only the analysis content: hide navigation and input chrome */
+  .sb-sidebar,
+  .sb-overlay,
+  .top-bar-main,
+  .buddy-right-col,
+  .chat-input-bar-wraper,
+  .btn-print-analyse {
+    display: none !important;
+  }
+  .sb-main {
+    margin-left: 0 !important;
+    padding: 0 !important;
+  }
 }
 .buddy-rp-topbar {
   justify-content: flex-end;
