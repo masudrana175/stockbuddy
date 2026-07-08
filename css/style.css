@@ -1157,16 +1157,16 @@ img {
   margin-bottom: 0rem;
 }
 .btn-auswertung-toggle {
-  background: #fff;
-  border: 1px solid var(--sb-border);
-  border-radius: 20px;
-  color: var(--sb-text-soft);
-  font-size: 0.85rem;
-  font-weight: 600;
-  font-family: inherit;
-  padding: 0.3rem 0.9rem;
-  cursor: pointer;
-  transition: var(--sb-ease);
+    background: #eeebf3;
+    border: 1px solid var(--sb-border);
+    border-radius: 20px;
+    color: var(--sb-text-h);
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: inherit;
+    padding: 0.3rem 0.9rem;
+    cursor: pointer;
+    transition: var(--sb-ease);
 }
 .btn-auswertung-toggle:hover {
   border-color: var(--sb-pink);
@@ -1181,13 +1181,13 @@ img {
 .auswertung-block-title {
   font-weight: 700;
   color: var(--sb-text-h);
-  margin-bottom: 0.35rem;
+  margin-bottom: 0rem;
 }
 .auswertung-block-sub {
-  font-size: 0.85rem;
-  color: var(--sb-text-soft);
-  line-height: 1.55;
-  margin-bottom: 0.85rem;
+    font-size: 1rem;
+    color: var(--sb-text-h);
+    line-height: 1.40;
+    margin-bottom: 0.85rem;
 }
 .table-scroll {
   overflow-x: auto;
@@ -1254,9 +1254,9 @@ table.dataTable.sbs-table thead > tr > th.dt-orderable-none span.dt-column-order
 .boost-headline {
   font-weight: 700;
   font-size: 1rem;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0rem;
   /* align with the card title text (icon 24px + 6px gap) */
-  padding-left: 30px;
+  padding-left: 45px;
 }
 .boost-headline.green { color: var(--sb-green-dark); }
 .boost-headline.red { color: #e53e3e; }
@@ -1267,7 +1267,7 @@ table.dataTable.sbs-table thead > tr > th.dt-orderable-none span.dt-column-order
     font-size: 1rem;
     color: var(--sb-text-h);
     margin-bottom: 0rem;
-    padding-left: 34px;
+    padding-left: 45px;
 }
 .st-protect i {
     color: red;
