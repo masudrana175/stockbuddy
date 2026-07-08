@@ -1113,12 +1113,14 @@ img {
 .analysen-modal {
   border: none;
   border-radius: 18px;
-  padding: 0.75rem 1rem 1rem;
+  padding: 1.5rem;
 }
 .analysen-modal-header {
-  border-bottom: none;
-  padding: 1rem 1rem 0.5rem;
-  align-items: center;
+    border-bottom: none;
+    padding: 0 0 1rem 0;
+    align-items: center;
+    border-bottom: 1px solid #d8d5d7;
+	justify-content: space-between;
 }
 .analysen-modal-title {
   display: flex;
@@ -1138,7 +1140,7 @@ img {
   padding: 4px;
 }
 .analysen-modal-body {
-  padding: 0.75rem 1rem;
+    padding: 1rem 0 1rem 0;
 }
 .analysen-modal-item {
   display: flex;
@@ -1148,7 +1150,10 @@ img {
   border-radius: 10px;
 }
 .analysen-modal-item:nth-child(even) {
-  background: #f7f7fb;
+  background: #faf7f9;
+}
+.analysen-modal-footer i.bi.bi-trash3 {
+    font-size: 20px;
 }
 .analysen-item-btn {
   background: none;
@@ -1172,6 +1177,9 @@ img {
   border-top: none;
   padding: 0.5rem 1rem 1rem;
 }
+.modal-open .modal {
+    backdrop-filter: blur(4px);
+}
 .btn-alle-loeschen {
   display: inline-flex;
   align-items: center;
@@ -1180,8 +1188,8 @@ img {
   border: none;
   color: #fff;
   border-radius: 8px;
-  padding: 0.55rem 1.2rem;
-  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
   font-weight: 700;
   font-family: inherit;
   cursor: pointer;
