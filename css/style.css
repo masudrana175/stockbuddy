@@ -1361,8 +1361,8 @@ table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order
   font-family: inherit;
   font-size: 0.9rem;
   cursor: pointer;
-  background: #fbe9f3;
-  color: #e0a9c8;
+  background: #faf7f9;
+  color: #c8b3bf;
   transition: var(--sb-ease);
 }
 .tx-typ-btn.active {
@@ -1370,13 +1370,14 @@ table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order
   color: #fff;
 }
 .tx-input {
-  width: 100%;
-  border: 1px solid var(--sb-border);
-  border-radius: 8px;
-  padding: 0.5rem 0.75rem;
-  font-family: inherit;
-  font-size: 0.92rem;
-  color: var(--sb-text-h);
+	width: 100%;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    font-family: inherit;
+    font-size: 0.92rem;
+    color: var(--sb-text-h);
+    background: #faf7f9;
 }
 .tx-input:focus {
   outline: none;
@@ -3134,7 +3135,7 @@ a.btn-vgl-detail i.bi.bi-arrow-right {
 }
 .pos-table thead th small {
   display: block;
-  text-align: right;
+  text-align: left;
   font-weight: 400;
   font-size: 1rem;
 }
@@ -3216,8 +3217,8 @@ table.dataTable thead>tr>th.dt-orderable-asc:hover, table.dataTable thead>tr>th.
 }
 .pos-company-cell {
   display: flex;
-  align-items: center;
   gap: 10px;
+      text-align: left;
 }
 .pos-logo {
   width: 38px;
