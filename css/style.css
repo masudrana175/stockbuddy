@@ -2833,6 +2833,17 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
   align-items: center;
   gap: 4px;
 }
+.se-period-menu {
+  border: 1px solid var(--sb-border);
+  border-radius: 10px;
+  box-shadow: var(--sb-shadow);
+  font-size: 0.9rem;
+}
+.se-period-menu .dropdown-item.active,
+.se-period-menu .dropdown-item:active {
+  background: var(--sb-pink);
+  color: #fff;
+}
 .analyse-sided .card-title img {
   margin-right: 10px;
 }
