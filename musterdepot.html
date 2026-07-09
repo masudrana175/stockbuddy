@@ -521,8 +521,8 @@
        ══════════════════════════════════════════ -->
     <div class="modal fade" id="transaktionModal" tabindex="-1" aria-labelledby="txModalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content tx-modal">
-                <div class="modal-header tx-modal-header">
+            <div class="modal-content analysen-modal">
+                <div class="modal-header analysen-modal-header">
                     <div class="tx-modal-title" id="txModalTitle">
                         <span class="tx-title-label">Neue Transaktion für:</span>
                         <span class="cb-logo tx-logo" id="txLogo"><img src="img/nvidia.png" alt="" /></span>
@@ -530,7 +530,7 @@
                     </div>
                     <button type="button" class="analysen-modal-close" data-bs-dismiss="modal" aria-label="Schließen"><i class="bi bi-x-lg"></i></button>
                 </div>
-                <div class="modal-body tx-modal-body">
+                <div class="modal-body analysen-modal-body">
                     <div class="tx-field-label">Typ</div>
                     <div class="tx-typ-btns mb-3">
                         <button type="button" class="tx-typ-btn active" data-typ="Kauf">Kauf</button>
@@ -554,10 +554,10 @@
                             <div class="tx-total" id="txTotal">6.080,00 €</div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-end gap-2 mt-4">
-                        <button type="button" class="btn-tx-cancel" data-bs-dismiss="modal">Abbrechen</button>
-                        <button type="button" class="btn-tx-save" id="txSave">Speichern</button>
-                    </div>
+                </div>
+                <div class="modal-footer analysen-modal-footer">
+                    <button type="button" class="btn-tx-cancel" data-bs-dismiss="modal">Abbrechen</button>
+                    <button type="button" class="btn-tx-save" id="txSave">Speichern</button>
                 </div>
             </div>
         </div>
@@ -568,15 +568,15 @@
        ══════════════════════════════════════════ -->
     <div class="modal fade" id="profilModal" tabindex="-1" aria-labelledby="profilModalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content profil-modal">
-                <div class="modal-header profil-modal-header">
+            <div class="modal-content analysen-modal">
+                <div class="modal-header analysen-modal-header">
                     <div class="tx-modal-title" id="profilModalTitle">
                         <span class="cb-logo tx-logo" id="pmLogo"><img src="img/nvidia.png" alt="" /></span>
                         <span class="pm-company" id="pmCompany">NVIDIA Corporation</span>
                     </div>
                     <button type="button" class="analysen-modal-close" data-bs-dismiss="modal" aria-label="Schließen"><i class="bi bi-x-lg"></i></button>
                 </div>
-                <div class="modal-body profil-modal-body">
+                <div class="modal-body analysen-modal-body profil-modal-body">
                     <div class="pm-nav">
                         <button class="pm-pill active" type="button">Profil</button>
                         <button class="pm-pill" type="button">Analystendaten</button>
