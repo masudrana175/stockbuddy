@@ -1426,7 +1426,7 @@ table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order
   gap: 10px;
   flex-shrink: 0;
   width: 170px;
-  border-right: 1px solid var(--sb-border);
+  border-right: 1px solid #c5c5c5;
   padding-right: 1.25rem;
 }
 .pm-pill {
@@ -1448,8 +1448,8 @@ table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order
   color: #fff;
 }
 .pm-content {
-  font-size: 0.92rem;
-  color: var(--sb-text-soft);
+  font-size: 1rem;
+  color: var(--sb-text-h);
   line-height: 1.65;
 }
 .pm-content-title {
