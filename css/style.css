@@ -1572,7 +1572,7 @@ table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order
 }
 .analysen-modal-footer {
   border-top: none;
-  padding: 0.5rem 1rem 1rem;
+  padding: 0.5rem 0rem 0rem;
 }
 .modal-open .modal {
     backdrop-filter: blur(4px);
