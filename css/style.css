@@ -1534,6 +1534,7 @@ table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order
   cursor: pointer;
   line-height: 1;
   padding: 4px;
+  margin-left: auto;
 }
 .analysen-modal-body {
     padding: 1rem 0 1rem 0;
@@ -3170,9 +3171,12 @@ a.btn-vgl-detail i.bi.bi-arrow-right {
 }
 .stat-val {
   font-size: 1.8rem;
-  font-weight: 700;
+  font-weight: 500;
   color: var(--sb-blue);
   line-height: 1;
+}
+table.dataTable thead>tr>th.dt-orderable-asc:hover, table.dataTable thead>tr>th.dt-orderable-desc:hover, table.dataTable thead>tr>td.dt-orderable-asc:hover, table.dataTable thead>tr>td.dt-orderable-desc:hover {
+    outline: 0px solid rgba(0, 0, 0, 0.05);
 }
 .stat-sub {
 }
