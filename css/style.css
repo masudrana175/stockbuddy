@@ -1251,6 +1251,229 @@ table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order
   display: none;
 }
 
+/* ── Musterdepot: alert bell, active row, company box, modals ── */
+.pos-table tr.pos-row { cursor: pointer; }
+.pos-table tbody tr.pos-row.active {
+  background: #efeaf7;
+}
+.alert-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  padding: 4px;
+  line-height: 1;
+  color: #c3c7cf;
+  transition: var(--sb-ease);
+}
+.alert-toggle.active {
+  color: var(--sb-green-dark);
+}
+.cb-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #76b900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.cb-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.cb-section-title {
+  font-weight: 600;
+  color: var(--sb-text-h);
+  margin: 0.75rem 0 0.6rem;
+}
+.cb-stats {
+  display: flex;
+  flex-wrap: wrap;
+}
+.cb-stat {
+  flex: 1 1 0;
+  min-width: 90px;
+  padding: 0 0.75rem;
+  border-left: 1px solid var(--sb-border);
+}
+.cb-stat:first-child {
+  padding-left: 0;
+  border-left: none;
+}
+.cb-stat-val {
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+.cb-stat-val.blue { color: var(--sb-blue); }
+.cb-stat-val.green { color: var(--sb-green-dark); }
+.cb-stat-lbl {
+  font-size: 0.82rem;
+  color: var(--sb-text-muted);
+}
+.cb-tx-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.cb-tx-table thead th {
+  font-weight: 600;
+  color: var(--sb-text-soft);
+  padding: 0.4rem 0.6rem;
+  text-align: left;
+  white-space: nowrap;
+}
+.cb-tx-table tbody td {
+  padding: 0.5rem 0.6rem;
+  white-space: nowrap;
+}
+.cb-tx-table tbody tr:nth-child(odd) {
+  background: #f7f7fb;
+}
+.cb-tx-table .tx-typ-kauf { color: var(--sb-green-dark); font-weight: 700; }
+.cb-tx-table .tx-typ-verkauf { color: #e53e3e; font-weight: 700; }
+
+/* Neue Transaktion modal */
+.tx-modal, .profil-modal {
+  border: none;
+  border-radius: 18px;
+  padding: 0.75rem 1rem 1rem;
+}
+.tx-modal-header, .profil-modal-header {
+  border-bottom: 1px solid var(--sb-border);
+  padding: 1rem 1rem 0.85rem;
+  align-items: center;
+}
+.tx-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+.tx-title-label { color: var(--sb-pink); }
+.tx-logo { width: 34px; height: 34px; }
+.tx-company, .pm-company { color: var(--sb-text-h); font-size: 1.05rem; }
+.tx-modal-body { padding: 1.25rem 1rem 1rem; }
+.tx-field-label {
+  font-weight: 600;
+  color: var(--sb-text-h);
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+}
+.tx-typ-btns { display: flex; gap: 10px; }
+.tx-typ-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 0.45rem 1.4rem;
+  font-weight: 700;
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: #fbe9f3;
+  color: #e0a9c8;
+  transition: var(--sb-ease);
+}
+.tx-typ-btn.active {
+  background: var(--sb-pink);
+  color: #fff;
+}
+.tx-input {
+  width: 100%;
+  border: 1px solid var(--sb-border);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.92rem;
+  color: var(--sb-text-h);
+}
+.tx-input:focus {
+  outline: none;
+  border-color: var(--sb-pink);
+}
+.tx-total {
+  background: var(--sb-blue);
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-weight: 800;
+  font-size: 0.92rem;
+}
+.btn-tx-cancel {
+  background: #fff;
+  border: 1.5px solid var(--sb-pink);
+  color: var(--sb-text-h);
+  border-radius: 8px;
+  padding: 0.5rem 1.3rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--sb-ease);
+}
+.btn-tx-cancel:hover { background: #fbe9f3; }
+.btn-tx-save {
+  background: var(--sb-pink);
+  border: none;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.5rem 1.5rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--sb-ease);
+}
+.btn-tx-save:hover { background: var(--sb-pink-hover); }
+
+/* Unternehmensprofil modal */
+.profil-modal-body {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.25rem 1rem 1rem;
+}
+.pm-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+  width: 170px;
+  border-right: 1px solid var(--sb-border);
+  padding-right: 1.25rem;
+}
+.pm-pill {
+  border: 1.5px solid var(--sb-pink);
+  background: #fff;
+  color: var(--sb-text-h);
+  border-radius: 10px;
+  padding: 0.45rem 0.75rem;
+  font-weight: 600;
+  font-size: 0.88rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--sb-ease);
+}
+.pm-pill:hover { background: #fbe9f3; }
+.pm-pill.active {
+  background: var(--sb-blue);
+  border-color: var(--sb-blue);
+  color: #fff;
+}
+.pm-content {
+  font-size: 0.92rem;
+  color: var(--sb-text-soft);
+  line-height: 1.65;
+}
+.pm-content-title {
+  color: var(--sb-blue);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+@media (max-width: 767.98px) {
+  .profil-modal-body { flex-direction: column; }
+  .pm-nav { width: 100%; border-right: none; flex-direction: row; flex-wrap: wrap; padding-right: 0; }
+}
+
 /* ── Right panel: Boost & Protect cards ── */
 .sb-card.rp-card {
   height: auto;
