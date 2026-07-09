@@ -1463,6 +1463,38 @@ table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order
   .pm-nav { width: 100%; border-right: none; flex-direction: row; flex-wrap: wrap; padding-right: 0; }
 }
 
+/* ── Stockbuddy Alerts card ── */
+.alerts-table {
+  min-width: 0; /* small card table: no forced scroll width */
+  font-size: 0.85rem;
+}
+.alerts-table thead th i {
+  font-size: 1rem;
+}
+.alerts-table tbody tr:nth-child(even) { background: #fafafa; }
+.alerts-table tbody td { white-space: nowrap; }
+.alerts-table .trend-up { color: var(--sb-green-dark); margin-left: 6px; }
+.alerts-table .trend-down { color: #e53e3e; margin-left: 6px; }
+table.dataTable.alerts-table thead th,
+table.dataTable.alerts-table thead th.dt-type-numeric {
+  text-align: left;
+  position: relative;
+  padding-right: 24px;
+}
+table.dataTable.alerts-table thead > tr > th span.dt-column-order {
+  position: absolute !important;
+  left: auto !important;
+  right: 6px !important;
+  top: 50% !important;
+  bottom: auto !important;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 20px;
+}
+table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-order {
+  display: none;
+}
+
 /* ── Right panel: Boost & Protect cards ── */
 .sb-card.rp-card {
   height: auto;
