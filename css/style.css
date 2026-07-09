@@ -1222,9 +1222,11 @@ img {
 .sbs-table .sbs-isin { font-size: 0.88rem; color: var(--sb-text-h); }
 .sbs-table .sbs-row-label { font-weight: 700; color: var(--sb-text-h); }
 .sbs-table td.sbs-hl { background: #f8d7e8; }
-/* DataTables header on sbs-table: title left, sort arrow right */
+/* DataTables header on sbs-table / pos-table: title left, sort arrow right */
 table.dataTable.sbs-table thead th,
-table.dataTable.sbs-table thead th.dt-type-numeric {
+table.dataTable.sbs-table thead th.dt-type-numeric,
+table.dataTable.pos-table thead th,
+table.dataTable.pos-table thead th.dt-type-numeric {
   text-align: left;
   position: relative;
   padding-right: 26px;
@@ -1233,6 +1235,7 @@ table.sbs-table tbody {
     font-size: 1rem;
 	color: var(--sb-text-h);
 }
+table.dataTable.pos-table thead > tr > th span.dt-column-order,
 table.dataTable.sbs-table thead > tr > th span.dt-column-order {
   position: absolute !important;
   left: auto !important;
@@ -1243,7 +1246,8 @@ table.dataTable.sbs-table thead > tr > th span.dt-column-order {
   width: 12px;
   height: 20px;
 }
-table.dataTable.sbs-table thead > tr > th.dt-orderable-none span.dt-column-order {
+table.dataTable.sbs-table thead > tr > th.dt-orderable-none span.dt-column-order,
+table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order {
   display: none;
 }
 

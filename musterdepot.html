@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -173,7 +174,7 @@
                         <img src="img/info.svg" alt="" style="width:18px;margin-left:2px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" />
                     </div>
                     <div style="overflow-x:auto;">
-                        <table class="pos-table">
+                        <table class="pos-table" id="posTable">
                             <thead>
                                 <tr>
                                     <th>Unternehmen</th>
@@ -353,6 +354,36 @@
             <!-- Side -->
             <div class="md-side">
 
+                <!-- NVIDIA stock card -->
+                <div class="rp-stock-card">
+                    <div class="rp-stock-head">
+                        <div class="rp-stock-logo" style="background:#76b900;">
+                            <img src="img/nvidia.png" alt="NVIDIA Logo" />
+                        </div>
+                        <div>
+                            <div class="rp-stock-name">NVIDIA Corporation</div>
+                            <div class="rp-stock-ticker">NVDA &bull; US67066G1040</div>
+                        </div>
+                    </div>
+
+                    <div class="rp-score-label card-title">StockBuddy Score</div>
+                    <div class="rp-score-row">
+                        <div>
+                            <div class="rp-score-num">92<span>/100</span></div>
+                            <div style="color: var(--sb-green-dark);">Sehr attraktiv</div>
+                        </div>
+                        <div class="rp-score-badge">Sehr gut</div>
+                    </div>
+                    <div class="rp-stars" aria-label="5 Sterne">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="rp-updated">Zuletzt aktualisiert: heute, 10:24</div>
+                </div>
+
                 <!-- Strategie -->
                 <div class="sb-card">
                     <div class="align-items-center gap-2 mb-3">
@@ -471,6 +502,8 @@
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/plotly.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/dataTables.min.js"></script>
     <script src="js/main.js"></script>
     <script>
       const PL = { font: { family: 'Barlow, sans-serif' }, paper_bgcolor: 'transparent', plot_bgcolor: 'transparent' };
@@ -507,6 +540,24 @@
         btn.addEventListener('click', function () {
           drawPerfHeader(this.textContent.trim());
         });
+      });
+
+      /* Top-Positionen — sortable via DataTables */
+      new DataTable('#posTable', {
+        paging: false,
+        info: false,
+        searching: false,
+        ordering: true,
+        order: [],
+        language: { zeroRecords: 'Keine Einträge gefunden' },
+        columnDefs: [
+          /* numeric sort: strip markup, German decimal comma → dot */
+          { targets: [1, 2, 3, 4], render: function (data, type) {
+              return type === 'sort' || type === 'type'
+                ? (parseFloat(String(data).replace(/<[^>]*>/g, ' ').trim().replace(',', '.')) || 0)
+                : data;
+            } }
+        ]
       });
 
       /* Performance im Vergleich */
