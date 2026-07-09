@@ -264,7 +264,14 @@
                         <div class="card-title">
                             <img src="img/score.svg" alt="" style="width:31px;" /> Score Entwicklung
                         </div>
-                        <button class="se-period-btn">Letzte 6 Monate <i class="bi bi-chevron-down"></i></button>
+                        <div class="dropdown">
+                            <button class="se-period-btn dropdown-toggle" type="button" id="sePeriodBtn" data-bs-toggle="dropdown" aria-expanded="false">Letzte 6 Monate</button>
+                            <ul class="dropdown-menu dropdown-menu-end se-period-menu" aria-labelledby="sePeriodBtn">
+                                <li><button class="dropdown-item" type="button" data-range="3">Letzte 3 Monate</button></li>
+                                <li><button class="dropdown-item active" type="button" data-range="6">Letzte 6 Monate</button></li>
+                                <li><button class="dropdown-item" type="button" data-range="12">Letzte 12 Monate</button></li>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="se-score-change">
@@ -403,20 +410,38 @@
       spark('spark1','#d14894',[10,14,13,17,16,19,18,21,20,24,22,26]);
       spark('spark2','#1d3a8e',[10,11,12,11,13,12,14,13,15,14,16,15]);
 
-      /* Score Entwicklung chart */
-      Plotly.newPlot('scoreDevChart', [{
-        x: ['Dez','Jan','Feb','Mär','Apr','Mai'],
-        y: [38,52,57,60,63,87],
-        type: 'scatter', mode: 'lines+markers',
-        line: { color: '#d14894', width: 2, shape: 'spline', smoothing: 1.2 },
-        marker: { color: '#d14894', size: 6, line: { color: '#fff', width: 2 } },
-        fill: 'tozeroy', fillcolor: 'rgba(209,72,148,0.1)'
-      }], {
-        ...PL,
-        margin: { t:4, r:8, b:28, l:32 },
-        xaxis: { showgrid: false, tickfont: { family:'Barlow', size:10, color:'#999' } },
-        yaxis: { range:[0,100], gridcolor:'#f0f0f0', tickfont: { family:'Barlow', size:10, color:'#999' }, dtick: 25 }
-      }, noBar);
+      /* Score Entwicklung chart — data per dropdown range */
+      const SE_RANGES = {
+        3:  { x: ['Mär','Apr','Mai'], y: [60,63,87] },
+        6:  { x: ['Dez','Jan','Feb','Mär','Apr','Mai'], y: [38,52,57,60,63,87] },
+        12: { x: ['Jun','Jul','Aug','Sep','Okt','Nov','Dez','Jan','Feb','Mär','Apr','Mai'], y: [30,34,32,36,40,37,38,52,57,60,63,87] }
+      };
+      function drawScoreDev(range) {
+        const d = SE_RANGES[range] || SE_RANGES[6];
+        Plotly.react('scoreDevChart', [{
+          x: d.x, y: d.y,
+          type: 'scatter', mode: 'lines+markers',
+          line: { color: '#d14894', width: 2, shape: 'spline', smoothing: 1.2 },
+          marker: { color: '#d14894', size: 6, line: { color: '#fff', width: 2 } },
+          fill: 'tozeroy', fillcolor: 'rgba(209,72,148,0.1)'
+        }], {
+          ...PL,
+          margin: { t:4, r:8, b:28, l:32 },
+          xaxis: { showgrid: false, tickfont: { family:'Barlow', size:10, color:'#999' } },
+          yaxis: { range:[0,100], gridcolor:'#f0f0f0', tickfont: { family:'Barlow', size:10, color:'#999' }, dtick: 25 }
+        }, noBar);
+      }
+      drawScoreDev(6);
+
+      /* dropdown selects the range */
+      document.querySelectorAll('.se-period-menu .dropdown-item').forEach(function (item) {
+        item.addEventListener('click', function () {
+          document.querySelectorAll('.se-period-menu .dropdown-item').forEach(i => i.classList.remove('active'));
+          this.classList.add('active');
+          document.getElementById('sePeriodBtn').firstChild.textContent = this.textContent + ' ';
+          drawScoreDev(this.dataset.range);
+        });
+      });
     </script>
 
     <script>
