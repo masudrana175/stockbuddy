@@ -182,16 +182,17 @@
                                     <th>Performance<small>seit Kauf</small></th>
                                     <th>Aktueller Kurs</th>
                                     <th>StockBuddy Score<small>/100</small></th>
+                                    <th class="pos-alert-th">Alert</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- NVIDIA -->
-                                <tr>
+                                <tr data-symbol="nvda" class="pos-row active">
                                     <td>
                                         <div class="pos-company-cell">
                                             <div class="pos-logo"><img src="img/nvidia.png" alt="NVIDIA" /></div>
                                             <div>
-                                                <div class="pos-name">NCIDIA Corporation</div>
+                                                <div class="pos-name">NVIDIA Corporation</div>
                                                 <div>22.05.2024</div>
                                             </div>
                                         </div>
@@ -214,9 +215,12 @@
                                             <div class="pos-score-label" style="color:var(--sb-green-dark);font-weight:700;">Sehr gut</div>
                                         </div>
                                     </td>
+                                    <td class="pos-alert-cell">
+                                        <button class="alert-toggle active" aria-label="Kursalarm umschalten"><i class="bi bi-bell"></i></button>
+                                    </td>
                                 </tr>
                                 <!-- Microsoft -->
-                                <tr>
+                                <tr data-symbol="msft" class="pos-row">
                                     <td>
                                         <div class="pos-company-cell">
                                             <div class="pos-logo"><img src="img/microsoft.png" alt="Microsoft" /></div>
@@ -244,9 +248,12 @@
                                             <div class="pos-score-label" style="color:var(--sb-green-dark);font-weight:700;">Sehr gut</div>
                                         </div>
                                     </td>
+                                    <td class="pos-alert-cell">
+                                        <button class="alert-toggle" aria-label="Kursalarm umschalten"><i class="bi bi-bell-slash"></i></button>
+                                    </td>
                                 </tr>
                                 <!-- ASML -->
-                                <tr>
+                                <tr data-symbol="asml" class="pos-row">
                                     <td>
                                         <div class="pos-company-cell">
                                             <div class="pos-logo"><img src="img/asml.png" alt="ASML" /></div>
@@ -274,9 +281,12 @@
                                             <div class="pos-score-label" style="color:var(--sb-green-dark);font-weight:700;">Sehr gut</div>
                                         </div>
                                     </td>
+                                    <td class="pos-alert-cell">
+                                        <button class="alert-toggle" aria-label="Kursalarm umschalten"><i class="bi bi-bell-slash"></i></button>
+                                    </td>
                                 </tr>
                                 <!-- Visa -->
-                                <tr>
+                                <tr data-symbol="visa" class="pos-row">
                                     <td>
                                         <div class="pos-company-cell">
                                             <div class="pos-logo"><img src="img/visa.png" alt="Visa" /></div>
@@ -303,6 +313,9 @@
                                             </div>
                                             <div class="pos-score-label" style="color:#c2a34e;font-weight:700;">Gut</div>
                                         </div>
+                                    </td>
+                                    <td class="pos-alert-cell">
+                                        <button class="alert-toggle active" aria-label="Kursalarm umschalten"><i class="bi bi-bell"></i></button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -354,37 +367,40 @@
             <!-- Side -->
             <div class="md-side">
 
-                <!-- NVIDIA stock card -->
-                <div class="rp-stock-card">
-                    <div class="rp-stock-head">
-                        <div class="rp-stock-logo" style="background:#76b900;">
-                            <img src="img/nvidia.png" alt="NVIDIA Logo" />
-                        </div>
-                        <div>
-                            <div class="rp-stock-name">NVIDIA Corporation</div>
-                            <div class="rp-stock-ticker">NVDA &bull; US67066G1040</div>
-                        </div>
+                <!-- Company detail box (follows the active row in Top-Positionen) -->
+                <div class="sb-card rp-card company-box" id="companyBox">
+                    <div class="d-flex align-items-center gap-2 mb-3">
+                        <div class="cb-logo" id="cbLogo"><img src="img/nvidia.png" alt="" /></div>
+                        <span class="card-title mb-0" id="cbName">NVIDIA Corporation</span>
+                        <img src="img/info.svg" alt="" id="cbInfoBtn" style="width:18px;cursor:pointer;" data-bs-toggle="modal" data-bs-target="#profilModal" role="button" tabindex="0" aria-label="Unternehmensprofil öffnen" />
                     </div>
 
-                    <div class="rp-score-label card-title">StockBuddy Score</div>
-                    <div class="rp-score-row">
-                        <div>
-                            <div class="rp-score-num">92<span>/100</span></div>
-                            <div style="color: var(--sb-green-dark);">Sehr attraktiv</div>
-                        </div>
-                        <div class="rp-score-badge">Sehr gut</div>
+                    <div class="cb-section-title">Position</div>
+                    <div class="cb-stats">
+                        <div class="cb-stat"><div class="cb-stat-val blue" id="cbShares">100</div><div class="cb-stat-lbl">Aktien</div></div>
+                        <div class="cb-stat"><div class="cb-stat-val blue" id="cbBuy">67,16 €</div><div class="cb-stat-lbl">Ø Kaufkurs</div></div>
+                        <div class="cb-stat"><div class="cb-stat-val blue" id="cbPrice">60,66 €</div><div class="cb-stat-lbl">Aktueller Kurs</div></div>
+                        <div class="cb-stat"><div class="cb-stat-val green" id="cbPerf">+1,12 %</div><div class="cb-stat-lbl">Performance</div></div>
                     </div>
-                    <div class="rp-stars" aria-label="5 Sterne">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
+
+                    <div class="cb-section-title">Transaktionen</div>
+                    <div class="table-scroll">
+                        <table class="cb-tx-table">
+                            <thead>
+                                <tr><th>Datum</th><th>Typ</th><th>Stück</th><th>Kurs</th><th>Betrag</th></tr>
+                            </thead>
+                            <tbody id="cbTxBody">
+                                <tr><td>16.06.2026</td><td class="tx-typ-kauf">Kauf</td><td>100</td><td>67,16 €</td><td>6.716,00 €</td></tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="rp-updated">Zuletzt aktualisiert: heute, 10:24</div>
+
+                    <div class="text-end mt-3">
+                        <button class="btn-neue-analyse" data-bs-toggle="modal" data-bs-target="#transaktionModal"><i class="bi bi-plus-circle"></i> Neue Transaktion</button>
+                    </div>
                 </div>
 
-                <!-- Strategie -->
+                <!-- Strategie (hidden per client request)
                 <div class="sb-card">
                     <div class="align-items-center gap-2 mb-3">
                         <span class="card-title mb-0">Strategie des Musterdepots</span>
@@ -395,8 +411,9 @@
                         <br> Fokus auf Qualität, Wachstum und Bewertung – für langfristige, überdurchschnittliche Renditen
                     </p>
                 </div>
+                -->
 
-                <!-- Risikoklasse -->
+                <!-- Risikoklasse (hidden per client request)
                 <div class="sb-card">
                     <div class="d-flex align-items-center gap-2 mb-3">
                         <span class="card-title mb-0">Risikoklasse</span>
@@ -407,6 +424,7 @@
                         <span class="risikoklasse-label">Wachstumsorientiert</span>
                     </div>
                 </div>
+                -->
 
                 <!-- Branchenverteilung -->
                 <div class="sb-card">
@@ -468,7 +486,7 @@
                     </div>
                 </div>
 
-                <!-- Letzte Umschichtung -->
+                <!-- Letzte Umschichtung (hidden per client request)
                 <div class="sb-card letzte-box-right">
                     <div class="d-flex align-items-center gap-2 mb-0">
                         <span class="card-title mb-0">Letzte Umschichtung</span>
@@ -492,6 +510,7 @@
                         <a href="#" class="sb-link">Zur Historie <img src="img/arrow_right_blue.svg" alt="" style="width:20px;"/></a>
                     </div>
                 </div>
+                -->
 
             </div>
             <!-- /md-side -->
@@ -499,6 +518,92 @@
         <!-- /md-layout -->
 
     </main>
+
+    <!-- ══════════════════════════════════════════
+       MODAL – Neue Transaktion
+       ══════════════════════════════════════════ -->
+    <div class="modal fade" id="transaktionModal" tabindex="-1" aria-labelledby="txModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content tx-modal">
+                <div class="modal-header tx-modal-header">
+                    <div class="tx-modal-title" id="txModalTitle">
+                        <span class="tx-title-label">Neue Transaktion für:</span>
+                        <span class="cb-logo tx-logo" id="txLogo"><img src="img/nvidia.png" alt="" /></span>
+                        <span class="tx-company" id="txCompany">NVIDIA Corporation</span>
+                    </div>
+                    <button type="button" class="analysen-modal-close" data-bs-dismiss="modal" aria-label="Schließen"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="modal-body tx-modal-body">
+                    <div class="tx-field-label">Typ</div>
+                    <div class="tx-typ-btns mb-3">
+                        <button type="button" class="tx-typ-btn active" data-typ="Kauf">Kauf</button>
+                        <button type="button" class="tx-typ-btn" data-typ="Verkauf">Verkauf</button>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-6 col-lg-3">
+                            <div class="tx-field-label">Datum</div>
+                            <input type="text" class="tx-input" id="txDatum" value="05.07.2026" />
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <div class="tx-field-label">Stückzahl</div>
+                            <input type="number" class="tx-input" id="txStueck" value="100" min="1" />
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <div class="tx-field-label">Kurs je Aktie</div>
+                            <input type="number" class="tx-input" id="txKurs" value="60.80" step="0.01" min="0" />
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <div class="tx-field-label">Gesamtwert</div>
+                            <div class="tx-total" id="txTotal">6.080,00 €</div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end gap-2 mt-4">
+                        <button type="button" class="btn-tx-cancel" data-bs-dismiss="modal">Abbrechen</button>
+                        <button type="button" class="btn-tx-save" id="txSave">Speichern</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+       MODAL – Unternehmensprofil
+       ══════════════════════════════════════════ -->
+    <div class="modal fade" id="profilModal" tabindex="-1" aria-labelledby="profilModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content profil-modal">
+                <div class="modal-header profil-modal-header">
+                    <div class="tx-modal-title" id="profilModalTitle">
+                        <span class="cb-logo tx-logo" id="pmLogo"><img src="img/nvidia.png" alt="" /></span>
+                        <span class="pm-company" id="pmCompany">NVIDIA Corporation</span>
+                    </div>
+                    <button type="button" class="analysen-modal-close" data-bs-dismiss="modal" aria-label="Schließen"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="modal-body profil-modal-body">
+                    <div class="pm-nav">
+                        <button class="pm-pill active" type="button">Profil</button>
+                        <button class="pm-pill" type="button">Analystendaten</button>
+                        <button class="pm-pill" type="button">Termine</button>
+                        <button class="pm-pill" type="button">Aktuelle News</button>
+                        <button class="pm-pill" type="button">Marge/Umsatz</button>
+                        <button class="pm-pill" type="button">KGV+KUV</button>
+                        <button class="pm-pill" type="button">Dividendenrendite</button>
+                        <button class="pm-pill" type="button">Aufsichtsrat</button>
+                        <button class="pm-pill" type="button">Aktionäre</button>
+                        <button class="pm-pill" type="button">Kontakt</button>
+                    </div>
+                    <div class="pm-content">
+                        <div class="pm-content-title">Beschreibung der Geschäftstätigkeit: <span id="pmContentCompany">NVIDIA Corporation</span></div>
+                        <p>Die NVIDIA Corporation ist weltweit führend in der Entwicklung, Herstellung und Vermarktung programmierbarer Grafikprozessoren. Das Unternehmen entwickelt auch zugehörige Software. Der Nettoumsatz verteilt sich wie folgt auf die einzelnen Produktfamilien:</p>
+                        <p>- Computer- und Netzwerklösungen (89 %): Rechenzentrumsplattformen und -infrastruktur, Ethernet-Verbindungslösungen, Hochleistungs-Computing-Lösungen, Plattformen und Lösungen für autonome und intelligente Fahrzeuge, Lösungen für die künstliche Intelligenz-Infrastruktur von Unternehmen, Kryptowährungs-Mining-Prozessoren, eingebettete Computerplatinen für Robotik, Lehre, Lernen und die Entwicklung künstlicher Intelligenz usw.;</p>
+                        <p>- Grafikprozessoren (11 %): für PCs, Spielekonsolen, Videospiel-Streaming-Plattformen, Workstations usw. (Marken GeForce, NVIDIA RTX, Quadro usw.). Der Konzern bietet außerdem Laptops, Desktops, Gaming-Computer, Computerperipheriegeräte (Monitore, Mäuse, Joysticks, Fernbedienungen usw.), Software für visuelles und virtuelles Computing, Plattformen für Infotainment-Systeme im Automobilbereich und Cloud-Kollaborationsplattformen an.</p>
+                        <p>Der Nettoumsatz verteilt sich nach Branchen auf Datenspeicherung (88,3 %), Gaming (8,7 %), professionelle Visualisierung (1,4 %), Automobil (1,3 %) und Sonstiges (0,3 %).</p>
+                        <p>Der Nettoumsatz verteilt sich geografisch wie folgt: Vereinigte Staaten (46,9 %), Singapur (18,2 %), Taiwan (15,8 %), China und Hongkong (13,1 %) und Sonstige (6 %).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/plotly.min.js"></script>
@@ -556,8 +661,104 @@
               return type === 'sort' || type === 'type'
                 ? (parseFloat(String(data).replace(/<[^>]*>/g, ' ').trim().replace(',', '.')) || 0)
                 : data;
-            } }
+            } },
+          { orderable: false, targets: 5 }
         ]
+      });
+
+      /* ── Company detail box follows the active table row ── */
+      const COMPANIES = {
+        nvda: { name: 'NVIDIA Corporation', logo: 'img/nvidia.png', logoBg: '#76b900',
+                shares: '100', buy: '67,16 €', price: '60,66 €', perf: '+1,12 %', perfUp: true,
+                tx: [['16.06.2026', 'Kauf', '100', '67,16 €', '6.716,00 €']] },
+        msft: { name: 'Microsoft Corporation', logo: 'img/microsoft.png', logoBg: '#fff',
+                shares: '80', buy: '82,10 €', price: '112,18 €', perf: '+2,31 %', perfUp: true,
+                tx: [['20.05.2024', 'Kauf', '80', '82,10 €', '6.568,00 €']] },
+        asml: { name: 'ASML Holding N.V.', logo: 'img/asml.png', logoBg: '#fff',
+                shares: '45', buy: '114,50 €', price: '146,72 €', perf: '+1,85 %', perfUp: true,
+                tx: [['19.05.2024', 'Kauf', '45', '114,50 €', '5.152,50 €']] },
+        visa: { name: 'Visa Inc.', logo: 'img/visa.png', logoBg: '#fff',
+                shares: '150', buy: '28,06 €', price: '31,45 €', perf: '+0,38 %', perfUp: true,
+                tx: [['14.05.2024', 'Kauf', '150', '28,06 €', '4.209,00 €']] }
+      };
+      let activeSymbol = 'nvda';
+
+      function showCompany(sym) {
+        const c = COMPANIES[sym];
+        if (!c) return;
+        activeSymbol = sym;
+        document.getElementById('cbName').textContent = c.name;
+        const logoImg = '<img src="' + c.logo + '" alt="" />';
+        const setLogo = id => { const el = document.getElementById(id); el.innerHTML = logoImg; el.style.background = c.logoBg; };
+        setLogo('cbLogo'); setLogo('txLogo'); setLogo('pmLogo');
+        document.getElementById('cbShares').textContent = c.shares;
+        document.getElementById('cbBuy').textContent = c.buy;
+        document.getElementById('cbPrice').textContent = c.price;
+        document.getElementById('cbPerf').textContent = c.perf;
+        document.getElementById('cbTxBody').innerHTML = c.tx.map(t =>
+          '<tr><td>' + t[0] + '</td><td class="tx-typ-' + t[1].toLowerCase() + '">' + t[1] + '</td><td>' + t[2] + '</td><td>' + t[3] + '</td><td>' + t[4] + '</td></tr>'
+        ).join('');
+        document.getElementById('txCompany').textContent = c.name;
+        document.getElementById('pmCompany').textContent = c.name;
+        document.getElementById('pmContentCompany').textContent = c.name;
+      }
+
+      /* row click activates company (delegated: survives DataTables redraws) */
+      document.querySelector('#posTable tbody').addEventListener('click', function (e) {
+        if (e.target.closest('.alert-toggle')) return; /* bell has its own handler */
+        const row = e.target.closest('tr.pos-row');
+        if (!row) return;
+        document.querySelectorAll('#posTable tbody tr.pos-row').forEach(r => r.classList.remove('active'));
+        row.classList.add('active');
+        showCompany(row.dataset.symbol);
+      });
+
+      /* alert bell on/off */
+      document.querySelector('#posTable tbody').addEventListener('click', function (e) {
+        const btn = e.target.closest('.alert-toggle');
+        if (!btn) return;
+        e.stopPropagation();
+        btn.classList.toggle('active');
+        const icon = btn.querySelector('i');
+        icon.className = btn.classList.contains('active') ? 'bi bi-bell' : 'bi bi-bell-slash';
+      });
+
+      /* ── Neue Transaktion modal ── */
+      const txStueck = document.getElementById('txStueck');
+      const txKurs = document.getElementById('txKurs');
+      const txTotal = document.getElementById('txTotal');
+      const fmtEUR = n => n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+
+      function updateTotal() {
+        const total = (parseFloat(txStueck.value) || 0) * (parseFloat(txKurs.value) || 0);
+        txTotal.textContent = fmtEUR(total);
+      }
+      txStueck.addEventListener('input', updateTotal);
+      txKurs.addEventListener('input', updateTotal);
+      updateTotal();
+
+      document.querySelectorAll('.tx-typ-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.tx-typ-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+
+      document.getElementById('txSave').addEventListener('click', function () {
+        const typ = document.querySelector('.tx-typ-btn.active').dataset.typ;
+        const row = [document.getElementById('txDatum').value, typ, txStueck.value,
+                     fmtEUR(parseFloat(txKurs.value) || 0), txTotal.textContent];
+        COMPANIES[activeSymbol].tx.unshift(row);
+        showCompany(activeSymbol);
+        bootstrap.Modal.getInstance(document.getElementById('transaktionModal')).hide();
+      });
+
+      /* profile modal pills (visual toggle) */
+      document.querySelectorAll('.pm-pill').forEach(p => {
+        p.addEventListener('click', function () {
+          document.querySelectorAll('.pm-pill').forEach(x => x.classList.remove('active'));
+          this.classList.add('active');
+        });
       });
 
       /* Performance im Vergleich */
