@@ -608,6 +608,46 @@
                     <div class="boost-item"><i class="fa-solid fa-check"></i> Bayerische Motoren Werke Aktiengesellschaft</div>
                     <div class="boost-item"><i class="fa-solid fa-check"></i> Volkswagen AG Stammaktien</div>
                 </div>
+
+                <!-- Stockbuddy Alerts -->
+                <div class="sb-card rp-card st-alerts">
+                    <div class="card-title mb-3">
+                        <i class="bi bi-bell" style="font-size:1.3rem;margin-right:6px;"></i> Stockbuddy Alerts
+                    </div>
+                    <div class="table-scroll">
+                        <table class="sbs-table alerts-table" id="alertsTable">
+                            <thead>
+                                <tr>
+                                    <th>ISIN</th>
+                                    <th>Wert</th>
+                                    <th class="alerts-bell-th" aria-label="Alarm"><i class="bi bi-bell"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>DE0005190003</td>
+                                    <td>70 EUR <i class="bi bi-graph-down-arrow trend-down"></i></td>
+                                    <td><button class="alert-toggle" aria-label="Kursalarm umschalten"><i class="bi bi-bell-slash"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>DE0007664005</td>
+                                    <td>75 EUR <i class="bi bi-graph-up-arrow trend-up"></i></td>
+                                    <td><button class="alert-toggle active" aria-label="Kursalarm umschalten"><i class="bi bi-bell"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>DE0007664005</td>
+                                    <td>70 EUR <i class="bi bi-graph-up-arrow trend-up"></i></td>
+                                    <td><button class="alert-toggle active" aria-label="Kursalarm umschalten"><i class="bi bi-bell"></i></button></td>
+                                </tr>
+                                <tr>
+                                    <td>DE0007664005</td>
+                                    <td>90 EUR <i class="bi bi-graph-down-arrow trend-down"></i></td>
+                                    <td><button class="alert-toggle active" aria-label="Kursalarm umschalten"><i class="bi bi-bell"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <!-- /right col -->
         </div>
@@ -788,6 +828,33 @@
                 : data;
             } }
         ]
+      });
+
+      /* Stockbuddy Alerts — sortable via DataTables */
+      new DataTable('#alertsTable', {
+        paging: false,
+        info: false,
+        searching: false,
+        ordering: true,
+        order: [],
+        language: { zeroRecords: 'Keine Einträge gefunden' },
+        columnDefs: [
+          /* Wert column: numeric sort on the EUR value */
+          { targets: 1, render: function (data, type) {
+              return type === 'sort' || type === 'type'
+                ? (parseFloat(String(data).replace(/<[^>]*>/g, '')) || 0)
+                : data;
+            } },
+          { orderable: false, targets: 2 }
+        ]
+      });
+
+      /* alert bell on/off */
+      document.querySelector('#alertsTable tbody').addEventListener('click', function (e) {
+        const btn = e.target.closest('.alert-toggle');
+        if (!btn) return;
+        btn.classList.toggle('active');
+        btn.querySelector('i').className = btn.classList.contains('active') ? 'bi bi-bell' : 'bi bi-bell-slash';
       });
 
       /* Detaillierte Auswertung toggle: swap button label with collapse state */
