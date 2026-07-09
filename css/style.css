@@ -1336,17 +1336,7 @@ table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order
 .cb-tx-table .tx-typ-kauf { color: var(--sb-green-dark); font-weight: 700; }
 .cb-tx-table .tx-typ-verkauf { color: #e53e3e; font-weight: 700; }
 
-/* Neue Transaktion modal */
-.tx-modal, .profil-modal {
-  border: none;
-  border-radius: 18px;
-  padding: 0.75rem 1rem 1rem;
-}
-.tx-modal-header, .profil-modal-header {
-  border-bottom: 1px solid var(--sb-border);
-  padding: 1rem 1rem 0.85rem;
-  align-items: center;
-}
+/* Neue Transaktion modal (shell styles come from .analysen-modal-*) */
 .tx-modal-title {
   display: flex;
   align-items: center;
@@ -1356,7 +1346,6 @@ table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order
 .tx-title-label { color: var(--sb-pink); }
 .tx-logo { width: 34px; height: 34px; }
 .tx-company, .pm-company { color: var(--sb-text-h); font-size: 1.05rem; }
-.tx-modal-body { padding: 1.25rem 1rem 1rem; }
 .tx-field-label {
   font-weight: 600;
   color: var(--sb-text-h);
@@ -1426,11 +1415,10 @@ table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order
 }
 .btn-tx-save:hover { background: var(--sb-pink-hover); }
 
-/* Unternehmensprofil modal */
+/* Unternehmensprofil modal (shell styles come from .analysen-modal-*) */
 .profil-modal-body {
   display: flex;
   gap: 1.5rem;
-  padding: 1.25rem 1rem 1rem;
 }
 .pm-nav {
   display: flex;
