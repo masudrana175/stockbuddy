@@ -200,6 +200,9 @@ div.dt-container.dt-empty-footer tbody>tr:last-child>* {
 .sb-nav-link:hover img {
   filter: brightness(1);
 }
+table#posTable tbody td {
+    text-align: left;
+}
 .sb-nav-link i {
   font-size: 1.2rem;
   flex-shrink: 0;
@@ -293,7 +296,7 @@ div.dt-container.dt-empty-footer tbody>tr:last-child>* {
 /* ── Topbar ── */
 .sb-topbar {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 1.75rem;
 }
@@ -1283,8 +1286,8 @@ table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order
   margin-left: 4px;
   vertical-align: middle;
 }
-.pos-alert-th .alert-master.active {
-  color: #fff;
+.pos-alert-th .alert-master.active,.pos-alert-th .alert-master {
+    color:var(--sb-green-dark);
 }
 .cb-logo {
   width: 42px;
@@ -3385,9 +3388,7 @@ table.dataTable thead>tr>th.dt-orderable-asc:hover, table.dataTable thead>tr>th.
   font-size: 0.9rem;
 }
 .pos-table tbody tr .d-flex {
-  max-width: 109px;
-  justify-content: space-between !important;
-  margin-left: auto;
+  justify-content:flex-start !important;
 }
 .pos-company-cell {
   display: flex;
@@ -3548,9 +3549,6 @@ table.dataTable thead>tr>th.dt-orderable-asc:hover, table.dataTable thead>tr>th.
 @media (min-width: 1024px) {
   .buddy-page .top-bar-main {
     display: none;
-  }
-  .buddy-right-col .sb-topbar-right {
-    margin-top: -10px;
   }
 }
 
