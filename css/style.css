@@ -1275,6 +1275,16 @@ table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order
 .alert-toggle.active {
   color: var(--sb-green-dark);
 }
+/* master bell lives in the blue table header */
+.pos-alert-th .alert-master {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 1.1rem;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+.pos-alert-th .alert-master.active {
+  color: #fff;
+}
 .cb-logo {
   width: 42px;
   height: 42px;
@@ -2620,6 +2630,8 @@ input.sb-switch[type="checkbox"]:focus-visible {
   height: 6px;
   background: #fff;
   border-radius: 4px;
+  cursor: pointer;
+  touch-action: none; /* draggable on touch devices */
 }
 .ziel-slider-fill {
   height: 100%;
