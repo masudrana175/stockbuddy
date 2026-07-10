@@ -161,7 +161,12 @@ function initPerfChart() {
       /* neutrale Nulllinie (Slate), markiert die Grenze zu negativ */
       zeroline: true, zerolinecolor: 'rgba(100,116,139,0.6)', zerolinewidth: 1.5
     },
-    hovermode: 'x unified', showlegend: false
+    hovermode: 'x unified', showlegend: false,
+    hoverlabel: {
+      bgcolor: 'rgba(255, 255, 255, 0.92)',
+      bordercolor: '#e5e7eb',
+      font: { family: 'Barlow', size: 13, color: '#333' }
+    }
   }, { displayModeBar: false, responsive: true });
 }
 
