@@ -1,0 +1,256 @@
+/* ============================================================
+   StockBuddy – Motion Layer (Vanilla JS, kein Backend)
+   ------------------------------------------------------------
+   Modernes Admin-Panel-Feeling durch Entrance-Animationen:
+     • Cards / Blöcke blenden gestaffelt beim Scrollen ein
+     • Charts (Plotly) „zeichnen" sich per Clip-Sweep (an Card gekoppelt)
+     • Kennzahlen zählen hoch (dt. Format: 18,75 % · 23.320,25 €)
+     • Score-/Metric-Bars füllen von 0 auf ihren Zielwert
+     • Sterne / Tags poppen gestaffelt
+   Bewusst KEINE Hover-Effekte auf Boxen.
+   Respektiert prefers-reduced-motion und @media print.
+   Sicherheits-Fallback: nach kurzer Zeit wird ALLES sichtbar
+   gemacht, selbst wenn ein IntersectionObserver nicht feuert.
+
+   Konfiguration (optional, VOR dem Script setzen):
+     window.SB_MOTION_CONFIG = { enabled, stagger, revealSelector,
+       countSelector, chartSelector, barSelector, popSelector,
+       countDuration, lift, fallbackMs }
+   Opt-out je Element:  data-sb-no-motion
+   ============================================================ */
+(function () {
+  "use strict";
+
+  var CFG = Object.assign({
+    enabled: true,
+    stagger: 0,        // 0 = alle sichtbaren Elemente starten gleichzeitig
+    revealSelector: ".sb-main .sb-card, .sb-main .chart-card, .sb-main .analysen-card, .sb-main .rp-card",
+    countSelector: ".trend-val, .wert-val, .score-num, .metric-pct, .analysis-score",
+    chartSelector: "#perfChart, #spark1, #spark2, .js-plotly-plot",
+    barSelector: ".sb-progress-bar",
+    popSelector: ".score-stars i, .sb-tag",
+    countDuration: 1300,   // gilt für Count-up UND Bar-Fill -> gleichzeitig fertig
+    lift: true,
+    fallbackMs: 1600
+  }, window.SB_MOTION_CONFIG || {});
+
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var supported = "IntersectionObserver" in window;
+
+  // Ohne Motion: Inhalt bleibt ganz normal sichtbar (nichts wird versteckt)
+  if (!CFG.enabled || reduced) return;
+
+  document.documentElement.classList.add("sb-anim");
+
+  function fmtDE(value, decimals) {
+    if (window.Intl && Intl.NumberFormat) {
+      return new Intl.NumberFormat("de-DE", {
+        minimumFractionDigits: decimals, maximumFractionDigits: decimals
+      }).format(value);
+    }
+    return value.toFixed(decimals);
+  }
+  var easeOut = function (t) { return 1 - Math.pow(1 - t, 3); };
+  var now = (window.performance && performance.now)
+    ? function () { return performance.now(); }
+    : function () { return +new Date(); };
+  function sel(s) { return Array.prototype.slice.call(document.querySelectorAll(s)); }
+  function skip(el) { return el.hasAttribute("data-sb-no-motion"); }
+
+  /* ---------- Count-up ---------- */
+  function findNumberNode(el) {
+    if (el.children.length) {
+      for (var i = 0; i < el.childNodes.length; i++) {
+        var n = el.childNodes[i];
+        if (n.nodeType === 3 && /\d/.test(n.nodeValue)) return n;
+      }
+    }
+    return el;
+  }
+  function parseParts(text) {
+    var m = String(text).match(/^(\D*?)([\d][\d.,]*)([\s\S]*)$/);
+    if (!m) return null;
+    var numStr = m[2], decimals = 0, ci = numStr.lastIndexOf(",");
+    if (ci > -1) decimals = numStr.length - ci - 1;
+    var value = parseFloat(numStr.replace(/\./g, "").replace(",", "."));
+    if (isNaN(value)) return null;
+    return { prefix: m[1], suffix: m[3], value: value, decimals: decimals };
+  }
+  function animateCount(el) {
+    if (el.dataset.sbCountDone) return;
+    var node = findNumberNode(el);
+    var src = node.nodeType === 3 ? node.nodeValue : node.textContent;
+    var p = parseParts(src);
+    if (!p) return;
+    el.dataset.sbCountDone = "1";
+    el.setAttribute("data-sb-count", "");
+    var start = null, dur = CFG.countDuration, target = Math.abs(p.value), neg = p.value < 0;
+    function put(v) { if (node.nodeType === 3) node.nodeValue = v; else node.textContent = v; }
+    function frame() {
+      if (start === null) start = now();   // Start erst beim 1. echten Frame
+      var t = Math.min(1, (now() - start) / dur);
+      var cur = target * easeOut(t);
+      put(p.prefix + fmtDE(neg ? -cur : cur, p.decimals) + p.suffix);
+      if (t < 1) requestAnimationFrame(frame);
+      else put(p.prefix + fmtDE(p.value, p.decimals) + p.suffix);
+    }
+    put(p.prefix + fmtDE(0, p.decimals) + p.suffix);
+    requestAnimationFrame(frame);
+  }
+
+  /* ---------- Bars ---------- */
+  function prepBar(bar) {
+    var w = bar.style.width;
+    if (!w) { var cs = getComputedStyle(bar).width; w = cs; }
+    if (!w || w === "0px") return;
+    bar.setAttribute("data-sb-bar", "");
+    bar.dataset.sbBarTarget = bar.style.width || w;
+    bar.style.width = "0";
+  }
+  function fillBar(bar) {
+    if (!bar.dataset.sbBarTarget || bar.dataset.sbBarFilled) return;
+    bar.dataset.sbBarFilled = "1";
+    // Balken werden per rAF-Loop animiert – EXAKT wie die Count-ups.
+    // (CSS-Transition triggert nicht immer zuverlässig; der rAF-Loop läuft
+    //  hingegen genauso stabil wie die Zahlen-Animation und ist zeitgleich fertig.)
+    var m = String(bar.dataset.sbBarTarget).match(/^([\d.]+)(.*)$/);
+    var end = m ? parseFloat(m[1]) : 100;
+    var unit = (m && m[2]) ? m[2] : "%";
+    bar.style.transition = "none";
+    var start = null, dur = CFG.countDuration;
+    function frame() {
+      if (start === null) start = now();   // Start erst beim 1. echten Frame
+      var t = Math.min(1, (now() - start) / dur);
+      bar.style.width = (end * easeOut(t)) + unit;
+      if (t < 1) requestAnimationFrame(frame);
+      else bar.style.width = bar.dataset.sbBarTarget;
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ---------- Reveal eines Cards (idempotent) ---------- */
+  function revealCard(el) {
+    if (el.dataset.sbRevealed) return;
+    el.dataset.sbRevealed = "1";
+    el.classList.add("sb-in");
+
+    // Alles startet GLEICHZEITIG und teilt dieselbe Dauer -> alle Zahlen
+    // und Balken sind zeitgleich fertig; die "Geschwindigkeit" ergibt sich
+    // aus dem jeweiligen Zielwert (großer Wert zählt schneller).
+    el.querySelectorAll("[data-sb-bar]").forEach(fillBar);
+    el.querySelectorAll(CFG.countSelector).forEach(function (n) {
+      if (!skip(n)) animateCount(n);
+    });
+    el.querySelectorAll("[data-sb-pop]").forEach(function (p) {
+      requestAnimationFrame(function () { p.classList.add("sb-in"); });
+    });
+    el.querySelectorAll("[data-sb-chart-reveal]").forEach(function (c) {
+      requestAnimationFrame(function () { c.classList.add("sb-in"); });
+    });
+  }
+
+  function init() {
+    /* Reveal-Ziele markieren + Startzustände setzen */
+    var reveal = sel(CFG.revealSelector).filter(function (el) { return !skip(el); });
+    reveal.forEach(function (el) {
+      el.setAttribute("data-sb-reveal", "");
+      if (CFG.lift) el.classList.add("sb-lift");
+      el.querySelectorAll(CFG.barSelector).forEach(prepBar);
+      el.querySelectorAll(CFG.popSelector).forEach(function (p) { p.setAttribute("data-sb-pop", ""); });
+    });
+
+    /* Charts (jetzt schon von Plotly gerendert) clippen */
+    var charts = [];
+    sel(CFG.chartSelector).forEach(function (c) {
+      if (charts.indexOf(c) === -1 && !skip(c)) charts.push(c);
+    });
+    charts.forEach(function (c) { c.setAttribute("data-sb-chart-reveal", ""); });
+    // Charts, die in KEINEM Reveal-Card liegen, einzeln behandeln
+    var looseCharts = charts.filter(function (c) { return !c.closest("[data-sb-reveal]"); });
+
+    /* Lose Zahlen (außerhalb von Cards) */
+    var looseNums = sel(CFG.countSelector).filter(function (el) {
+      return !skip(el) && !el.closest("[data-sb-reveal]");
+    });
+
+    /* Stagger-Gruppen je Elterncontainer */
+    var seq = 0;
+    reveal.forEach(function (el) {
+      var pr = el.parentNode;
+      if (pr.__sbGid == null) pr.__sbGid = ++seq;
+    });
+    function delayFor(el) {
+      var pr = el.parentNode, sibs = [];
+      reveal.forEach(function (r) { if (r.parentNode === pr) sibs.push(r); });
+      return Math.min(sibs.indexOf(el), 6) * CFG.stagger;
+    }
+
+    if (supported) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          var el = en.target; io.unobserve(el);
+          setTimeout(function () { revealCard(el); }, delayFor(el));
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+      reveal.forEach(function (el) { io.observe(el); });
+
+      if (looseNums.length || looseCharts.length) {
+        var io2 = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) {
+            if (!en.isIntersecting) return;
+            io2.unobserve(en.target);
+            if (en.target.matches(CFG.chartSelector)) {
+              requestAnimationFrame(function () { en.target.classList.add("sb-in"); });
+            } else { animateCount(en.target); }
+          });
+        }, { threshold: 0.05 });
+        looseNums.forEach(function (el) { io2.observe(el); });
+        looseCharts.forEach(function (el) { io2.observe(el); });
+      }
+    }
+
+    /* Fallback OHNE Vorwegnahme: reveal NUR, was gerade sichtbar ist.
+       Elemente unter dem Sichtbereich bleiben ausstehend und animieren
+       erst beim Reinscrollen (via IO oder diesem Scroll-Fallback).
+       Das deckt auch No-/Broken-IO-Umgebungen ab, ohne die Scroll-
+       Animation vorzeitig „abzubrennen". */
+    function inViewport(el) {
+      var vh = window.innerHeight || document.documentElement.clientHeight || 0;
+      if (!vh) return true; // Viewport unbekannt -> lieber zeigen als verstecken
+      var r = el.getBoundingClientRect();
+      return r.bottom > 0 && r.top < vh * 0.92;
+    }
+    function revealVisible() {
+      reveal.forEach(function (el) {
+        if (!el.dataset.sbRevealed && inViewport(el)) revealCard(el);
+      });
+      looseNums.forEach(function (el) {
+        if (!el.dataset.sbCountDone && inViewport(el)) animateCount(el);
+      });
+      looseCharts.forEach(function (el) {
+        if (!el.classList.contains("sb-in") && inViewport(el)) el.classList.add("sb-in");
+      });
+    }
+
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { ticking = false; revealVisible(); });
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    /* kurz nach Load das aktuell Sichtbare absichern (falls IO nicht feuert) */
+    setTimeout(revealVisible, CFG.fallbackMs);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+
+  window.SBMotion = { countUp: animateCount, reveal: revealCard, config: CFG };
+})();

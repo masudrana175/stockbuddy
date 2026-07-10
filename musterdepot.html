@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=20260709e">
+    <link rel="stylesheet" href="css/sb-uploader.css?v=20260709e">
+    <link rel="stylesheet" href="css/sb-motion.css?v=20260709e">
 </head>
 
 <body>
@@ -24,6 +26,10 @@
                 <div class="sb-logo-icon"><img src="img/logo.png" alt="" /></div>
             </a>
             <nav class="sb-nav">
+				<p><button class="btn-neuer-chat" onclick="window.location.href='buddy.html'"><i class="bi bi-plus-circle"></i> Neuer Chat</button></p>
+				<p><button class="btn-print-analyse" href="#" class="sb-link" data-bs-toggle="modal" data-bs-target="#depotanalyseModal">
+				<i class="bi bi-plus-circle"></i> neue Depotanalyse</button></p>
+				
                 <a class="sb-nav-link" href="index.html">
                     <span><img src="img/navi_home_active.svg" alt="" style="width:22px"/></span>
                     <span>Übersicht</span>
@@ -69,7 +75,7 @@
                 </div>
             </div>
             <div class="sb-topbar-right">
-                <button class="btn-neue-analyse d-none d-lg-inline-flex" onclick="window.location.href='analyse.html'"><i class="bi bi-plus-circle"></i> Neue Analyse</button>
+                
                 <div class="notif-wrapper" id="notifWrapper">
                     <button class="sb-notif" id="notifBtn" aria-label="Benachrichtigungen" aria-expanded="false" aria-controls="notifPanel">
                         <img src="img/benachrichtigungen.svg" alt="" style="width:24px;" />
@@ -170,7 +176,7 @@
                 <!-- Top Positionen -->
                 <div class="sb-card">
                     <div class="d-flex align-items-center gap-2 mb-3">
-                        <span class="card-title">Top – Positionen</span>
+                        <span class="card-title">Depot – Positionen</span>
                         <img src="img/info.svg" alt="" style="width:18px;margin-left:2px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" />
                     </div>
                     <div style="overflow-x:auto;">
@@ -456,7 +462,7 @@
                     <div class="d-flex align-items-center gap-2 mb-3">
                         <div class="cb-logo" id="cbLogo"><img src="img/nvidia.png" alt="" /></div>
                         <span class="card-title mb-0" id="cbName">NVIDIA Corporation</span>
-                        <img src="img/info.svg" alt="" id="cbInfoBtn" style="width:18px;cursor:pointer;" data-bs-toggle="modal" data-bs-target="#profilModal" role="button" tabindex="0" aria-label="Unternehmensprofil öffnen" />
+                        <img src="img/info_company.svg" alt="" id="cbInfoBtn" style="width:28px;cursor:pointer;" data-bs-toggle="modal" data-bs-target="#profilModal" role="button" tabindex="0" aria-label="Unternehmensprofil öffnen" />
                     </div>
 
                     <div class="cb-section-title">Position</div>
@@ -601,12 +607,53 @@
             </div>
         </div>
     </div>
+	
+	<!-- ══════════════════════════════════════════
+       MODAL – Neue Depot-Analyse
+       ══════════════════════════════════════════ -->
+    <div class="modal fade" id="depotanalyseModal" tabindex="-1" aria-labelledby="depotanalyseModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content analysen-modal">
+                <div class="modal-header analysen-modal-header">
+                    <div class="analysen-modal-title" id="depotanalyseModalTitle">
+                        <i class="bi bi-plus-circle"></i>
+                        Depot-Analyse
+                    </div>
+                    <button type="button" class="analysen-modal-close" data-bs-dismiss="modal" aria-label="Schließen">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+                <div class="modal-body analysen-modal-body">
+
+                    
+					<div class="sb-uploader" data-sb-uploader
+                         data-accept=".xls,.xlsx,.csv,.pdf,.png,.jpg,.jpeg,.webp"
+                         data-max-size-mb="2"
+                         data-max-files="5"
+                         data-multiple="true"
+                         data-title="<b>Portfolio hochladen</b> &ndash; ziehen oder durchsuchen"
+                         data-hint="XLS, CSV, PDF oder Screenshot &middot; max 2 MB pro Datei"
+                         data-paste="true"
+                         data-submit-button=".btn-alle-loeschen"
+                         data-note="Du kannst auch manuell Positionen &uuml;ber &bdquo;Dein Musterdepot&ldquo; eingeben."></div>
+                    
+				
+                    
+				</div>
+                <div class="modal-footer analysen-modal-footer">
+                    <button class="btn-print-analyse" href="#" class="sb-link" data-bs-toggle="modal" data-bs-target="#depotanalyseModal">Abbrechen</button>
+					<button type="button" class="btn-alle-loeschen">Analysieren</button> 
+		
+				</div>
+            </div>
+        </div>
+    </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/plotly.min.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/dataTables.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=20260709e"></script>
     <script>
       const PL = { font: { family: 'Barlow, sans-serif' }, paper_bgcolor: 'transparent', plot_bgcolor: 'transparent' };
       const noBar = { displayModeBar: false, responsive: true };
@@ -784,6 +831,8 @@
         showlegend: false
       }, noBar);
     </script>
-</body>
+    <script src="js/sb-uploader.js?v=20260709e"></script>
+      <script src="js/sb-motion.js?v=20260709e"></script>
+  </body>
 
 </html>

@@ -161,6 +161,12 @@ function initPerfChart() {
       /* neutrale Nulllinie (Slate), markiert die Grenze zu negativ */
       zeroline: true, zerolinecolor: 'rgba(100,116,139,0.6)', zerolinewidth: 1.5
     },
+    /* Negativ-Zone dezent grau hinterlegen – bewusst nicht rot/magenta */
+    shapes: dataMin < 0 ? [{
+      type: 'rect', xref: 'paper', x0: 0, x1: 1,
+      yref: 'y', y0: dataMin, y1: 0,
+      fillcolor: 'rgba(100,116,139,0.08)', line: { width: 0 }, layer: 'below'
+    }] : [],
     hovermode: 'x unified', showlegend: false
   }, { displayModeBar: false, responsive: true });
 }

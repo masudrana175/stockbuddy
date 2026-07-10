@@ -181,6 +181,9 @@ div.dt-container.dt-empty-footer tbody>tr:last-child>* {
   letter-spacing: 0.01em;
   transition: var(--sb-ease);
 }
+.sb-nav button.btn-neuer-chat, nav.sb-nav button.btn-print-analyse {
+    min-width: 210px;
+}
 .sb-nav-link > span:first-child {
   display: inline-block;
   min-width: 29px;
@@ -2728,6 +2731,34 @@ input.sb-switch[type="checkbox"]:focus-visible {
 }
 .btn-neue-analyse:hover {
   background: var(--sb-pink-hover);
+}
+
+.btn-neuer-chat {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--sb-pink);
+    border: none;
+    color: #fff;
+    border-radius: 10px;
+    padding:0.52rem 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: var(--sb-ease);
+}
+.btn-neuer-chat i {
+  font-size: 1.1rem;
+}
+.btn-neuer-chat:hover {
+  background: var(--sb-pink-hover);
+  color: #fff;
+}
+.btn-neuer-chat:hover img{
+    filter: brightness(0) invert(1);
 }
 
 .analyse-body {

@@ -1,0 +1,111 @@
+/* ============================================================
+   StockBuddy – Motion Layer (Admin-Panel)
+   Entrance-/Reveal-Animationen für Cards, Charts, Zahlen, Bars.
+   Bewusst KEINE Hover-Effekte auf Boxen.
+   Aktiv nur wenn <html> die Klasse .sb-anim trägt (JS-gesetzt),
+   damit ohne JS nichts versteckt bleibt.
+   ============================================================ */
+
+/* Reduced-Motion & Druck: alles sofort sichtbar zeigen */
+@media (prefers-reduced-motion: reduce) {
+  html.sb-anim [data-sb-reveal] { opacity: 1 !important; transform: none !important; }
+  html.sb-anim [data-sb-chart-reveal] { clip-path: none !important; }
+}
+@media print {
+  html.sb-anim [data-sb-reveal] { opacity: 1 !important; transform: none !important; }
+  html.sb-anim [data-sb-chart-reveal] { clip-path: none !important; }
+}
+
+/* ---------- Reveal: Cards & Blöcke ---------- */
+html.sb-anim [data-sb-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  will-change: opacity, transform;
+  transition:
+    opacity .55s cubic-bezier(.22, .61, .36, 1),
+    transform .62s cubic-bezier(.22, .61, .36, 1);
+}
+html.sb-anim [data-sb-reveal].sb-in {
+  opacity: 1;
+  transform: none;
+}
+/* subtiler "Lift" nur während der Einblendung, kein Hover */
+html.sb-anim [data-sb-reveal].sb-lift {
+  transform: translateY(18px) scale(.985);
+}
+html.sb-anim [data-sb-reveal].sb-lift.sb-in {
+  transform: none;
+}
+
+/* ---------- Chart-Sweep (Linie „zeichnet sich") ---------- */
+html.sb-anim [data-sb-chart-reveal] {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.15s cubic-bezier(.33, 1, .68, 1);
+  will-change: clip-path;
+}
+html.sb-anim [data-sb-chart-reveal].sb-in {
+  clip-path: inset(0 0 0 0);
+}
+
+/* ---------- Zahl-Count-up: nur ein sanftes Aufblenden ---------- */
+html.sb-anim [data-sb-count] {
+  transition: color .3s ease;
+}
+
+/* ---------- Micro-Pop: Sterne, Tags, Badges (gestaffelt) ---------- */
+html.sb-anim [data-sb-pop] {
+  opacity: 0;
+  transform: translateY(6px) scale(.82);
+  transition:
+    opacity .34s ease,
+    transform .42s cubic-bezier(.34, 1.56, .64, 1);
+  will-change: opacity, transform;
+}
+html.sb-anim [data-sb-pop].sb-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Progress/Score-Bars füllen von 0 ---------- */
+/* .sb-progress-bar hat bereits transition: width .7s ease  */
+html.sb-anim .sb-progress-bar[data-sb-bar] {
+  transition: width 1s cubic-bezier(.33, 1, .68, 1);
+}
+
+/* ============================================================
+   Modal-Footer – Buttons angeglichen (Abbrechen ⇄ Analysieren)
+   Scoped auf den Depot-Analyse-Footer, ändert Sidebar/Print nicht.
+   ============================================================ */
+.analysen-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+.analysen-modal-footer .btn-print-analyse,
+.analysen-modal-footer .btn-alle-loeschen {
+  min-width: 150px;
+  height: 46px;
+  padding: 0 1.15rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+/* Abbrechen: gleiche Maße, dezenter Rahmen */
+.analysen-modal-footer .btn-print-analyse {
+  border-width: 1.5px;
+}
+/* Deaktivierter Analysieren-Button (kein gültiges File) */
+.btn-alle-loeschen:disabled,
+.btn-alle-loeschen.is-disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+.btn-alle-loeschen:disabled:hover,
+.btn-alle-loeschen.is-disabled:hover {
+  background: var(--sb-pink);
+}

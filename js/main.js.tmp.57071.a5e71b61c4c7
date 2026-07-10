@@ -101,7 +101,13 @@ function drawSparkline(divId, color, data) {
     yaxis: {
       showgrid: false, showticklabels: false, showline: false,
       zeroline: hasNeg, zerolinecolor: 'rgba(100,116,139,0.55)', zerolinewidth: 1
-    }
+    },
+    /* dezente Schraffur des Bereichs unter Null (neutral, nicht rot/magenta) */
+    shapes: hasNeg ? [{
+      type: 'rect', xref: 'paper', x0: 0, x1: 1,
+      yref: 'y', y0: dataMin, y1: 0,
+      fillcolor: 'rgba(100,116,139,0.10)', line: { width: 0 }, layer: 'below'
+    }] : []
   }, { displayModeBar: false, responsive: true });
 }
 
@@ -121,28 +127,23 @@ function initPerfChart() {
   var x             = Array.from({ length: total }, function (_, i) { return i; });
   var dataMin       = Math.min(Math.min.apply(null, pinkData), Math.min.apply(null, blueData));
 
-  /* Je Serie: positiver Teil solide, negativer Teil gestrichelt –
-     beide in DERSELBEN Serienfarbe, damit die Linien im negativen
-     Bereich unterscheidbar bleiben. */
-  var series = [
-    { y: pinkData, c: '#D4387A', name: 'StockBuddy Musterdepot' },
-    { y: blueData, c: '#1B4FBF', name: 'Mein Depot' }
+  var traces = [
+    { x: x, y: pinkData, name: 'StockBuddy Musterdepot',
+      type: 'scatter', mode: 'lines',
+      line: { color: '#D4387A', width: 2, shape: 'spline', smoothing: 1.2 } },
+    { x: x, y: blueData, name: 'Mein Depot',
+      type: 'scatter', mode: 'lines',
+      line: { color: '#1B4FBF', width: 2, shape: 'spline', smoothing: 1.2 } }
   ];
-  var traces = [];
-  series.forEach(function (s) {
-    var sp = splitSeriesAtZero(x, s.y);
+  /* Negative Linienabschnitte je Serie in neutralem Slate darüberlegen */
+  [pinkData, blueData].forEach(function (series) {
+    if (Math.min.apply(null, series) >= 0) return;
+    var seg = negativeSegments(x, series);
     traces.push({
-      x: sp.posX, y: sp.posY, name: s.name,
-      type: 'scatter', mode: 'lines', connectgaps: false,
-      line: { color: s.c, width: 2, shape: 'spline', smoothing: 1.2 }
+      x: seg.x, y: seg.y, type: 'scatter', mode: 'lines',
+      line: { color: SB_NEG_COLOR, width: 2, shape: 'spline', smoothing: 1.2 },
+      connectgaps: false, hoverinfo: 'skip', showlegend: false
     });
-    if (Math.min.apply(null, s.y) < 0) {
-      traces.push({
-        x: sp.negX, y: sp.negY, name: s.name,       // gleicher Name -> Hover bleibt sauber
-        type: 'scatter', mode: 'lines', connectgaps: false, showlegend: false,
-        line: { color: s.c, width: 2, shape: 'spline', smoothing: 1.2, dash: 'dash' }
-      });
-    }
   });
 
   Plotly.newPlot('perfChart', traces, {
@@ -161,6 +162,12 @@ function initPerfChart() {
       /* neutrale Nulllinie (Slate), markiert die Grenze zu negativ */
       zeroline: true, zerolinecolor: 'rgba(100,116,139,0.6)', zerolinewidth: 1.5
     },
+    /* Negativ-Zone dezent grau hinterlegen – bewusst nicht rot/magenta */
+    shapes: dataMin < 0 ? [{
+      type: 'rect', xref: 'paper', x0: 0, x1: 1,
+      yref: 'y', y0: dataMin, y1: 0,
+      fillcolor: 'rgba(100,116,139,0.08)', line: { width: 0 }, layer: 'below'
+    }] : [],
     hovermode: 'x unified', showlegend: false
   }, { displayModeBar: false, responsive: true });
 }

@@ -12,7 +12,9 @@
     />
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=20260709e">
+    <link rel="stylesheet" href="css/sb-uploader.css?v=20260709e">
+    <link rel="stylesheet" href="css/sb-motion.css?v=20260709e">
 </head>
 
 <body>
@@ -23,6 +25,10 @@
                 <div class="sb-logo-icon"><img src="img/logo.png" alt="" /></div>
             </a>
             <nav class="sb-nav">
+				<p><button class="btn-neuer-chat" onclick="window.location.href='buddy.html'"><i class="bi bi-plus-circle"></i> Neuer Chat</button></p>
+				<p><button class="btn-print-analyse" href="#" class="sb-link" data-bs-toggle="modal" data-bs-target="#depotanalyseModal">
+				<i class="bi bi-plus-circle"></i> neue Depotanalyse</button></p>
+				
                 <a class="sb-nav-link" href="index.html">
                     <span><img src="img/navi_home_active.svg" alt="" style="width:22px"/></span>
                     <span>Übersicht</span>
@@ -68,7 +74,7 @@
                 </div>
             </div>
             <div class="sb-topbar-right">
-                <button class="btn-neue-analyse d-none d-lg-inline-flex" onclick="window.location.href='analyse.html'"><i class="bi bi-plus-circle"></i> Neue Analyse</button>
+                
                 <div class="notif-wrapper" id="notifWrapper">
                     <button class="sb-notif" id="notifBtn" aria-label="Benachrichtigungen" aria-expanded="false" aria-controls="notifPanel">
                         <img src="img/benachrichtigungen.svg" alt="" style="width:24px;" />
@@ -165,7 +171,7 @@
                         </div>
                     </div>
                     <!-- Bevorzugte Märkte -->
-                    <div class="setting-row">
+                    <!--<div class="setting-row">
                         <div class="setting-icon"><img style="width:32px;" src="img/maerkte.svg" alt="" /></div>
                         <div class="setting-info">
                             <div class="setting-label">Bevorzugte Märkte</div>
@@ -176,7 +182,7 @@
                             <button class="toggle-pill">Europa</button>
                             <button class="toggle-pill">Deutschland</button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <!-- Datenschutz & Konto -->
@@ -457,6 +463,47 @@
             </div>
         </div>
     </div>
+	
+	<!-- ══════════════════════════════════════════
+       MODAL – Neue Depot-Analyse
+       ══════════════════════════════════════════ -->
+    <div class="modal fade" id="depotanalyseModal" tabindex="-1" aria-labelledby="depotanalyseModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content analysen-modal">
+                <div class="modal-header analysen-modal-header">
+                    <div class="analysen-modal-title" id="depotanalyseModalTitle">
+                        <i class="bi bi-plus-circle"></i>
+                        Depot-Analyse
+                    </div>
+                    <button type="button" class="analysen-modal-close" data-bs-dismiss="modal" aria-label="Schließen">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+                <div class="modal-body analysen-modal-body">
+
+                    
+					<div class="sb-uploader" data-sb-uploader
+                         data-accept=".xls,.xlsx,.csv,.pdf,.png,.jpg,.jpeg,.webp"
+                         data-max-size-mb="2"
+                         data-max-files="5"
+                         data-multiple="true"
+                         data-title="<b>Portfolio hochladen</b> &ndash; ziehen oder durchsuchen"
+                         data-hint="XLS, CSV, PDF oder Screenshot &middot; max 2 MB pro Datei"
+                         data-paste="true"
+                         data-submit-button=".btn-alle-loeschen"
+                         data-note="Du kannst auch manuell Positionen &uuml;ber &bdquo;Dein Musterdepot&ldquo; eingeben."></div>
+                    
+				
+                    
+				</div>
+                <div class="modal-footer analysen-modal-footer">
+                    <button class="btn-print-analyse" href="#" class="sb-link" data-bs-toggle="modal" data-bs-target="#depotanalyseModal">Abbrechen</button>
+					<button type="button" class="btn-alle-loeschen">Analysieren</button> 
+		
+				</div>
+            </div>
+        </div>
+    </div>
 
     <script>
       /* Tabs inside the profile modals */
@@ -484,7 +531,9 @@
     </script>
 
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
-</body>
+    <script src="js/main.js?v=20260709e"></script>
+    <script src="js/sb-uploader.js?v=20260709e"></script>
+      <script src="js/sb-motion.js?v=20260709e"></script>
+  </body>
 
 </html>
