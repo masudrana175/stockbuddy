@@ -27,7 +27,7 @@
             <nav class="sb-nav">
 				<p><button class="btn-neuer-chat" onclick="window.location.href='buddy.html'"><i class="bi bi-plus-circle"></i> Neuer Chat</button></p>
 				<p><button class="btn-print-analyse" href="#" class="sb-link" data-bs-toggle="modal" data-bs-target="#depotanalyseModal">
-				<i class="bi bi-plus-circle"></i> neue Depotanalyse</button></p>
+				<i class="bi bi-plus-circle"></i> Neue Depotanalyse</button></p>
 				
                 <a class="sb-nav-link" href="index.html">
                     <span><img src="img/navi_home_active.svg" alt="" style="width:22px"/></span>
@@ -507,6 +507,32 @@
 
     <script>
       /* Tabs inside the profile modals */
+      /* Ziel sliders: drag or click to set the value, percent label updates */
+      document.querySelectorAll('.ziel-slider-wrap').forEach(function (wrap) {
+        var fill = wrap.querySelector('.ziel-slider-fill');
+        var thumb = wrap.querySelector('.ziel-thumb');
+        var pctEl = wrap.parentElement.querySelector('.ziel-pct');
+
+        function setFromX(clientX) {
+          var r = wrap.getBoundingClientRect();
+          var p = Math.max(0, Math.min(100, Math.round((clientX - r.left) / r.width * 100)));
+          fill.style.width = p + '%';
+          thumb.style.left = 'calc(' + p + '% - 7px)';
+          if (pctEl) pctEl.textContent = p + '%';
+        }
+        function onMove(e) { setFromX(e.clientX); e.preventDefault(); }
+        function onUp() {
+          document.removeEventListener('pointermove', onMove);
+          document.removeEventListener('pointerup', onUp);
+        }
+        wrap.addEventListener('pointerdown', function (e) {
+          setFromX(e.clientX);
+          document.addEventListener('pointermove', onMove);
+          document.addEventListener('pointerup', onUp);
+          e.preventDefault();
+        });
+      });
+
       document.querySelectorAll('.pf-tabs').forEach(function (tabs) {
         var modal = tabs.closest('.modal');
         tabs.querySelectorAll('.pf-tab').forEach(function (tab) {

@@ -28,7 +28,7 @@
             <nav class="sb-nav">
 				<p><button class="btn-neuer-chat" onclick="window.location.href='buddy.html'"><i class="bi bi-plus-circle"></i> Neuer Chat</button></p>
 				<p><button class="btn-print-analyse" href="#" class="sb-link" data-bs-toggle="modal" data-bs-target="#depotanalyseModal">
-				<i class="bi bi-plus-circle"></i> neue Depotanalyse</button></p>
+				<i class="bi bi-plus-circle"></i> Neue Depotanalyse</button></p>
 				
                 <a class="sb-nav-link" href="index.html">
                     <span><img src="img/navi_home_active.svg" alt="" style="width:22px"/></span>
@@ -188,7 +188,9 @@
                                     <th>Performance<small>seit Kauf</small></th>
                                     <th>Aktueller Kurs</th>
                                     <th>StockBuddy Score<small>/100</small></th>
-                                    <th class="pos-alert-th">Alert</th>
+                                    <th class="pos-alert-th">Alert
+                                        <button class="alert-toggle alert-master active" id="alertMaster" aria-label="Alle Kursalarme umschalten"><i class="bi bi-bell"></i></button>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -221,9 +223,7 @@
                                             <div class="pos-score-label" style="color:var(--sb-green-dark);font-weight:700;">Sehr gut</div>
                                         </div>
                                     </td>
-                                    <td class="pos-alert-cell">
-                                        <button class="alert-toggle active" aria-label="Kursalarm umschalten"><i class="bi bi-bell"></i></button>
-                                    </td>
+                                    <td class="pos-alert-cell"></td>
                                 </tr>
                                 <!-- Microsoft -->
                                 <tr data-symbol="msft" class="pos-row">
@@ -254,9 +254,7 @@
                                             <div class="pos-score-label" style="color:var(--sb-green-dark);font-weight:700;">Sehr gut</div>
                                         </div>
                                     </td>
-                                    <td class="pos-alert-cell">
-                                        <button class="alert-toggle" aria-label="Kursalarm umschalten"><i class="bi bi-bell-slash"></i></button>
-                                    </td>
+                                    <td class="pos-alert-cell"></td>
                                 </tr>
                                 <!-- ASML -->
                                 <tr data-symbol="asml" class="pos-row">
@@ -287,9 +285,7 @@
                                             <div class="pos-score-label" style="color:var(--sb-green-dark);font-weight:700;">Sehr gut</div>
                                         </div>
                                     </td>
-                                    <td class="pos-alert-cell">
-                                        <button class="alert-toggle" aria-label="Kursalarm umschalten"><i class="bi bi-bell-slash"></i></button>
-                                    </td>
+                                    <td class="pos-alert-cell"></td>
                                 </tr>
                                 <!-- Visa -->
                                 <tr data-symbol="visa" class="pos-row">
@@ -320,9 +316,7 @@
                                             <div class="pos-score-label" style="color:#c2a34e;font-weight:700;">Gut</div>
                                         </div>
                                     </td>
-                                    <td class="pos-alert-cell">
-                                        <button class="alert-toggle active" aria-label="Kursalarm umschalten"><i class="bi bi-bell"></i></button>
-                                    </td>
+                                    <td class="pos-alert-cell"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -757,15 +751,16 @@
         showCompany(row.dataset.symbol);
       });
 
-      /* alert bell on/off */
-      document.querySelector('#posTable tbody').addEventListener('click', function (e) {
-        const btn = e.target.closest('.alert-toggle');
-        if (!btn) return;
-        e.stopPropagation();
-        btn.classList.toggle('active');
-        const icon = btn.querySelector('i');
-        icon.className = btn.classList.contains('active') ? 'bi bi-bell' : 'bi bi-bell-slash';
-      });
+      /* master alert bell in the column header: one toggle for everything */
+      (function () {
+        const master = document.getElementById('alertMaster');
+        if (!master) return;
+        master.addEventListener('click', function (e) {
+          e.stopPropagation(); /* don't trigger column sorting */
+          this.classList.toggle('active');
+          this.querySelector('i').className = this.classList.contains('active') ? 'bi bi-bell' : 'bi bi-bell-slash';
+        });
+      })();
 
       /* ── Neue Transaktion modal ── */
       const txStueck = document.getElementById('txStueck');
