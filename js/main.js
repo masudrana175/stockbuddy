@@ -95,6 +95,7 @@ function drawSparkline(divId, color, data) {
     paper_bgcolor: 'transparent', plot_bgcolor: 'transparent',
     margin: { t: 0, r: 0, b: 0, l: 0 },
     showlegend: false,
+    hoverlabel: { bgcolor: '#ffffff', bordercolor: 'rgba(100,116,139,0.35)', font: { family: 'Barlow', size: 12, color: '#333333' } },
     xaxis: { visible: false },
     /* zeroline sichtbar, sonst Achse unsichtbar – markiert die Nulllinie
        neutral (Slate-Grau), damit negative Ausschläge lesbar sind */
@@ -131,16 +132,25 @@ function initPerfChart() {
   var traces = [];
   series.forEach(function (s) {
     var sp = splitSeriesAtZero(x, s.y);
+    /* Unsichtbare Voll-Linie NUR für den Hover -> genau EIN sauberer Eintrag
+       je Serie (keine Doppelungen durch die Split-Traces) und Hover rastet
+       auf ganze x-Werte (kein krummer Header). */
     traces.push({
-      x: sp.posX, y: sp.posY, name: s.name,
-      type: 'scatter', mode: 'lines', connectgaps: false,
-      line: { color: s.c, width: 2, shape: 'spline', smoothing: 1.2 }
+      x: x, y: s.y, name: s.name, type: 'scatter', mode: 'lines',
+      line: { color: 'rgba(0,0,0,0)', width: 0 }, showlegend: false
     });
+    /* Sichtbar: positiver Teil solide – ohne eigenen Hover */
+    traces.push({
+      x: sp.posX, y: sp.posY, type: 'scatter', mode: 'lines', connectgaps: false,
+      line: { color: s.c, width: 2, shape: 'spline', smoothing: 1.2 },
+      hoverinfo: 'skip', showlegend: false
+    });
+    /* Sichtbar: negativer Teil gestrichelt – ohne eigenen Hover */
     if (Math.min.apply(null, s.y) < 0) {
       traces.push({
-        x: sp.negX, y: sp.negY, name: s.name,       // gleicher Name -> Hover bleibt sauber
-        type: 'scatter', mode: 'lines', connectgaps: false, showlegend: false,
-        line: { color: s.c, width: 2, shape: 'spline', smoothing: 1.2, dash: 'dash' }
+        x: sp.negX, y: sp.negY, type: 'scatter', mode: 'lines', connectgaps: false,
+        line: { color: s.c, width: 2, shape: 'spline', smoothing: 1.2, dash: 'dash' },
+        hoverinfo: 'skip', showlegend: false
       });
     }
   });
@@ -161,12 +171,13 @@ function initPerfChart() {
       /* neutrale Nulllinie (Slate), markiert die Grenze zu negativ */
       zeroline: true, zerolinecolor: 'rgba(100,116,139,0.6)', zerolinewidth: 1.5
     },
-    hovermode: 'x unified', showlegend: false,
+    /* deckend weißer Hover (Standard-Plotly-Hintergrund ist halbtransparent) */
     hoverlabel: {
-      bgcolor: 'rgba(255, 255, 255, 0.92)',
-      bordercolor: '#e5e7eb',
-      font: { family: 'Barlow', size: 13, color: '#333' }
-    }
+      bgcolor: '#ffffff',
+      bordercolor: 'rgba(100,116,139,0.35)',
+      font: { family: 'Barlow', size: 12, color: '#333333' }
+    },
+    hovermode: 'x unified', showlegend: false
   }, { displayModeBar: false, responsive: true });
 }
 
