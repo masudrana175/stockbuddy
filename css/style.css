@@ -350,6 +350,7 @@ div.dt-container.dt-empty-footer tbody>tr:last-child>* {
 
 /* Avatar */
 .sb-avatar {
+  display: block; /* also rendered as <a> in the topbar */
   width: 42px;
   height: 42px;
   border-radius: 50%;
