@@ -605,7 +605,7 @@
 
                 <!-- Stockbuddy Alerts -->
                 <div class="sb-card rp-card st-alerts">
-                    <div class="card-title mb-3">
+                    <div class="card-title mb-3 st-alerts-title" data-bs-toggle="modal" data-bs-target="#meineAlertsModal" role="button" tabindex="0">
                         <img src="img/message.svg" alt="" style="width:24px;    margin-right: 6px;"/> Stockbuddy Alerts
                     </div>
                     <div class="table-scroll">
@@ -648,6 +648,105 @@
         <!-- /buddy-layout -->
 
     </main>
+
+
+    <!-- ══════════════════════════════════════════
+       MODAL – Meine Alerts
+       ══════════════════════════════════════════ -->
+    <div class="modal fade" id="meineAlertsModal" tabindex="-1" aria-labelledby="meineAlertsTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content analysen-modal">
+                <div class="modal-header analysen-modal-header">
+                    <div class="analysen-modal-title" id="meineAlertsTitle">
+                        <img src="img/letzte_analysen.svg" alt="" style="width:24px;" />
+                        Meine Alerts
+                    </div>
+                    <button type="button" class="analysen-modal-close" data-bs-dismiss="modal" aria-label="Schließen"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="modal-body analysen-modal-body">
+
+                    <!-- Toolbar -->
+                    <div class="ma-toolbar mb-3">
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                            <select class="tx-input ma-select" id="maPerPage" aria-label="Einträge pro Seite">
+                                <option selected>10</option>
+                                <option>25</option>
+                                <option>50</option>
+                            </select>
+                            <span class="pf-hint">Einträge pro Seite</span>
+                            <select class="tx-input ma-select ma-filter" id="maFilter" aria-label="Alerts filtern">
+                                <option value="" selected>Alle Alerts</option>
+                                <option value="Dein Depot">Dein Depot</option>
+                                <option value="Dein Musterdepot">Dein Musterdepot</option>
+                                <option value="Manuell">Manuell</option>
+                            </select>
+                        </div>
+                        <input type="text" class="tx-input ma-search" id="maSearch" placeholder="Suche" aria-label="Alerts durchsuchen" />
+                    </div>
+
+                    <!-- Alerts table -->
+                    <div class="table-scroll">
+                        <table class="sbs-table ma-table" id="maTable">
+                            <thead>
+                                <tr>
+                                    <th>Quelle</th>
+                                    <th>Unternehmen/Aktie</th>
+                                    <th>Basis</th>
+                                    <th>Wert</th>
+                                    <th>Aktuell</th>
+                                    <th>Abstand</th>
+                                    <th>Erstellt</th>
+                                    <th>Ausgelöst</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+
+                    <!-- New alert form -->
+                    <div class="ma-new-alert mt-4">
+                        <div class="d-flex align-items-center gap-3 flex-wrap mb-3">
+                            <span class="tx-title-label" style="white-space:nowrap;">Neue Transaktion für:</span>
+                            <input type="text" class="tx-input flex-grow-1" id="maStockSearch" placeholder="Aktie suchen" aria-label="Aktie suchen" />
+                        </div>
+                        <div class="ma-selected-stock mb-3" id="maSelectedStock">XS2630111982 &mdash; BAYER AG</div>
+                        <div class="row g-3">
+                            <div class="col-6 col-lg-3">
+                                <div class="tx-field-label">Basis</div>
+                                <select class="tx-input" id="maBasis">
+                                    <option selected>Kurs</option>
+                                    <option>Bid</option>
+                                    <option>Ask</option>
+                                </select>
+                            </div>
+                            <div class="col-6 col-lg-3">
+                                <div class="tx-field-label">Aktueller Preis</div>
+                                <div class="tx-total" id="maPreis">100.06 &euro;</div>
+                            </div>
+                            <div class="col-6 col-lg-3">
+                                <div class="tx-field-label">Richtung</div>
+                                <select class="tx-input" id="maRichtung">
+                                    <option selected>Steigt über</option>
+                                    <option>fällt runter</option>
+                                </select>
+                            </div>
+                            <div class="col-6 col-lg-3">
+                                <div class="tx-field-label">Schwellwert (EUR)</div>
+                                <input type="number" class="tx-input" id="maSchwellwert" value="0.00" step="0.01" min="0" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer analysen-modal-footer">
+                    <button type="button" class="btn-tx-cancel" data-bs-dismiss="modal">Abbrechen</button>
+                    <button type="button" class="btn-tx-save" id="maSave">Speichern</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- ══════════════════════════════════════════
        MODAL – Alle bisherigen Analysen
@@ -891,6 +990,93 @@
         btn.classList.toggle('active');
         btn.querySelector('i').className = btn.classList.contains('active') ? 'bi bi-bell' : 'bi bi-bell-slash';
       });
+
+
+      /* ── Meine Alerts modal ── */
+      (function () {
+        if (!document.getElementById('maTable')) return;
+
+        const up = '<i class="bi bi-graph-up-arrow trend-up"></i>';
+        const down = '<i class="bi bi-graph-down-arrow trend-down"></i>';
+        const bellOn = '<button class="alert-toggle active" aria-label="Kursalarm umschalten"><i class="bi bi-bell"></i></button>';
+        const bellOff = '<button class="alert-toggle" aria-label="Kursalarm umschalten"><i class="bi bi-bell-slash"></i></button>';
+        const trash = '<button class="ma-delete" aria-label="Alert löschen"><i class="bi bi-trash3"></i></button>';
+        const company = (n, isin) => '<div class="ma-company">' + n + '</div><div class="ma-isin">' + isin + '</div>';
+        const dist = (v, isUp) => '<span class="' + (isUp ? 'ma-dist-up' : 'ma-dist-down') + '">' + (isUp ? '\u25b2' : '\u25bc') + ' ' + v + '</span>';
+
+        const base = [
+          ['Manuell, Dein Depot',       company('Bayerische Motoren Werke AG', 'DE0005190003'), 'Kurs', up + ' 70 EUR',    '57,92 EUR', dist('20,9 %', true),  '01.07.226',  '&ndash;',              bellOn,  trash],
+          ['Manuell, Dein Musterdepot', company('Volkswagen AG Stammaktien',   'DE0007664005'), 'Kurs', up + ' 100 EUR',   '72,2 EUR',  dist('38,5 %', true),  '10.07.2026', '&ndash;',              bellOn,  trash],
+          ['Manuell, Dein Musterdepot', company('Volkswagen AG Stammaktien',   'DE0007664005'), 'Kurs', up + ' 75 EUR',    '72,2 EUR',  dist('3,9 %', false),  '01.07.2026', '02.07.2026 11:01',     bellOff, trash],
+          ['Dein Musterdepot',          company('Volkswagen AG Stammaktien',   'DE0007664005'), 'Kurs', down + ' 48,1 EUR','72,2 EUR',  dist('33,4 %', true),  '01.07.2026', '&ndash;',              bellOn,  trash],
+          ['Manuell, Dein Musterdepot', company('Bayerische Motoren Werke AG', 'DE0005190003'), 'Kurs', down + ' 70 EUR',  '72,2 EUR',  dist('3,0 %', false),  '01.07.2026', '08.05.2026 11:01',     bellOn,  trash]
+        ];
+        /* demo data: repeat the base rows so the pagination has 3 pages */
+        const data = [];
+        for (let i = 0; i < 5; i++) base.forEach(r => data.push(r.slice()));
+
+        const maDt = new DataTable('#maTable', {
+          data: data,
+          paging: true,
+          pageLength: 10,
+          lengthChange: false,
+          info: false,
+          searching: true,
+          ordering: true,
+          order: [],
+          language: {
+            zeroRecords: 'Keine Einträge gefunden',
+            paginate: { previous: '&lsaquo;', next: '&rsaquo;' }
+          },
+          layout: { topStart: null, topEnd: null, bottomStart: null, bottomEnd: 'paging' },
+          columnDefs: [
+            { orderable: false, targets: [8, 9] },
+            /* strip markup for sorting text/number columns */
+            { targets: [1, 3, 4, 5], render: function (d, type) {
+                return type === 'sort' || type === 'type'
+                  ? String(d).replace(/<[^>]*>/g, ' ').trim()
+                  : d;
+              } }
+          ]
+        });
+
+        /* toolbar: page length, source filter, search */
+        document.getElementById('maPerPage').addEventListener('change', function () {
+          maDt.page.len(parseInt(this.value, 10)).draw();
+        });
+        document.getElementById('maFilter').addEventListener('change', function () {
+          maDt.column(0).search(this.value).draw();
+        });
+        document.getElementById('maSearch').addEventListener('input', function () {
+          maDt.search(this.value).draw();
+        });
+
+        /* bell toggle + row delete */
+        document.querySelector('#maTable tbody').addEventListener('click', function (e) {
+          const bell = e.target.closest('.alert-toggle');
+          if (bell) {
+            bell.classList.toggle('active');
+            bell.querySelector('i').className = bell.classList.contains('active') ? 'bi bi-bell' : 'bi bi-bell-slash';
+            return;
+          }
+          const del = e.target.closest('.ma-delete');
+          if (del) maDt.row(del.closest('tr')).remove().draw(false);
+        });
+
+        /* save: add the new alert as a table row */
+        document.getElementById('maSave').addEventListener('click', function () {
+          const basis = document.getElementById('maBasis').value;
+          const richtung = document.getElementById('maRichtung').value;
+          const wert = (parseFloat(document.getElementById('maSchwellwert').value) || 0)
+            .toLocaleString('de-DE', { minimumFractionDigits: 2 }) + ' EUR';
+          const arrow = richtung === 'Steigt über' ? up : down;
+          const today = new Date().toLocaleDateString('de-DE');
+          maDt.row.add(['Manuell, Dein Depot',
+            company('BAYER AG', 'XS2630111982'), basis, arrow + ' ' + wert,
+            '100,06 EUR', dist('0,0 %', richtung === 'Steigt über'), today, '&ndash;', bellOn, trash
+          ]).draw(false);
+        });
+      })();
 
       /* Detaillierte Auswertung toggle: swap button label with collapse state */
       (function () {
