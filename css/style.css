@@ -1593,6 +1593,52 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
   .pf-daten-left { width: 100%; border-right: none; padding-right: 0; }
 }
 
+
+/* ── Meine Alerts modal ── */
+.st-alerts-title { cursor: pointer; }
+.st-alerts-title:hover { color: var(--sb-pink); }
+.ma-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.ma-select { width: auto; padding: 0.35rem 0.6rem; }
+.ma-search { max-width: 220px; }
+.ma-table { font-size: 0.85rem; min-width: 860px; }
+.ma-table .ma-company { font-weight: 700; color: var(--sb-text-h); }
+.ma-table .ma-isin { font-size: 0.76rem; color: var(--sb-text-muted); }
+.ma-table tbody tr:nth-child(even) { background: #fafafa; }
+.ma-table .trend-up { color: var(--sb-green-dark); }
+.ma-table .trend-down { color: #e53e3e; }
+.ma-dist-up { color: var(--sb-green-dark); font-weight: 700; }
+.ma-dist-down { color: #e53e3e; font-weight: 700; }
+.ma-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--sb-pink);
+  font-size: 1.05rem;
+  padding: 4px;
+  line-height: 1;
+}
+.ma-delete:hover { opacity: 0.65; }
+.ma-selected-stock { font-weight: 700; color: var(--sb-text-h); }
+/* DataTables pagination inside the modal: brand styling */
+#meineAlertsModal .dt-paging { text-align: right; margin-top: 0.5rem; }
+#meineAlertsModal .dt-paging-button {
+  border: none;
+  background: none;
+  color: var(--sb-text-soft);
+  font-family: inherit;
+  font-weight: 600;
+  padding: 2px 8px;
+  cursor: pointer;
+}
+#meineAlertsModal .dt-paging-button.current { color: var(--sb-pink); }
+#meineAlertsModal .dt-paging-button.disabled { opacity: 0.4; cursor: default; }
+
 /* ── Right panel: Boost & Protect cards ── */
 .sb-card.rp-card {
   height: auto;
