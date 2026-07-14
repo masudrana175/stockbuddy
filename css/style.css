@@ -1660,6 +1660,49 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
 #meineAlertsModal .dt-paging-button.current { color: var(--sb-pink); }
 #meineAlertsModal .dt-paging-button.disabled { opacity: 0.4; cursor: default; }
 
+
+/* ── Abonnement box (Konto & Abonnement tab) ── */
+.abo-box {
+  background: #f7d9e8;
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem 1.25rem;
+  max-width: 300px;
+}
+.abo-label {
+  font-weight: 700;
+  color: var(--sb-text-h);
+}
+.abo-price {
+  background: #e6e9fb;
+  border: 1.5px solid var(--sb-blue);
+  border-radius: 10px;
+  padding: 0.55rem 1rem;
+  text-align: center;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--sb-blue);
+}
+.abo-manage-btn {
+  display: block;
+  width: 100%;
+  background: var(--sb-blue);
+  border: none;
+  color: #fff;
+  border-radius: 10px;
+  padding: 0.55rem 1rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--sb-ease);
+}
+.abo-manage-btn:hover { background: #16307a; }
+.abo-note {
+  font-size: 0.82rem;
+  color: var(--sb-text-soft);
+  line-height: 1.5;
+}
+
 /* ── Right panel: Boost & Protect cards ── */
 .sb-card.rp-card {
   height: auto;
