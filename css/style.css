@@ -1367,10 +1367,18 @@ table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order
 .tx-logo { width: 34px; height: 34px; }
 .tx-company, .pm-company { color: var(--sb-text-h); font-size: 1.05rem; }
 .tx-field-label {
-  font-weight: 600;
-  color: var(--sb-text-h);
-  margin-bottom: 0.4rem;
-  font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--sb-text-h);
+    margin-bottom: 0.4rem;
+    font-size: 1rem;
+}
+.ma-new-alert.mt-4 {
+    border-top: 1px solid #d8d5d7;
+    padding-top: 26px;
+}
+table#maTable tr td:first-child {
+    font-weight: 700;
+	color:var(--sb-text-h);
 }
 .tx-typ-btns { display: flex; gap: 10px; }
 .tx-typ-btn {
@@ -1608,12 +1616,25 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
 .ma-search { max-width: 220px; }
 .ma-table { font-size: 0.85rem; min-width: 860px; }
 .ma-table .ma-company { font-weight: 700; color: var(--sb-text-h); }
-.ma-table .ma-isin { font-size: 0.76rem; color: var(--sb-text-muted); }
-.ma-table tbody tr:nth-child(even) { background: #fafafa; }
+.ma-table .ma-isin {
+    font-size: 0.86rem;
+    color: var(--sb-text-h);
+}
 .ma-table .trend-up { color: var(--sb-green-dark); }
 .ma-table .trend-down { color: #e53e3e; }
 .ma-dist-up { color: var(--sb-green-dark); font-weight: 700; }
 .ma-dist-down { color: #e53e3e; font-weight: 700; }
+.new-transk-field .tx-input {
+    width: auto;
+    flex: 1;
+}
+.new-transk-field  span.tx-title-label {
+    font-weight: 700;
+}
+.new-transk-field .tx-input::placeholder {
+    font-weight: 700;
+    color: var(--sb-text-h);
+}
 .ma-delete {
   background: none;
   border: none;
