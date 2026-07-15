@@ -588,6 +588,7 @@
                 <div class="sb-card rp-card st-boost">
                     <div class="card-title mb-3">
                         <img src="img/letzte_analysen.svg" alt="" style="width:34px;margin-right:6px;" /> Stockbuddy Boost
+                        <button class="rp-bell active" aria-label="Benachrichtigungen umschalten"><i class="bi bi-bell"></i></button>
                     </div>
                     <div class="boost-headline green">Bestes Ranking diese Woche</div>
                     <div class="boost-item"><i class="fa-solid fa-check"></i> Industria de Diseño Textil, S.A.</div>
@@ -599,6 +600,7 @@
                 <div class="sb-card rp-card st-protect">
                     <div class="card-title mb-3">
                         <img src="img/letzte_analysen.svg" alt="" style="width:34px;margin-right:6px;" /> Stockbuddy Protect
+                        <button class="rp-bell active" aria-label="Benachrichtigungen umschalten"><i class="bi bi-bell"></i></button>
                     </div>
                     <div class="boost-headline red">Bad Performer im Depot</div>
                     <div class="boost-item"><i class="fa-solid fa-check"></i> Bayerische Motoren Werke Aktiengesellschaft</div>
@@ -611,6 +613,7 @@
                         <img src="img/message.svg" alt="" style="width:24px;    margin-right: 6px;"/> Stockbuddy Alerts 
 						<i class="bi bi-arrow-right ds-arrow"></i>
                     </div>
+                    <button class="rp-bell rp-bell-abs active" aria-label="Benachrichtigungen umschalten"><i class="bi bi-bell"></i></button>
                     <div class="table-scroll">
                         <table class="sbs-table alerts-table" id="alertsTable">
                             <thead>
@@ -905,19 +908,21 @@
       const PL = { font: { family: 'Barlow, sans-serif' }, paper_bgcolor: 'transparent', plot_bgcolor: 'transparent' };
       const noBar = { displayModeBar: false, responsive: true };
 
-      /* Score-Entwicklung Chart */
-      Plotly.newPlot('scoreChart', [{
-        x: ['Dez 24','Jan 25','Feb 25','Mär 25','Apr 25','Mai 25'],
-        y: [52, 58, 62, 68, 74, 87],
-        type: 'scatter', mode: 'lines+markers',
-        line: { color: '#d14894', width: 2, shape: 'spline', smoothing: 1.2 },
-        marker: { color: '#d14894', size: 6, line: { color: '#fff', width: 2 } },
-        fill: 'tozeroy', fillcolor: 'rgba(209,72,148,0.1)'
-      }], {
-        ...PL, margin: { t:4, r:8, b:28, l:32 },
-        xaxis: { showgrid: false, tickfont: { family:'Barlow', size:10, color:'#999' } },
-        yaxis: { range:[0,100], gridcolor:'#f0f0f0', tickfont: { family:'Barlow', size:10, color:'#999' }, dtick: 25 }
-      }, noBar);
+      /* Score-Entwicklung Chart (guarded: section is currently commented out in the HTML) */
+      if (document.getElementById('scoreChart')) {
+        Plotly.newPlot('scoreChart', [{
+          x: ['Dez 24','Jan 25','Feb 25','Mär 25','Apr 25','Mai 25'],
+          y: [52, 58, 62, 68, 74, 87],
+          type: 'scatter', mode: 'lines+markers',
+          line: { color: '#d14894', width: 2, shape: 'spline', smoothing: 1.2 },
+          marker: { color: '#d14894', size: 6, line: { color: '#fff', width: 2 } },
+          fill: 'tozeroy', fillcolor: 'rgba(209,72,148,0.1)'
+        }], {
+          ...PL, margin: { t:4, r:8, b:28, l:32 },
+          xaxis: { showgrid: false, tickfont: { family:'Barlow', size:10, color:'#999' } },
+          yaxis: { range:[0,100], gridcolor:'#f0f0f0', tickfont: { family:'Barlow', size:10, color:'#999' }, dtick: 25 }
+        }, noBar);
+      }
 
       /* Ranking Diagramm — grouped bars, SBS per category */
       (function () {
@@ -985,6 +990,16 @@
             } },
           { orderable: false, targets: 2 }
         ]
+      });
+
+      /* heading bells on Boost/Protect/Alerts cards */
+      document.querySelectorAll('.rp-bell').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation(); /* Alerts title also opens the modal */
+          e.preventDefault();
+          this.classList.toggle('active');
+          this.querySelector('i').className = this.classList.contains('active') ? 'bi bi-bell' : 'bi bi-bell-slash';
+        });
       });
 
       /* alert bell on/off */

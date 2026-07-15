@@ -1753,6 +1753,34 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
   color: #fff;
 }
 
+
+/* ── Heading bells on right-panel cards (Boost/Protect/Alerts) ── */
+.rp-card .card-title {
+  display: flex;
+  align-items: center;
+}
+.rp-bell {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  padding: 4px;
+  line-height: 1;
+  margin-left: auto;
+  color: #c3c7cf;
+  transition: var(--sb-ease);
+}
+.st-alerts { position: relative; }
+.rp-bell-abs {
+  position: absolute;
+  top: 1.35rem;
+  right: 1.25rem;
+  margin-left: 0;
+}
+.rp-bell.active {
+  color: var(--sb-green-dark);
+}
+
 /* ── Right panel: Boost & Protect cards ── */
 .sb-card.rp-card {
   height: auto;
