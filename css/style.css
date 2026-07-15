@@ -1698,9 +1698,9 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
 }
 .abo-manage-btn:hover { background: #16307a; }
 .abo-note {
-  font-size: 0.82rem;
-  color: var(--sb-text-soft);
-  line-height: 1.5;
+    font-size: .95rem;
+    color: var(--sb-text-h);
+    line-height: 1.4;
 }
 
 /* ── Right panel: Boost & Protect cards ── */

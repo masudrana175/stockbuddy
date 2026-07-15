@@ -26,8 +26,7 @@
             </a>
             <nav class="sb-nav">
 				<p><button class="btn-neuer-chat" onclick="window.location.href='buddy.html'"><i class="bi bi-plus-circle"></i> Neuer Chat</button></p>
-				<p><button class="btn-print-analyse" href="#" class="sb-link" data-bs-toggle="modal" data-bs-target="#depotanalyseModal">
-				<i class="bi bi-plus-circle"></i> Neue Depotanalyse</button></p>
+				
 				
                 <a class="sb-nav-link" href="index.html">
                     <span><img src="img/navi_home_active.svg" alt="" style="width:22px"/></span>
@@ -35,20 +34,20 @@
                 </a>
                 <a class="sb-nav-link" href="buddy.html">
                     <span><img src="img/bildmarke_stockbuddy.svg" alt="" style="width:28px"/></span>
-                    <span>Buddy</span>
+                    <span>Buddy-Chat</span>
                 </a>
                 <a class="sb-nav-link" href="depot.html">
                     <span><img src="img/navi_depot_active.svg" alt="" style="width:26px"/></span>
-                    <span>Depot</span>
+                    <span>StockBuddy Depot</span>
                 </a>
                 <a class="sb-nav-link" href="musterdepot.html">
                     <span><img src="img/navi_musterdepot_active.svg" alt="" style="width:29px"/></span>
-                    <span>Musterdepot</span>
+                    <span>Dein Depot</span>
                 </a>
-                <a class="sb-nav-link" href="analyse.html">
-                    <span><img src="img/navi_analyse_active.svg" alt="" style="width:22px"/></span>
-                    <span>Analyse</span>
-                </a>
+                <a class="sb-nav-link" href="#" data-bs-toggle="modal" data-bs-target="#depotanalyseModal">
+					<span><img src="img/navi_analyse_active.svg" alt="" style="width:22px" /></span>
+					<span>Neue Depotanalyse</span>
+          		</a>
                 <a class="sb-nav-link active" href="profil.html">
                     <span><img src="img/navi_profil_active.svg" alt="" style="width:22px"/></span>
                     <span>Profil</span>
@@ -125,101 +124,9 @@
 
         <!-- Layout -->
         <div class="profil-layout-wrap row">
-
-            <!-- Left column -->
-            <div class="profil-leftd col-xxl-6 col-lg-6 ">
-
-                <!-- Analyseprofil settings -->
-                <div class="sb-card">
-                    <!-- Anlagefokus -->
-                    <div class="setting-row">
-                        <div class="setting-icon"><img src="img/analysefokus.svg" alt="" style="width:33px;" /></div>
-                        <div class="setting-info">
-                            <div class="setting-label">Anlagefokus</div>
-                            <div class="setting-desc">Wofrauf legen Sie ihr Hauptaugenmerk?</div>
-                        </div>
-                        <div class="setting-btns">
-                            <button class="toggle-pill active">Wachstum</button>
-                            <button class="toggle-pill">Dividende</button>
-                            <button class="toggle-pill">Value</button>
-                        </div>
-                    </div>
-                    <!-- Risikoprofil -->
-                    <div class="setting-row">
-                        <div class="setting-icon"><img style="width:22px;" src="img/risikoprofil.svg" alt="" /></div>
-                        <div class="setting-info">
-                            <div class="setting-label">Risikoprofil</div>
-                            <div class="setting-desc">Wie schätzen Sie ihr Risiko ein?</div>
-                        </div>
-                        <div class="setting-btns">
-                            <button class="toggle-pill">Niedrig</button>
-                            <button class="toggle-pill active">Mittel</button>
-                            <button class="toggle-pill">Hoch</button>
-                        </div>
-                    </div>
-                    <!-- Anlagehorizont -->
-                    <div class="setting-row">
-                        <div class="setting-icon"><img style="width:31px;" src="img/anlagehorizont.svg" alt="" /></div>
-                        <div class="setting-info">
-                            <div class="setting-label">Anlagehorizont</div>
-                            <div class="setting-desc">Wie lange ist ihr Anlagehorizont?</div>
-                        </div>
-                        <div class="setting-btns">
-                            <button class="toggle-pill">Kurzfristig</button>
-                            <button class="toggle-pill">Mittelfristig</button>
-                            <button class="toggle-pill active">Langfristig</button>
-                        </div>
-                    </div>
-                    <!-- Bevorzugte Märkte -->
-                    <!--<div class="setting-row">
-                        <div class="setting-icon"><img style="width:32px;" src="img/maerkte.svg" alt="" /></div>
-                        <div class="setting-info">
-                            <div class="setting-label">Bevorzugte Märkte</div>
-                            <div class="setting-desc">Welche Märkte bevorzugen Sie?</div>
-                        </div>
-                        <div class="setting-btns">
-                            <button class="toggle-pill active">USA</button>
-                            <button class="toggle-pill">Europa</button>
-                            <button class="toggle-pill">Deutschland</button>
-                        </div>
-                    </div> -->
-                </div>
-
-                <!-- Datenschutz & Konto -->
-                <div class="sb-card">
-                    <div class="ds-section-title">
-                        <img src="img/datenschutz_konten.svg" alt="" /> Datenschutz &amp; Konto
-                    </div>
-                    <div class="ds-link-row" data-bs-toggle="modal" data-bs-target="#dkModal" data-tab="daten" role="button" tabindex="0">
-                        <div>
-                            <div class="ds-link-title">Persönliche Daten</div>
-                            <div class="ds-link-desc">Verwalten Sie Ihre persönlichen Informationen</div>
-                        </div>
-                        <i class="bi bi-arrow-right ds-arrow"></i>
-                    </div>
-                    <div class="ds-link-row" data-bs-toggle="modal" data-bs-target="#dkModal" data-tab="datenschutz" role="button" tabindex="0">
-                        <div>
-                            <div class="ds-link-title">Datenschutz</div>
-                            <div class="ds-link-desc">Verwalten Sie Ihre Datenschutzeinstellungen</div>
-                        </div>
-                        <i class="bi bi-arrow-right ds-arrow"></i>
-                    </div>
-                    <div class="ds-link-row" data-bs-toggle="modal" data-bs-target="#dkModal" data-tab="konto" role="button" tabindex="0">
-                        <div>
-                            <div class="ds-link-title">Konto &amp; Abonnement</div>
-                            <div class="ds-link-desc">Verwalten Sie Ihr Abonnement und Ihre Rechnungen</div>
-						</div>
-                        <i class="bi bi-arrow-right ds-arrow"></i>
-                    </div>
-                </div>
-
-            </div>
-            <!-- /profil-left -->
-
-            <!-- Right column -->
-            <div class="profil-rights col-xxl-6 col-lg-6">
-
-                <!-- Deine voreingestellten Ziele -->
+			
+			 <div class="col-xxl-12 col-lg-12 ">
+			<!-- Deine voreingestellten Ziele -->
                 <div class="sb-card pink-bg">
                     <div class="ziele-header">
                         <div class="ziele-title">
@@ -292,6 +199,63 @@
                         <span class="ziel-pct">40%</span>
                     </div>
                 </div>
+			</div>
+
+            <!-- Left column -->
+            <div class="profil-leftd col-xxl-6 col-lg-6 ">
+
+                <!-- Analyseprofil settings -->
+                
+
+                <!-- Datenschutz & Konto -->
+                <div class="sb-card">
+                    <div class="ds-section-title">
+                        <img src="img/datenschutz_konten.svg" alt="" /> Datenschutz &amp; Konto
+                    </div>
+                    <div class="ds-link-row" data-bs-toggle="modal" data-bs-target="#dkModal" data-tab="daten" role="button" tabindex="0">
+                        <div>
+                            <div class="ds-link-title">Persönliche Daten</div>
+                            <div class="ds-link-desc">Verwalten Sie Ihre persönlichen Informationen</div>
+                        </div>
+                        <i class="bi bi-arrow-right ds-arrow"></i>
+                    </div>
+                    <div class="ds-link-row" data-bs-toggle="modal" data-bs-target="#dkModal" data-tab="datenschutz" role="button" tabindex="0">
+                        <div>
+                            <div class="ds-link-title">Datenschutz</div>
+                            <div class="ds-link-desc">Verwalten Sie Ihre Datenschutzeinstellungen</div>
+                        </div>
+                        <i class="bi bi-arrow-right ds-arrow"></i>
+                    </div>
+                    <div class="ds-link-row" data-bs-toggle="modal" data-bs-target="#dkModal" data-tab="konto" role="button" tabindex="0">
+                        <div>
+                            <div class="ds-link-title">Konto &amp; Abonnement</div>
+                            <div class="ds-link-desc">Verwalten Sie Ihr Abonnement und Ihre Rechnungen</div>
+						</div>
+                        <i class="bi bi-arrow-right ds-arrow"></i>
+                    </div>
+					<div class="ds-link-row" data-bs-toggle="modal" data-bs-target="#dkModal" data-tab="nutzung" role="button" tabindex="0">
+                        <div>
+                            <div class="ds-link-title">Nutzungsbedingungen</div>
+                            <div class="ds-link-desc">Lesen Sie die aktuellen Nutungsbedingungen</div>
+                        </div>
+                        <i class="bi bi-arrow-right ds-arrow"></i>
+                    </div>
+					<div class="ds-link-row" data-bs-toggle="modal" data-bs-target="#dkModal" data-tab="risiko" role="button" tabindex="0">
+                        <div>
+                            <div class="ds-link-title">Risikohinweis</div>
+                            <div class="ds-link-desc">Informieren Sie sich über die Risikohinweise</div>
+                        </div>
+                        <i class="bi bi-arrow-right ds-arrow"></i>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /profil-left -->
+
+            <!-- Right column -->
+            <div class="profil-rights col-xxl-6 col-lg-6">
+
+                
 
                 <!-- Beanachrichtigungen -->
                 <div class="sb-card">
@@ -340,6 +304,8 @@
                         <button class="pf-tab active" type="button" data-tab="daten">Persönliche Daten</button>
                         <button class="pf-tab" type="button" data-tab="datenschutz">Datenschutz</button>
                         <button class="pf-tab" type="button" data-tab="konto">Konto &amp; Abonnement</button>
+						<button class="pf-tab" type="button" data-tab="nutzung">Nutzungsbedingungen</button>
+						<button class="pf-tab" type="button" data-tab="risiko">Risikohinweise</button>
                     </div>
 
                     <div class="pf-pane" data-pane="daten">
@@ -364,6 +330,7 @@
                                     <div class="col-6"><input type="text" class="tx-input" placeholder="Ort" /></div>
                                     <div class="col-6"><input type="text" class="tx-input" placeholder="Bundesland" /></div>
                                     <div class="col-6"><input type="text" class="tx-input" placeholder="Land" /></div>
+									<div class="col-12"><input type="text" class="tx-input" placeholder="E-Mail-Adresse" /></div>
                                 </div>
                                 <div class="d-flex align-items-center gap-2 mt-4">
                                     <input type="checkbox" class="sb-switch" id="introSkip" />
@@ -381,7 +348,7 @@
                         <p class="pf-hint">Verwalten Sie Ihr Abonnement und Ihre Rechnungen.</p>
 
                         <!-- Abonnement box -->
-                        <div class="abo-box mt-3">
+                        <div class="abo-box mt-4">
                             <div class="d-flex align-items-center justify-content-between mb-3">
                                 <span class="abo-label">StockBuddy</span>
                                 <input type="checkbox" class="sb-switch" id="aboActive" checked aria-label="Abonnement aktiv" />
@@ -393,6 +360,14 @@
                                 Keine versteckten Kosten,
                             </div>
                         </div>
+                    </div>
+					<div class="pf-pane d-none" data-pane="nutzung">
+                        <div class="pf-subtitle mb-2">Nutzungsbedingungen</div>
+                        <p class="pf-hint">Lesen Sie die aktuellen Nutzungsbedingungen</p>
+                    </div>
+					<div class="pf-pane d-none" data-pane="risiko">
+                        <div class="pf-subtitle mb-2">Risikohinweise</div>
+                        <p class="pf-hint">Informieren Sie sich über die Risikohinweise</p>
                     </div>
                 </div>
                 <div class="modal-footer analysen-modal-footer">
@@ -436,15 +411,15 @@
                         <div class="nf-toggle-row">
                             <input type="checkbox" class="sb-switch" id="nfMusterdepot" />
                             <div>
-                                <div class="nf-toggle-title">StockBuddy Musterdepot</div>
-                                <div class="pf-hint">Trailing-Stop-Loss-Benachrichtigung, wenn ein Wert im StockBuddy-Musterdepot signifikant unter den letzten Höchstwert fällt.</div>
+                                <div class="nf-toggle-title">StockBuddy Depot</div>
+                                <div class="pf-hint">Trailing-Stop-Loss-Benachrichtigung, wenn ein Wert im StockBuddy-Depot signifikant unter den letzten Höchstwert fällt.</div>
                             </div>
                         </div>
                         <div class="nf-toggle-row">
                             <input type="checkbox" class="sb-switch" id="nfDeinDepot" />
                             <div>
-                                <div class="nf-toggle-title">Dein Musterdepot</div>
-                                <div class="pf-hint">Trailing-Stop-Loss-Benachrichtigung, wenn ein Wert in deinem Musterdepot signifikant unter den letzten Höchstwert fällt.</div>
+                                <div class="nf-toggle-title">Dein Depot</div>
+                                <div class="pf-hint">Trailing-Stop-Loss-Benachrichtigung, wenn ein Wert in deinem Depot signifikant unter den letzten Höchstwert fällt.</div>
                             </div>
                         </div>
                         <div class="nf-toggle-row">
@@ -505,7 +480,7 @@
                          data-hint="XLS, CSV, PDF oder Screenshot &middot; max 2 MB pro Datei"
                          data-paste="true"
                          data-submit-button=".btn-alle-loeschen"
-                         data-note="Du kannst auch manuell Positionen &uuml;ber &bdquo;Dein Musterdepot&ldquo; eingeben."></div>
+                         data-note="Du kannst auch manuell Positionen &uuml;ber &bdquo;Dein Depot&ldquo; eingeben."></div>
                     
 				
                     
