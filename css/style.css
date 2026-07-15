@@ -1703,6 +1703,56 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
     line-height: 1.4;
 }
 
+
+/* ── Profilbild upload (Persönliche Daten tab) ── */
+.pf-avatar-upload {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+.pf-avatar-upload:focus-visible {
+  outline: 2px solid var(--sb-blue);
+  outline-offset: 3px;
+}
+.pf-avatar-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(29, 58, 142, 0.55);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.pf-avatar-upload:hover .pf-avatar-overlay,
+.pf-avatar-upload:focus-visible .pf-avatar-overlay {
+  opacity: 1;
+}
+.pf-avatar-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1.5px solid var(--sb-pink);
+  color: var(--sb-text-h);
+  border-radius: 10px;
+  padding: 0.45rem 1rem;
+  font-weight: 700;
+  font-size: 0.88rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--sb-ease);
+}
+.pf-avatar-btn:hover {
+  background: var(--sb-pink);
+  color: #fff;
+}
+
 /* ── Right panel: Boost & Protect cards ── */
 .sb-card.rp-card {
   height: auto;
