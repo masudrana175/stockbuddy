@@ -313,7 +313,15 @@
                             <div class="pf-daten-left">
                                 <div class="pf-subtitle">Profilbild</div>
                                 <div class="pf-hint mb-3">Profilbild ändern</div>
-                                <div class="pf-avatar"><img src="img/circle-profile.png" alt="Profilbild" /></div>
+                                <label class="pf-avatar pf-avatar-upload" for="pfAvatarInput" tabindex="0" role="button" aria-label="Profilbild ändern">
+                                    <img id="pfAvatarPreview" src="img/circle-profile.png" alt="Profilbild" />
+                                    <span class="pf-avatar-overlay"><i class="bi bi-camera-fill"></i> Ändern</span>
+                                </label>
+                                <input type="file" id="pfAvatarInput" accept="image/png,image/jpeg,image/webp" hidden />
+                                <button type="button" class="pf-avatar-btn mt-3" onclick="document.getElementById('pfAvatarInput').click()">
+                                    <i class="bi bi-upload"></i> Bild auswählen
+                                </button>
+                                <div class="pf-hint mt-2" style="font-size:.78rem;">JPG, PNG oder WEBP &middot; max. 2 MB</div>
                             </div>
                             <div class="pf-daten-right">
                                 <div class="pf-subtitle">Informationen</div>
@@ -496,6 +504,35 @@
 
     <script>
       /* Tabs inside the profile modals */
+      /* Profilbild ändern: Datei wählen -> Live-Vorschau (auch Topbar/Seite) */
+      (function () {
+        var input = document.getElementById('pfAvatarInput');
+        if (!input) return;
+        input.addEventListener('change', function () {
+          var file = this.files && this.files[0];
+          if (!file) return;
+          if (!/^image\/(png|jpeg|webp)$/.test(file.type)) {
+            alert('Bitte ein Bild im Format JPG, PNG oder WEBP w\u00e4hlen.');
+            this.value = '';
+            return;
+          }
+          if (file.size > 2 * 1024 * 1024) {
+            alert('Das Bild darf maximal 2 MB gro\u00df sein.');
+            this.value = '';
+            return;
+          }
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            document.getElementById('pfAvatarPreview').src = e.target.result;
+            /* Vorschau auch im Seiten-Header und in der Topbar */
+            document.querySelectorAll('.profil-avatar-lg img, .sb-avatar img').forEach(function (img) {
+              img.src = e.target.result;
+            });
+          };
+          reader.readAsDataURL(file);
+        });
+      })();
+
       /* Ziel sliders: drag or click to set the value, percent label updates */
       document.querySelectorAll('.ziel-slider-wrap').forEach(function (wrap) {
         var fill = wrap.querySelector('.ziel-slider-fill');
