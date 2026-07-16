@@ -1918,6 +1918,30 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
 }
 .btn-depot-erstellen:hover { background: var(--sb-pink-hover); }
 
+
+/* ── Share menu ── */
+.share-menu {
+  border: 1px solid var(--sb-border);
+  border-radius: 12px;
+  box-shadow: var(--sb-shadow);
+  font-size: 0.92rem;
+  min-width: 200px;
+}
+.share-menu .dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  color: var(--sb-text-h);
+}
+.share-menu .dropdown-item:hover { background: #fbe9f3; }
+.share-ico { font-size: 1.1rem; color: var(--sb-text-soft); }
+.share-ico.wa { color: #25d366; }
+.share-ico.mail { color: var(--sb-blue); }
+.share-ico.li { color: #0a66c2; }
+.share-ico.x { color: #111; }
+
 /* ── Right panel: Boost & Protect cards ── */
 .sb-card.rp-card {
   height: auto;
