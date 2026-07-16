@@ -1863,6 +1863,57 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
 }
 .an-item.open .an-body { display: block; }
 
+
+/* ── Cash-Anteil plus button + Depot empty state ── */
+.cash-plus-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  cursor: pointer;
+  color: var(--sb-pink);
+  font-size: 1.25rem;
+  line-height: 1;
+  vertical-align: middle;
+  transition: var(--sb-ease);
+}
+.cash-plus-btn:hover { color: var(--sb-pink-hover); }
+.cash-modal-text {
+  color: var(--sb-text-soft);
+  line-height: 1.7;
+  margin: 0;
+}
+.cash-modal-text strong { color: var(--sb-text-h); }
+.cash-modal-warn {
+  color: var(--sb-pink);
+  font-weight: 700;
+}
+.depot-empty-state {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 14vh;
+  min-height: 60vh;
+}
+.btn-depot-erstellen {
+  background: var(--sb-pink);
+  border: none;
+  color: #fff;
+  border-radius: 12px;
+  padding: 1.1rem 3.2rem;
+  font-weight: 700;
+  font-size: 1.35rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--sb-ease);
+}
+.btn-depot-erstellen:hover { background: var(--sb-pink-hover); }
+
 /* ── Right panel: Boost & Protect cards ── */
 .sb-card.rp-card {
   height: auto;
