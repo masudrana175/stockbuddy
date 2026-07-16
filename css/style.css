@@ -1647,8 +1647,10 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
 .ma-delete:hover { opacity: 0.65; }
 .ma-selected-stock { font-weight: 700; color: var(--sb-text-h); }
 /* DataTables pagination inside the modal: brand styling */
-#meineAlertsModal .dt-paging { text-align: right; margin-top: 0.5rem; }
-#meineAlertsModal .dt-paging-button {
+#meineAlertsModal .dt-paging,
+#txHistModal .dt-paging { text-align: right; margin-top: 0.5rem; }
+#meineAlertsModal .dt-paging-button,
+#txHistModal .dt-paging-button {
   border: none;
   background: none;
   color: var(--sb-text-soft);
@@ -1657,8 +1659,10 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
   padding: 2px 8px;
   cursor: pointer;
 }
-#meineAlertsModal .dt-paging-button.current { color: var(--sb-pink); }
-#meineAlertsModal .dt-paging-button.disabled { opacity: 0.4; cursor: default; }
+#meineAlertsModal .dt-paging-button.current,
+#txHistModal .dt-paging-button.current { color: var(--sb-pink); }
+#meineAlertsModal .dt-paging-button.disabled,
+#txHistModal .dt-paging-button.disabled { opacity: 0.4; cursor: default; }
 
 
 /* ── Abonnement box (Konto & Abonnement tab) ── */

@@ -339,7 +339,7 @@
                         </table>
                     </div>
                     <div class="wert-row arrow-link" style="margin-top:.75rem;">
-                        <a href="#" class="sb-link">Transaktionshistorie anzeigen (alle) <img src="img/arrow_right_blue.svg" alt="" style="width:22px;"/></a>
+                        <a href="#" class="sb-link" data-bs-toggle="modal" data-bs-target="#txHistModal">Transaktionshistorie anzeigen (alle) <img src="img/arrow_right_blue.svg" alt="" style="width:22px;"/></a>
                     </div>
                 </div>
 
@@ -530,6 +530,65 @@
             <!-- /md-side -->
         </div>
         <!-- /md-layout -->
+
+
+    <!-- ══════════════════════════════════════════
+       MODAL – Transaktionshistorien (Alle)
+       ══════════════════════════════════════════ -->
+    <div class="modal fade" id="txHistModal" tabindex="-1" aria-labelledby="txHistTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content analysen-modal">
+                <div class="modal-header analysen-modal-header">
+                    <div class="pf-modal-title-text" id="txHistTitle">Transaktionshistorien (Alle)</div>
+                    <button type="button" class="analysen-modal-close" data-bs-dismiss="modal" aria-label="Schließen"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="modal-body analysen-modal-body">
+                    <div class="pf-tabs mb-4">
+                        <button class="pf-tab active" type="button" data-tab="positionen">Depot - Positionen</button>
+                        <button class="pf-tab" type="button" data-tab="ertraege">Erträge &amp; Kapitalmaßnahmen</button>
+                    </div>
+
+                    <div class="pf-pane" data-pane="positionen">
+                        <div class="ma-toolbar mb-3">
+                            <div class="d-flex align-items-center gap-2 flex-wrap">
+                                <select class="tx-input ma-select" id="thPerPage" aria-label="Einträge pro Seite">
+                                    <option selected>10</option>
+                                    <option>25</option>
+                                    <option>50</option>
+                                </select>
+                                <span class="pf-hint">Einträge pro Seite</span>
+                                <select class="tx-input ma-select" id="thFilter" aria-label="Alerts filtern">
+                                    <option value="" selected>Alle Alerts</option>
+                                    <option value="aktiv">Aktive Alerts</option>
+                                    <option value="inaktiv">Inaktive Alerts</option>
+                                </select>
+                            </div>
+                            <input type="text" class="tx-input ma-search" id="thSearch" placeholder="Suche" aria-label="Durchsuchen" />
+                        </div>
+                        <div class="table-scroll">
+                            <table class="pos-table th-table" id="thTable">
+                                <thead>
+                                    <tr>
+                                        <th>Unternehmen</th>
+                                        <th>Gewichtung</th>
+                                        <th>Performance<small>seit Kauf</small></th>
+                                        <th>Aktueller Kurs</th>
+                                        <th>StockBuddy Score<small>/100</small></th>
+                                        <th>Alert</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="pf-pane d-none" data-pane="ertraege">
+                        <div class="pf-subtitle mb-2">Erträge &amp; Kapitalmaßnahmen</div>
+                        <p class="pf-hint">Hier erscheinen Dividenden, Zinsen und Kapitalmaßnahmen.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     </main>
 
@@ -768,6 +827,87 @@
         row.classList.add('active');
         showCompany(row.dataset.symbol);
       });
+
+
+      /* ── Transaktionshistorien (Alle) modal ── */
+      (function () {
+        if (!document.getElementById('thTable')) return;
+
+        const company = (logo, name, date) => '<div class="pos-company-cell"><div class="pos-logo"><img src="' + logo + '" alt="" /></div><div><div class="pos-name">' + name + '</div><div>' + date + '</div></div></div>';
+        const price = (p, chg) => '<div class="pos-price-main">' + p + '</div><div class="pos-price-chg">' + chg + '</div>';
+        const score = (n, label, color) => '<div class="d-flex align-items-center gap-2"><div class="score-circle" aria-label="Score: ' + n + ' von 100"><svg viewBox="0 0 80 80"><circle class="bg-ring" cx="40" cy="40" r="33"></circle><circle class="value-ring" cx="40" cy="40" r="33" style="stroke:' + color + '"></circle></svg><div class="score-circle-num" style="color:' + color + '">' + n + '</div></div><div class="pos-score-label" style="color:' + color + ';font-weight:700;">' + label + '</div></div>';
+        const bellOn = '<button class="alert-toggle active" aria-label="Kursalarm umschalten"><i class="bi bi-bell"></i></button>';
+        const bellOff = '<button class="alert-toggle" aria-label="Kursalarm umschalten"><i class="bi bi-bell-slash"></i></button>';
+
+        const base = [
+          [company('img/nvidia.png', 'NVIDIA Corporation', '22.05.2024'), '<strong class="blue">8,72 %</strong>', '<span class="pos-pct-pos">+24,31 %</span>', price('422,56 €', '+1,12 %'), score(89, 'Sehr gut', '#22b36d'), bellOn],
+          [company('img/microsoft.png', 'Microsoft Corporation', '20.05.2024'), '<strong class="blue">8,15 %</strong>', '<span class="pos-pct-pos">+36,47 %</span>', price('112,18 €', '+2,31 %'), score(91, 'Sehr gut', '#22b36d'), bellOff],
+          [company('img/asml.png', 'ASML Holding N.V.', '19.05.2024'), '<strong class="blue">7,68 %</strong>', '<span class="pos-pct-pos">+28,19 %</span>', price('146,72 €', '+1,85%'), score(87, 'Sehr gut', '#22b36d'), bellOff],
+          [company('img/visa.png', 'Visa Inc.', '14.05.2024'), '<strong class="blue">6,45 %</strong>', '<span class="pos-pct-pos">+12,08 %</span>', price('31,45 €', '+0,38 %'), score(68, 'Gut', '#c2a34e'), bellOn]
+        ];
+        const data = [];
+        for (let i = 0; i < 7; i++) base.forEach(r => data.push(r.slice()));
+
+        const thDt = new DataTable('#thTable', {
+          data: data,
+          paging: true,
+          pageLength: 10,
+          lengthChange: false,
+          info: false,
+          searching: true,
+          ordering: true,
+          order: [],
+          language: { zeroRecords: 'Keine Einträge gefunden', paginate: { previous: '&lsaquo;', next: '&rsaquo;' } },
+          layout: { topStart: null, topEnd: null, bottomStart: null, bottomEnd: 'paging' },
+          columnDefs: [
+            { orderable: false, targets: 5 },
+            { targets: [1, 2, 3, 4], render: function (d, type) {
+                return type === 'sort' || type === 'type'
+                  ? (parseFloat(String(d).replace(/<[^>]*>/g, ' ').trim().replace(',', '.')) || 0)
+                  : d;
+              } }
+          ]
+        });
+
+        document.getElementById('thPerPage').addEventListener('change', function () {
+          thDt.page.len(parseInt(this.value, 10)).draw();
+        });
+        document.getElementById('thSearch').addEventListener('input', function () {
+          thDt.search(this.value).draw();
+        });
+        /* Alert filter: custom search on the bell state (HTML is stripped from
+           DataTables' normal filter data, so match on the raw row data) */
+        DataTable.ext.search.push(function (settings, data, dataIndex, rowData) {
+          if (settings.nTable.id !== 'thTable') return true;
+          const v = document.getElementById('thFilter').value;
+          if (!v) return true;
+          const active = String(rowData[5]).indexOf('alert-toggle active') !== -1;
+          return v === 'aktiv' ? active : !active;
+        });
+        document.getElementById('thFilter').addEventListener('change', function () {
+          thDt.draw();
+        });
+
+        /* bells inside the modal table */
+        document.querySelector('#thTable tbody').addEventListener('click', function (e) {
+          const btn = e.target.closest('.alert-toggle');
+          if (!btn) return;
+          btn.classList.toggle('active');
+          btn.querySelector('i').className = btn.classList.contains('active') ? 'bi bi-bell' : 'bi bi-bell-slash';
+        });
+
+        /* tabs */
+        const modal = document.getElementById('txHistModal');
+        modal.querySelectorAll('.pf-tab').forEach(function (tab) {
+          tab.addEventListener('click', function () {
+            modal.querySelectorAll('.pf-tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            modal.querySelectorAll('.pf-pane').forEach(function (pane) {
+              pane.classList.toggle('d-none', pane.dataset.pane !== tab.dataset.tab);
+            });
+          });
+        });
+      })();
 
       /* master alert bell in the column header: one toggle for everything */
       (function () {
