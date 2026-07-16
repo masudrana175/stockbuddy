@@ -1942,6 +1942,41 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
 .share-ico.li { color: #0a66c2; }
 .share-ico.x { color: #111; }
 
+
+/* ── Transaktionshistorien modal table: blue header, left-aligned, pagination ── */
+.th-table thead tr {
+  background: var(--sb-blue);
+  border-bottom: none;
+}
+table.dataTable.th-table thead th,
+table.dataTable.th-table thead th.dt-type-numeric,
+.th-table thead th {
+  color: #fff;
+  font-weight: 500;
+  text-align: left;
+  padding: 0.6rem 0.9rem;
+  padding-right: 26px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.th-table thead th:first-child { border-radius: 8px 0 0 8px; }
+.th-table thead th:last-child  { border-radius: 0 8px 8px 0; }
+.th-table thead th small { color: rgba(255, 255, 255, 0.85); }
+.pos-table.th-table tbody td {
+  text-align: left;
+}
+/* pagination like the design: ‹ 1 | 2 | 3 › */
+#txHistModal .dt-paging-button.first,
+#txHistModal .dt-paging-button.last {
+  display: none;
+}
+#txHistModal .dt-paging-button:not(.previous):not(.next) + .dt-paging-button:not(.previous):not(.next)::before {
+  content: '|';
+  color: #c9ccd4;
+  margin-right: 10px;
+  font-weight: 400;
+}
+
 /* ── Right panel: Boost & Protect cards ── */
 .sb-card.rp-card {
   height: auto;
