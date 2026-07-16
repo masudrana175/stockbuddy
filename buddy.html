@@ -121,9 +121,19 @@
                         <h1 style="margin-bottom:2px;">Buddy Analyse – Assistent</h1>
                         <div class="page-subtitle">Dein KI-gestützter Analyse-assistent – für fundierte Einblicke, keine Anlageberatung</div>
                     </div>
-                    <button class="btn-print-analyse" onclick="window.print()">
-                        <img src="img/print.svg" alt="" style="width:23px;"/> Analyse drucken
-                    </button>
+                    <div class="dropdown">
+                        <button class="btn-print-analyse" id="shareAnalyseBtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-share"></i> Analyse teilen
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end share-menu" aria-labelledby="shareAnalyseBtn">
+                            <li><a class="dropdown-item" id="shareWhatsapp" href="#" target="_blank" rel="noopener"><i class="bi bi-whatsapp share-ico wa"></i> WhatsApp</a></li>
+                            <li><a class="dropdown-item" id="shareMail" href="#"><i class="bi bi-envelope share-ico mail"></i> E-Mail</a></li>
+                            <li><a class="dropdown-item" id="shareLinkedin" href="#" target="_blank" rel="noopener"><i class="bi bi-linkedin share-ico li"></i> LinkedIn</a></li>
+                            <li><a class="dropdown-item" id="shareX" href="#" target="_blank" rel="noopener"><i class="bi bi-twitter-x share-ico x"></i> X</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><button class="dropdown-item" id="shareCopy" type="button"><i class="bi bi-link-45deg share-ico"></i> <span id="shareCopyLabel">Link kopieren</span></button></li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="chat-window">
 
@@ -1146,6 +1156,36 @@
           { orderable: false, targets: 2 }
         ]
       });
+
+      /* ── Analyse teilen ── */
+      (function () {
+        var btn = document.getElementById('shareAnalyseBtn');
+        if (!btn) return;
+        var url = window.location.href;
+        var text = 'StockBuddy Analyse: Oracle Corp. (ORCL) — StockBuddy Score 87/100';
+
+        document.getElementById('shareWhatsapp').href = 'https://wa.me/?text=' + encodeURIComponent(text + ' ' + url);
+        document.getElementById('shareMail').href = 'mailto:?subject=' + encodeURIComponent('StockBuddy Analyse') + '&body=' + encodeURIComponent(text + '\n' + url);
+        document.getElementById('shareLinkedin').href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url);
+        document.getElementById('shareX').href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url);
+
+        document.getElementById('shareCopy').addEventListener('click', function () {
+          navigator.clipboard.writeText(url).then(function () {
+            var label = document.getElementById('shareCopyLabel');
+            label.textContent = 'Kopiert!';
+            setTimeout(function () { label.textContent = 'Link kopieren'; }, 1600);
+          });
+        });
+
+        /* Mobile/unterstützte Geräte: natives Teilen-Menü statt Dropdown */
+        if (navigator.share) {
+          btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            navigator.share({ title: 'StockBuddy Analyse', text: text, url: url }).catch(function () {});
+          });
+        }
+      })();
 
       /* ── Send/Stop button in the chat input ── */
       (function () {
