@@ -413,7 +413,7 @@
 							</div>
 						</div>
 						<div class="chat-disclaimer-bar">
-							Buddy kann Fehler machen. Antworten bitte immer selbst prüfen.
+							StockBuddy kann Fehler machen. Antworten bitte immer selbst prüfen.
 						</div>
                     </div>
 
@@ -431,7 +431,7 @@
                     <div class="notif-wrapper" id="notifWrapper">
                         <button class="sb-notif" id="notifBtn" aria-label="Benachrichtigungen" aria-expanded="false" aria-controls="notifPanel">
                             <img src="img/benachrichtigungen.svg" alt="" style="width:24px;" />
-                            <span class="nb" id="notifCount" aria-label="2 neue Benachrichtigungen">2</span>
+                            <span class="nb" id="notifCount" aria-label="3 neue Benachrichtigungen">3</span>
                         </button>
 
                         <div class="notif-panel" id="notifPanel" role="dialog" aria-label="Benachrichtigungen" hidden>
@@ -443,39 +443,34 @@
                             </div>
 
                             <div class="notif-item unread">
-                                <div class="notif-icon-wrap" style="background:#fce8f1;">
-                                    <i class="bi bi-graph-up-arrow" style="color:var(--sb-pink);" aria-hidden="true"></i>
-                                </div>
-                                <div class="notif-body">
-                                    <div class="notif-item-title">Neue Analyse verfügbar</div>
-                                    <div class="notif-item-desc">Oracle Corp. wurde heute analysiert und erhält 87/100 Punkte.</div>
-                                    <div class="notif-item-time"><i class="bi bi-clock" aria-hidden="true"></i> Vor 2 Stunden</div>
-                                </div>
-                                <span class="notif-dot" aria-label="Ungelesen"></span>
+                            <div class="notif-body">
+                                <div class="pos-logo"><img src="img/nvidia.png" alt="NVIDIA" /></div>
+								<div class="notif-item-title">NVIDIA Corporation</div>
+                                <div class="notif-item-desc">Die NVIDIA-Aktie notierte im NASDAQ-Handel um 20:26 Uhr in Grün und gewann 4,0 Prozent auf 211,60 USD. Hiermit zählt das Wertpapier zu den aktuellen Gewinnern im NASDAQ Composite Index, der derzeit bei 26'155 Punkten notiert. </div>
+                                <div class="notif-item-time"><i class="bi bi-clock"></i> Vor 2 Stunden</div>
                             </div>
+							<span class="notif-dot"></span>
+                        </div>
+						<div class="notif-item unread">
+                            <div class="notif-body">
+                                <div class="pos-logo"><img src="img/microsoft.png" alt="NVIDIA" /></div>
+								<div class="notif-item-title">Microsoft Corporation</div>
+                                <div class="notif-item-desc">Die Microsoft-Aktie gab im NASDAQ-Handel um 20:26 Uhr um 1,1 Prozent auf 386,84 USD nach. Dadurch steht der Anteilsschein auf der Verlustseite im Dow Jones 30 Industrial, der im Moment bei 52'464 Punkten realisiert. </div>
+                                <div class="notif-item-time"><i class="bi bi-clock"></i> Vor 2 Stunden</div>
+                            </div>
+							<span class="notif-dot"></span>
+                        </div>
+						<div class="notif-item unread">
+                            <div class="notif-body">
+                                <div class="pos-logo"><img src="img/asml.png" alt="NVIDIA" /></div>
+								<div class="notif-item-title">ASML Holding N.V.</div>
+                                <div class="notif-item-desc">Die Microsoft-Aktie gab im NASDAQ-Handel um 20:26 Uhr um 1,1 Prozent auf 386,84 USD nach. Dadurch steht der Anteilsschein auf der Verlustseite im Dow Jones 30 Industrial, der im Moment bei 52'464 Punkten realisiert. </div>
+                                <div class="notif-item-time"><i class="bi bi-clock"></i> Vor 2 Stunden</div>
+                            </div>
+							<span class="notif-dot"></span>
+                        </div>
 
-                            <div class="notif-item unread">
-                                <div class="notif-icon-wrap" style="background:#eef2ff;">
-                                    <i class="bi bi-lightning-charge-fill" style="color:var(--sb-blue);" aria-hidden="true"></i>
-                                </div>
-                                <div class="notif-body">
-                                    <div class="notif-item-title">Kursalarm ausgelöst</div>
-                                    <div class="notif-item-desc">NVIDIA ist seit gestern um +5,2 % gestiegen.</div>
-                                    <div class="notif-item-time"><i class="bi bi-clock" aria-hidden="true"></i> Vor 5 Stunden</div>
-                                </div>
-                                <span class="notif-dot" aria-label="Ungelesen"></span>
-                            </div>
-
-                            <div class="notif-item">
-                                <div class="notif-icon-wrap" style="background:#f0fdf4;">
-                                    <i class="bi bi-check-circle-fill" style="color:#16a34a;" aria-hidden="true"></i>
-                                </div>
-                                <div class="notif-body">
-                                    <div class="notif-item-title">Depot aktualisiert</div>
-                                    <div class="notif-item-desc">Deine Wertentwicklung wurde erfolgreich synchronisiert.</div>
-                                    <div class="notif-item-time"><i class="bi bi-clock" aria-hidden="true"></i> Gestern, 18:42</div>
-                                </div>
-                            </div>
+                           
 
                             <div class="notif-footer">
                                 <a href="#" class="sb-link">Alle Benachrichtigungen →</a>
@@ -487,8 +482,8 @@
                 </div>
 
                 <!-- Stock info card -->
-                <div class="rp-stock-card">
-					<div class="d-flex align-items-center gap-2" style="padding-bottom: 20px"><img src="img/aktie.svg" alt="" style="width:38px;" /><span class="card-title">Aktie des Tages</span>
+                <div class="rp-stock-card" >
+					<div class="d-flex align-items-center gap-2" style="padding-bottom: 20px" data-bs-toggle="tooltip" data-bs-placement="top" title="Zeigt die Aktie des Tages" tabindex="0" aria-label="Info zu Analysen"><img src="img/aktie.svg" alt="" style="width:38px;" /><span class="card-title">Aktie des Tages</span>
               </div>
                     <div class="rp-stock-head">
 						
@@ -521,7 +516,7 @@
 
                 <!-- Letzte Analysen -->
                 <div class="rp-analyses-card">
-                    <div class="rp-analyses-title card-title">
+                    <div class="rp-analyses-title card-title" data-bs-toggle="tooltip" data-bs-placement="top" title="Zeigt die letzten 5 Analysen." tabindex="0" aria-label="Info zu Analysen">
                         <img src="img/letzte_analysen.svg" alt="" /> Letzte Analysen
                     </div>
 
@@ -586,7 +581,7 @@
                 </div> -->
 				 <!-- Stockbuddy Boost -->
                 <div class="sb-card rp-card st-boost">
-                    <div class="card-title mb-3">
+                    <div class="card-title mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Diese Aktien hatten gestern das beste Ranking unter Berücksichtigung deiner Anlageziele." tabindex="0" aria-label="Bestes Ranking">
                         <img src="img/letzte_analysen.svg" alt="" style="width:34px;margin-right:6px;" /> Stockbuddy Boost
                         <button class="rp-bell active" aria-label="Benachrichtigungen umschalten"><i class="bi bi-bell"></i></button>
                     </div>
@@ -598,7 +593,7 @@
 
                 <!-- Stockbuddy Protect -->
                 <div class="sb-card rp-card st-protect">
-                    <div class="card-title mb-3">
+                    <div class="card-title mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Diese Aktien aus deinem Depot sind nicht mehr unter den 20 besten Aktien." tabindex="0" aria-label="Aktien nicht unter den besten 20">
                         <img src="img/letzte_analysen.svg" alt="" style="width:34px;margin-right:6px;" /> Stockbuddy Protect
                         <button class="rp-bell active" aria-label="Benachrichtigungen umschalten"><i class="bi bi-bell"></i></button>
                     </div>
@@ -609,9 +604,9 @@
 
                 <!-- Stockbuddy Alerts -->
                 <div class="sb-card rp-card st-alerts">
-                    <div class="card-title mb-3 st-alerts-title" data-bs-toggle="modal" data-bs-target="#meineAlertsModal" role="button" tabindex="0">
+                    <div class="card-title mb-3 st-alerts-title" data-bs-toggle="modal" data-bs-target="#meineAlertsModal" role="button" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="top" title="Deine Kursalarme: Du wirst benachrichtigt, sobald ein Kurz deinen Schwellenwert erreicht." tabindex="0" aria-label="Kursalarm">
                         <img src="img/message.svg" alt="" style="width:24px;    margin-right: 6px;"/> Stockbuddy Alerts 
-						<i class="bi bi-arrow-right ds-arrow"></i>
+						
                     </div>
                     <button class="rp-bell rp-bell-abs active" aria-label="Benachrichtigungen umschalten"><i class="bi bi-bell"></i></button>
                     <div class="table-scroll">
@@ -625,23 +620,23 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><strong>DE0005190003</strong></td>
+                                    <td><a href="" data-bs-toggle="modal" data-bs-target="#profilModal" tabindex="0" aria-label="Unternehmensprofil öffnen"><strong>DE0005190003</strong></a></td>
                                     <td>70 EUR <i class="bi bi-graph-down-arrow trend-down"></i></td>
                                     <td><button class="alert-toggle" aria-label="Kursalarm umschalten"><i class="bi bi-bell-slash"></i></button></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>DE0007664005</strong></td>
+                                    <td><a href="" data-bs-toggle="modal" data-bs-target="#profilModal" tabindex="0" aria-label="Unternehmensprofil öffnen"><strong>DE0007664005</strong></a></td>
                                     <td>75 EUR <i class="bi bi-graph-up-arrow trend-up"></i></td>
                                     <td><button class="alert-toggle active" aria-label="Kursalarm umschalten"><i class="bi bi-bell"></i></button></td>
 									
                                 </tr>
                                 <tr>
-                                    <td><strong>DE0007664005</strong></td>
+                                    <td><a href="" data-bs-toggle="modal" data-bs-target="#profilModal" tabindex="0" aria-label="Unternehmensprofil öffnen"><strong>DE0007664005</strong></a></td>
                                     <td>70 EUR <i class="bi bi-graph-up-arrow trend-up"></i></td>
                                     <td><button class="alert-toggle active" aria-label="Kursalarm umschalten"><i class="bi bi-bell"></i></button></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>DE0007664005</strong></td>
+                                    <td><a href="" data-bs-toggle="modal" data-bs-target="#profilModal" tabindex="0" aria-label="Unternehmensprofil öffnen"><strong>DE0007664005</strong></a></td>
                                     <td>90 EUR <i class="bi bi-graph-down-arrow trend-down"></i></td>
                                     <td><button class="alert-toggle active" aria-label="Kursalarm umschalten"><i class="bi bi-bell"></i></button></td>
                                 </tr>
@@ -750,6 +745,46 @@
                 <div class="modal-footer analysen-modal-footer">
                     <button type="button" class="btn-tx-cancel" data-bs-dismiss="modal">Abbrechen</button>
                     <button type="button" class="btn-tx-save" id="maSave">Speichern</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<!-- ══════════════════════════════════════════
+       MODAL – Unternehmensprofil
+       ══════════════════════════════════════════ -->
+    <div class="modal fade" id="profilModal" tabindex="-1" aria-labelledby="profilModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content analysen-modal">
+                <div class="modal-header analysen-modal-header">
+                    <div class="tx-modal-title" id="profilModalTitle">
+                        <span class="cb-logo tx-logo" id="pmLogo"><img src="img/nvidia.png" alt="" /></span>
+                        <span class="pm-company" id="pmCompany">NVIDIA Corporation</span>
+                    </div>
+                    <button type="button" class="analysen-modal-close" data-bs-dismiss="modal" aria-label="Schließen"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="modal-body analysen-modal-body profil-modal-body">
+                    <div class="pm-nav">
+                        <button class="pm-pill active" type="button">Profil</button>
+                        <button class="pm-pill" type="button">Analystendaten</button>
+                        <button class="pm-pill" type="button">Termine</button>
+                        <button class="pm-pill" type="button">Aktuelle News</button>
+                        <button class="pm-pill" type="button">Marge/Umsatz</button>
+                        <button class="pm-pill" type="button">KGV+KUV</button>
+                        <button class="pm-pill" type="button">Dividendenrendite</button>
+						<button class="pm-pill" type="button">Management</button>
+                        <button class="pm-pill" type="button">Aufsichtsrat</button>
+                        <button class="pm-pill" type="button">Aktionäre</button>
+                        <button class="pm-pill" type="button">Kontakt</button>
+                    </div>
+                    <div class="pm-content">
+                        <div class="pm-content-title">Beschreibung der Geschäftstätigkeit: <span id="pmContentCompany">NVIDIA Corporation</span></div>
+                        <p>Die NVIDIA Corporation ist weltweit führend in der Entwicklung, Herstellung und Vermarktung programmierbarer Grafikprozessoren. Das Unternehmen entwickelt auch zugehörige Software. Der Nettoumsatz verteilt sich wie folgt auf die einzelnen Produktfamilien:</p>
+                        <p>- Computer- und Netzwerklösungen (89 %): Rechenzentrumsplattformen und -infrastruktur, Ethernet-Verbindungslösungen, Hochleistungs-Computing-Lösungen, Plattformen und Lösungen für autonome und intelligente Fahrzeuge, Lösungen für die künstliche Intelligenz-Infrastruktur von Unternehmen, Kryptowährungs-Mining-Prozessoren, eingebettete Computerplatinen für Robotik, Lehre, Lernen und die Entwicklung künstlicher Intelligenz usw.;</p>
+                        <p>- Grafikprozessoren (11 %): für PCs, Spielekonsolen, Videospiel-Streaming-Plattformen, Workstations usw. (Marken GeForce, NVIDIA RTX, Quadro usw.). Der Konzern bietet außerdem Laptops, Desktops, Gaming-Computer, Computerperipheriegeräte (Monitore, Mäuse, Joysticks, Fernbedienungen usw.), Software für visuelles und virtuelles Computing, Plattformen für Infotainment-Systeme im Automobilbereich und Cloud-Kollaborationsplattformen an.</p>
+                        <p>Der Nettoumsatz verteilt sich nach Branchen auf Datenspeicherung (88,3 %), Gaming (8,7 %), professionelle Visualisierung (1,4 %), Automobil (1,3 %) und Sonstiges (0,3 %).</p>
+                        <p>Der Nettoumsatz verteilt sich geografisch wie folgt: Vereinigte Staaten (46,9 %), Singapur (18,2 %), Taiwan (15,8 %), China und Hongkong (13,1 %) und Sonstige (6 %).</p>
+                    </div>
                 </div>
             </div>
         </div>

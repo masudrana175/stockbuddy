@@ -78,21 +78,39 @@
                 <div class="notif-wrapper" id="notifWrapper">
                     <button class="sb-notif" id="notifBtn" aria-label="Benachrichtigungen" aria-expanded="false" aria-controls="notifPanel">
                         <img src="img/benachrichtigungen.svg" alt="" style="width:24px;" />
-                        <span class="nb" id="notifCount">2</span>
+                        <span class="nb" id="notifCount">3</span>
                     </button>
                     <div class="notif-panel" id="notifPanel" role="dialog" aria-label="Benachrichtigungen" hidden>
                         <div class="notif-header">
                             <span class="notif-title">Benachrichtigungen</span>
                             <button class="notif-close" id="notifClose" aria-label="Schließen"><i class="bi bi-x-lg"></i></button>
                         </div>
-                        <div class="notif-item unread">
-                            <div class="notif-icon-wrap" style="background:#fce8f1;"><i class="bi bi-graph-up-arrow" style="color:var(--sb-pink);"></i></div>
+                       <div class="notif-item unread">
                             <div class="notif-body">
-                                <div class="notif-item-title">Neue Analyse verfügbar</div>
-                                <div class="notif-item-desc">Oracle Corp. wurde heute analysiert und erhält 87/100 Punkte.</div>
+                                <div class="pos-logo"><img src="img/nvidia.png" alt="NVIDIA" /></div>
+								<div class="notif-item-title">NVIDIA Corporation</div>
+                                <div class="notif-item-desc">Die NVIDIA-Aktie notierte im NASDAQ-Handel um 20:26 Uhr in Grün und gewann 4,0 Prozent auf 211,60 USD. Hiermit zählt das Wertpapier zu den aktuellen Gewinnern im NASDAQ Composite Index, der derzeit bei 26'155 Punkten notiert. </div>
                                 <div class="notif-item-time"><i class="bi bi-clock"></i> Vor 2 Stunden</div>
                             </div>
-                            <span class="notif-dot"></span>
+							<span class="notif-dot"></span>
+                        </div>
+						<div class="notif-item unread">
+                            <div class="notif-body">
+                                <div class="pos-logo"><img src="img/microsoft.png" alt="NVIDIA" /></div>
+								<div class="notif-item-title">Microsoft Corporation</div>
+                                <div class="notif-item-desc">Die Microsoft-Aktie gab im NASDAQ-Handel um 20:26 Uhr um 1,1 Prozent auf 386,84 USD nach. Dadurch steht der Anteilsschein auf der Verlustseite im Dow Jones 30 Industrial, der im Moment bei 52'464 Punkten realisiert. </div>
+                                <div class="notif-item-time"><i class="bi bi-clock"></i> Vor 2 Stunden</div>
+                            </div>
+							<span class="notif-dot"></span>
+                        </div>
+						<div class="notif-item unread">
+                            <div class="notif-body">
+                                <div class="pos-logo"><img src="img/asml.png" alt="NVIDIA" /></div>
+								<div class="notif-item-title">ASML Holding N.V.</div>
+                                <div class="notif-item-desc">Die Microsoft-Aktie gab im NASDAQ-Handel um 20:26 Uhr um 1,1 Prozent auf 386,84 USD nach. Dadurch steht der Anteilsschein auf der Verlustseite im Dow Jones 30 Industrial, der im Moment bei 52'464 Punkten realisiert. </div>
+                                <div class="notif-item-time"><i class="bi bi-clock"></i> Vor 2 Stunden</div>
+                            </div>
+							<span class="notif-dot"></span>
                         </div>
                         <div class="notif-footer"><a href="#" class="sb-link">Alle Benachrichtigungen →</a></div>
                     </div>
@@ -584,6 +602,7 @@
                         <button class="pm-pill" type="button">Marge/Umsatz</button>
                         <button class="pm-pill" type="button">KGV+KUV</button>
                         <button class="pm-pill" type="button">Dividendenrendite</button>
+						<button class="pm-pill" type="button">Management</button>
                         <button class="pm-pill" type="button">Aufsichtsrat</button>
                         <button class="pm-pill" type="button">Aktionäre</button>
                         <button class="pm-pill" type="button">Kontakt</button>
