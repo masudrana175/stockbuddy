@@ -169,7 +169,7 @@
                     </div>
                     <div class="col-12 col-lg-3 col-6">
                         <div class="stat-box">
-                            <div class="card-title mb-3">Cash – Anteil <img src="img/info.svg" alt="" style="width:18px;margin-left:2px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" /></div>
+                            <div class="card-title mb-3">Cash – Anteil <button class="cash-plus-btn" data-bs-toggle="modal" data-bs-target="#cashModal1" aria-label="Neues Budget"><i class="bi bi-plus-circle-fill"></i></button></div>
                             <div class="stat-val">8,32 %</div>
                             <div class="stat-sub">10.664,45 €</div>
                         </div>
@@ -531,7 +531,50 @@
         </div>
         <!-- /md-layout -->
 
+
+        <!-- Empty state after depot reset -->
+        <div class="depot-empty-state d-none" id="depotEmptyState">
+            <button type="button" class="btn-depot-erstellen" onclick="window.location.reload()">Jetzt neues Depot erstellen</button>
+        </div>
+
     </main>
+
+    <!-- ══════════════════════════════════════════
+       MODALS – Neue Performance-Messung
+       ══════════════════════════════════════════ -->
+    <div class="modal fade" id="cashModal1" tabindex="-1" aria-labelledby="cashModal1Title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content analysen-modal">
+                <div class="modal-header analysen-modal-header pf-modal-header">
+                    <div class="pf-modal-title-text" id="cashModal1Title">Neue Performance-Messung?</div>
+                </div>
+                <div class="modal-body analysen-modal-body">
+                    <p class="cash-modal-text">Willst du neues Budget, dann werden all <strong>deine Kauf- und Verkaufspositionen gelöscht</strong> und deine Performance-Messung fängt von neuem an.</p>
+                </div>
+                <div class="modal-footer analysen-modal-footer">
+                    <button type="button" class="btn-tx-cancel" data-bs-dismiss="modal">Abbrechen</button>
+                    <button type="button" class="btn-tx-save" id="cashNeustart1">Neustart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="cashModal2" tabindex="-1" aria-labelledby="cashModal2Title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content analysen-modal">
+                <div class="modal-header analysen-modal-header pf-modal-header">
+                    <div class="pf-modal-title-text" id="cashModal2Title">Neue Performance-Messung?</div>
+                </div>
+                <div class="modal-body analysen-modal-body">
+                    <p class="cash-modal-text cash-modal-warn">Willst du wirklich neues Budget ?</p>
+                </div>
+                <div class="modal-footer analysen-modal-footer">
+                    <button type="button" class="btn-tx-cancel" data-bs-dismiss="modal">Abbrechen</button>
+                    <button type="button" class="btn-tx-save" id="cashNeustart2">Neustart</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- ══════════════════════════════════════════
        MODAL – Neue Transaktion
@@ -768,6 +811,30 @@
         row.classList.add('active');
         showCompany(row.dataset.symbol);
       });
+
+
+      /* ── Neue Performance-Messung: Modal-Kette + Depot-Reset ── */
+      (function () {
+        var m1 = document.getElementById('cashModal1');
+        var m2 = document.getElementById('cashModal2');
+        if (!m1 || !m2) return;
+        document.getElementById('cashNeustart1').addEventListener('click', function () {
+          bootstrap.Modal.getInstance(m1).hide();
+          m1.addEventListener('hidden.bs.modal', function onHidden() {
+            m1.removeEventListener('hidden.bs.modal', onHidden);
+            bootstrap.Modal.getOrCreateInstance(m2).show();
+          });
+        });
+        document.getElementById('cashNeustart2').addEventListener('click', function () {
+          bootstrap.Modal.getInstance(m2).hide();
+          m2.addEventListener('hidden.bs.modal', function onHidden() {
+            m2.removeEventListener('hidden.bs.modal', onHidden);
+            /* Depot leeren: Inhalt ausblenden, Empty-State zeigen */
+            document.querySelector('.md-layout').classList.add('d-none');
+            document.getElementById('depotEmptyState').classList.remove('d-none');
+          });
+        });
+      })();
 
       /* master alert bell in the column header: one toggle for everything */
       (function () {
