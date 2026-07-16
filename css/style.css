@@ -1980,6 +1980,21 @@ table.dataTable.th-table thead th.dt-type-numeric,
   margin-right: 10px;
   font-weight: 400;
 }
+/* hover: brand pink, no DataTables default gradient */
+#txHistModal .dt-paging-button:not(.disabled):not(.current):hover {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #cc3399 !important;
+}
+#txHistModal .dt-paging-button:not(.disabled):hover::before {
+  color: var(--sb-blue); /* separator keeps its color on hover */
+}
+#txHistModal .dt-paging-button:active {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
 
 /* ── Right panel: Boost & Protect cards ── */
 .sb-card.rp-card {
