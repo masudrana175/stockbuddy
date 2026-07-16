@@ -1177,12 +1177,20 @@
           });
         });
 
-        /* Mobile/unterstützte Geräte: natives Teilen-Menü statt Dropdown */
-        if (navigator.share) {
+        /* Natives Teilen-Menü NUR auf echten Mobilgeräten.
+           Desktop-Chrome/Edge melden navigator.share zwar auch, der Aufruf
+           kann dort aber den Tab crashen (RESULT_CODE_KILLED_BAD_MESSAGE) —
+           deshalb am Desktop immer das Dropdown verwenden. */
+        var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+          || (navigator.maxTouchPoints > 1 && /Mac/i.test(navigator.userAgent)); /* iPadOS */
+        if (isMobile) {
           btn.addEventListener('click', function (e) {
+            if (!navigator.share) return; /* Dropdown als Fallback */
             e.preventDefault();
             e.stopPropagation();
-            navigator.share({ title: 'StockBuddy Analyse', text: text, url: url }).catch(function () {});
+            try {
+              navigator.share({ title: 'StockBuddy Analyse', text: text, url: url }).catch(function () {});
+            } catch (err) { /* fällt aufs Dropdown zurück */ }
           });
         }
       })();
