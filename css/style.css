@@ -1781,6 +1781,88 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
   color: var(--sb-green-dark);
 }
 
+
+/* ── Chat send/stop button ── */
+.chat-send-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: none;
+  background: var(--sb-pink);
+  color: #fff;
+  font-size: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: var(--sb-ease);
+}
+.chat-send-btn:hover { background: var(--sb-pink-hover); }
+.chat-send-btn .stop-icon { display: none; }
+.chat-send-btn.running {
+  background: var(--sb-blue);
+}
+.chat-send-btn.running:hover { background: #16307a; }
+.chat-send-btn.running .send-icon { display: none; }
+.chat-send-btn.running .stop-icon { display: inline; }
+
+/* ── Like / Dislike feedback ── */
+.chat-feedback {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.fb-btn {
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  line-height: 1;
+  transition: var(--sb-ease);
+}
+.fb-btn img { width: 20px; height: 20px; display: block; }
+.fb-btn:hover { transform: scale(1.12); }
+
+/* ── Alle Benachrichtigungen accordion ── */
+.an-list { max-height: 60vh; overflow-y: auto; }
+.an-item { border-radius: 10px; }
+.an-item:nth-child(even) { background: #f7f7fb; }
+.an-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+.an-logo { flex-shrink: 0; }
+.an-info { flex: 1; min-width: 0; }
+.an-title { font-weight: 700; color: var(--sb-text-h); font-size: 0.92rem; }
+.an-desc { font-size: 0.85rem; color: var(--sb-text-soft); }
+.an-date { font-size: 0.8rem; color: var(--sb-text-muted); margin-top: 2px; }
+.an-chevron {
+  color: var(--sb-blue);
+  font-size: 1.05rem;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+.an-item.open .an-chevron { transform: rotate(180deg); }
+.an-body {
+  display: none;
+  padding: 0.25rem 1.25rem 1rem;
+  font-size: 0.88rem;
+  color: var(--sb-text-soft);
+  line-height: 1.6;
+}
+.an-item.open .an-body { display: block; }
+
 /* ── Right panel: Boost & Protect cards ── */
 .sb-card.rp-card {
   height: auto;
