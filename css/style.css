@@ -1659,8 +1659,9 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
   padding: 2px 8px;
   cursor: pointer;
 }
-#meineAlertsModal .dt-paging-button.current,
-#txHistModal .dt-paging-button.current { color: var(--sb-pink); }
+#meineAlertsModal .dt-paging-button.current, #txHistModal .dt-paging-button.current, #txHistModal .dt-paging-button:hover {
+    color: var(--sb-pink)!important;
+}
 #meineAlertsModal .dt-paging-button.disabled,
 #txHistModal .dt-paging-button.disabled { opacity: 0.4; cursor: default; }
 
@@ -1788,8 +1789,8 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
 
 /* ── Chat send/stop button ── */
 .chat-send-btn {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 12px;
   border: none;
   background: var(--sb-pink);
@@ -1852,10 +1853,13 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
 .an-desc { font-size: 0.85rem; color: var(--sb-text-soft); }
 .an-date { font-size: 0.8rem; color: var(--sb-text-muted); margin-top: 2px; }
 .an-chevron {
-  color: var(--sb-blue);
+  color:var(--sb-text-h);
   font-size: 1.05rem;
   transition: transform 0.2s ease;
   flex-shrink: 0;
+}
+.an-item.open .an-chevron{
+  color:var(--sb-pink);	
 }
 .an-item.open .an-chevron { transform: rotate(180deg); }
 .an-body {
@@ -1972,7 +1976,7 @@ table.dataTable.th-table thead th.dt-type-numeric,
 }
 #txHistModal .dt-paging-button:not(.previous):not(.next) + .dt-paging-button:not(.previous):not(.next)::before {
   content: '|';
-  color: #c9ccd4;
+  color: #254192;
   margin-right: 10px;
   font-weight: 400;
 }
@@ -2517,9 +2521,26 @@ table.dataTable.th-table thead th.dt-type-numeric,
   color: #333 !important;
 }
 .chat-input-wrap i.bi.bi-mic-fill {
-  color: #333;
-  font-size: 32px;
+  color: #343434;
+  font-size: 34px;
   line-height: 1.1;
+}
+.chat-send-btn.running .stop-icon {
+    font-size: 26px;
+}
+.chat-feedback button.fb-btn[data-fb="dislike"] {
+    position: relative;
+    top: 6px;
+}
+.chat-feedback button.fb-btn.active[data-fb="dislike"] img {
+    filter: brightness(0);
+}
+#alertsTable a {
+    color: var(--sb-text-h);
+    text-decoration: none;
+}
+.chat-input-wrap button i.bi.bi-chevron-right.send-icon {
+    font-size: 22px;
 }
 .chat-input-wrap button {
   padding-top: 0;
@@ -2533,6 +2554,7 @@ table.dataTable.th-table thead th.dt-type-numeric,
   border: none;
   border-radius: 15px;
   padding: 0.8rem 0.75rem 0.8rem 1rem;
+  padding: 9px;
 }
 .chat-attach-btn {
   background: none;

@@ -428,7 +428,7 @@
 								</button>
 								<button class="chat-send-btn" id="chatSendBtn" aria-label="Senden">
 									<i class="bi bi-chevron-right send-icon"></i>
-									<i class="bi bi-stop-fill stop-icon"></i>
+									<i class="bi bi-stop stop-icon"></i>
 								</button>
 							</div>
 						</div>
@@ -537,7 +537,7 @@
                 <!-- Letzte Analysen -->
                 <div class="rp-analyses-card">
                     <div class="rp-analyses-title card-title" data-bs-toggle="tooltip" data-bs-placement="top" title="Zeigt die letzten 5 Analysen." tabindex="0" aria-label="Info zu Analysen">
-                        <img src="img/letzte_analysen.svg" alt="" /> Letzte Analysen
+                        <img src="img/letzte_analysen.svg" alt="" style="width:24px;"/> Letzte Analysen
                     </div>
 
                     <div class="analysis-item">
@@ -681,7 +681,7 @@
             <div class="modal-content analysen-modal">
                 <div class="modal-header analysen-modal-header">
                     <div class="analysen-modal-title" id="alleNotifTitle">
-                        <img src="img/letzte_analysen.svg" alt="" style="width:24px;" />
+                        <img src="img/letzte_analysen.svg" alt="" style="width:34px;" />
                         Alle Benachrichtigungen
                     </div>
                     <button type="button" class="analysen-modal-close" data-bs-dismiss="modal" aria-label="Schließen"><i class="bi bi-x-lg"></i></button>
@@ -1220,7 +1220,7 @@
             if (!active) {
               this.classList.add('active');
               this.setAttribute('aria-pressed', 'true');
-              this.querySelector('img').src = this.dataset.fb === 'like' ? 'img/like_blue.svg' : 'img/dontlike_blue.svg';
+              this.querySelector('img').src = this.dataset.fb === 'like' ? 'img/like_blue.svg' : 'img/dontlike_grey.svg';
             }
           });
         });
