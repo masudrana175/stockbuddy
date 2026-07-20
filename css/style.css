@@ -1903,7 +1903,7 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
 .fb-btn:hover { transform: scale(1.12); }
 
 /* ── Alle Benachrichtigungen accordion ── */
-.an-list { max-height: 60vh; overflow-y: auto; }
+/* an-list scrolls with the modal at the browser edge (like Meine Alerts) */
 .an-item { border-radius: 10px; }
 .an-item:nth-child(even) { background: #f7f7fb; }
 .an-head {
