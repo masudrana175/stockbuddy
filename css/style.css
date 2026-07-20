@@ -1641,8 +1641,14 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
   line-height: 1.55;
 }
 .pf-daten-grid {
-  display: flex;
-  gap: 2rem;
+
+}
+.profile-modal-body .form-group input[type="checkbox"],.profile-modal-body .form-group input[type="radio"] {
+    display: none;
+    opacity: 0;
+}
+.profile-modal-body .form-group input[type="checkbox"]:checked+label:before,.profile-modal-body .form-group input[type="radio"]:checked+label:before {
+    background: var(--sb-blue);
 }
 .pf-daten-left {
   width: 240px;
