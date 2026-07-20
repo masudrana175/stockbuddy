@@ -181,6 +181,104 @@ function initPerfChart() {
   }, { displayModeBar: false, responsive: true });
 }
 
+
+/* ============================================================
+   ALLE BENACHRICHTIGUNGEN – shared modal (all pages)
+   Injected from JS so every page gets the same popup without
+   duplicating markup. Clicking a bell-dropdown item opens the
+   modal with that message expanded.
+   ============================================================ */
+var NOTIF_MESSAGES = [
+  { logo: 'img/nvidia.png',    title: 'NVIDIA Corporation',    teaser: 'Die NVIDIA-Aktie notierte im NASDAQ-Handel um 20:26 Uhr in Grün und gewann 4,0 Prozent auf 211,60 USD.', date: '22.05.2026' },
+  { logo: 'img/microsoft.png', title: 'Microsoft Corporation', teaser: 'Die Microsoft-Aktie gab im NASDAQ-Handel um 20:26 Uhr um 1,1 Prozent auf 386,84 USD nach.', date: '12.04.2026' },
+  { logo: 'img/asml.png',      title: 'ASML Holding N.V.',     teaser: 'Die Quartalssaison nimmt nach einem verhaltenen Start in der zurückliegenden Woche inzwischen mächtig an Fahrt auf.', date: '19.05.2024' },
+  { logo: 'img/visa.png',      title: 'Visa Inc.',             teaser: 'Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.', date: '14.05.2024' },
+  { logo: 'img/asml.png',      title: 'ASML Holding N.V.',     teaser: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna', date: '14.03.2024' },
+  { logo: 'img/microsoft.png', title: 'Microsoft Corporation', teaser: 'Die Microsoft-Aktie gab im NASDAQ-Handel um 20:26 Uhr um 1,1 Prozent auf 386,84 USD nach.', date: '12.04.2026' }
+];
+
+function initAlleNotifModal() {
+  if (typeof bootstrap === 'undefined') return;
+
+  var lorem1 = 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.';
+  var lorem2 = 'Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.<br />Duis autem vel eum iriure dolor in hendrerit.';
+
+  /* build the modal once per page */
+  if (!document.getElementById('alleNotifModal')) {
+    var rows = NOTIF_MESSAGES.map(function (msg, i) {
+      return '<div class="an-item" data-an-index="' + i + '">' +
+        '<button class="an-head" type="button" aria-expanded="false">' +
+          '<div class="analysis-logo an-logo"><img src="' + msg.logo + '" alt="' + msg.title + '" /></div>' +
+          '<div class="an-info">' +
+            '<div class="an-title">' + msg.title + '</div>' +
+            '<div class="an-desc">' + msg.teaser + '</div>' +
+            '<div class="an-date">' + msg.date + '</div>' +
+          '</div>' +
+          '<i class="bi bi-chevron-down an-chevron"></i>' +
+        '</button>' +
+        '<div class="an-body"><p>' + lorem1 + '</p><p>' + lorem2 + '</p></div>' +
+      '</div>';
+    }).join('');
+
+    document.body.insertAdjacentHTML('beforeend',
+      '<div class="modal fade" id="alleNotifModal" tabindex="-1" aria-labelledby="alleNotifTitle" aria-hidden="true">' +
+        '<div class="modal-dialog modal-dialog-centered modal-lg">' +
+          '<div class="modal-content analysen-modal">' +
+            '<div class="modal-header analysen-modal-header">' +
+              '<div class="analysen-modal-title" id="alleNotifTitle">' +
+                '<img src="img/letzte_analysen.svg" alt="" style="width:24px;" /> Alle Benachrichtigungen' +
+              '</div>' +
+              '<button type="button" class="analysen-modal-close" data-bs-dismiss="modal" aria-label="Schließen"><i class="bi bi-x-lg"></i></button>' +
+            '</div>' +
+            '<div class="modal-body analysen-modal-body an-list">' + rows + '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>');
+  }
+
+  var modalEl = document.getElementById('alleNotifModal');
+
+  function setOpen(item, open) {
+    item.classList.toggle('open', open);
+    item.querySelector('.an-head').setAttribute('aria-expanded', String(open));
+  }
+  modalEl.querySelectorAll('.an-head').forEach(function (head) {
+    head.addEventListener('click', function () {
+      var item = this.closest('.an-item');
+      var willOpen = !item.classList.contains('open');
+      modalEl.querySelectorAll('.an-item').forEach(function (i) { setOpen(i, false); });
+      setOpen(item, willOpen);
+    });
+  });
+
+  function openModalAt(index) {
+    modalEl.querySelectorAll('.an-item').forEach(function (i) { setOpen(i, false); });
+    var target = index != null ? modalEl.querySelector('.an-item[data-an-index="' + index + '"]') : null;
+    if (target) setOpen(target, true);
+    var panel = document.getElementById('notifPanel');
+    if (panel) panel.hidden = true;
+    bootstrap.Modal.getOrCreateInstance(modalEl).show();
+    if (target) setTimeout(function () { target.scrollIntoView({ block: 'nearest' }); }, 250);
+  }
+
+  /* bell dropdown items open the modal with the clicked message expanded */
+  document.querySelectorAll('#notifPanel .notif-item').forEach(function (item, idx) {
+    item.style.cursor = 'pointer';
+    item.addEventListener('click', function () { openModalAt(idx); });
+  });
+  /* footer link opens the modal without preselecting */
+  var footerLink = document.querySelector('#notifPanel .notif-footer a');
+  if (footerLink) footerLink.addEventListener('click', function (e) {
+    e.preventDefault();
+    openModalAt(null);
+  });
+  /* bells without their own dropdown (e.g. the mobile-only topbar bell on
+     buddy.html) open the modal directly — previously they did nothing */
+  document.querySelectorAll('.sb-notif:not(#notifBtn)').forEach(function (bell) {
+    bell.addEventListener('click', function () { openModalAt(null); });
+  });
+}
+
 /* ============================================================
    TIME-PERIOD SELECTOR BUTTONS
    ============================================================ */
@@ -339,5 +437,6 @@ document.addEventListener('DOMContentLoaded', function () {
   initTimeButtons();
   initSidebarToggle();
   initNotifications();
+  initAlleNotifModal();
   initTooltips();
 });
