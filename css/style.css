@@ -1641,7 +1641,11 @@ table.dataTable.alerts-table thead > tr > th.dt-orderable-none span.dt-column-or
   line-height: 1.55;
 }
 .pf-daten-grid {
-
+    display: flex;
+    gap: 2rem;
+}
+div#analysefragebogenModal .pf-daten-grid {
+    display: block;
 }
 .profile-modal-body .form-group input[type="checkbox"],.profile-modal-body .form-group input[type="radio"] {
     display: none;
