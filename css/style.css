@@ -427,6 +427,36 @@ img {
   margin-top: 0px;
 }
 
+/* ── Abo Zustände ── */
+.active-badge {
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+  background: #4daf47;
+  padding: 0px 5px;
+  border-radius: 35px;
+  letter-spacing: 0.02em;
+}
+
+.endsoon-badge {
+  font-size: 14px;
+  font-weight: 400;
+  color: #fff;
+  background: #e2b260;
+  padding: 0px 5px;
+  border-radius: 35px;
+  letter-spacing: 0.02em;
+}
+
+.hinweis {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+  padding: 0px 5px;
+  letter-spacing: 0.02em;
+}
+
+
 /* ── Sparklines (StockBuddy Depot / Mein Depot) ── */
 .sparkwrap {
   flex-shrink: 0;
@@ -1045,6 +1075,47 @@ img {
   color: var(--sb-pink);
   outline: none;
 }
+/* ============================================================
+   Form Analyse Fragebogen
+   ============================================================ */
+
+
+form.form-questionnaire .form-group label:before {
+    content: "";
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    background: #efe9ef;
+    margin-right: 12px;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+form.form-questionnaire .form-group label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+form.form-questionnaire label {
+    font-weight: 400;
+}
+
+.form-control, .form-control:focus {
+    padding: 7px 14px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--grey);
+    background: var(--white);
+    border-radius: 30px;
+    border: 0;
+    box-shadow: none;
+}
+
 
 /* ============================================================
    MOBILE BOTTOM NAV

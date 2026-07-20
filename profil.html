@@ -151,7 +151,7 @@
                                 <label for="zieleCheck">Meine voreingestellten Ziele immer in der Session berücksichtigen</label>
                             </div>
                         </div>
-                        <button class="btn-ziele">Anlageziele von StockBuddy
+                        <button class="btn-ziele" data-bs-toggle="modal" data-bs-target="#analysefragebogenModal" data-tab="daten" role="button" tabindex="0">Anlageziele von StockBuddy
                             <br>ermitteln lassen</button>
                     </div>
 
@@ -359,7 +359,11 @@
                                     <input type="checkbox" class="sb-switch" id="introSkip" />
                                     <label for="introSkip" class="pf-check-label">Intro überspringen (wird innerhalb von 20 Minuten angewendet)</label>
                                 </div>
+								<div class="modal-footer analysen-modal-footer">
+                    			<button type="button" class="btn-tx-save">Aktualisieren</button>
+               					</div>
                             </div>
+							
                         </div>
                     </div>
                     <div class="pf-pane d-none" data-pane="datenschutz">
@@ -374,9 +378,11 @@
                         <div class="abo-box mt-4">
                             <div class="d-flex align-items-center justify-content-between mb-3">
                                 <span class="abo-label">StockBuddy</span>
+								 <span class="active-badge">aktiv</span>
+								<span class="endsoon-badge">läuft ab</span>
                                 <input type="checkbox" class="sb-switch" id="aboActive" checked aria-label="Abonnement aktiv" />
                             </div>
-                            <div class="abo-price mb-3">34,90 &euro; / Monat</div>
+                            <div class="abo-price mb-3">34,90 &euro; / Monat <span class="hinweis">(noch <strong>24 Tage</strong>)</span></div>
                             <button type="button" class="abo-manage-btn mb-3">Abonnement verwalten</button>
                             <div class="abo-note">
                                 Jederzeit kündbar,<br />
@@ -393,9 +399,7 @@
                         <p class="pf-hint">Informieren Sie sich über die Risikohinweise</p>
                     </div>
                 </div>
-                <div class="modal-footer analysen-modal-footer">
-                    <button type="button" class="btn-tx-save">Aktualisieren</button>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -472,6 +476,169 @@
                         <p class="pf-hint">Anpassen, welche E-Mails Sie erhalten möchten.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+	
+	<!-- ══════════════════════════════════════════
+       MODAL – Anlagenziele von StockBuddy ermitteln lassen
+       ══════════════════════════════════════════ -->
+    <div class="modal fade" id="analysefragebogenModal" tabindex="-1" aria-labelledby="analysefragebogenModalModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content analysen-modal">
+                <div class="modal-header analysen-modal-header pf-modal-header">
+                    <div class="tx-modal-title" id="analysefragebogenModalModalTitle">
+                       
+                        <span class="pf-modal-title-text">Anlagenziele Fragebogen</span>
+                    </div>
+                    <button type="button" class="analysen-modal-close" data-bs-dismiss="modal" aria-label="Schließen"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="modal-body analysen-modal-body">
+                   
+
+                    <div class="pf-pane" data-pane="daten">
+                        <div class="pf-daten-grid">
+                            
+                            <!---->
+							
+							<div class="profile-modal-body">
+						<div data-spinner
+							class="container-fluid d-flex justify-content-center align-items-center d-none">
+							<i class="fa fa-spinner fa-pulse stock-buddy-spinner"></i>
+						</div>
+						<div data-success class="align-center d-none">
+							<i class="fas fa-check-circle"></i> Die Anlageziele wurden erfolgreich gespeichert.
+						</div>
+						<div data-failure class="align-center d-none">
+							<i class="fas fa-exclamation-circle"></i> Fehlgeschlagen. Versuchen Sie bitte erneut.
+						</div>
+						<form class="form-questionnaire questionnaire">
+							<p>Bitte kreuze die zutreffenden Antworten an, um deine Anlageziele zu bestimmen.</p>
+							<div class="row" data-strategy-intro-question-container required>
+								<div class="col-lg-12">
+									<div class="pf-subtitle mb-2" data-question>1. Was ist dein primäres Anlageziel? (Mehrfachauswahl
+										möglich)</div>
+									<div class="form-group">
+										<input id="q1-a1" type="checkbox" class="form-control">
+										<label for="q1-a1">Kurzfristige Gewinne (Spekulation & Trading)</label>
+									</div>
+									<div class="form-group">
+										<input id="q1-a2" type="checkbox" class="form-control">
+										<label for="q1-a2">Langfristiges Wachstum (Vermögensaufbau über mehrere
+											Jahre)</label>
+									</div>
+									<div class="form-group">
+										<input id="q1-a3" type="checkbox" class="form-control">
+										<label for="q1-a3">Altersvorsorge (Sicherheit & stabile Erträge im
+											Ruhestand)</label>
+									</div>
+									<div class="form-group">
+										<input id="q1-a4" type="checkbox" class="form-control">
+										<label for="q1-a4">Passive Einnahmen (z. B. durch Dividenden oder
+											Zinsen)</label>
+									</div>
+								</div>
+							</div>
+							<div class="row" data-strategy-intro-question-container required>
+								<div class="col-lg-12">
+									<div class="pf-subtitle mb-2" data-question>2. Wie lange möchtest du dein Kapital anlegen? (Eine
+										Auswahl treffen)</div>
+									<div class="form-group">
+										<input name="q2" id="q2-a1" type="radio" class="form-control">
+										<label for="q2-a1">Weniger als 1 Jahr (sehr kurzfristig)</label>
+									</div>
+									<div class="form-group">
+										<input name="q2" id="q2-a2" type="radio" class="form-control">
+										<label for="q2-a2">1-5 Jahre (mittelfristig)</label>
+									</div>
+									<div class="form-group">
+										<input name="q2" id="q2-a3" type="radio" class="form-control">
+										<label for="q2-a3">5-10 Jahre (langfristig)</label>
+									</div>
+									<div class="form-group">
+										<input name="q2" id="q2-a4" type="radio" class="form-control">
+										<label for="q2-a4">Über 10 Jahre (sehr langfristig)</label>
+									</div>
+								</div>
+							</div>
+							<div class="row" data-strategy-intro-question-container required>
+								<div class="col-lg-12">
+									<div class="pf-subtitle mb-2" data-question>3. Wie hoch ist deine Risikobereitschaft? (Eine
+										Auswahl treffen)</div>
+									<div class="form-group">
+										<input name="q3" id="q3-a1" type="radio" class="form-control">
+										<label for="q3-a1">Niedrig (Sicherheit steht an erster Stelle)</label>
+									</div>
+									<div class="form-group">
+										<input name="q3" id="q3-a2" type="radio" class="form-control">
+										<label for="q3-a2">Mittel (Ausgewogene Mischung aus Risiko und
+											Sicherheit)</label>
+									</div>
+									<div class="form-group">
+										<input name="q3" id="q3-a3" type="radio" class="form-control">
+										<label for="q3-a3">Hoch (Ich bin bereit, hohe Risiken für potenziell hohe
+											Gewinne einzugehen)</label>
+									</div>
+								</div>
+							</div>
+							<div class="row" data-strategy-intro-question-container required>
+								<div class="col-lg-12">
+									<div class="pf-subtitle mb-2" data-question>4. Wofür möchtest du deine Gewinne nutzen?
+										(Mehrfachauswahl möglich)</div>
+									<div class="form-group">
+										<input id="q4-a1" type="checkbox" class="form-control">
+										<label for="q4-a1">Reinvestition in weitere Anlagen</label>
+									</div>
+									<div class="form-group">
+										<input id="q4-a2" type="checkbox" class="form-control">
+										<label for="q4-a2">Zusätzliche Einkommensquelle für den Alltag</label>
+									</div>
+									<div class="form-group">
+										<input id="q4-a3" type="checkbox" class="form-control">
+										<label for="q4-a3">Finanzierung eines großen Ziels (z. B. Hauskauf,
+											Studium)</label>
+									</div>
+									<div class="form-group">
+										<input id="q4-a4" type="checkbox" class="form-control">
+										<label for="q4-a4">Ruhestand und finanzielle Unabhängigkeit</label>
+									</div>
+								</div>
+							</div>
+							<div class="row" data-strategy-intro-question-container required>
+								<div class="col-lg-12">
+									<div class="pf-subtitle mb-2" data-question>5. Wie aktiv möchtest du deine Anlagen verwalten?
+										(Eine Auswahl treffen)</div>
+									<div class="form-group">
+										<input name="q5" id="q5-a1" type="radio" class="form-control">
+										<label for="q5-a1">Passiv (Langfristig halten, wenig Anpassung)</label>
+									</div>
+									<div class="form-group">
+										<input name="q5" id="q5-a2" type="radio" class="form-control">
+										<label for="q5-a2">Gelegentlich (Ein paar Mal im Jahr Anpassungen)</label>
+									</div>
+									<div class="form-group">
+										<input name="q5" id="q5-a3" type="radio" class="form-control">
+										<label for="q5-a3">Aktiv (Regelmäßiges Trading und Umschichtungen)</label>
+									</div>
+								</div>
+							</div>
+							<div class="modal-buttons d-flex justify-content-end align-items-center mt-4 mb-3">
+								 <button type="button" class="btn-tx-save">Speichern</button>
+							</div>
+						</form>
+					</div>
+							
+							
+							<!---->
+							
+                        </div>
+                    </div>
+                   
+                   
+					
+					
+                </div>
+                
             </div>
         </div>
     </div>
