@@ -1732,9 +1732,11 @@ div#analysefragebogenModal .pf-daten-grid {
 .ma-selected-stock { font-weight: 700; color: var(--sb-text-h); }
 /* DataTables pagination inside the modal: brand styling */
 #meineAlertsModal .dt-paging,
-#txHistModal .dt-paging { text-align: right; margin-top: 0.5rem; }
+#txHistModal .dt-paging,
+#depotErstellenModal .dt-paging { text-align: right; margin-top: 0.5rem; }
 #meineAlertsModal .dt-paging-button,
-#txHistModal .dt-paging-button {
+#txHistModal .dt-paging-button,
+#depotErstellenModal .dt-paging-button {
   border: none;
   background: none;
   color: var(--sb-text-soft);
@@ -1743,11 +1745,13 @@ div#analysefragebogenModal .pf-daten-grid {
   padding: 2px 8px;
   cursor: pointer;
 }
-#meineAlertsModal .dt-paging-button.current, #txHistModal .dt-paging-button.current, #txHistModal .dt-paging-button:hover {
+#meineAlertsModal .dt-paging-button.current, #txHistModal .dt-paging-button.current, #txHistModal .dt-paging-button:hover,
+#depotErstellenModal .dt-paging-button.current, #depotErstellenModal .dt-paging-button:hover {
     color: var(--sb-pink)!important;
 }
 #meineAlertsModal .dt-paging-button.disabled,
-#txHistModal .dt-paging-button.disabled { opacity: 0.4; cursor: default; }
+#txHistModal .dt-paging-button.disabled,
+#depotErstellenModal .dt-paging-button.disabled { opacity: 0.4; cursor: default; }
 
 
 /* ── Abonnement box (Konto & Abonnement tab) ── */
@@ -2161,26 +2165,32 @@ table.dataTable.th-table thead th.dt-type-numeric,
 }
 /* pagination like the design: ‹ 1 | 2 | 3 › */
 #txHistModal .dt-paging-button.first,
-#txHistModal .dt-paging-button.last {
+#txHistModal .dt-paging-button.last,
+#depotErstellenModal .dt-paging-button.first,
+#depotErstellenModal .dt-paging-button.last {
   display: none;
 }
-#txHistModal .dt-paging-button:not(.previous):not(.next) + .dt-paging-button:not(.previous):not(.next)::before {
+#txHistModal .dt-paging-button:not(.previous):not(.next) + .dt-paging-button:not(.previous):not(.next)::before,
+#depotErstellenModal .dt-paging-button:not(.previous):not(.next) + .dt-paging-button:not(.previous):not(.next)::before {
   content: '|';
   color: #254192;
   margin-right: 10px;
   font-weight: 400;
 }
 /* hover: brand pink, no DataTables default gradient */
-#txHistModal .dt-paging-button:not(.disabled):not(.current):hover {
+#txHistModal .dt-paging-button:not(.disabled):not(.current):hover,
+#depotErstellenModal .dt-paging-button:not(.disabled):not(.current):hover {
   background: none !important;
   border: none !important;
   box-shadow: none !important;
   color: #cc3399 !important;
 }
-#txHistModal .dt-paging-button:not(.disabled):hover::before {
+#txHistModal .dt-paging-button:not(.disabled):hover::before,
+#depotErstellenModal .dt-paging-button:not(.disabled):hover::before {
   color: var(--sb-blue); /* separator keeps its color on hover */
 }
-#txHistModal .dt-paging-button:active {
+#txHistModal .dt-paging-button:active,
+#depotErstellenModal .dt-paging-button:active {
   background: none !important;
   border: none !important;
   box-shadow: none !important;
