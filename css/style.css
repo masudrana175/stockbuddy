@@ -1797,31 +1797,40 @@ div#analysefragebogenModal .pf-daten-grid {
 .pf-avatar-upload {
   position: relative;
   display: block;
-  cursor: pointer;
-}
-.pf-avatar-upload:focus-visible {
-  outline: 2px solid var(--sb-blue);
-  outline-offset: 3px;
 }
 .pf-avatar-overlay {
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background: rgba(29, 58, 142, 0.55);
-  color: #fff;
-  font-weight: 700;
-  font-size: 0.9rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 10px;
   opacity: 0;
   transition: opacity 0.2s ease;
 }
 .pf-avatar-upload:hover .pf-avatar-overlay,
-.pf-avatar-upload:focus-visible .pf-avatar-overlay {
+.pf-avatar-upload:focus-within .pf-avatar-overlay {
   opacity: 1;
 }
+.pf-avatar-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  color: var(--sb-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--sb-ease);
+}
+.pf-avatar-icon-btn:hover { background: var(--sb-blue); color: #fff; }
+.pf-avatar-icon-btn.delete { color: var(--sb-pink); }
+.pf-avatar-icon-btn.delete:hover { background: var(--sb-pink); color: #fff; }
 .pf-avatar-btn {
   display: inline-flex;
   align-items: center;
