@@ -279,15 +279,15 @@
                     </div>
                     <div class="ds-link-row" data-bs-toggle="modal" data-bs-target="#nfModal" data-tab="benach" role="button" tabindex="0">
                         <div>
-                            <div class="ds-link-title">Benachrichtigungen</div>
-                            <div class="ds-link-desc">Verwalten Sie Ihre Benachrichtigungen</div>
+                            <div class="ds-link-title">Alerts</div>
+                            <div class="ds-link-desc">Verwalten Sie Ihre Alerts</div>
                         </div>
                         <i class="bi bi-arrow-right ds-arrow"></i>
                     </div>
                     <div class="ds-link-row" data-bs-toggle="modal" data-bs-target="#nfModal" data-tab="email" role="button" tabindex="0">
                         <div>
-                            <div class="ds-link-title">E-Mail Einstellungen</div>
-                            <div class="ds-link-desc">anpassen, welche E-Mails Sie erhalten möchten</div>
+                            <div class="ds-link-title">E-Mail Benachrichtigungen</div>
+                            <div class="ds-link-desc">Anpassen, welche E-Mails Sie erhalten möchten</div>
                         </div>
                         <i class="bi bi-arrow-right ds-arrow"></i>
                     </div>
@@ -419,11 +419,54 @@
                 </div>
                 <div class="modal-body analysen-modal-body">
                     <div class="pf-tabs mb-4">
-                        <button class="pf-tab active" type="button" data-tab="benach">Benachrichtigungen</button>
-                        <button class="pf-tab" type="button" data-tab="email">E-Mail Einstellungen</button>
+                        <button class="pf-tab active" type="button" data-tab="benach">Alerts</button>
+                        <button class="pf-tab" type="button" data-tab="email">E-Mail Benachrichtigungen</button>
                     </div>
 
                     <div class="pf-pane" data-pane="benach">
+                       
+                       
+
+                        <div class="nf-toggle-row">
+                            <input type="checkbox" class="sb-switch" id="nfMusterdepot" />
+                            <div>
+                                <div class="nf-toggle-title">StockBuddy Depot</div>
+                                <div class="pf-hint">Trailing-Stop-Loss-Benachrichtigung, wenn ein Wert im StockBuddy-Depot signifikant unter den letzten Höchstwert fällt.</div>
+                            </div>
+                        </div>
+                        <div class="nf-toggle-row">
+                            <input type="checkbox" class="sb-switch" id="nfDeinDepot" />
+                            <div>
+                                <div class="nf-toggle-title">Dein Depot</div>
+                                <div class="pf-hint">Trailing-Stop-Loss-Benachrichtigung, wenn ein Wert in deinem Depot signifikant unter den letzten Höchstwert fällt.</div>
+                            </div>
+                        </div>
+                        <div class="nf-toggle-row">
+                            <input type="checkbox" class="sb-switch" id="nfBooster" checked />
+                            <div>
+                                <div class="nf-toggle-title">StockBuddy Booster <span class="nf-aktiv">(aktiv)</span></div>
+                                <div class="pf-hint">Erhalte Empfehlungen für Instrumente basierend auf deinen Anlagezielen.</div>
+                            </div>
+                        </div>
+                        <div class="nf-toggle-row">
+                            <input type="checkbox" class="sb-switch" id="nfProtect" checked />
+                            <div>
+                                <div class="nf-toggle-title">StockBuddy Protect <span class="nf-aktiv">(aktiv)</span></div>
+                                <div class="pf-hint">Erhalte Hinweise, wenn eine Position im Portfolio Verkaufssignale zeigt.</div>
+                            </div>
+                        </div>
+                        <div class="nf-toggle-row">
+                            <input type="checkbox" class="sb-switch" id="nfAlerts" checked />
+                            <div>
+                                <div class="nf-toggle-title">StockBuddy Alerts <span class="nf-aktiv">(aktiv)</span></div>
+                                <div class="pf-hint">Kursalarme für deine Portfolio- und Musterdepot-Werte (dynamische Stop-Loss- und Take-Profit-Marken).</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pf-pane d-none" data-pane="email">
+                         <p class="pf-hint">Anpassen, welche E-Mails Sie erhalten möchten.</p>
+						
+						
                         <div class="pf-subtitle mb-2">Dein persönlicher Newsletter</div>
                         <div class="row g-3 align-items-center mb-4">
                             <div class="col-12 col-lg-4">
@@ -470,10 +513,9 @@
                                 <div class="pf-hint">Kursalarme für deine Portfolio- und Musterdepot-Werte (dynamische Stop-Loss- und Take-Profit-Marken).</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="pf-pane d-none" data-pane="email">
-                        <div class="pf-subtitle mb-2">E-Mail Einstellungen</div>
-                        <p class="pf-hint">Anpassen, welche E-Mails Sie erhalten möchten.</p>
+                    
+						
+						
                     </div>
                 </div>
             </div>

@@ -1089,7 +1089,9 @@ form.form-questionnaire .form-group label:before {
     background: #efe9ef;
     margin-right: 12px;
 }
-
+.profile-modal-body .form-group input[type="radio"]+label:before {
+    border-radius: 50%;
+}
 *, ::after, ::before {
     box-sizing: border-box;
 }
