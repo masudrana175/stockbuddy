@@ -2204,6 +2204,13 @@ table.dataTable.th-table thead th.dt-type-numeric,
   border: none !important;
   box-shadow: none !important;
 }
+/* Empty Depot-Positionen table: still show a "1" page indicator, like the design */
+#depotErstellenModal .dt-paging nav:not(:has(.dt-paging-button:not(.previous):not(.next):not(.first):not(.last))) .dt-paging-button.next::before {
+  content: '1';
+  color: var(--sb-pink);
+  font-weight: 600;
+  margin-right: 10px;
+}
 
 /* ── Right panel: Boost & Protect cards ── */
 .sb-card.rp-card {

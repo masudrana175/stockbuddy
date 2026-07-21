@@ -1069,7 +1069,7 @@
 
         /* Depot-Positionen Tabelle: leer beim Erstellen eines neuen Depots */
         if (document.getElementById('deTable')) {
-          new DataTable('#deTable', {
+          var deDt = new DataTable('#deTable', {
             paging: true,
             pageLength: 10,
             lengthChange: false,
@@ -1082,10 +1082,10 @@
             columnDefs: [{ orderable: false, targets: 5 }]
           });
           document.getElementById('deTablePerPage').addEventListener('change', function () {
-            $('#deTable').DataTable().page.len(parseInt(this.value, 10)).draw();
+            deDt.page.len(parseInt(this.value, 10)).draw();
           });
           document.getElementById('deTableSearch').addEventListener('input', function () {
-            $('#deTable').DataTable().search(this.value).draw();
+            deDt.search(this.value).draw();
           });
         }
 
