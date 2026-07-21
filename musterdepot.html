@@ -1089,12 +1089,12 @@
           });
         }
 
-        /* Bootstrap tooltip on the OK button: auto-shown while modal is open */
-        var deCashTooltip = new bootstrap.Tooltip(deCashOk);
-        deModal.addEventListener('shown.bs.modal', function () {
+        /* Tooltip hint on the Cash field: shown while entering the amount */
+        var deCashTooltip = new bootstrap.Tooltip(deCashOk, { trigger: 'manual' });
+        deCashAmount.addEventListener('focus', function () {
           if (!cashSet) deCashTooltip.show();
         });
-        deCashAmount.addEventListener('focus', function () {
+        deCashAmount.addEventListener('blur', function () {
           deCashTooltip.hide();
         });
       })();
