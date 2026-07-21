@@ -534,7 +534,7 @@
 
         <!-- Empty state after depot reset -->
         <div class="depot-empty-state d-none" id="depotEmptyState">
-            <button type="button" class="btn-depot-erstellen" data-bs-toggle="modal" data-bs-target="#depotErstellenModal">Jetzt neues Depot erstellen</button>
+            <button type="button" class="btn-depot-erstellen" onclick="window.location.reload()">Jetzt neues Depot erstellen</button>
         </div>
 
     </main>
@@ -666,37 +666,7 @@
             </div>
         </div>
     </div>
-
-	<!-- ══════════════════════════════════════════
-       MODAL – Neues Depot erstellen
-       ══════════════════════════════════════════ -->
-    <div class="modal fade" id="depotErstellenModal" tabindex="-1" aria-labelledby="depotErstellenModalTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content analysen-modal">
-                <div class="modal-header analysen-modal-header pf-modal-header">
-                    <div class="pf-modal-title-text" id="depotErstellenModalTitle">Neues Depot erstellen</div>
-                </div>
-                <div class="modal-body analysen-modal-body">
-                    <div class="de-field-label">Zeitraum</div>
-                    <select class="de-select" id="deZeitraum">
-                        <option value="seit-anfang">Seit Anfang</option>
-                        <option value="1-jahr">Letzte 1 Jahr</option>
-                        <option value="6-monate">Letzte 6 Monate</option>
-                        <option value="3-monate">Letzte 3 Monate</option>
-                        <option value="1-monat">Letzte 1 Monat</option>
-                    </select>
-
-                    <div class="de-field-label mt-4">Cash</div>
-                    <input type="number" class="de-input" id="deCash" placeholder="Betrag eingeben" min="0" step="0.01" />
-                </div>
-                <div class="modal-footer analysen-modal-footer">
-                    <button type="button" class="btn-tx-cancel" data-bs-dismiss="modal">Abbrechen</button>
-                    <button type="button" class="btn-tx-save" id="depotErstellenOk">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+	
 	<!-- ══════════════════════════════════════════
        MODAL – Neue Depot-Analyse
        ══════════════════════════════════════════ -->
@@ -846,32 +816,6 @@
         showCompany(row.dataset.symbol);
       });
 
-
-      /* ── Neues Depot erstellen: Zeit + Cash eingeben ── */
-      (function () {
-        var depotErstellenModal = document.getElementById('depotErstellenModal');
-        var depotErstellenOk = document.getElementById('depotErstellenOk');
-        if (!depotErstellenModal || !depotErstellenOk) return;
-        depotErstellenOk.addEventListener('click', function () {
-          var zeitraum = document.getElementById('deZeitraum').value;
-          var cash = document.getElementById('deCash').value;
-          if (!cash || parseFloat(cash) <= 0) {
-            alert('Bitte geben Sie einen gültigen Betrag ein.');
-            return;
-          }
-          /* Close modal and reload depot */
-          bootstrap.Modal.getInstance(depotErstellenModal).hide();
-          depotErstellenModal.addEventListener('hidden.bs.modal', function onHidden() {
-            depotErstellenModal.removeEventListener('hidden.bs.modal', onHidden);
-            /* Depot wiederherstellen: Empty-State ausblenden, Inhalt zeigen */
-            document.querySelector('.md-layout').classList.remove('d-none');
-            document.getElementById('depotEmptyState').classList.add('d-none');
-            /* Clear form fields */
-            document.getElementById('deZeitraum').value = 'seit-anfang';
-            document.getElementById('deCash').value = '';
-          });
-        });
-      })();
 
       /* ── Neue Performance-Messung: Modal-Kette + Depot-Reset ── */
       (function () {
