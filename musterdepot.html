@@ -534,7 +534,7 @@
 
         <!-- Empty state after depot reset -->
         <div class="depot-empty-state d-none" id="depotEmptyState">
-            <button type="button" class="btn-depot-erstellen" onclick="window.location.reload()">Jetzt neues Depot erstellen</button>
+            <button type="button" class="btn-depot-erstellen" data-bs-toggle="modal" data-bs-target="#depotErstellenModal">Jetzt neues Depot erstellen</button>
         </div>
 
     </main>
@@ -575,6 +575,120 @@
                 <div class="modal-footer analysen-modal-footer">
                     <button type="button" class="btn-tx-cancel" data-bs-dismiss="modal">Abbrechen</button>
                     <button type="button" class="btn-tx-save" id="cashNeustart2">Neustart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+       MODAL – Neues Depot erstellen
+       ══════════════════════════════════════════ -->
+    <div class="modal fade" id="depotErstellenModal" tabindex="-1" aria-labelledby="depotErstellenTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content analysen-modal">
+                <div class="modal-header analysen-modal-header">
+                    <div class="pf-modal-title-text" id="depotErstellenTitle">Neues Depot erstellen</div>
+                    <button type="button" class="analysen-modal-close" data-bs-dismiss="modal" aria-label="Schließen"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="modal-body analysen-modal-body">
+
+                    <div class="de-summary-row mb-4">
+                        <div class="de-summary-box de-perf-box">
+                            <div class="de-summary-title">Deine Performance</div>
+                            <select class="de-perf-select" id="dePerfRange" aria-label="Zeitraum">
+                                <option value="anfang">seit Anfang</option>
+                                <option value="30">seit 30 Tage</option>
+                                <option value="90">seit 90 Tage</option>
+                                <option value="180">seit 180 Tage</option>
+                                <option value="360">seit 360 Tage</option>
+                            </select>
+                        </div>
+                        <div class="de-summary-box de-invest-box">
+                            <div class="de-summary-title">Investiert</div>
+                            <div class="de-invest-val" id="deInvestiert">0,00 €</div>
+                        </div>
+                        <div class="de-cash-box">
+                            <span class="de-cash-label">Cash</span>
+                            <input type="number" class="de-cash-input" id="deCashAmount" placeholder="Betrag" min="0" step="0.01" aria-label="Cash-Betrag" />
+                            <button type="button" class="de-cash-ok" id="deCashOk" data-bs-toggle="tooltip" data-bs-placement="top" title="Bitte den Betrag eingeben. Du kannst den Betrag nur einmal setzen. Diese Cash wird als Startwert für deine Performance-Messung verwendet.">OK</button>
+                        </div>
+                    </div>
+
+                    <div class="pf-tabs mb-4">
+                        <button class="pf-tab active" type="button" data-tab="de-positionen">Depot - Positionen</button>
+                        <button class="pf-tab" type="button" data-tab="de-ertraege">Erträge &amp; Kapitalmaßnahmen</button>
+                    </div>
+
+                    <div class="pf-pane" data-pane="de-positionen">
+                        <div class="ma-toolbar mb-3">
+                            <div class="d-flex align-items-center gap-2 flex-wrap">
+                                <select class="tx-input ma-select" id="deTablePerPage" aria-label="Einträge pro Seite">
+                                    <option selected>10</option>
+                                    <option>25</option>
+                                    <option>50</option>
+                                </select>
+                                <span class="pf-hint">Einträge pro Seite</span>
+                            </div>
+                            <input type="text" class="tx-input ma-search" id="deTableSearch" placeholder="Suche" aria-label="Durchsuchen" />
+                        </div>
+                        <div class="table-scroll">
+                            <table class="pos-table th-table" id="deTable">
+                                <thead>
+                                    <tr>
+                                        <th>Unternehmen</th>
+                                        <th>Gewichtung</th>
+                                        <th>Performance<small>seit Kauf</small></th>
+                                        <th>Aktueller Kurs</th>
+                                        <th>StockBuddy Score<small>/100</small></th>
+                                        <th>Alert</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="pf-pane d-none" data-pane="de-ertraege">
+                        <div class="pf-subtitle mb-2">Erträge &amp; Kapitalmaßnahmen</div>
+                        <p class="pf-hint">Hier erscheinen Dividenden, Zinsen und Kapitalmaßnahmen.</p>
+                    </div>
+
+                    <div class="de-newtx" id="deNewTx">
+                        <div class="de-newtx-header" id="deNewTxHeader">
+                            <span class="de-newtx-title">Neue Transaktion für:</span>
+                            <button type="button" class="de-newtx-toggle" id="deNewTxToggle" aria-label="Transaktion hinzufügen"><i class="bi bi-plus-circle"></i></button>
+                        </div>
+                        <div class="de-newtx-body d-none" id="deNewTxBody">
+                            <input type="text" class="tx-input mb-3" id="deTxName" placeholder="Geben Sie den Namen oder ISIN ein" />
+                            <div class="tx-field-label">Typ</div>
+                            <div class="tx-typ-btns mb-3">
+                                <button type="button" class="tx-typ-btn active" data-typ="Kauf">Kauf</button>
+                                <button type="button" class="tx-typ-btn" data-typ="Verkauf">Verkauf</button>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-6 col-lg-3">
+                                    <div class="tx-field-label">Datum</div>
+                                    <input type="text" class="tx-input" id="deTxDatum" value="05.07.2026" />
+                                </div>
+                                <div class="col-6 col-lg-3">
+                                    <div class="tx-field-label">Stückzahl</div>
+                                    <input type="number" class="tx-input" id="deTxStueck" value="100" min="1" />
+                                </div>
+                                <div class="col-6 col-lg-3">
+                                    <div class="tx-field-label">Kurs je Aktie</div>
+                                    <input type="number" class="tx-input" id="deTxKurs" value="60.80" step="0.01" min="0" />
+                                </div>
+                                <div class="col-6 col-lg-3">
+                                    <div class="tx-field-label">Gesamtwert</div>
+                                    <div class="tx-total" id="deTxTotal">6.080,00 €</div>
+                                </div>
+                            </div>
+                            <div class="text-end mt-3">
+                                <button type="button" class="btn-tx-cancel" id="deTxCancel">Abbrechen</button>
+                                <button type="button" class="btn-tx-save" id="deTxSave">Speichern</button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -837,6 +951,151 @@
             document.querySelector('.md-layout').classList.add('d-none');
             document.getElementById('depotEmptyState').classList.remove('d-none');
           });
+        });
+      })();
+
+      /* ── Neues Depot erstellen: Cash setzen + Neue Transaktion ── */
+      (function () {
+        var deModal = document.getElementById('depotErstellenModal');
+        if (!deModal) return;
+
+        var deCashAmount = document.getElementById('deCashAmount');
+        var deCashOk = document.getElementById('deCashOk');
+        var deNewTx = document.getElementById('deNewTx');
+        var deNewTxToggle = document.getElementById('deNewTxToggle');
+        var deNewTxBody = document.getElementById('deNewTxBody');
+        var deInvestiert = document.getElementById('deInvestiert');
+
+        var cashSet = false;
+
+        function fmtEUR(n) {
+          return n.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €';
+        }
+
+        function expandNewTx() {
+          deNewTx.classList.add('expanded');
+          deNewTxBody.classList.remove('d-none');
+          deNewTxToggle.querySelector('i').className = 'bi bi-dash-circle';
+        }
+        function collapseNewTx() {
+          deNewTx.classList.remove('expanded');
+          deNewTxBody.classList.add('d-none');
+          deNewTxToggle.querySelector('i').className = 'bi bi-plus-circle';
+        }
+
+        deNewTxToggle.addEventListener('click', function () {
+          if (deNewTxBody.classList.contains('d-none')) {
+            expandNewTx();
+          } else {
+            collapseNewTx();
+          }
+        });
+
+        /* Cash amount can only be set once, per tooltip hint */
+        deCashOk.addEventListener('click', function () {
+          if (cashSet) return;
+          var amount = parseFloat(deCashAmount.value);
+          if (!amount || amount <= 0) {
+            deCashAmount.focus();
+            return;
+          }
+          cashSet = true;
+          deCashAmount.disabled = true;
+          deCashOk.disabled = true;
+          var tip = bootstrap.Tooltip.getInstance(deCashOk);
+          if (tip) tip.hide();
+          /* Neue Transaktion dauerhaft aufklappen */
+          expandNewTx();
+        });
+
+        /* Neue Transaktion speichern: einfache Zeile in Depot-Positionen-Tabelle */
+        var deTxStueck = document.getElementById('deTxStueck');
+        var deTxKurs = document.getElementById('deTxKurs');
+        var deTxTotal = document.getElementById('deTxTotal');
+
+        function updateDeTxTotal() {
+          var total = (parseFloat(deTxStueck.value) || 0) * (parseFloat(deTxKurs.value) || 0);
+          deTxTotal.textContent = fmtEUR(total);
+        }
+        deTxStueck.addEventListener('input', updateDeTxTotal);
+        deTxKurs.addEventListener('input', updateDeTxTotal);
+        updateDeTxTotal();
+
+        deNewTx.querySelectorAll('.tx-typ-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            deNewTx.querySelectorAll('.tx-typ-btn').forEach(function (b) { b.classList.remove('active'); });
+            this.classList.add('active');
+          });
+        });
+
+        document.getElementById('deTxCancel').addEventListener('click', function () {
+          collapseNewTx();
+        });
+
+        document.getElementById('deTxSave').addEventListener('click', function () {
+          var name = document.getElementById('deTxName').value.trim();
+          if (!name) {
+            document.getElementById('deTxName').focus();
+            return;
+          }
+          var total = (parseFloat(deTxStueck.value) || 0) * (parseFloat(deTxKurs.value) || 0);
+          var current = parseFloat(String(deInvestiert.textContent).replace(/[^\d,.-]/g, '').replace(',', '.')) || 0;
+          deInvestiert.textContent = fmtEUR(current + total);
+          document.getElementById('deTxName').value = '';
+        });
+
+        /* Reset state when the modal is closed; restore full depot layout */
+        deModal.addEventListener('hidden.bs.modal', function () {
+          cashSet = false;
+          deCashAmount.value = '';
+          deCashAmount.disabled = false;
+          deCashOk.disabled = false;
+          collapseNewTx();
+          deInvestiert.textContent = '0,00 €';
+          document.querySelector('.md-layout').classList.remove('d-none');
+          document.getElementById('depotEmptyState').classList.add('d-none');
+        });
+
+        /* tabs inside the modal */
+        deModal.querySelectorAll('.pf-tab').forEach(function (tab) {
+          tab.addEventListener('click', function () {
+            deModal.querySelectorAll('.pf-tab').forEach(function (t) { t.classList.remove('active'); });
+            this.classList.add('active');
+            deModal.querySelectorAll('.pf-pane').forEach(function (pane) {
+              pane.classList.toggle('d-none', pane.dataset.pane !== tab.dataset.tab);
+            });
+          });
+        });
+
+        /* Depot-Positionen Tabelle: leer beim Erstellen eines neuen Depots */
+        if (document.getElementById('deTable')) {
+          new DataTable('#deTable', {
+            paging: true,
+            pageLength: 10,
+            lengthChange: false,
+            info: false,
+            searching: true,
+            ordering: true,
+            order: [],
+            language: { zeroRecords: 'Keine Einträge gefunden', paginate: { previous: '<i class="fa-solid fa-angle-left"></i>', next: '<i class="fa-solid fa-angle-right"></i>' } },
+            layout: { topStart: null, topEnd: null, bottomStart: null, bottomEnd: 'paging' },
+            columnDefs: [{ orderable: false, targets: 5 }]
+          });
+          document.getElementById('deTablePerPage').addEventListener('change', function () {
+            $('#deTable').DataTable().page.len(parseInt(this.value, 10)).draw();
+          });
+          document.getElementById('deTableSearch').addEventListener('input', function () {
+            $('#deTable').DataTable().search(this.value).draw();
+          });
+        }
+
+        /* Bootstrap tooltip on the OK button: auto-shown while modal is open */
+        var deCashTooltip = new bootstrap.Tooltip(deCashOk);
+        deModal.addEventListener('shown.bs.modal', function () {
+          if (!cashSet) deCashTooltip.show();
+        });
+        deCashAmount.addEventListener('focus', function () {
+          deCashTooltip.hide();
         });
       })();
 

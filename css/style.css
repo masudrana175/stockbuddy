@@ -2006,6 +2006,112 @@ div#analysefragebogenModal .pf-daten-grid {
 }
 .btn-depot-erstellen:hover { background: var(--sb-pink-hover); }
 
+/* ── Neues Depot erstellen modal ── */
+.de-summary-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.de-summary-box {
+  flex: 1 1 220px;
+  background: rgba(34, 179, 109, 0.08);
+  border-radius: 12px;
+  padding: 0.9rem 1.2rem;
+}
+.de-summary-title {
+  font-weight: 700;
+  color: var(--sb-text-h);
+  font-size: 1rem;
+  margin-bottom: 0.35rem;
+}
+.de-perf-select {
+  border: none;
+  background: transparent;
+  font-weight: 600;
+  color: var(--sb-text-soft);
+  font-family: inherit;
+  font-size: 0.92rem;
+  padding: 0;
+  cursor: pointer;
+}
+.de-perf-select:focus { outline: none; }
+.de-invest-val {
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--sb-blue);
+}
+.de-cash-box {
+  flex: 1 1 220px;
+  background: var(--sb-pink);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 1.1rem;
+}
+.de-cash-label {
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.15rem;
+  white-space: nowrap;
+}
+.de-cash-input {
+  flex: 1;
+  min-width: 60px;
+  background: transparent;
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+  font-weight: 600;
+  font-family: inherit;
+  padding: 0.9rem 0 0.9rem 0.75rem;
+}
+.de-cash-input::placeholder { color: rgba(255, 255, 255, 0.75); }
+.de-cash-input:focus { outline: none; }
+.de-cash-input::-webkit-outer-spin-button,
+.de-cash-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.de-cash-ok {
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.35rem 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.de-cash-ok:hover { background: #2a2a2a; }
+.de-newtx {
+  margin-top: 1.5rem;
+  border-radius: 12px;
+  transition: var(--sb-ease);
+}
+.de-newtx-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+  color: var(--sb-text-h);
+  padding: 0.2rem 0;
+}
+.de-newtx-title { font-size: 1rem; }
+.de-newtx-toggle {
+  background: none;
+  border: none;
+  color: var(--sb-pink);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+.de-newtx-toggle:hover { color: var(--sb-pink-hover); }
+.de-newtx.expanded {
+  background: var(--sb-pink-light);
+  padding: 1rem 1.2rem;
+}
+
 
 /* ── Share menu ── */
 .share-menu {
