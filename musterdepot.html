@@ -595,14 +595,16 @@
 
                     <div class="de-summary-row mb-4">
                         <div class="de-summary-box de-perf-box">
-                            <div class="de-summary-title">Deine Performance</div>
-                            <select class="de-perf-select" id="dePerfRange" aria-label="Zeitraum">
-                                <option value="anfang">seit Anfang</option>
-                                <option value="30">seit 30 Tage</option>
-                                <option value="90">seit 90 Tage</option>
-                                <option value="180">seit 180 Tage</option>
-                                <option value="360">seit 360 Tage</option>
-                            </select>
+							<div class="de-summary-left">
+								<div class="de-summary-title">Deine Performance</div>
+								<select class="de-perf-select" id="dePerfRange" aria-label="Zeitraum">
+									<option value="anfang">seit Anfang</option>
+									<option value="30">seit 30 Tage</option>
+									<option value="90">seit 90 Tage</option>
+									<option value="180">seit 180 Tage</option>
+									<option value="360">seit 360 Tage</option>
+								</select>
+							</div>
                         </div>
                         <div class="de-summary-box de-invest-box">
                             <div class="de-summary-title">Investiert</div>
@@ -654,36 +656,41 @@
                     </div>
 
                     <div class="de-newtx" id="deNewTx">
-                        <div class="de-newtx-header" id="deNewTxHeader">
-                            <span class="de-newtx-title">Neue Transaktion für:</span>
-                            <button type="button" class="de-newtx-toggle" id="deNewTxToggle" aria-label="Transaktion hinzufügen"><i class="bi bi-plus-circle"></i></button>
+                        <div class="de-newtx-header d-flex gap-3" id="deNewTxHeader">
+                            <span class="de-newtx-title text-nowrap">Neue Transaktion für:</span>
+							<input type="text" class="tx-input" id="deTxName" placeholder="Geben Sie den Namen oder ISIN ein" />
+                           <button type="button" class="de-newtx-toggle d-none" id="deNewTxToggle" aria-label="Transaktion hinzufügen"><i class="bi bi-plus-circle"></i></button> 
                         </div>
-                        <div class="de-newtx-body d-none" id="deNewTxBody">
-                            <input type="text" class="tx-input mb-3" id="deTxName" placeholder="Geben Sie den Namen oder ISIN ein" />
-                            <div class="tx-field-label">Typ</div>
-                            <div class="tx-typ-btns mb-3">
-                                <button type="button" class="tx-typ-btn active" data-typ="Kauf">Kauf</button>
-                                <button type="button" class="tx-typ-btn" data-typ="Verkauf">Verkauf</button>
-                            </div>
+                        <div class="de-newtx-body" id="deNewTxBody">
+                            
+                            
                             <div class="row g-3">
-                                <div class="col-6 col-lg-3">
+								
+                                <div class="col">
+									<div class="tx-field-label">Typ</div>
+									<div class="tx-typ-btns">
+										<button type="button" class="tx-typ-btn active" data-typ="Kauf">Kauf</button>
+										<button type="button" class="tx-typ-btn" data-typ="Verkauf">Verkauf</button>
+									</div>
+								</div>
+                                <div class="col">
                                     <div class="tx-field-label">Datum</div>
                                     <input type="text" class="tx-input" id="deTxDatum" value="05.07.2026" />
                                 </div>
-                                <div class="col-6 col-lg-3">
+                                <div class="col">
                                     <div class="tx-field-label">Stückzahl</div>
                                     <input type="number" class="tx-input" id="deTxStueck" value="100" min="1" />
                                 </div>
-                                <div class="col-6 col-lg-3">
+                                <div class="col">
                                     <div class="tx-field-label">Kurs je Aktie</div>
                                     <input type="number" class="tx-input" id="deTxKurs" value="60.80" step="0.01" min="0" />
                                 </div>
-                                <div class="col-6 col-lg-3">
+                                <div class="col">
                                     <div class="tx-field-label">Gesamtwert</div>
                                     <div class="tx-total" id="deTxTotal">6.080,00 €</div>
                                 </div>
                             </div>
-                            <div class="text-end mt-3">
+                            <div class="d-flex justify-content-end mt-3 gap-3">
                                 <button type="button" class="btn-tx-cancel" id="deTxCancel">Abbrechen</button>
                                 <button type="button" class="btn-tx-save" id="deTxSave">Speichern</button>
                             </div>

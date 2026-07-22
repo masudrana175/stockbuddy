@@ -79,6 +79,7 @@
                         <img src="img/benachrichtigungen.svg" alt="" style="width:24px;" />
                         <span class="nb" id="notifCount">3</span>
                     </button>
+					
                     <div class="notif-panel" id="notifPanel" role="dialog" aria-label="Benachrichtigungen" hidden>
                         <div class="notif-header">
                             <span class="notif-title">Benachrichtigungen</span>
@@ -230,8 +231,8 @@
                     </div>
                     <div class="ds-link-row" data-bs-toggle="modal" data-bs-target="#dkModal" data-tab="daten" role="button" tabindex="0">
                         <div>
-                            <div class="ds-link-title">Persönliche Daten</div>
-                            <div class="ds-link-desc">Verwalten Sie Ihre persönlichen Informationen</div>
+                            <div class="ds-link-title">Persönliche Daten / Konto</div>
+                            <div class="ds-link-desc">Verwalten Sie Ihre persönlichen Informationen / Profil / Passwort / Konto </div>
                         </div>
                         <i class="bi bi-arrow-right ds-arrow"></i>
                     </div>
@@ -244,7 +245,7 @@
                     </div>
                     <div class="ds-link-row" data-bs-toggle="modal" data-bs-target="#dkModal" data-tab="konto" role="button" tabindex="0">
                         <div>
-                            <div class="ds-link-title">Konto &amp; Abonnement</div>
+                            <div class="ds-link-title">Abonnement &amp; Rechnungen</div>
                             <div class="ds-link-desc">Verwalten Sie Ihr Abonnement und Ihre Rechnungen</div>
 						</div>
                         <i class="bi bi-arrow-right ds-arrow"></i>
@@ -317,9 +318,9 @@
                 </div>
                 <div class="modal-body analysen-modal-body">
                     <div class="pf-tabs mb-4">
-                        <button class="pf-tab active" type="button" data-tab="daten">Persönliche Daten</button>
+                        <button class="pf-tab active" type="button" data-tab="daten">Persönliche Daten / Konto</button>
                         <button class="pf-tab" type="button" data-tab="datenschutz">Datenschutz</button>
-                        <button class="pf-tab" type="button" data-tab="konto">Konto &amp; Abonnement</button>
+                        <button class="pf-tab" type="button" data-tab="konto">Abonnement &amp; Rechnungen</button>
 						<button class="pf-tab" type="button" data-tab="nutzung">Nutzungsbedingungen</button>
 						<button class="pf-tab" type="button" data-tab="risiko">Risikohinweise</button>
                     </div>
@@ -363,9 +364,28 @@
                                     <input type="checkbox" class="sb-switch" id="introSkip" />
                                     <label for="introSkip" class="pf-check-label">Intro überspringen (wird innerhalb von 20 Minuten angewendet)</label>
                                 </div>
+								
 								<div class="modal-footer analysen-modal-footer">
                     			<button type="button" class="btn-tx-save">Aktualisieren</button>
                					</div>
+								<hr>
+								<div class="pf-subtitle mb-2">Passwort ändern?</div>
+								<p class="pf-hint">Hier haben Sie die Möglichkeit Ihr Passwort zu ändern:</p>
+								<p>
+								<div class="modal-footer analysen-modal-footer">
+									<button class="btn-tx-save" onclick="window.location.href='https://fief.stock-buddy.com/stockbuddy/password'">Passwort ändern</button>
+								</div>
+								</p>
+								<hr>
+								<div class="pf-subtitle mb-2">Konto löschen?</div>
+								<p class="pf-hint">Sie möchten zukünftig den Service von StockBuddy nicht weiter nutzen?<br>
+								Dann haben Sie hier die Möglichkeit Ihr Konto zu löschen. Ihre persönlichen Daten werden direkt gelöscht</p>
+								<p>
+									<div class="modal-footer analysen-modal-footer">
+									<a href="#">
+								<button class="btn-tx-save" ><i class="bi bi-trash3-fill"></i> Jetzt Konto löschen</button></a>
+							</div>
+								</p>
                             </div>
 							
                         </div>

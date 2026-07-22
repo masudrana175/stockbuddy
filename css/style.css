@@ -2051,39 +2051,81 @@ div#analysefragebogenModal .pf-daten-grid {
 .de-summary-title {
   font-weight: 700;
   color: var(--sb-text-h);
-  font-size: 1rem;
-  margin-bottom: 0.35rem;
+    font-size: 1rem;
+    margin-bottom: 0;
 }
 .de-perf-select {
-  border: none;
-  background: transparent;
-  font-weight: 600;
-  color: var(--sb-text-soft);
-  font-family: inherit;
-  font-size: 0.92rem;
-  padding: 0;
-  cursor: pointer;
+    border: none;
+    background: transparent;
+    font-weight: 400;
+    color: var(--sb-text-h);
+    font-family: inherit;
+    font-size: 1rem;
+    padding: 0;
+    cursor: pointer;
+}
+.de-cash-box, .de-summary-box {
+    border-radius: 56px !important;
+    padding: 15px 30px !important;
+}
+.de-summary-box.de-invest-box {
+    display: flex;
+    align-items: center;
+    max-width: 300px;
+}
+.de-summary-box.de-invest-box .de-summary-title {
+    border-right: 1px solid #000000;
+    display: flex;
+    align-items: center;
+    margin-right: 25px;
+    padding-right: 15px;
+	height: 53px;
 }
 .de-perf-select:focus { outline: none; }
-.de-invest-val {
-  font-weight: 800;
-  font-size: 1.25rem;
+.de-invest-val,.de-cash-box input#deCashAmount {
+  font-weight: 700;
+  font-size: 1rem;
   color: var(--sb-blue);
 }
 .de-cash-box {
-  flex: 1 1 220px;
+  flex: 1 1 300px;
   background: var(--sb-pink);
   border-radius: 12px;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap:15px;
   padding: 0 1.1rem;
+    max-width: 300px;
+}
+
+input#deCashAmount::placeholder {
+    color:  var(--sb-blue);
+    text-align: left;
+}
+.de-cash-box span.de-cash-label {
+    border-right: 1px solid #fff;
+    padding-right: 15px;
+    height: 53px;
+    display: flex;
+    align-items: center;
+    margin-right: 0;
 }
 .de-cash-label {
   color: #fff;
   font-weight: 800;
   font-size: 1.15rem;
   white-space: nowrap;
+}
+.de-summary-box.de-invest-box div#deInvestiert,.de-cash-box input#deCashAmount {
+    background: #fff;
+    padding:6px 15px;
+    border-radius: 15px;
+    width: 131px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	height: 34px;
 }
 .de-cash-input {
   flex: 1;
@@ -2138,11 +2180,35 @@ div#analysefragebogenModal .pf-daten-grid {
 }
 .de-newtx-toggle:hover { color: var(--sb-pink-hover); }
 .de-newtx.expanded {
-  background: var(--sb-pink-light);
-  padding: 1rem 1.2rem;
+ /* background: var(--sb-pink-light);
+  padding: 1rem 1.2rem; */
 }
-
-
+.de-summary-left {
+    max-width: 161px;
+    border-right: 1px solid #000000;
+    margin-right: 20px;
+}
+div#deNewTxBody .tx-field-label {
+    font-weight: 400;
+}
+div#deNewTxBody {
+    margin-top: 17px;
+}
+table#deTable td.dt-empty {
+    border-bottom: 1px solid #d8d8d8!important;
+    border-top: 1px solid #d8d8d8!important;
+    padding-top: 22px;
+    padding-bottom: 22px;
+    text-align: center;
+    margin-top: 13px!important;
+}
+.de-cash-box input#deCashAmount {
+    background: #fff;
+    color: var(--sb-blue);
+    border: none;
+	text-align:left;
+	
+}
 /* ── Share menu ── */
 .share-menu {
   border: 1px solid var(--sb-border);
