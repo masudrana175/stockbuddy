@@ -366,6 +366,23 @@ table#posTable tbody td {
   object-fit: cover;
   display: block;
 }
+
+/* Logout button (right of the avatar) */
+.sb-logout {
+  background: none;
+  border: none;
+  color: var(--sb-text-soft);
+  font-size: 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: var(--sb-ease);
+}
+.sb-logout:hover { color: var(--sb-pink); }
+
 img {
   max-width: 100%;
 }
