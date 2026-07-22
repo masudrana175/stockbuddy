@@ -280,6 +280,46 @@ function initAlleNotifModal() {
 }
 
 /* ============================================================
+   LOGOUT CONFIRMATION MODAL
+   ============================================================ */
+function initLogoutModal() {
+  if (typeof bootstrap === 'undefined') return;
+  var logoutBtns = document.querySelectorAll('.sb-logout');
+  if (!logoutBtns.length) return;
+
+  if (!document.getElementById('logoutModal')) {
+    document.body.insertAdjacentHTML('beforeend',
+      '<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalTitle" aria-hidden="true">' +
+        '<div class="modal-dialog modal-dialog-centered">' +
+          '<div class="modal-content analysen-modal">' +
+            '<div class="modal-header analysen-modal-header pf-modal-header">' +
+              '<div class="pf-modal-title-text" id="logoutModalTitle">Abmelden</div>' +
+            '</div>' +
+            '<div class="modal-body analysen-modal-body">' +
+              '<p class="cash-modal-text">Möchtest du dich wirklich von StockBuddy abmelden?</p>' +
+            '</div>' +
+            '<div class="modal-footer analysen-modal-footer">' +
+              '<button type="button" class="btn-tx-cancel" data-bs-dismiss="modal">Abbrechen</button>' +
+              '<button type="button" class="btn-tx-save" id="logoutConfirmBtn">Abmelden</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>');
+  }
+
+  var modalEl = document.getElementById('logoutModal');
+  var modalInstance = bootstrap.Modal.getOrCreateInstance(modalEl);
+
+  logoutBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () { modalInstance.show(); });
+  });
+
+  document.getElementById('logoutConfirmBtn').addEventListener('click', function () {
+    window.location.href = 'index.html';
+  });
+}
+
+/* ============================================================
    TIME-PERIOD SELECTOR BUTTONS
    ============================================================ */
 function initTimeButtons() {
@@ -438,5 +478,6 @@ document.addEventListener('DOMContentLoaded', function () {
   initSidebarToggle();
   initNotifications();
   initAlleNotifModal();
+  initLogoutModal();
   initTooltips();
 });
