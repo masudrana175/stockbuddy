@@ -1429,11 +1429,14 @@ table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order
 .sbs-detail-table tbody tr:nth-child(odd)  td { background: #fff; }
 .sbs-detail-table tbody tr:nth-child(even) td { background: #faf7f9; }
 .sbs-detail-table tbody td:first-child { font-weight: 600; }
-/* First 3 columns (Kennzahl / Date / Average) stay fixed while the rest scrolls */
-.sbs-detail-table th:nth-child(1), .sbs-detail-table td:nth-child(1) { position: sticky; left: 0;     width: 230px; min-width: 230px; z-index: 2; }
-.sbs-detail-table th:nth-child(2), .sbs-detail-table td:nth-child(2) { position: sticky; left: 230px; width: 100px; min-width: 100px; z-index: 2; }
-.sbs-detail-table th:nth-child(3), .sbs-detail-table td:nth-child(3) { position: sticky; left: 330px; width: 100px; min-width: 100px; z-index: 2; box-shadow: 3px 0 6px rgba(0,0,0,0.08); }
-.sbs-detail-table thead th:nth-child(-n+3) { z-index: 3; background: var(--sb-blue); }
+/* First 3 columns (Kennzahl / Date / Average) stay fixed while the rest scrolls
+   — desktop/tablet only; on mobile the columns scroll normally (see media query below) */
+@media (min-width: 768px) {
+  .sbs-detail-table th:nth-child(1), .sbs-detail-table td:nth-child(1) { position: sticky; left: 0;     width: 230px; min-width: 230px; z-index: 2; }
+  .sbs-detail-table th:nth-child(2), .sbs-detail-table td:nth-child(2) { position: sticky; left: 230px; width: 100px; min-width: 100px; z-index: 2; }
+  .sbs-detail-table th:nth-child(3), .sbs-detail-table td:nth-child(3) { position: sticky; left: 330px; width: 100px; min-width: 100px; z-index: 2; box-shadow: 3px 0 6px rgba(0,0,0,0.08); }
+  .sbs-detail-table thead th:nth-child(-n+3) { z-index: 3; background: var(--sb-blue); }
+}
 
 /* ── Musterdepot: alert bell, active row, company box, modals ── */
 .pos-table tr.pos-row { cursor: pointer; }
