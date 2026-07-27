@@ -289,10 +289,10 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>Unternehmen/Aktie</th>
-                                                                <th>Kumulativ</th>
-                                                                <th>Geringstes Risiko</th>
-                                                                <th>Beste Dividende</th>
-                                                                <th>Beste Fundamentaldaten</th>
+                                                                <th>Kumulativ <button type="button" class="sbs-info-btn" data-category="kumulativ" aria-label="Details zu Kumulativ"><i class="bi bi-info-circle-fill"></i></button></th>
+                                                                <th>Geringstes Risiko <button type="button" class="sbs-info-btn" data-category="risiko" aria-label="Details zu Geringstes Risiko"><i class="bi bi-info-circle-fill"></i></button></th>
+                                                                <th>Beste Dividende <button type="button" class="sbs-info-btn" data-category="dividende" aria-label="Details zu Beste Dividende"><i class="bi bi-info-circle-fill"></i></button></th>
+                                                                <th>Beste Fundamentaldaten <button type="button" class="sbs-info-btn" data-category="fundamentaldaten" aria-label="Details zu Beste Fundamentaldaten"><i class="bi bi-info-circle-fill"></i></button></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -954,6 +954,28 @@
     </div>
 
     <!-- ══════════════════════════════════════════
+       MODAL – SBS Kategorie-Details
+       ══════════════════════════════════════════ -->
+    <div class="modal fade" id="sbsDetailModal" tabindex="-1" aria-labelledby="sbsDetailTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content analysen-modal">
+                <div class="modal-header analysen-modal-header">
+                    <div class="analysen-modal-title" id="sbsDetailTitle">Details</div>
+                    <button type="button" class="analysen-modal-close" data-bs-dismiss="modal" aria-label="Schließen"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="modal-body analysen-modal-body">
+                    <div class="sbs-detail-scroll">
+                        <table class="sbs-detail-table" id="sbsDetailTable">
+                            <thead></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════
        SCRIPTS
        ══════════════════════════════════════════ -->
     <script src="js/bootstrap.bundle.min.js"></script>
@@ -1252,6 +1274,103 @@
             numEl.style.color = color;
           }
           el.setAttribute('aria-label', 'Score: ' + score + ' von 100');
+        });
+      })();
+
+      /* ── SBS Kategorie-Details: Info-Buttons in der Scoring-Tabelle öffnen eine Detailtabelle ── */
+      (function () {
+        var infoBtns = document.querySelectorAll('.sbs-info-btn');
+        var detailModalEl = document.getElementById('sbsDetailModal');
+        if (!infoBtns.length || !detailModalEl) return;
+
+        var COMPANIES = [
+          { name: 'Advantest Corp.', isin: 'JP3122400009' },
+          { name: 'Applied Materials Inc', isin: 'US0382221051' },
+          { name: 'Automatic Data Processing Inc', isin: 'US0530151036' },
+          { name: 'BE Semiconductor Industries N.V.', isin: 'NL0012866412' },
+          { name: 'BHP Group Ltd.', isin: 'AU000000BHP4' }
+        ];
+
+        var CATEGORIES = {
+          fundamentaldaten: {
+            title: 'Beste Fundamentaldaten',
+            rows: [
+              ['Bargeld zu kurzfristigen Verbindlichkeiten', '0.07', [0.26, 0.23, 0.75, 0.16, 0.31]],
+              ['Cashflow zu kurzfristigen Verbindlichkeiten', '0.28', [2.33, 1.61, 14.95, 1.58, 1.02]],
+              ['Fremdkapital zu Eigenkapital', '3.26', [1.24, 1.9, 0.65, 0.94, 0.87]],
+              ['Free Cashflow zu Umsatz', '1.01', [10.12, 5.45, 24.43, 4.03, 6.28]],
+              ['Bruttogewinnmarge', '11.52', [100, 58.72, 100, 45.22, 52.4]],
+              ['Betriebsergebnis-Marge', '3.82', [12.79, 7.99, 36, 6.55, 22.11]],
+              ['Vorsteuer-Gewinnmarge', '2.87', [12.54, 6.63, 38.01, 6.19, 20.05]],
+              ['Quick Ratio', '—', [0.49, 0.93, 0.93, 2.71, 1.15]],
+              ['R&D Ratio', '—', [0.09, 0.01, 0.15, 0.1, 0.02]]
+            ]
+          },
+          risiko: {
+            title: 'Geringstes Risiko',
+            rows: [
+              ['Beta (5J)', '1.02', [0.78, 1.14, 0.65, 1.32, 0.91]],
+              ['Volatilität (1J) %', '28.4', [22.1, 31.6, 18.3, 36.9, 25.7]],
+              ['Verschuldungsgrad %', '46.2', [31.5, 58.7, 22.4, 61.3, 40.8]],
+              ['Eigenkapitalquote %', '38.9', [52.3, 29.1, 61.7, 24.8, 44.2]],
+              ['Max. Drawdown (1J) %', '-24.6', [-18.2, -29.4, -14.1, -33.8, -21.5]],
+              ['Quick Ratio', '0.94', [0.49, 0.93, 0.93, 2.71, 1.15]]
+            ]
+          },
+          dividende: {
+            title: 'Beste Dividende',
+            rows: [
+              ['Dividendenrendite %', '2.14', [0.9, 1.6, 2.4, 0, 5.2]],
+              ['Ausschüttungsquote %', '38.6', [21.4, 34.8, 52.1, 0, 46.9]],
+              ['Dividendenwachstum 5J %', '9.2', [12.5, 6.8, 8.4, 0, 4.1]],
+              ['Dividendenhistorie (Jahre)', '14', [9, 12, 18, 0, 22]],
+              ['Free-Cashflow-Deckung', '2.6', [3.4, 2.1, 3.8, 0, 2.2]]
+            ]
+          },
+          kumulativ: {
+            title: 'Kumulativ',
+            rows: [
+              ['Geringstes Risiko (SBS)', '46.4', [89, 56, 67, 56, 67]],
+              ['Beste Dividende (SBS)', '4.4', [-11, 0, 22, -11, 11]],
+              ['Beste Fundamentaldaten (SBS)', '64.6', [77, 69, 38, 85, 54]],
+              ['Gewichteter Gesamtscore (Kumulativ)', '40.68', [46.73, 37.81, 43.40, 38.45, 37.02]]
+            ]
+          }
+        };
+
+        function fmt(n) {
+          if (n === 0 || n === '0') return '0';
+          if (typeof n !== 'number') return n;
+          return n.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+        }
+
+        function buildTable(cat) {
+          var theadRow = '<tr><th>Kennzahl</th><th>Date</th><th>Average</th>' +
+            COMPANIES.map(function (c) {
+              return '<th>' + c.name + '<br><span class="sbs-detail-isin">(' + c.isin + ')</span></th>';
+            }).join('') + '</tr>';
+
+          var tbody = cat.rows.map(function (row) {
+            var label = row[0], avg = row[1], vals = row[2];
+            return '<tr><td>' + label + '</td><td>23.07.2026</td><td>' + avg + '</td>' +
+              vals.map(function (v) { return '<td>' + fmt(v) + '</td>'; }).join('') +
+              '</tr>';
+          }).join('');
+
+          document.querySelector('#sbsDetailTable thead').innerHTML = theadRow;
+          document.querySelector('#sbsDetailTable tbody').innerHTML = tbody;
+          document.getElementById('sbsDetailTitle').textContent = cat.title;
+        }
+
+        var modalInstance = bootstrap.Modal.getOrCreateInstance(detailModalEl);
+        infoBtns.forEach(function (btn) {
+          btn.addEventListener('click', function (e) {
+            e.stopPropagation(); /* don't trigger column sorting on the sbs-table */
+            var cat = CATEGORIES[this.dataset.category];
+            if (!cat) return;
+            buildTable(cat);
+            modalInstance.show();
+          });
         });
       })();
     </script>
