@@ -1303,30 +1303,41 @@ form.form-questionnaire label {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
-.sbs-table {
+.sbs-table,
+.chat-response-inner table {
   width: 100%;
   border-collapse: collapse;
   min-width: 640px;
   font-size: 0.88rem;
 }
-.sbs-table thead tr {
+.sbs-table thead tr,
+.chat-response-inner table thead tr {
   background: var(--sb-blue);
 }
-.sbs-table thead th {
+.sbs-table thead th,
+.chat-response-inner table thead th {
   padding: 0.6rem 0.9rem;
   font-weight: 500;
   color: #fff;
   text-align: left;
   white-space: nowrap;
 }
-.sbs-table thead th:first-child { border-radius: 8px 0 0 8px; }
-.sbs-table thead th:last-child  { border-radius: 0 8px 8px 0; }
-.sbs-table tbody tr { border-bottom: 0px solid var(--sb-border); }
-.sbs-table tbody tr:nth-child(even) { background: #faf7f9; }
-.sbs-table tbody td {
+.sbs-table thead th:first-child, .chat-response-inner table thead th:first-child { border-radius: 8px 0 0 8px; }
+.sbs-table thead th:last-child, .chat-response-inner table thead th:last-child  { border-radius: 0 8px 8px 0; }
+.sbs-table tbody tr, .chat-response-inner table tbody tr { border-bottom: 0px solid var(--sb-border); }
+.sbs-table tbody tr:nth-child(even), .chat-response-inner table tbody tr:nth-child(even) { background: #faf7f9; }
+.sbs-table tbody td,
+.chat-response-inner table tbody td {
   padding: 0.65rem 0.9rem;
   vertical-align: middle;
   white-space: nowrap;
+}
+/* Generic (non-.sbs-table) tables in chat responses — e.g. LLM-generated markdown
+   tables — don't come wrapped in .table-scroll, so make the table itself scroll. */
+.chat-response-inner table:not(.sbs-table) {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .sbs-table .sbs-company { font-weight: 700; color: var(--sb-text-h);    font-size: 1rem; }
 .sbs-table .sbs-isin { font-size: 0.88rem; color: var(--sb-text-h); }
@@ -1344,7 +1355,8 @@ table.dataTable.pos-table thead th.dt-type-numeric {
 table#sbsTable td {
     text-align: left;
 }
-table.sbs-table tbody {
+table.sbs-table tbody,
+.chat-response-inner table tbody {
     font-size: 1rem;
 	color: var(--sb-text-h);
 }
@@ -1363,6 +1375,55 @@ table.dataTable.sbs-table thead > tr > th.dt-orderable-none span.dt-column-order
 table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order {
   display: none;
 }
+
+/* ── SBS category info button + detail modal table ── */
+.sbs-info-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.85rem;
+  padding: 0;
+  margin-left: 2px;
+  line-height: 1;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: var(--sb-ease);
+}
+.sbs-info-btn:hover { color: #fff; }
+.sbs-detail-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+}
+.sbs-detail-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 900px;
+  font-size: 0.85rem;
+}
+.sbs-detail-table thead tr { background: var(--sb-blue); }
+.sbs-detail-table thead th {
+  padding: 0.6rem 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  text-align: left;
+  white-space: nowrap;
+}
+.sbs-detail-table .sbs-detail-isin { font-weight: 400; color: rgba(255, 255, 255, 0.8); font-size: 0.78rem; }
+.sbs-detail-table tbody td {
+  padding: 0.55rem 0.9rem;
+  white-space: nowrap;
+  color: var(--sb-text-h);
+}
+.sbs-detail-table tbody tr:nth-child(odd)  td { background: #fff; }
+.sbs-detail-table tbody tr:nth-child(even) td { background: #faf7f9; }
+.sbs-detail-table tbody td:first-child { font-weight: 600; }
+/* First 3 columns (Kennzahl / Date / Average) stay fixed while the rest scrolls */
+.sbs-detail-table th:nth-child(1), .sbs-detail-table td:nth-child(1) { position: sticky; left: 0;     width: 230px; min-width: 230px; z-index: 2; }
+.sbs-detail-table th:nth-child(2), .sbs-detail-table td:nth-child(2) { position: sticky; left: 230px; width: 100px; min-width: 100px; z-index: 2; }
+.sbs-detail-table th:nth-child(3), .sbs-detail-table td:nth-child(3) { position: sticky; left: 330px; width: 100px; min-width: 100px; z-index: 2; box-shadow: 3px 0 6px rgba(0,0,0,0.08); }
+.sbs-detail-table thead th:nth-child(-n+3) { z-index: 3; background: var(--sb-blue); }
 
 /* ── Musterdepot: alert bell, active row, company box, modals ── */
 .pos-table tr.pos-row { cursor: pointer; }
