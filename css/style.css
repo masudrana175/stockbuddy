@@ -1416,6 +1416,32 @@ table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order
   .sbs-detail-table thead th:nth-child(-n+3) { z-index: 3; background: var(--sb-blue); }
 }
 
+/* ── Aktienkurse-Chart: individual pill range buttons (Heute / 5 Tage / …) ── */
+.sbs-range-btns {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.sbs-range-btn {
+  padding: 0.4rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
+  border-radius: 20px;
+  background: rgba(29, 58, 142, 0.1);
+  color: var(--sb-blue);
+  cursor: pointer;
+  transition: var(--sb-ease);
+  white-space: nowrap;
+}
+.sbs-range-btn:hover:not(.active) { background: rgba(29, 58, 142, 0.18); }
+.sbs-range-btn.active {
+  background: var(--sb-blue);
+  color: #fff;
+}
+
 /* ── Musterdepot: alert bell, active row, company box, modals ── */
 .pos-table tr.pos-row { cursor: pointer; }
 .pos-table tbody tr.pos-row.active {
