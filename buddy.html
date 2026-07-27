@@ -347,6 +347,37 @@
                                     </div>
                                     <!-- /Detaillierte Score-Auswertung -->
 
+                                    <!-- Aktienkurse der drei besten Aktien -->
+                                    <div class="auswertung-block">
+                                        <div class="chart-card-head">
+                                            <div class="card-title mb-0">Aktienkurse der drei besten Aktien</div>
+                                            <div class="time-btns" id="topStocksTimeBtns" role="group">
+                                                <button class="time-btn" data-range="1M">1M</button>
+                                                <button class="time-btn" data-range="3M">3M</button>
+                                                <button class="time-btn active" data-range="6M">6M</button>
+                                                <button class="time-btn" data-range="YTD">YTD</button>
+                                                <button class="time-btn" data-range="1J">1J</button>
+                                                <button class="time-btn" data-range="Seit Start">Seit Start</button>
+                                            </div>
+                                        </div>
+                                        <div class="chart-legend">
+                                            <div class="legend-item">
+                                                <div class="legend-line" style="background:#1d3a8e;" aria-hidden="true"></div>
+                                                <span class="legend-label">JP3143600009 - ITOCHU Corp.</span>
+                                            </div>
+                                            <div class="legend-item">
+                                                <div class="legend-line" style="background:#f59e0b;" aria-hidden="true"></div>
+                                                <span class="legend-label">JP3224200000 - Kawasaki Heavy Industries Ltd.</span>
+                                            </div>
+                                            <div class="legend-item">
+                                                <div class="legend-line" style="background:#22b36d;" aria-hidden="true"></div>
+                                                <span class="legend-label">JP3304200003 - Komatsu Ltd.</span>
+                                            </div>
+                                        </div>
+                                        <div class="chart-scroll"><div id="topStocksChart" style="width:100%;height:320px;"></div></div>
+                                        <div class="auswertung-block-sub mt-2">Hier ist das Diagramm der Aktienkurse der drei besten Aktien über die letzten drei Monate.</div>
+                                    </div>
+
                                     <!-- Bottom grid: Erklärung + Entwicklung -->
                                     <div class="buddy-analysis-grid">
 
@@ -1003,6 +1034,61 @@
           yaxis: { range:[0,100], gridcolor:'#f0f0f0', tickfont: { family:'Barlow', size:10, color:'#999' }, dtick: 25 }
         }, noBar);
       }
+
+      /* Aktienkurse der drei besten Aktien — line chart with time-range buttons */
+      (function () {
+        if (!document.getElementById('topStocksChart')) return;
+
+        var STOCKS = [
+          { name: 'JP3143600009 - ITOCHU Corp.',               color: '#1d3a8e', base: 10.4 },
+          { name: 'JP3224200000 - Kawasaki Heavy Industries Ltd.', color: '#f59e0b', base: 14.8 },
+          { name: 'JP3304200003 - Komatsu Ltd.',                color: '#22b36d', base: 33.6 }
+        ];
+
+        var RANGES = {
+          '1M':         ['Woche 1','Woche 2','Woche 3','Woche 4'],
+          '3M':         ['Mai','Jun','Jul'],
+          '6M':         ['Feb','Mär','Apr','Mai','Jun','Jul'],
+          'YTD':        ['Jan','Feb','Mär','Apr','Mai','Jun','Jul'],
+          '1J':         ['Jul 25','Sep 25','Nov 25','Jan 26','Mär 26','Mai 26','Jul 26'],
+          'Seit Start': ['2024','2025','Jul 26']
+        };
+
+        /* deterministic pseudo-random walk so re-drawing the same range looks stable */
+        function seriesFor(base, len, seed) {
+          var y = [base];
+          for (var i = 1; i < len; i++) {
+            var delta = Math.sin(seed + i * 1.7) * (base * 0.02);
+            y.push(+(y[i - 1] + delta).toFixed(2));
+          }
+          return y;
+        }
+
+        function draw(range) {
+          var x = RANGES[range] || RANGES['6M'];
+          var traces = STOCKS.map(function (s, i) {
+            return {
+              x: x, y: seriesFor(s.base, x.length, i + 1),
+              name: s.name, type: 'scatter', mode: 'lines',
+              line: { color: s.color, width: 2, shape: 'spline', smoothing: 1.2 }
+            };
+          });
+          Plotly.react('topStocksChart', traces, {
+            ...PL,
+            margin: { t: 4, r: 8, b: 28, l: 40 },
+            xaxis: { showgrid: false, tickfont: { family: 'Barlow', size: 10, color: '#999' } },
+            yaxis: { title: { text: 'Schlusskurs (EUR)', font: { family: 'Barlow', size: 11, color: '#999' } }, gridcolor: '#f0f0f0', tickfont: { family: 'Barlow', size: 10, color: '#999' } },
+            hovermode: 'x unified',
+            showlegend: false
+          }, noBar);
+        }
+
+        draw('6M');
+
+        document.querySelectorAll('#topStocksTimeBtns .time-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () { draw(this.dataset.range); });
+        });
+      })();
 
       /* Ranking Diagramm — grouped bars, SBS per category */
       (function () {
