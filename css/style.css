@@ -381,6 +381,18 @@ table#posTable tbody td {
   flex-shrink: 0;
   transition: var(--sb-ease);
 }
+.sb-topbar-right button.sb-logout {
+    width: 42px;
+    height: 42px;
+    background: var(--sb-blue);
+    border-radius: 50%;
+}
+.sb-topbar-right button.sb-logout:hover{
+	background:#000;
+}
+.sb-topbar-right button.sb-logout i.bi.bi-box-arrow-right {
+    color: #fff;
+}
 .sb-logout:hover { color: var(--sb-pink); }
 
 img {
