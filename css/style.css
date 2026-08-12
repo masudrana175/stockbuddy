@@ -2539,6 +2539,13 @@ table.dataTable.th-table thead th.dt-type-numeric,
   .btn-print-analyse {
     display: none !important;
   }
+{ print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+.chat-window { overflow: visible; height: auto; min-height: 0; }
+.chat-messages { overflow: visible; height: auto; max-height: none; padding-bottom: 0; }
+.table-scroll { overflow: visible; }
+.collapse.show { height: auto; }
+.btn-auswertung-toggle { display: none; }
+	
   .sb-main {
     margin-left: 0 !important;
     padding: 0 !important;
@@ -3636,6 +3643,10 @@ input.sb-switch[type="checkbox"]:focus-visible {
   color: var(--sb-text-muted);
   margin-top: 2px;
 }
+.chat-window .bubble-avatar {
+    border-radius: 50%;
+    overflow: hidden;
+}
 .ergebnis-logo {
   width: 64px;
   height: 64px;
@@ -4397,7 +4408,7 @@ table.dataTable thead>tr>th.dt-orderable-asc:hover, table.dataTable thead>tr>th.
 		padding: 1rem;
 	}
 	.buddy-page .buddy-layout {
-		flex-direction: column-reverse;
+		/* flex-direction: column-reverse;*/
 	}
 	.chat-window {
 		margin-top: 2rem;
