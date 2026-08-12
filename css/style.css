@@ -1230,6 +1230,27 @@ form.form-questionnaire label {
   flex-direction: column;
   padding-right: 2.1rem;
 }
+/* Desktop: chat column and the right-side boxes column each get their own
+   independent scrollbar instead of the whole page scrolling as one unit.
+   Mobile keeps the natural whole-page scroll since .buddy-layout stacks
+   the columns vertically below 1024px (see media query further down). */
+@media (min-width: 1024.02px) {
+  .buddy-layout {
+    height: calc(100vh - 4.2rem); /* fills the viewport within .sb-main's own top/bottom padding */
+  }
+  .buddy-chat-col {
+    min-height: 0;
+    overflow: hidden;
+  }
+  .buddy-right-col {
+    min-height: 0;
+    overflow-y: auto;
+  }
+  .chat-window {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+}
 .buddy-col-header {
   padding-bottom: 0;
   justify-content: space-between;
