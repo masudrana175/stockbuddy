@@ -2684,6 +2684,7 @@ table.dataTable.th-table thead th.dt-type-numeric,
   width: 113px;
   height: 113px;
   flex-shrink: 0;
+    text-align: center;
 }
 .score-circle svg {
   width: 100%;
