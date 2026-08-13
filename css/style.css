@@ -4370,6 +4370,11 @@ table.dataTable thead>tr>th.dt-orderable-asc:hover, table.dataTable thead>tr>th.
   font-weight: 700;
   color: var(--sb-green-dark);
 }
+.pos-pct-neg {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #e53e3e;
+}
 .pos-price-main {
   font-weight: 700;
   color: var(--sb-blue);
@@ -4378,6 +4383,9 @@ table.dataTable thead>tr>th.dt-orderable-asc:hover, table.dataTable thead>tr>th.
   font-size: 0.78rem;
   color: var(--sb-green-dark);
   font-weight: 600;
+}
+.pos-price-chg-neg {
+  color: #e53e3e;
 }
 .pos-score-badge {
   width: 38px;
