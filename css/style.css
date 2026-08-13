@@ -557,6 +557,45 @@ img {
 }
 
 /* ============================================================
+   DEINE SESSIONS
+   ============================================================ */
+.sessions-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.6rem 0;
+  border-bottom: 0px solid var(--sb-divider);
+}
+.sessions-item:last-child {
+  border-bottom: none;
+}
+
+.sessions-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--sb-text-h);
+  line-height: 1;
+}
+
+.sessions-date {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--sb-text-h);
+  margin-top: 2px;
+}
+
+.sessions-score {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #22b36d;
+  white-space: nowrap;
+  margin-left: auto;
+}
+.sessions-score span {
+  font-weight: 400;
+}
+
+/* ============================================================
    ANALYSEPROFIL CARD
    ============================================================ */
 .profile-desc {
@@ -2432,6 +2471,76 @@ table.dataTable.th-table thead th.dt-type-numeric,
 }
 .boost-check { color: var(--sb-green-dark); font-size: 1rem; }
 .protect-check { color: #e53e3e; font-size: 1rem; }
+
+/* ── Modal: Deine bisherigen Sessions ── */
+.sessions-modal {
+  border: none;
+  border-radius: 18px;
+  padding: 1.5rem;
+}
+.sessions-modal-header {
+    border-bottom: none;
+    padding: 0 0 1rem 0;
+    align-items: center;
+    border-bottom: 1px solid #d8d5d7;
+	justify-content: space-between;
+}
+.sessions-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--sb-blue);
+}
+.sessions-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--sb-text-h);
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px;
+  margin-left: auto;
+}
+.sessions-modal-body {
+    padding: 1rem 0 1rem 0;
+}
+.sessions-modal-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+}
+.sessions-modal-item:nth-child(even) {
+  background: #faf7f9;
+}
+.sessions-modal-footer i.bi.bi-trash3 {
+    font-size: 20px;
+}
+.sessions-item-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.15rem;
+  padding: 5px;
+  line-height: 1;
+  transition: var(--sb-ease);
+}
+.sessions-item-btn.edit {
+  color: var(--sb-blue);
+}
+.sessions-item-btn.delete {
+  color: var(--sb-pink);
+}
+.sessions-item-btn:hover {
+  opacity: 0.65;
+}
+.sessions-modal-footer {
+  border-top: none;
+  padding: 0.5rem 0rem 0rem;
+}
 
 /* ── Modal: Alle bisherigen Analysen ── */
 .analysen-modal {
