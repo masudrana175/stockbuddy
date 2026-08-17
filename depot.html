@@ -76,7 +76,7 @@
                 <div class="d-block d-lg-none"><img src="img/logo.png" alt="" /></div>
                 <div class="d-none d-lg-block">
                     <h1 style="margin-bottom:2px;">StockBuddy Depot </h1>
-                    <div class="page-subtitle">Das KI-optimierte Depot von StockBuddy</div>
+                    <div class="page-subtitle">Das KI-optimierte Depot von StockBuddy  <button class="btn-neue-unternehmens-transaktion" data-bs-toggle="modal" data-bs-target="#unternehmenstransaktionModal"><i class="bi bi-plus-circle"></i> Neue Unternehmens-Transaktion erstellen</button></div>
                 </div>
             </div>
             <div class="sb-topbar-right">
@@ -696,6 +696,52 @@
     </div>
 
     </main>
+	
+	<!-- ══════════════════════════════════════════
+       MODAL – Neue Unternehmens-Transaktion erstellen
+       ══════════════════════════════════════════ -->
+    <div class="modal fade" id="unternehmenstransaktionModal" tabindex="-1" aria-labelledby="txModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content analysen-modal">
+                <div class="modal-header analysen-modal-header">
+                    <div class="tx-modal-title" id="txModalTitle">
+                        <span class="tx-title-label text-nowrap">Neue Unternehmens-Transaktion für:</span>
+                       <input type="text" class="tx-input" id="txDatum" value="" placeholder="Geben Sie den Namen oder ISIN ein">
+                    </div>
+                    <button type="button" class="analysen-modal-close" data-bs-dismiss="modal" aria-label="Schließen"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="modal-body analysen-modal-body">
+                    <div class="tx-field-label">Typ</div>
+                    <div class="tx-typ-btns mb-3">
+                        <button type="button" class="tx-typ-btn active" data-typ="Kauf">Kauf</button>
+                        <button type="button" class="tx-typ-btn" data-typ="Verkauf">Verkauf</button>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-6 col-lg-3">
+                            <div class="tx-field-label">Datum</div>
+                            <input type="text" class="tx-input" id="txDatum" value="05.07.2026" />
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <div class="tx-field-label">Stückzahl</div>
+                            <input type="number" class="tx-input" id="txStueck" value="100" min="1" />
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <div class="tx-field-label">Kurs je Aktie</div>
+                            <input type="number" class="tx-input" id="txKurs" value="60.80" step="0.01" min="0" />
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <div class="tx-field-label">Gesamtwert</div>
+                            <div class="tx-total" id="txTotal">6.080,00 €</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer analysen-modal-footer">
+                    <button type="button" class="btn-tx-cancel" data-bs-dismiss="modal">Abbrechen</button>
+                    <button type="button" class="btn-tx-save" id="txSave">Speichern</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- ══════════════════════════════════════════
        MODAL – Neue Transaktion
