@@ -1505,6 +1505,10 @@
             numEl.style.color = color;
           }
           el.setAttribute('aria-label', 'Score: ' + score + ' von 100');
+          /* the "Sehr gut" label next to the circle matches the circle's color */
+          var wrap = el.closest('.score-circle-wrap');
+          var labelEl = wrap && wrap.querySelector('.score-label-green');
+          if (labelEl) labelEl.style.color = color;
         });
       })();
 

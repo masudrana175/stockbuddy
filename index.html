@@ -265,7 +265,7 @@
                   <div>ORCL &bull; US68389X1084</div>
                 </div>
               </div>
-              <div class="score-box" aria-label="Bewertung: 87 von 100, Sehr attraktiv">
+              <div class="score-box" data-score="87" aria-label="Bewertung: 87 von 100, Sehr attraktiv">
                 <div class="score-num">87 <span class="score-tot">/100</span>
                 </div>
                 <div class="score-lbl">Sehr attraktiv</div>
@@ -749,5 +749,30 @@
     <script src="js/main.js?v=20260709f"></script>
       <script src="js/sb-uploader.js?v=20260709f"></script>
       <script src="js/sb-motion.js?v=20260709f"></script>
+    <script>
+      /* "Aktie des Tages" score box — background + text color follow the
+         same 10-step score gradient used for the score-circle elsewhere. */
+      (function () {
+        var SCORE_COLORS = ['#cc0000', '#cc5600', '#cc8600', '#ccad00', '#dacd02', '#cdda02', '#a5da02', '#63da02', '#0cc841', '#0ca867'];
+        function colorForScore(score) {
+          var idx = Math.min(9, Math.max(0, Math.ceil(score / 10) - 1));
+          return SCORE_COLORS[idx];
+        }
+        function hexToRgba(hex, alpha) {
+          var r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
+          return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+        }
+        document.querySelectorAll('.score-box[data-score]').forEach(function (box) {
+          var score = Math.max(0, Math.min(100, parseInt(box.dataset.score, 10) || 0));
+          var color = colorForScore(score);
+          box.style.background = hexToRgba(color, 0.18);
+          var numEl = box.querySelector('.score-num');
+          if (numEl) numEl.style.color = color;
+          var lblEl = box.querySelector('.score-lbl');
+          if (lblEl) lblEl.style.color = color;
+          box.querySelectorAll('.score-stars i').forEach(function (star) { star.style.color = color; });
+        });
+      })();
+    </script>
   </body>
 </html>
