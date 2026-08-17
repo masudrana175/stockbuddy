@@ -51,6 +51,12 @@
                     <span><img src="img/bildmarke_stockbuddy.svg" alt="" style="width:28px"/></span>
                     <span>Buddy-Chat</span>
                 </a>
+				<a class="sb-nav-link" href="#" class="sb-link" data-bs-toggle="modal" data-bs-target="#deineSessionsModal">
+				<span>
+				  <img src="img/navi_deine_session_active.svg" alt="" style="width:29px" />
+				</span>
+				<span>Deine Sessions</span>
+			    </a>
                 <a class="sb-nav-link" href="depot.html">
                     <span><img src="img/navi_depot_active.svg" alt="" style="width:26px"/></span>
                     <span>StockBuddy Depot</span>
@@ -177,7 +183,7 @@
                                             </div>
 
                                             <div class="score-circle-wrap">
-                                                <div class="score-circle" data-score="90" aria-label="Score: 87 von 100">
+                                                <div class="score-circle" data-score="27" aria-label="Score: 27 von 100">
                                                     <svg viewBox="0 0 80 80">
                                                         <circle class="bg-ring" cx="40" cy="40" r="33" />
                                                         <circle class="value-ring" cx="40" cy="40" r="33" />
@@ -185,7 +191,7 @@
                                                     <div class="score-circle-num">87<span>/100</span></div>
                                                 </div>
                                                 <div>
-                                                    <div class="score-label-green">Sehr gut</div>
+                                                    <div class="score-label-green" >Sehr gut</div>
                                                     <div class="score-desc">Oracle überzeugt mit starkem Wachstum und soliden Fundamentaldaten. Die Bewertung ist leicht erhöht, das Risiko moderat.</div>
                                                 </div>
                                             </div>
@@ -289,10 +295,10 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>Unternehmen/Aktie</th>
-                                                                <th>Kumulativ <button type="button" class="sbs-info-btn" data-category="kumulativ" aria-label="Details zu Kumulativ"><i class="bi bi-info-circle-fill"></i></button></th>
-                                                                <th>Geringstes Risiko <button type="button" class="sbs-info-btn" data-category="risiko" aria-label="Details zu Geringstes Risiko"><i class="bi bi-info-circle-fill"></i></button></th>
-                                                                <th>Beste Dividende <button type="button" class="sbs-info-btn" data-category="dividende" aria-label="Details zu Beste Dividende"><i class="bi bi-info-circle-fill"></i></button></th>
-                                                                <th>Beste Fundamentaldaten <button type="button" class="sbs-info-btn" data-category="fundamentaldaten" aria-label="Details zu Beste Fundamentaldaten"><i class="bi bi-info-circle-fill"></i></button></th>
+                                                                <th>Kumulativ <button type="button" class="sbs-info-btn" data-category="kumulativ" aria-label="Details zu Kumulativ"><i class="fa-solid fa-info"></i></button></th>
+                                                                <th>Geringstes Risiko <button type="button" class="sbs-info-btn" data-category="risiko" aria-label="Details zu Geringstes Risiko"><i class="fa-solid fa-info"></i></button></th>
+                                                                <th>Beste Dividende <button type="button" class="sbs-info-btn" data-category="dividende" aria-label="Details zu Beste Dividende"><i class="fa-solid fa-info"></i></button></th>
+                                                                <th>Beste Fundamentaldaten <button type="button" class="sbs-info-btn" data-category="fundamentaldaten" aria-label="Details zu Beste Fundamentaldaten"><i class="fa-solid fa-info"></i></button></th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -621,26 +627,26 @@
                     <a href="#" class="sb-link">Mehr erfahren <img src="img/arrow_right_blue.svg" alt="" style="width:22px;"/></a>
                 </div> -->
 				 <!-- Stockbuddy Boost -->
-                <div class="sb-card rp-card st-boost">
+                <div class="sb-card rp-card">
                     <div class="card-title mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Diese Aktien hatten gestern das beste Ranking unter Berücksichtigung deiner Anlageziele." tabindex="0" aria-label="Bestes Ranking">
                         <img src="img/letzte_analysen.svg" alt="" style="width:34px;margin-right:6px;" /> Stockbuddy Boost
                         <button class="rp-bell active" aria-label="Benachrichtigungen umschalten"><i class="bi bi-bell"></i></button>
                     </div>
                     <div class="boost-headline green">Bestes Ranking diese Woche</div>
-                    <div class="boost-item"><i class="fa-solid fa-check"></i> Industria de Diseño Textil, S.A.</div>
-                    <div class="boost-item"><i class="fa-solid fa-check"></i> Sanofi S.A.</div>
-                    <div class="boost-item"><i class="fa-solid fa-check"></i> Medtronic PLC</div>
+                    <div class="boost-item st-boost"><i class="fa-solid fa-check"></i> Industria de Diseño Textil, S.A.</div>
+                    <div class="boost-item st-boost"><i class="fa-solid fa-check"></i> Sanofi S.A.</div>
+                    <div class="boost-item st-boost"><i class="fa-solid fa-check"></i> Medtronic PLC</div>
                 </div>
 
                 <!-- Stockbuddy Protect -->
-                <div class="sb-card rp-card st-protect">
+                <div class="sb-card rp-card ">
                     <div class="card-title mb-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Diese Aktien aus deinem Depot sind nicht mehr unter den 20 besten Aktien." tabindex="0" aria-label="Aktien nicht unter den besten 20">
                         <img src="img/letzte_analysen.svg" alt="" style="width:34px;margin-right:6px;" /> Stockbuddy Protect
                         <button class="rp-bell active" aria-label="Benachrichtigungen umschalten"><i class="bi bi-bell"></i></button>
                     </div>
                     <div class="boost-headline red">Bad Performer im Depot</div>
-                    <div class="boost-item"><i class="fa-solid fa-check"></i> Bayerische Motoren Werke Aktiengesellschaft</div>
-                    <div class="boost-item"><i class="fa-solid fa-check"></i> Volkswagen AG Stammaktien</div>
+                    <div class="boost-item st-protect"><i class="fa-solid fa-check"></i> Bayerische Motoren Werke Aktiengesellschaft</div>
+                    <div class="boost-item st-protect"><i class="fa-solid fa-check"></i> Volkswagen AG Stammaktien</div>
                 </div>
 
                 <!-- Stockbuddy Alerts -->
@@ -692,6 +698,104 @@
 
     </main>
 
+		<!-- ══════════════════════════════════════════
+       MODAL – Deine Sessions
+       ══════════════════════════════════════════ -->
+    <div class="modal fade" id="deineSessionsModal" tabindex="-1" aria-labelledby="deineSessionsModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content sessions-modal">
+                <div class="modal-header sessions-modal-header">
+                    <div class="sessions-modal-title" id="deineSessionsModalTitle">
+                        <img src="img/navi_deine_session.svg" alt="" style="width:34px;" />
+                       Deine bisherigen Sessions
+                    </div>
+                    <button type="button" class="sessions-modal-close" data-bs-dismiss="modal" aria-label="Schließen">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+                <div class="modal-body sessions-modal-body">
+
+                    <div class="sessions-modal-item">
+                        
+                        <div class="flex-grow-1">
+                            <div class="sessions-name">Aktienkursentwicklung der Top 3 Aktien der letzten 3 Monate im Diagramm</div>
+                            <div class="sessions-date">22.05.2024</div>
+                        </div>
+						<div class="action-btns">
+							<button class="sessions-item-btn edit" aria-label="Session bearbeiten"><i class="bi bi-pencil-square"></i></button>
+							<button class="sessions-item-btn delete" aria-label="Session löschen"><i class="bi bi-trash3"></i></button>
+						</div>
+                    </div>
+
+                    <div class="sessions-modal-item">
+                        
+                        <div class="flex-grow-1">
+                            <div class="sessions-name">VW: Neueste Entwicklungen und Innovationen</div>
+                            <div class="sessions-date">20.05.2024</div>
+                        </div>
+                        <div class="action-btns">
+							<button class="sessions-item-btn edit" aria-label="Session bearbeiten"><i class="bi bi-pencil-square"></i></button>
+							<button class="sessions-item-btn delete" aria-label="Session löschen"><i class="bi bi-trash3"></i></button>
+						</div>
+                    </div>
+
+                    <div class="sessions-modal-item">
+                        
+                        <div class="flex-grow-1">
+                            <div class="sessions-name">Latest Updates on Meta Platforms, Inc. (ISIN: US30303M1027)</div>
+                            <div class="sessions-date">19.05.2024</div>
+                        </div>
+                        <div class="action-btns">
+							<button class="sessions-item-btn edit" aria-label="Session bearbeiten"><i class="bi bi-pencil-square"></i></button>
+							<button class="sessions-item-btn delete" aria-label="Session löschen"><i class="bi bi-trash3"></i></button>
+						</div>
+                    </div>
+
+                    <div class="sessions-modal-item">
+                       
+                        <div class="flex-grow-1">
+                            <div class="sessions-name">Aktienempfehlungen basierend auf individuellen Anlagezielen</div>
+                            <div class="sessions-date">14.05.2024</div>
+                        </div>
+                        <div class="action-btns">
+							<button class="sessions-item-btn edit" aria-label="Session bearbeiten"><i class="bi bi-pencil-square"></i></button>
+							<button class="sessions-item-btn delete" aria-label="Session löschen"><i class="bi bi-trash3"></i></button>
+						</div>
+                    </div>
+
+                    <div class="sessions-modal-item">
+                        
+                        <div class="flex-grow-1">
+                            <div class="sessions-name">Umsatz und Nettogewinn von Carrefour und Metro: 10-Jahres-Diagramm Anfrage</div>
+                            <div class="sessions-date">14.03.2024</div>
+                        </div>
+                        <div class="action-btns">
+							<button class="sessions-item-btn edit" aria-label="Session bearbeiten"><i class="bi bi-pencil-square"></i></button>
+							<button class="sessions-item-btn delete" aria-label="Session löschen"><i class="bi bi-trash3"></i></button>
+						</div>
+                    </div>
+
+                    <div class="sessions-modal-item">
+                        
+                        <div class="flex-grow-1">
+                            <div class="sessions-name">Beste US-Pharma-Aktien: Empfehlungen und Tipps</div>
+                            <div class="sessions-date">12.01.2024</div>
+                        </div>
+                        <div class="action-btns">
+							<button class="sessions-item-btn edit" aria-label="Session bearbeiten"><i class="bi bi-pencil-square"></i></button>
+							<button class="sessions-item-btn delete" aria-label="Session löschen"><i class="bi bi-trash3"></i></button>
+						</div>
+                    </div>
+
+                </div>
+                <div class="modal-footer sessions-modal-footer">
+                    <button type="button" class="btn-alle-loeschen">
+                        <i class="bi bi-trash3"></i> Alle Sessions löschen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!-- ══════════════════════════════════════════

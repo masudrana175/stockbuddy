@@ -37,6 +37,12 @@
                     <span><img src="img/bildmarke_stockbuddy.svg" alt="" style="width:28px"/></span>
                     <span>Buddy-Chat</span>
                 </a>
+				<a class="sb-nav-link" href="#" class="sb-link" data-bs-toggle="modal" data-bs-target="#deineSessionsModal">
+				<span>
+				  <img src="img/navi_deine_session_active.svg" alt="" style="width:29px" />
+				</span>
+				<span>Deine Sessions</span>
+			    </a>
                 <a class="sb-nav-link" href="depot.html">
                     <span><img src="img/navi_depot_active.svg" alt="" style="width:26px"/></span>
                     <span>StockBuddy Depot</span>
@@ -70,7 +76,11 @@
                 <div class="d-block d-lg-none"><img src="img/logo.png" alt="" /></div>
                 <div class="d-none d-lg-block">
                     <h1 style="margin-bottom:2px;">Dein Depot </h1>
-                    <div class="page-subtitle">Das KI-optimierte Depot von StockBuddy</div>
+                    <div class="page-subtitle">
+						Das KI-optimierte Depot von StockBuddy <button class="btn-neue-unternehmens-transaktion" data-bs-toggle="modal" data-bs-target="#unternehmenstransaktionModal"><i class="bi bi-plus-circle"></i> Neue Unternehmens-Transaktion erstellen</button>
+					</div>
+
+                    
                 </div>
             </div>
             <div class="sb-topbar-right">
@@ -540,7 +550,104 @@
 
     </main>
 	
-	
+		<!-- ══════════════════════════════════════════
+       MODAL – Deine Sessions
+       ══════════════════════════════════════════ -->
+    <div class="modal fade" id="deineSessionsModal" tabindex="-1" aria-labelledby="deineSessionsModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content sessions-modal">
+                <div class="modal-header sessions-modal-header">
+                    <div class="sessions-modal-title" id="deineSessionsModalTitle">
+                        <img src="img/navi_deine_session.svg" alt="" style="width:34px;" />
+                       Deine bisherigen Sessions
+                    </div>
+                    <button type="button" class="sessions-modal-close" data-bs-dismiss="modal" aria-label="Schließen">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+                <div class="modal-body sessions-modal-body">
+
+                    <div class="sessions-modal-item">
+                        
+                        <div class="flex-grow-1">
+                            <div class="sessions-name">Aktienkursentwicklung der Top 3 Aktien der letzten 3 Monate im Diagramm</div>
+                            <div class="sessions-date">22.05.2024</div>
+                        </div>
+						<div class="action-btns">
+							<button class="sessions-item-btn edit" aria-label="Session bearbeiten"><i class="bi bi-pencil-square"></i></button>
+							<button class="sessions-item-btn delete" aria-label="Session löschen"><i class="bi bi-trash3"></i></button>
+						</div>
+                    </div>
+
+                    <div class="sessions-modal-item">
+                        
+                        <div class="flex-grow-1">
+                            <div class="sessions-name">VW: Neueste Entwicklungen und Innovationen</div>
+                            <div class="sessions-date">20.05.2024</div>
+                        </div>
+                        <div class="action-btns">
+							<button class="sessions-item-btn edit" aria-label="Session bearbeiten"><i class="bi bi-pencil-square"></i></button>
+							<button class="sessions-item-btn delete" aria-label="Session löschen"><i class="bi bi-trash3"></i></button>
+						</div>
+                    </div>
+
+                    <div class="sessions-modal-item">
+                        
+                        <div class="flex-grow-1">
+                            <div class="sessions-name">Latest Updates on Meta Platforms, Inc. (ISIN: US30303M1027)</div>
+                            <div class="sessions-date">19.05.2024</div>
+                        </div>
+                        <div class="action-btns">
+							<button class="sessions-item-btn edit" aria-label="Session bearbeiten"><i class="bi bi-pencil-square"></i></button>
+							<button class="sessions-item-btn delete" aria-label="Session löschen"><i class="bi bi-trash3"></i></button>
+						</div>
+                    </div>
+
+                    <div class="sessions-modal-item">
+                       
+                        <div class="flex-grow-1">
+                            <div class="sessions-name">Aktienempfehlungen basierend auf individuellen Anlagezielen</div>
+                            <div class="sessions-date">14.05.2024</div>
+                        </div>
+                        <div class="action-btns">
+							<button class="sessions-item-btn edit" aria-label="Session bearbeiten"><i class="bi bi-pencil-square"></i></button>
+							<button class="sessions-item-btn delete" aria-label="Session löschen"><i class="bi bi-trash3"></i></button>
+						</div>
+                    </div>
+
+                    <div class="sessions-modal-item">
+                        
+                        <div class="flex-grow-1">
+                            <div class="sessions-name">Umsatz und Nettogewinn von Carrefour und Metro: 10-Jahres-Diagramm Anfrage</div>
+                            <div class="sessions-date">14.03.2024</div>
+                        </div>
+                        <div class="action-btns">
+							<button class="sessions-item-btn edit" aria-label="Session bearbeiten"><i class="bi bi-pencil-square"></i></button>
+							<button class="sessions-item-btn delete" aria-label="Session löschen"><i class="bi bi-trash3"></i></button>
+						</div>
+                    </div>
+
+                    <div class="sessions-modal-item">
+                        
+                        <div class="flex-grow-1">
+                            <div class="sessions-name">Beste US-Pharma-Aktien: Empfehlungen und Tipps</div>
+                            <div class="sessions-date">12.01.2024</div>
+                        </div>
+                        <div class="action-btns">
+							<button class="sessions-item-btn edit" aria-label="Session bearbeiten"><i class="bi bi-pencil-square"></i></button>
+							<button class="sessions-item-btn delete" aria-label="Session löschen"><i class="bi bi-trash3"></i></button>
+						</div>
+                    </div>
+
+                </div>
+                <div class="modal-footer sessions-modal-footer">
+                    <button type="button" class="btn-alle-loeschen">
+                        <i class="bi bi-trash3"></i> Alle Sessions löschen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 	
 	
 
@@ -702,6 +809,52 @@
         </div>
     </div>
 
+	 <!-- ══════════════════════════════════════════
+       MODAL – Neue Unternehmens-Transaktion erstellen
+       ══════════════════════════════════════════ -->
+    <div class="modal fade" id="unternehmenstransaktionModal" tabindex="-1" aria-labelledby="txModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content analysen-modal">
+                <div class="modal-header analysen-modal-header">
+                    <div class="tx-modal-title" id="txModalTitle">
+                        <span class="tx-title-label text-nowrap">Neue Unternehmens-Transaktion für:</span>
+                       <input type="text" class="tx-input" id="txDatum" value="" placeholder="Geben Sie den Namen oder ISIN ein">
+                    </div>
+                    <button type="button" class="analysen-modal-close" data-bs-dismiss="modal" aria-label="Schließen"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="modal-body analysen-modal-body">
+                    <div class="tx-field-label">Typ</div>
+                    <div class="tx-typ-btns mb-3">
+                        <button type="button" class="tx-typ-btn active" data-typ="Kauf">Kauf</button>
+                        <button type="button" class="tx-typ-btn" data-typ="Verkauf">Verkauf</button>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-6 col-lg-3">
+                            <div class="tx-field-label">Datum</div>
+                            <input type="text" class="tx-input" id="txDatum" value="05.07.2026" />
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <div class="tx-field-label">Stückzahl</div>
+                            <input type="number" class="tx-input" id="txStueck" value="100" min="1" />
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <div class="tx-field-label">Kurs je Aktie</div>
+                            <input type="number" class="tx-input" id="txKurs" value="60.80" step="0.01" min="0" />
+                        </div>
+                        <div class="col-6 col-lg-3">
+                            <div class="tx-field-label">Gesamtwert</div>
+                            <div class="tx-total" id="txTotal">6.080,00 €</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer analysen-modal-footer">
+                    <button type="button" class="btn-tx-cancel" data-bs-dismiss="modal">Abbrechen</button>
+                    <button type="button" class="btn-tx-save" id="txSave">Speichern</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	
     <!-- ══════════════════════════════════════════
        MODAL – Neue Transaktion
        ══════════════════════════════════════════ -->

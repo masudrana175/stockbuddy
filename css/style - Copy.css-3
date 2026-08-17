@@ -1600,9 +1600,6 @@ table.dataTable.pos-table thead > tr > th.dt-orderable-none span.dt-column-order
   gap: 10px;
   font-weight: 700;
 }
-div#txModalTitle{
-	flex:1;
-}
 .tx-title-label { color: var(--sb-pink); }
 .tx-logo { width: 34px; height: 34px; }
 .tx-company, .pm-company { color: var(--sb-text-h); font-size: 1.05rem; }
@@ -3216,9 +3213,6 @@ table.dataTable.th-table thead th.dt-type-numeric,
   font-weight: 700;
   color: var(--sb-green-dark);
 }
-.rp-score-sub {
-  color: var(--sb-green-dark);
-}
 .rp-stars {
   color: #2fad6c;
   font-size: 1rem;
@@ -3679,28 +3673,6 @@ input.sb-switch[type="checkbox"]:focus-visible {
 .search-input-wrap input::placeholder {
   color: var(--sb-text-muted);
 }
-.btn-neue-unternehmens-transaktion {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  background: #fff;
-  border: 1px solid var(--sb-pink);
-  color: #d14894;
-  border-radius: 30px;
-  padding: 0.5rem 1.2rem;
-  margin-left: 1.2rem;
-  font-size: 0.95rem;
-  font-weight: 700;
-  font-family: inherit;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: var(--sb-ease);
-}
-.btn-neue-unternehmens-transaktion:hover {
-  background: var(--sb-pink);
-	color: #fff;
-}
-
 .btn-neue-analyse {
   display: inline-flex;
   align-items: center;
@@ -4393,15 +4365,10 @@ table.dataTable thead>tr>th.dt-orderable-asc:hover, table.dataTable thead>tr>th.
   font-size: 0.78rem;
   color: var(--sb-text-muted);
 }
-.pos-pct {
+.pos-pct-pos {
   font-size: 0.95rem;
   font-weight: 700;
-}
-.pos-pct-pos {
   color: var(--sb-green-dark);
-}
-.pos-pct-neg {
-  color: #e53e3e;
 }
 .pos-price-main {
   font-weight: 700;
@@ -4411,9 +4378,6 @@ table.dataTable thead>tr>th.dt-orderable-asc:hover, table.dataTable thead>tr>th.
   font-size: 0.78rem;
   color: var(--sb-green-dark);
   font-weight: 600;
-}
-.pos-price-chg-neg {
-  color: #e53e3e;
 }
 .pos-score-badge {
   width: 38px;
