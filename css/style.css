@@ -3216,6 +3216,9 @@ table.dataTable.th-table thead th.dt-type-numeric,
   font-weight: 700;
   color: var(--sb-green-dark);
 }
+.rp-score-sub {
+  color: var(--sb-green-dark);
+}
 .rp-stars {
   color: #2fad6c;
   font-size: 1rem;
@@ -4390,14 +4393,14 @@ table.dataTable thead>tr>th.dt-orderable-asc:hover, table.dataTable thead>tr>th.
   font-size: 0.78rem;
   color: var(--sb-text-muted);
 }
-.pos-pct-pos {
+.pos-pct {
   font-size: 0.95rem;
   font-weight: 700;
+}
+.pos-pct-pos {
   color: var(--sb-green-dark);
 }
 .pos-pct-neg {
-  font-size: 0.95rem;
-  font-weight: 700;
   color: #e53e3e;
 }
 .pos-price-main {
