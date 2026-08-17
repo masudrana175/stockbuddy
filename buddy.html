@@ -523,11 +523,11 @@
                 </div>
 
                 <!-- Stock info card -->
-                <div class="rp-stock-card" >
+                <div class="rp-stock-card" data-score="87">
 					<div class="d-flex align-items-center gap-2" style="padding-bottom: 20px" data-bs-toggle="tooltip" data-bs-placement="top" title="Zeigt die Aktie des Tages" tabindex="0" aria-label="Info zu Analysen"><img src="img/aktie.svg" alt="" style="width:38px;" /><span class="card-title">Aktie des Tages</span>
               </div>
                     <div class="rp-stock-head">
-						
+
                         <div class="rp-stock-logo">
                             <img src="img/oracal.png" alt="Oracle Logo" />
                         </div>
@@ -541,7 +541,7 @@
                     <div class="rp-score-row">
                         <div>
                             <div class="rp-score-num">87<span>/100</span></div>
-                            <div style="color: var(--sb-green-dark);">Sehr attraktiv</div>
+                            <div class="rp-score-sub">Sehr attraktiv</div>
                         </div>
                         <div class="rp-score-badge">Sehr gut</div>
                     </div>
@@ -1405,6 +1405,19 @@
           var wrap = el.closest('.score-circle-wrap');
           var labelEl = wrap && wrap.querySelector('.score-label-green');
           if (labelEl) labelEl.style.color = color;
+        });
+
+        /* "Aktie des Tages" stock card in the right column: same gradient */
+        document.querySelectorAll('.rp-stock-card[data-score]').forEach(function (card) {
+          var score = Math.max(0, Math.min(100, parseInt(card.dataset.score, 10) || 0));
+          var color = colorForScore(score);
+          var numEl = card.querySelector('.rp-score-num');
+          if (numEl) numEl.style.color = color;
+          var subEl = card.querySelector('.rp-score-sub');
+          if (subEl) subEl.style.color = color;
+          var badgeEl = card.querySelector('.rp-score-badge');
+          if (badgeEl) badgeEl.style.color = color;
+          card.querySelectorAll('.rp-stars i').forEach(function (star) { star.style.color = color; });
         });
       })();
 

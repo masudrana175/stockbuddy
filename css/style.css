@@ -3074,6 +3074,9 @@ table.dataTable.th-table thead th.dt-type-numeric,
   font-weight: 700;
   color: var(--sb-green-dark);
 }
+.rp-score-sub {
+  color: var(--sb-green-dark);
+}
 .rp-stars {
   color: #2fad6c;
   font-size: 1rem;
