@@ -3196,10 +3196,15 @@ table.dataTable.th-table thead th.dt-type-numeric,
 }
 .rp-score-row {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 8px;
   margin-bottom: 0.25rem;
+}
+.rp-score-box {
+  border-radius: var(--sb-radius-md);
+  padding: 0.5rem 0.9rem;
+  background: rgba(34, 179, 109, 0.12);
 }
 .rp-score-num {
   font-size: 2.2rem;
