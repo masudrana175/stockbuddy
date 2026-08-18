@@ -546,7 +546,7 @@
                     <div class="rp-score-label card-title">StockBuddy Score</div>
                     <div class="rp-score-row">
                         <div class="rp-score-box">
-                            <div class="rp-score-num">87<span>/100</span></div>
+                            <div class="rp-score-num"></div>
                             <div class="rp-score-sub">Sehr attraktiv</div>
                         </div>
                         <div class="rp-score-badge">Sehr gut</div>
@@ -1520,7 +1520,10 @@
           var score = Math.max(0, Math.min(100, parseInt(card.dataset.score, 10) || 0));
           var color = colorForScore(score);
           var boxEl = card.querySelector('.rp-score-box');
-          if (boxEl) boxEl.style.background = hexToRgba(color, 0.15);
+          if (boxEl) {
+            boxEl.style.background = hexToRgba(color, 0.15);
+            boxEl.setAttribute('aria-label', 'StockBuddy Score: ' + score + ' von 100');
+          }
           var numEl = card.querySelector('.rp-score-num');
           if (numEl) {
             numEl.innerHTML = score + '<span>/100</span>';
