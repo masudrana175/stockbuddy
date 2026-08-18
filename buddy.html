@@ -1522,7 +1522,10 @@
           var boxEl = card.querySelector('.rp-score-box');
           if (boxEl) boxEl.style.background = hexToRgba(color, 0.15);
           var numEl = card.querySelector('.rp-score-num');
-          if (numEl) numEl.style.color = color;
+          if (numEl) {
+            numEl.innerHTML = score + '<span>/100</span>';
+            numEl.style.color = color;
+          }
           var subEl = card.querySelector('.rp-score-sub');
           if (subEl) subEl.style.color = color;
           var badgeEl = card.querySelector('.rp-score-badge');
