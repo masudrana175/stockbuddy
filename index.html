@@ -415,7 +415,7 @@
                 <div class="analysis-name">NVIDIA Corporation</div>
                 <div class="analysis-date">22.05.2024</div>
               </div>
-              <div class="analysis-score">92/ <span>100</span>
+              <div class="analysis-score" data-anscore="92">92/ <span>100</span>
               </div>
             </div>
             <!-- Microsoft -->
@@ -427,7 +427,7 @@
                 <div class="analysis-name">Microsoft Corporation</div>
                 <div class="analysis-date">20.05.2024</div>
               </div>
-              <div class="analysis-score">88/ <span>100</span>
+              <div class="analysis-score" data-anscore="88">88/ <span>100</span>
               </div>
             </div>
             <!-- ASML -->
@@ -439,7 +439,7 @@
                 <div class="analysis-name">ASML Holding N.V.</div>
                 <div class="analysis-date">19.05.2024</div>
               </div>
-              <div class="analysis-score">85/ <span>100</span>
+              <div class="analysis-score" data-anscore="85">85/ <span>100</span>
               </div>
             </div>
             <!-- Visa -->
@@ -451,7 +451,7 @@
                 <div class="analysis-name">Visa Inc.</div>
                 <div class="analysis-date">14.05.2024</div>
               </div>
-              <div class="analysis-score">80/ <span>100</span>
+              <div class="analysis-score" data-anscore="80">80/ <span>100</span>
               </div>
             </div>
             <div class="wert-row arrow-link">
@@ -771,6 +771,14 @@
           var lblEl = box.querySelector('.score-lbl');
           if (lblEl) lblEl.style.color = color;
           box.querySelectorAll('.score-stars i').forEach(function (star) { star.style.color = color; });
+        });
+
+        /* "Letzte Analysen" list: same gradient */
+        document.querySelectorAll('.analysis-score[data-anscore]').forEach(function (el) {
+          var score = Math.max(0, Math.min(100, parseInt(el.dataset.anscore, 10) || 0));
+          var color = colorForScore(score);
+          el.innerHTML = score + '/ <span>100</span>';
+          el.style.color = color;
         });
       })();
     </script>
