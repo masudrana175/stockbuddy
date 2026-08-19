@@ -207,37 +207,37 @@
                                                 Score-Breakdown
                                                 <img src="img/info.svg" alt="" style="width:18px;margin-left:2px" data-bs-toggle="tooltip" data-bs-placement="top" title="Gesamte Wertentwicklung seit dem Startdatum 01.01.2024, ohne Berücksichtigung von Steuern und Gebühren." tabindex="0" aria-label="Info zur Wertentwicklung" />
                                             </div>
-                                            <div class="breakdown-row">
+                                            <div class="breakdown-row" data-value="90">
                                                 <div class="breakdown-icon"><img src="img/wachstum_green.svg" alt="" /></div>
                                                 <span class="breakdown-lbl">Wachstum</span>
                                                 <div class="breakdown-bar-wrap">
-                                                    <div class="breakdown-bar bar-green" style="width:90%"></div>
+                                                    <div class="breakdown-bar" style="width:90%"></div>
                                                 </div>
-                                                <span class="breakdown-pct pct-green">90%</span>
+                                                <span class="breakdown-pct">90%</span>
                                             </div>
-                                            <div class="breakdown-row">
+                                            <div class="breakdown-row" data-value="60">
                                                 <div class="breakdown-icon"><img src="img/dividende_yellow.svg" alt="" /></div>
                                                 <span class="breakdown-lbl">Dividende</span>
                                                 <div class="breakdown-bar-wrap">
-                                                    <div class="breakdown-bar bar-amber" style="width:60%"></div>
+                                                    <div class="breakdown-bar" style="width:60%"></div>
                                                 </div>
-                                                <span class="breakdown-pct pct-amber">60%</span>
+                                                <span class="breakdown-pct">60%</span>
                                             </div>
-                                            <div class="breakdown-row">
+                                            <div class="breakdown-row" data-value="80">
                                                 <div class="breakdown-icon"><img src="img/risiko_green.svg" alt="" /></div>
                                                 <span class="breakdown-lbl">Risiko</span>
                                                 <div class="breakdown-bar-wrap">
-                                                    <div class="breakdown-bar bar-green" style="width:80%"></div>
+                                                    <div class="breakdown-bar" style="width:80%"></div>
                                                 </div>
-                                                <span class="breakdown-pct pct-green">80%</span>
+                                                <span class="breakdown-pct">80%</span>
                                             </div>
-                                            <div class="breakdown-row">
+                                            <div class="breakdown-row" data-value="70">
                                                 <div class="breakdown-icon"><img src="img/bewertung_lightblue.svg" alt="" /></div>
                                                 <span class="breakdown-lbl">Bewertung</span>
                                                 <div class="breakdown-bar-wrap">
-                                                    <div class="breakdown-bar bar-green" style="width:70%"></div>
+                                                    <div class="breakdown-bar" style="width:70%"></div>
                                                 </div>
-                                                <span class="breakdown-pct pct-green">70%</span>
+                                                <span class="breakdown-pct">70%</span>
                                             </div>
                                         </div>
 
@@ -1543,6 +1543,16 @@
           var color = colorForScore(score);
           el.innerHTML = score + '/<span>100</span>';
           el.style.color = color;
+        });
+
+        /* Score-Breakdown bars (Wachstum, Dividende, Risiko, Bewertung, ...): same gradient */
+        document.querySelectorAll('.breakdown-row[data-value]').forEach(function (row) {
+          var score = Math.max(0, Math.min(100, parseInt(row.dataset.value, 10) || 0));
+          var color = colorForScore(score);
+          var barEl = row.querySelector('.breakdown-bar');
+          if (barEl) barEl.style.background = color;
+          var pctEl = row.querySelector('.breakdown-pct');
+          if (pctEl) pctEl.style.color = color;
         });
       })();
 
