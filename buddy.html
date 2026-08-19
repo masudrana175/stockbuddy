@@ -575,7 +575,7 @@
                             <div class="analysis-name">NCIDIA Corporation</div>
                             <div class="analysis-date">22.05.2024</div>
                         </div>
-                        <div class="analysis-score">92/<span>100</span></div>
+                        <div class="analysis-score" data-score="92">92/<span>100</span></div>
                     </div>
 
                     <div class="analysis-item">
@@ -586,7 +586,7 @@
                             <div class="analysis-name">Microsoft Corporation</div>
                             <div class="analysis-date">20.05.2024</div>
                         </div>
-                        <div class="analysis-score">88/<span>100</span></div>
+                        <div class="analysis-score" data-score="88">88/<span>100</span></div>
                     </div>
 
                     <div class="analysis-item">
@@ -597,7 +597,7 @@
                             <div class="analysis-name">ASML Holding N.V.</div>
                             <div class="analysis-date">19.05.2024</div>
                         </div>
-                        <div class="analysis-score">85/<span>100</span></div>
+                        <div class="analysis-score" data-score="85">85/<span>100</span></div>
                     </div>
 
                     <div class="analysis-item" style="margin-bottom:0;">
@@ -608,7 +608,7 @@
                             <div class="analysis-name">Visa Inc.</div>
                             <div class="analysis-date">14.05.2024</div>
                         </div>
-                        <div class="analysis-score">80/<span>100</span></div>
+                        <div class="analysis-score" data-score="80">80/<span>100</span></div>
                     </div>
 
                     <div class="wert-row arrow-link" style="margin-top:.75rem;padding-top:.6rem;">
@@ -1535,6 +1535,14 @@
           if (badgeEl) badgeEl.style.color = color;
           var card = row.closest('.rp-stock-card');
           if (card) card.querySelectorAll('.rp-stars i').forEach(function (star) { star.style.color = color; });
+        });
+
+        /* "Letzte Analysen" list in the right column: same gradient */
+        document.querySelectorAll('.analysis-score[data-score]').forEach(function (el) {
+          var score = Math.max(0, Math.min(100, parseInt(el.dataset.score, 10) || 0));
+          var color = colorForScore(score);
+          el.innerHTML = score + '/<span>100</span>';
+          el.style.color = color;
         });
       })();
 
