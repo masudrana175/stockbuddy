@@ -780,6 +780,16 @@
           el.innerHTML = score + '/ <span>100</span>';
           el.style.color = color;
         });
+
+        /* Wachstum / Rentabilität / Finanzstärke / Bewertung / Momentum bars: same gradient */
+        document.querySelectorAll('.metric-row .sb-progress[aria-valuenow]').forEach(function (bar) {
+          var score = Math.max(0, Math.min(100, parseInt(bar.getAttribute('aria-valuenow'), 10) || 0));
+          var color = colorForScore(score);
+          var fillEl = bar.querySelector('.sb-progress-bar');
+          if (fillEl) fillEl.style.background = color;
+          var pctEl = bar.parentElement.querySelector('.metric-pct');
+          if (pctEl) pctEl.style.color = color;
+        });
       })();
     </script>
   </body>
