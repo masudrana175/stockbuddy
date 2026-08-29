@@ -144,6 +144,10 @@ body {
 .sb-logo-icon {
   position: relative;
 }
+/* small logo only shows on the collapsed icon rail (see tablet breakpoint) */
+.sb-logo-icon .sb-logo-small {
+  display: none;
+}
 .sb-logo-icon span {
   color: #fff;
   font-size: 1.1rem;
@@ -292,6 +296,21 @@ table#posTable tbody td {
 .sb-sidebar.mobile-open .sb-logo {
   justify-content: flex-start !important;
   padding: 1.4rem 1.6rem 1.6rem !important;
+}
+
+/* Drawer open: restore the full logo and the "Neuer Chat" button text */
+.sb-sidebar.mobile-open .sb-logo-icon .sb-logo-full {
+  display: block !important;
+}
+.sb-sidebar.mobile-open .sb-logo-icon .sb-logo-small {
+  display: none !important;
+}
+.sb-sidebar.mobile-open .btn-neuer-chat .btn-txt {
+  display: inline !important;
+}
+.sb-sidebar.mobile-open .sb-nav button.btn-neuer-chat {
+  min-width: 210px;
+  padding: 0.52rem 1rem;
 }
 
 /* ============================================================
@@ -1251,7 +1270,7 @@ form.form-questionnaire label {
   }
 
   .sb-logo-text,
-  .sb-nav-link span {
+  .sb-nav-link span + span { /* hide only the text label, keep the icon */
     opacity: 0;
     pointer-events: none;
     width: 0;
@@ -1261,6 +1280,24 @@ form.form-questionnaire label {
   .sb-logo {
     justify-content: center;
     padding: 1.3rem 0.5rem 1.6rem;
+  }
+
+  /* collapsed rail: small logo instead of the full one */
+  .sb-logo-icon .sb-logo-full {
+    display: none;
+  }
+  .sb-logo-icon .sb-logo-small {
+    display: block;
+    width: 44px;
+  }
+
+  /* collapsed rail: "Neuer Chat" button keeps only the plus icon */
+  .btn-neuer-chat .btn-txt {
+    display: none;
+  }
+  .sb-nav button.btn-neuer-chat {
+    min-width: 0;
+    padding: 0.52rem 0.7rem;
   }
 
   .sb-nav {
@@ -1279,6 +1316,9 @@ form.form-questionnaire label {
 /* ============================================================
    BUDDY PAGE
    ============================================================ */
+:root {
+  --buddy-right-w: clamp(300px, 26vw, 400px);
+}
 .buddy-layout {
   display: flex;
   gap: 0;
@@ -2695,7 +2735,10 @@ table.dataTable.th-table thead th.dt-type-numeric,
   padding-bottom: 1rem;
 }
 .buddy-right-col {
-  max-width: 400px;
+  /* fluid: shrinks with the viewport so the chat column always stays wider.
+     --buddy-right-w is shared with .chat-input-bar-wraper (fixed positioning),
+     which is why it uses vw instead of % — both resolve against the viewport. */
+  width: var(--buddy-right-w, clamp(300px, 26vw, 400px));
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -2785,6 +2828,14 @@ table.dataTable.th-table thead th.dt-type-numeric,
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   margin-bottom: 2rem;
+}
+/* The chat column is much narrower than the viewport (sidebar + right column
+   take ~600-830px), so the two analysis cards must stack far earlier than the
+   usual mobile breakpoint to stay readable. */
+@media (max-width: 1499.98px) {
+  .buddy-analysis-grid {
+    grid-template-columns: 1fr;
+  }
 }
 .buddy-score-section {
   background: transparent;
@@ -3033,7 +3084,9 @@ table.dataTable.th-table thead th.dt-type-numeric,
     z-index: 100;
     padding: 8px 2.1rem 4px;
     background: #f9f7f9f0;
-    max-width: calc(100% - 834px);
+    /* span exactly the chat column: viewport minus sidebar, right column and
+       its 2.1rem padding — tracks the fluid --buddy-right-w automatically */
+    max-width: calc(100% - var(--sb-sidebar-w) - var(--buddy-right-w, 500px) - 2.1rem);
 }
 .btn-compare:hover img,.btn-detail:hover img {
     filter: brightness(0) invert(1);
@@ -3289,11 +3342,8 @@ table.dataTable.th-table thead th.dt-type-numeric,
     line-height: 1.1rem;
     margin-bottom: 3px;
 }
-@media (max-width: 1279.98px) {
-  .buddy-right-col {
-    width: 360px;
-  }
-}
+/* (the old fixed 360px override below 1280px is gone — the right column
+   now scales fluidly via --buddy-right-w) */
 @media (max-width: 1024px) {
   .buddy-layout {
     flex-direction: column;
