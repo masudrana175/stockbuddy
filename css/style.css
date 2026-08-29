@@ -1279,6 +1279,9 @@ form.form-questionnaire label {
 /* ============================================================
    BUDDY PAGE
    ============================================================ */
+:root {
+  --buddy-right-w: clamp(300px, 26vw, 500px);
+}
 .buddy-layout {
   display: flex;
   gap: 0;
@@ -2695,7 +2698,10 @@ table.dataTable.th-table thead th.dt-type-numeric,
   padding-bottom: 1rem;
 }
 .buddy-right-col {
-  width: 500px;
+  /* fluid: shrinks with the viewport so the chat column always stays wider.
+     --buddy-right-w is shared with .chat-input-bar-wraper (fixed positioning),
+     which is why it uses vw instead of % — both resolve against the viewport. */
+  width: var(--buddy-right-w, clamp(300px, 26vw, 500px));
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -2785,6 +2791,14 @@ table.dataTable.th-table thead th.dt-type-numeric,
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   margin-bottom: 2rem;
+}
+/* The chat column is much narrower than the viewport (sidebar + right column
+   take ~600-830px), so the two analysis cards must stack far earlier than the
+   usual mobile breakpoint to stay readable. */
+@media (max-width: 1499.98px) {
+  .buddy-analysis-grid {
+    grid-template-columns: 1fr;
+  }
 }
 .buddy-score-section {
   background: transparent;
@@ -3033,7 +3047,9 @@ table.dataTable.th-table thead th.dt-type-numeric,
     z-index: 100;
     padding: 8px 2.1rem 4px;
     background: #f9f7f9f0;
-    max-width: calc(100% - 834px);
+    /* span exactly the chat column: viewport minus sidebar, right column and
+       its 2.1rem padding — tracks the fluid --buddy-right-w automatically */
+    max-width: calc(100% - var(--sb-sidebar-w) - var(--buddy-right-w, 500px) - 2.1rem);
 }
 .btn-compare:hover img,.btn-detail:hover img {
     filter: brightness(0) invert(1);
@@ -3284,11 +3300,8 @@ table.dataTable.th-table thead th.dt-type-numeric,
     line-height: 1.1rem;
     margin-bottom: 3px;
 }
-@media (max-width: 1279.98px) {
-  .buddy-right-col {
-    width: 360px;
-  }
-}
+/* (the old fixed 360px override below 1280px is gone — the right column
+   now scales fluidly via --buddy-right-w) */
 @media (max-width: 1024px) {
   .buddy-layout {
     flex-direction: column;
