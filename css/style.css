@@ -1652,6 +1652,17 @@ div#txModalTitle{
     margin-bottom: 0.4rem;
     font-size: 1rem;
 }
+div#deNewTx .tx-field-label {
+    margin-bottom: 3px;
+}
+div#deNewTx  .tx-total {
+    padding: 0 0;
+}
+div#depotNeueAktieModal .de-summary-box.de-perf-box {
+    display: inline-block;
+    width: auto;
+    max-width: 477px;
+}
 .ma-new-alert.mt-4 {
     border-top: 1px solid #d8d5d7;
     padding-top: 26px;
