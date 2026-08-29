@@ -165,7 +165,7 @@
                             <div class="chat-response-inner">
 
                                 <p class="chat-intro-text">
-                                    Gerne analysiere ich Oracle (ORCL) anhand deines hinterlegten Analyseprofils.
+                                    Gerne analysiere ich Oracle (ORCL) anhand deines hinterlegten <a href="#" data-bs-toggle="modal" data-bs-target="#depotNeueAktieModal">Analyseprofils</a>.
                                     <br>
                                     <strong>Dein Profil:</strong> Ausgewogen (wachstum, Dividende, Risiko, Bewertung gleichgewicht)
                                     <br> Hier die Analyse:
@@ -792,6 +792,77 @@
                     <button type="button" class="btn-alle-loeschen">
                         <i class="bi bi-trash3"></i> Alle Sessions löschen
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	
+	<!-- ══════════════════════════════════════════
+       MODAL – Neue Aktie dem Depot hinzufügen
+       ══════════════════════════════════════════ -->
+    <div class="modal fade" id="depotNeueAktieModal" tabindex="-1" aria-labelledby="depotErstellenTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content analysen-modal">
+                <div class="modal-header analysen-modal-header">
+                    <div class="pf-modal-title-text" id="depotErstellenTitle">Neue Aktie dem Depot hinzufügen</div>
+                    <button type="button" class="analysen-modal-close" data-bs-dismiss="modal" aria-label="Schließen"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="modal-body analysen-modal-body">
+
+                    <div class="de-summary-row mb-4">
+                        <div class="de-summary-box de-perf-box">
+							<div class="de-summary-left">
+								<div class="de-summary-title">Deine Performance</div>
+								<select class="de-perf-select" id="dePerfRange" aria-label="Zeitraum">
+									<option value="anfang">seit Anfang</option>
+									<option value="30">seit 30 Tage</option>
+									<option value="90">seit 90 Tage</option>
+									<option value="180">seit 180 Tage</option>
+									<option value="360">seit 360 Tage</option>
+								</select>
+							</div>
+                        </div>
+                       
+                        
+                    </div>
+
+                   
+					 <div class="de-newtx" id="deNewTx">
+                         <div class="de-newtx-body" id="deNewTxBody">
+                            
+                            
+                            <div class="row g-3">
+								
+                                <div class="col">
+                                    <div class="tx-field-label">Typ</div>
+                                    <input type="text" class="tx-input" id="deTxTyp" value="Kauf" />
+                                </div>
+                                <div class="col">
+                                    <div class="tx-field-label">Datum</div>
+                                    <input type="text" class="tx-input" id="deTxDatum" value="05.07.2026" />
+                                </div>
+                                <div class="col">
+                                    <div class="tx-field-label">Stückzahl</div>
+                                    <input type="number" class="tx-input" id="deTxStueck" value="100" min="1" />
+                                </div>
+                                <div class="col">
+                                    <div class="tx-field-label">Stückpreis</div>
+                                    <input type="number" class="tx-input" id="deTxKurs" value="60.80" step="0.01" min="0" />
+                                </div>
+                                <div class="col">
+                                    <div class="tx-field-label">Währung</div>
+                                    <div class="tx-total" id="deTxTotal">EUR</div>
+                                </div>
+                            <div class="d-flex justify-content-end mt-3 gap-3">
+                                <button type="button" class="btn-tx-cancel" id="deTxCancel">Abbrechen</button>
+                                <button type="button" class="btn-tx-save" id="deTxSave">Speichern</button>
+                            </div>
+							 </div>
+                            
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
