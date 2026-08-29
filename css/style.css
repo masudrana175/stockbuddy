@@ -2372,6 +2372,31 @@ input#deCashAmount::placeholder {
  /* background: var(--sb-pink-light);
   padding: 1rem 1.2rem; */
 }
+/* Depot modal: per-stock transaction sections */
+.de-tx-divider {
+  border: 0;
+  border-top: 1px solid var(--sb-divider);
+  opacity: 1;
+  margin: 1.4rem 0;
+}
+.de-tx-section-title {
+  font-weight: 700;
+  color: var(--sb-text-h);
+  font-size: 1rem;
+  margin-bottom: 0.9rem;
+}
+.de-tx-section-title .de-tx-stock {
+  color: var(--sb-blue);
+}
+.de-tx-section .tx-field-label {
+  font-weight: 400;
+}
+.de-tx-section .tx-total {
+  background: none;
+  color: var(--sb-text-h);
+  padding: 0.45rem 0;
+  font-weight: 400;
+}
 .de-summary-left {
     max-width: 161px;
     border-right: 1px solid #000000;
