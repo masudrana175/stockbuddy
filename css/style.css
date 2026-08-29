@@ -4730,6 +4730,14 @@ table.dataTable thead>tr>th.dt-orderable-asc:hover, table.dataTable thead>tr>th.
 		max-width: 100%;
 	}
 }
+/* Between 992px and 1024px the desktop header (d-lg-flex) is already
+   visible, so keep the mobile page title hidden there — otherwise the
+   title shows twice. Must come after the rule above to win the cascade. */
+@media (min-width: 992px) {
+  .sb-topbar.d-block.d-lg-none {
+    display: none !important;
+  }
+}
 @media (max-width: 767.98px) {
   .sb-sidebar {
     display: none;
