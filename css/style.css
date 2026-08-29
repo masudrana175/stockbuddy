@@ -1280,7 +1280,7 @@ form.form-questionnaire label {
    BUDDY PAGE
    ============================================================ */
 :root {
-  --buddy-right-w: clamp(300px, 26vw, 500px);
+  --buddy-right-w: clamp(300px, 26vw, 400px);
 }
 .buddy-layout {
   display: flex;
@@ -2701,7 +2701,7 @@ table.dataTable.th-table thead th.dt-type-numeric,
   /* fluid: shrinks with the viewport so the chat column always stays wider.
      --buddy-right-w is shared with .chat-input-bar-wraper (fixed positioning),
      which is why it uses vw instead of % — both resolve against the viewport. */
-  width: var(--buddy-right-w, clamp(300px, 26vw, 500px));
+  width: var(--buddy-right-w, clamp(300px, 26vw, 400px));
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -3216,11 +3216,16 @@ table.dataTable.th-table thead th.dt-type-numeric,
   justify-content: space-between;
   gap: 8px;
   margin-bottom: 0.25rem;
+    margin-top: 5px;
 }
 .rp-score-box {
   border-radius: var(--sb-radius-md);
   padding: 0.5rem 0.9rem;
   background: rgba(34, 179, 109, 0.12);
+}
+.rp-score-row .rp-score-box {
+    padding: 0;
+    background: transparent!important;
 }
 .rp-score-num {
   font-size: 2.2rem;
